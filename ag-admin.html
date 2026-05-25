@@ -1097,7 +1097,7 @@ async function buildZip(){
     /* replaced images */
     var imgPaths=Object.keys(DATA.images);
     imgPaths.forEach(function(ip){
-      zip.file(ip,dataUrlB64(DATA.images[ip]),{base64:true});
+      zip.file(ip,DATA.images[ip].split(',')[1],{base64:true});
     });
     zip.file('assure-gold-backup.json',JSON.stringify(DATA,null,1));
     var blob=await zip.generateAsync({type:'blob'});
