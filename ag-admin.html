@@ -226,7 +226,9 @@ img{display:block;max-width:100%}
   <aside class="sidebar">
     <div class="sb-brand">
       <div class="lr">
-        <div class="ic">&#128142;</div>
+        <div class="ic" style="background:var(--ink);padding:5px;overflow:hidden">
+          <img src="assets/images/logo.png" alt="Assure Gold" style="width:28px;height:28px;object-fit:contain;filter:invert(1)"/>
+        </div>
         <div><h1>ASSURE GOLD</h1></div>
       </div>
       <p>Website Manager</p>
@@ -406,15 +408,16 @@ img{display:block;max-width:100%}
         </div>
 
         <div class="card">
-          <div class="card-h"><div><h3>&#128228; Step 2 &mdash; Upload to GitHub</h3></div></div>
+          <div class="card-h"><div><h3>&#128228; Step 2 &mdash; Push to GitHub</h3></div></div>
           <div class="card-b">
-            <ol style="padding-left:19px;line-height:2;font-size:12.5px;color:var(--sub)">
+            <div class="notice blue" style="margin-bottom:14px"><span class="ni">&#128187;</span><div><strong>Using GitHub Desktop (easiest)</strong><p>Open GitHub Desktop &rarr; it detects the changed files automatically &rarr; type a short note like "update prices" &rarr; click <b>Commit to main</b> &rarr; click <b>Push origin</b>. Done.</p></div></div>
+            <div class="notice" style="margin-bottom:0"><span class="ni">&#127760;</span><div><strong>Using github.com directly</strong><ol style="padding-left:17px;line-height:1.9;margin:4px 0 0;font-size:12px">
               <li>Unzip the downloaded file on your computer</li>
-              <li>Open your website repository on github.com</li>
+              <li>Open your website repo on github.com</li>
               <li>Click <b>Add file</b> &rarr; <b>Upload files</b></li>
-              <li>Drag in the updated files, then click <b>Commit changes</b></li>
-              <li>Your website updates automatically in about 30 seconds</li>
-            </ol>
+              <li>Drag in the updated files &rarr; click <b>Commit changes</b></li>
+            </ol></div></div>
+            <div style="margin-top:13px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="font-size:14px">&#9989;</span> Your website at <b>assuregold.sg</b> updates automatically in about 30 seconds.</div>
           </div>
         </div>
 
