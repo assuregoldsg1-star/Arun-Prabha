@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Assure Gold — Website Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{
+  --white:#fff;--off:#faf8f4;--warm:#f5f0e8;--paper:#ede8dc;
+  --ink:#1a1410;--text:#3a2e22;--sub:#5a4e3e;--muted:#7a6e5c;
+  --g0:#c9950a;--g1:#b8860b;--g2:#8b6508;--gold-lt:#f5d060;--gold-pale:#fdf6d8;
+  --line:rgba(185,134,11,.18);--ls:rgba(26,20,16,.07);
+  --green:#16a34a;--red:#dc2626;--blue:#1d4ed8;--wa:#25d366;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --cinzel:"Cinzel",serif;
+  --r:12px;--sidebar:256px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--off);-webkit-font-smoothing:antialiased}
+input,textarea,select,button{font-family:inherit;font-size:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+
+.layout{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);flex-shrink:0;background:linear-gradient(180deg,#1a1410,#241c14);display:flex;flex-direction:column;overflow-y:auto;border-right:1px solid rgba(185,134,11,.2)}
+.sb-brand{padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .lr{display:flex;align-items:center;gap:10px}
+.sb-brand .ic{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--gold-lt),var(--g1));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 3px 10px rgba(185,134,11,.35)}
+.sb-brand h1{font-family:var(--cinzel);font-size:14px;letter-spacing:.18em;color:#fff;font-weight:600}
+.sb-brand p{font-family:var(--cinzel);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt);opacity:.7;margin-left:46px;margin-top:3px}
+.sb-nav{flex:1;padding:10px 0}
+.sb-sec{font-family:var(--cinzel);padding:14px 18px 5px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,208,96,.5)}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.62);transition:all .18s;border-left:3px solid transparent;user-select:none}
+.sb-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.sb-item.active{background:rgba(185,134,11,.15);color:var(--gold-lt);border-left-color:var(--g1)}
+.sb-item .i{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.sb-item .c{margin-left:auto;background:rgba(185,134,11,.25);color:var(--gold-lt);font-size:10px;padding:1px 7px;border-radius:999px;font-weight:600}
+.sb-foot{padding:12px 14px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-foot .bb{display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;background:linear-gradient(135deg,var(--gold-lt),var(--g1));color:#fff;border:0;border-radius:8px;font-size:12.5px;font-weight:700;width:100%;transition:transform .2s,box-shadow .3s}
+.sb-foot .bb:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(185,134,11,.4)}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{background:var(--white);border-bottom:2px solid var(--line);padding:16px 30px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:14px;box-shadow:0 1px 8px rgba(26,20,16,.03)}
+.topbar h2{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:.01em;color:var(--ink)}
+.topbar p{font-size:12px;color:var(--muted);margin-top:0}
+.tb-actions{display:flex;gap:8px;align-items:center}
+.content{flex:1;overflow-y:auto;padding:28px 30px;background:var(--off)}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);margin-bottom:20px;overflow:hidden;box-shadow:0 1px 3px rgba(26,20,16,.04)}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:linear-gradient(180deg,rgba(253,246,216,.35),transparent)}
+.card-h h3{font-family:var(--serif);font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.card-h p{font-size:11.5px;color:var(--muted);margin-top:2px;font-weight:400}
+.card-b{padding:18px}
+
+/* FIELDS */
+.field{margin-bottom:15px}
+.field label{display:block;font-family:var(--cinzel);font-size:9.5px;font-weight:600;color:var(--g2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.field .hint{font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:400;text-transform:none;letter-spacing:0}
+.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:13.5px;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--g1);background:#fff}
+.field textarea{resize:vertical;min-height:62px;line-height:1.5}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.03em;border:0;transition:all .2s cubic-bezier(.34,1.56,.64,1);line-height:1;font-family:var(--sans)}
+.btn-p{background:linear-gradient(135deg,var(--g0),var(--g2));color:#fff;box-shadow:0 3px 10px rgba(185,134,11,.3)}
+.btn-p:hover{background:var(--g2);transform:translateY(-1px)}
+.btn-s{background:var(--green);color:#fff}
+.btn-s:hover{background:#15803d}
+.btn-d{background:var(--red);color:#fff}
+.btn-d:hover{background:#b91c1c}
+.btn-g{background:transparent;color:var(--g1);border:1.5px solid var(--g1)}
+.btn-g:hover{background:var(--g1);color:#fff}
+.btn-sm{padding:6px 10px;font-size:11.5px}
+.btn-xl{padding:15px 32px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* PRODUCT GRID */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:13px}
+.pcard{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:13px;transition:box-shadow .2s;position:relative}
+.pcard:hover{box-shadow:0 6px 20px rgba(185,134,11,.1);border-color:rgba(185,134,11,.4)}
+.pcard.feat{border-color:var(--g1);background:linear-gradient(135deg,rgba(253,246,216,.4),#fff)}
+.pcard.feat::before{content:"\2605 ON HOME";position:absolute;top:-8px;right:11px;background:var(--g1);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.1em;padding:3px 9px;border-radius:999px}
+.pc-top{display:flex;gap:11px;margin-bottom:10px}
+.pc-img{width:62px;height:62px;border-radius:8px;object-fit:cover;border:1px solid var(--line);flex-shrink:0;background:var(--paper);cursor:pointer}
+.pc-img:hover{border-color:var(--g1)}
+.pc-info{flex:1;min-width:0}
+.pc-name{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.2;margin-bottom:3px;color:var(--ink)}
+.pc-spec{font-size:11px;color:var(--muted);line-height:1.4}
+.pc-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.pc-price{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--g1)}
+.pc-actions{display:flex;gap:5px}
+.pc-actions .btn{flex:1;justify-content:center;font-size:11px;padding:7px 8px}
+.tag{display:inline-block;font-size:9px;padding:2px 6px;border-radius:999px;font-weight:600;letter-spacing:.04em;margin-right:4px}
+.tag-gold{background:rgba(185,134,11,.12);color:var(--g2);border:1px solid rgba(185,134,11,.28)}
+.tag-green{background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.25)}
+.tag-blue{background:rgba(29,78,216,.08);color:var(--blue);border:1px solid rgba(29,78,216,.2)}
+
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(26,20,16,.55);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s}
+.ov.open{opacity:1;pointer-events:auto}
+.modal{background:var(--off);border-radius:14px;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 70px rgba(26,20,16,.3);transform:translateY(16px) scale(.97);transition:transform .28s;border:1px solid var(--line)}
+.ov.open .modal{transform:none}
+.modal-h{padding:15px 20px;border-bottom:1px solid var(--ls);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:2}
+.modal-h h3{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink)}
+.modal-x{background:none;border:0;font-size:21px;color:var(--muted);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s}
+.modal-x:hover{background:var(--off)}
+.modal-b{padding:18px 20px}
+.modal-f{padding:12px 20px;border-top:1px solid var(--ls);display:flex;justify-content:space-between;align-items:center;gap:9px;position:sticky;bottom:0;background:#fff}
+.modal-f .r{display:flex;gap:8px}
+
+/* TOAST */
+.toast{position:fixed;bottom:26px;right:26px;z-index:9999;background:var(--ink);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 8px 30px rgba(26,20,16,.3);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .32s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:9px;max-width:370px}
+.toast.show{transform:none;opacity:1}
+.toast.success{border-left:4px solid var(--green)}
+.toast.error{border-left:4px solid var(--red)}
+.toast.info{border-left:4px solid var(--g1)}
+
+/* VIEWS */
+.view{display:none}
+.view.active{display:block}
+
+/* STATS */
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:22px}
+.stile{background:linear-gradient(150deg,#fff,rgba(253,246,216,.5));border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.stile .n{font-family:var(--serif);font-size:34px;font-weight:600;color:var(--g1);line-height:1;margin-bottom:4px}
+.stile .l{font-family:var(--cinzel);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.notice{background:linear-gradient(135deg,var(--gold-pale),rgba(245,240,232,.6));border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;margin-bottom:18px;display:flex;align-items:flex-start;gap:11px;font-size:13px}
+.notice .ni{font-size:18px;flex-shrink:0;margin-top:1px}
+.notice strong{display:block;margin-bottom:2px;color:var(--g2)}
+.notice p{color:var(--sub);line-height:1.5}
+.notice.green{background:rgba(22,163,74,.06);border-color:rgba(22,163,74,.25)}
+.notice.green strong{color:var(--green)}
+.notice.blue{background:rgba(29,78,216,.05);border-color:rgba(29,78,216,.2)}
+.notice.blue strong{color:var(--blue)}
+
+.srow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--ls);gap:12px}
+.srow:last-child{border:0}
+.srow .si h4{font-size:13.5px;font-weight:600}
+.srow .si p{font-size:11.5px;color:var(--muted);margin-top:1px}
+
+/* IMAGE GALLERY */
+.imgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.imtile{border:1.5px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;transition:box-shadow .2s,border-color .2s}
+.imtile:hover{box-shadow:0 6px 18px rgba(185,134,11,.12);border-color:rgba(185,134,11,.4)}
+.imtile .imthumb{width:100%;height:130px;object-fit:cover;background:var(--paper);cursor:pointer}
+.imtile .imbody{padding:9px 11px}
+.imtile .imname{font-size:11px;font-weight:600;color:var(--ink);word-break:break-all;line-height:1.35;margin-bottom:3px}
+.imtile .imrole{font-size:10px;color:var(--muted);margin-bottom:8px}
+.imtile .imbtn{width:100%;justify-content:center;font-size:11px;padding:7px}
+.imtile.changed{border-color:var(--green);box-shadow:0 0 0 2px rgba(22,163,74,.15)}
+.imtile.changed .imrole::after{content:" \2713 changed";color:var(--green);font-weight:700}
+
+/* search & filter */
+.search{width:100%;padding:10px 13px 10px 36px;border:1.5px solid var(--line);border-radius:8px;font-size:13px;background:#fff url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 stroke=%27%238a7e6c%27 stroke-width=%272%27 viewBox=%270 0 24 24%27><circle cx=%2711%27 cy=%2711%27 r=%277%27/><path d=%27M21 21l-4.3-4.3%27/></svg>") no-repeat 11px center;background-size:15px;outline:none;margin-bottom:13px}
+.search:focus{border-color:var(--g1)}
+.frow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px;align-items:center}
+.fp{padding:7px 13px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:11.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .18s}
+.fp:hover{border-color:var(--g1)}
+.fp.active{background:var(--g1);color:#fff;border-color:var(--g1)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:22px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.step .sn{width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:11px}
+.step h4{font-family:var(--serif);font-size:16px;font-weight:600;margin-bottom:5px}
+.step p{font-size:12px;color:var(--sub);line-height:1.5}
+
+/* slide rows */
+.slrow{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px;margin-bottom:11px;display:flex;align-items:flex-start;justify-content:space-between;gap:13px}
+.slrow .slc{flex:1}
+.slrow .sln{width:26px;height:26px;background:var(--g1);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.slrow .sle{font-family:var(--cinzel);font-size:9px;color:var(--g1);letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px}
+.slrow .slh{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.3;color:var(--ink)}
+.slrow .sls{font-size:11.5px;color:var(--muted);margin-top:4px}
+
+/* deploy */
+.deploy{background:linear-gradient(135deg,var(--gold-pale),#fff);border:2px solid rgba(185,134,11,.3);border-radius:14px;padding:32px;text-align:center;margin-bottom:20px}
+.deploy .di{font-size:48px;margin-bottom:10px}
+.deploy h2{font-family:var(--serif);font-size:28px;font-weight:500;margin-bottom:8px;color:var(--ink)}
+.deploy p{font-size:13px;color:var(--sub);margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+.dstatus{margin-top:16px;font-size:12.5px;font-weight:500;display:none;padding:11px 14px;border-radius:8px}
+.dstatus.show{display:block}
+.dstatus.ok{background:rgba(22,163,74,.1);color:#15803d;border:1px solid rgba(22,163,74,.25)}
+.dstatus.err{background:rgba(220,38,38,.08);color:#b91c1c;border:1px solid rgba(220,38,38,.22)}
+.dstatus.work{background:rgba(29,78,216,.06);color:var(--blue);border:1px solid rgba(29,78,216,.2)}
+
+.gh-step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:11px;display:flex;gap:13px}
+.gh-step .gn{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gh-step h4{font-size:13px;font-weight:600;margin-bottom:4px}
+.gh-step p{font-size:12px;color:var(--sub);line-height:1.55}
+.gh-step code{background:var(--paper);padding:2px 6px;border-radius:4px;font-size:11px;word-break:break-all}
+
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 10px;border-radius:999px;background:var(--paper);color:var(--sub);margin:3px 4px 3px 0;font-weight:500}
+
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(185,134,11,.25);border-radius:3px}
+
+'media(max-width:980px){.sgrid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.fr2,.fr3{grid-template-columns:1fr}}
+'media(max-width:720px){.sidebar{width:54px}.sb-brand p,.sb-sec,.sb-item span:not(.i),.sb-item .c,.sb-foot{display:none}.sb-item{justify-content:center}}
+
+/* ── Loomix Studios credit ── */
+.loomix-credit{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
+.lx-line{display:block;font-size:9.5px;letter-spacing:.08em;color:rgba(255,255,255,.38);text-transform:uppercase;margin-bottom:3px}
+.lx-heart{color:#e0556b;font-size:9px;display:inline-block;animation:lxbeat 1.8s ease-in-out infinite}
+@keyframes lxbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+.lx-name{display:block;font-family:var(--cinzel,"Cinzel",serif);font-size:11px;font-weight:600;letter-spacing:.14em;background:linear-gradient(135deg,var(--gold-lt),var(--g1));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold-lt)}
+
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="lr">
+        <div class="ic">&#128142;</div>
+        <div><h1>ASSURE GOLD</h1></div>
+      </div>
+      <p>Website Manager</p>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-sec">Manage</div>
+      <div class="sb-item active" id="nav-dashboard" onclick="showView('dashboard')"><span class="i">&#127968;</span><span>Dashboard</span></div>
+      <div class="sb-item" id="nav-products" onclick="showView('products')"><span class="i">&#128141;</span><span>Products &amp; Prices</span><span class="c" id="cnt-prod">19</span></div>
+      <div class="sb-item" id="nav-featured" onclick="showView('featured')"><span class="i">&#11088;</span><span>Featured on Home</span><span class="c" id="cnt-feat">3</span></div>
+      <div class="sb-item" id="nav-images" onclick="showView('images')"><span class="i">&#128247;</span><span>Photos &amp; Images</span></div>
+      <div class="sb-item" id="nav-carousel" onclick="showView('carousel')"><span class="i">&#127909;</span><span>Hero Carousel</span></div>
+      <div class="sb-item" id="nav-text" onclick="showView('text')"><span class="i">&#9999;&#65039;</span><span>Website Text</span></div>
+      <div class="sb-item" id="nav-business" onclick="showView('business')"><span class="i">&#127970;</span><span>Business Info</span></div>
+      <div class="sb-sec">Publish</div>
+      <div class="sb-item" id="nav-deploy" onclick="showView('deploy')"><span class="i">&#128640;</span><span>Publish Website</span></div>
+      <div class="sb-item" id="nav-help" onclick="showView('help')"><span class="i">&#10067;</span><span>Help &amp; Guide</span></div>
+    </nav>
+    <div class="sb-foot">
+      <button class="bb" onclick="showView('deploy')">&#128640; Publish Changes</button>
+      <div class="loomix-credit">
+        <span class="lx-line">Crafted with <span class="lx-heart">&#10084;</span> by</span>
+        <span class="lx-name">Loomix Studios</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h2 id="tb-title">Dashboard</h2>
+        <p id="tb-sub">Manage your Assure Gold website</p>
+      </div>
+      <div class="tb-actions">
+        <button class="btn btn-g btn-sm" onclick="loadBackup()">&#128194; Load Backup</button>
+        <button class="btn btn-g btn-sm" onclick="saveBackup()">&#128190; Save Backup</button>
+        <button class="btn btn-p" onclick="showView('deploy')">&#128640; Publish</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="view active" id="view-dashboard">
+        <div class="notice green">
+          <span class="ni">&#9989;</span>
+          <div><strong>Welcome to your Website Manager</strong><p>Edit prices, products, photos, text and business info here. Everything saves automatically. When ready, go to <b>Publish Website</b> to push changes live.</p></div>
+        </div>
+        <div class="sgrid">
+          <div class="stile"><div class="n" id="d-prod">0</div><div class="l">Total Products</div></div>
+          <div class="stile"><div class="n" id="d-feat">0</div><div class="l">Featured on Home</div></div>
+          <div class="stile"><div class="n" id="d-img">0</div><div class="l">Editable Images</div></div>
+          <div class="stile"><div class="n" id="d-edits">0</div><div class="l">Unsaved Edits</div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#9889; Quick Actions</h3></div></div>
+          <div class="card-b">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px">
+              <button class="btn btn-g" onclick="showView('products')">&#128141; Edit a Price</button>
+              <button class="btn btn-g" onclick="showView('images')">&#128247; Change a Photo</button>
+              <button class="btn btn-g" onclick="showView('text')">&#9999;&#65039; Edit Website Text</button>
+              <button class="btn btn-g" onclick="showView('deploy')">&#128640; Publish Website</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#11088; Featured on Homepage</h3></div><button class="btn btn-g btn-sm" onclick="showView('featured')">Manage &#8594;</button></div>
+          <div class="card-b" id="d-featured"></div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="view" id="view-products">
+        <div class="notice"><span class="ni">&#128181;</span><div><strong>Edit any product &mdash; changes apply to ALL pages automatically</strong><p>Change a price here and it updates on the Collection page and the Home page together. No more mismatches.</p></div></div>
+        <input type="search" class="search" id="psearch" placeholder="Search products by name..." oninput="renderProducts()"/>
+        <div class="frow">
+          <button class="fp active" data-c="all" onclick="filt('all')">All</button>
+          <button class="fp" data-c="chains" onclick="filt('chains')">Chains</button>
+          <button class="fp" data-c="pendants" onclick="filt('pendants')">Pendants</button>
+          <button class="fp" data-c="featured" onclick="filt('featured')">&#11088; Featured</button>
+          <div style="flex:1"></div>
+          <button class="btn btn-p btn-sm" onclick="openProd(-1)">&#10133; Add Product</button>
+        </div>
+        <div class="pgrid" id="plist"></div>
+      </div>
+
+      <!-- FEATURED -->
+      <div class="view" id="view-featured">
+        <div class="notice"><span class="ni">&#11088;</span><div><strong>Pick the 3 products shown on the homepage</strong><p>Click the star on any product to feature it. The first 3 starred products appear in the homepage "Featured" section.</p></div></div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#11088; Currently Featured</h3></div></div>
+          <div class="card-b"><div class="pgrid" id="featlist"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>All Products</h3><p>Click the star to feature / unfeature</p></div></div>
+          <div class="card-b"><div class="pgrid" id="featall"></div></div>
+        </div>
+      </div>
+
+      <!-- IMAGES -->
+      <div class="view" id="view-images">
+        <div class="notice blue"><span class="ni">&#128247;</span><div><strong>Replace any photo on the website</strong><p>Click "Replace" on any image, pick a new photo from your computer. The new photo keeps the exact same size and position &mdash; nothing breaks. Square photos work best.</p></div></div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#127968; Homepage &amp; Brand Images</h3></div></div>
+          <div class="card-b"><div class="imgrid" id="imbrand"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#128141; Product Photos</h3><p>All 19 product images</p></div></div>
+          <div class="card-b"><div class="imgrid" id="improd"></div></div>
+        </div>
+      </div>
+
+      <!-- CAROUSEL -->
+      <div class="view" id="view-carousel">
+        <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the 5 rotating slides at the top of the homepage</strong><p>Change the small label, the big headline (up to 3 lines), the description, and the button. Layout stays perfect automatically.</p></div></div>
+        <div id="sllist"></div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="view" id="view-text">
+        <div class="notice"><span class="ni">&#9999;&#65039;</span><div><strong>Edit the main text across your website</strong><p>Section headings and the stats bar. Edits keep all alignment and styling intact.</p></div></div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#128202; Hero Stats Bar</h3><p>The 4 stats below the carousel</p></div></div>
+          <div class="card-b" id="statlist"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>&#128221; Section Headings</h3><p>Main titles on the homepage</p></div></div>
+          <div class="card-b" id="headlist"></div>
+        </div>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="view" id="view-business">
+        <div class="notice"><span class="ni">&#127970;</span><div><strong>Business details shown across every page</strong><p>WhatsApp number, address, hours, licence &mdash; appear in header, footer, contact section.</p></div></div>
+        <div class="card">
+          <div class="card-h"><h3>&#128242; Contact &amp; WhatsApp</h3></div>
+          <div class="card-b">
+            <div class="field"><label>WhatsApp Number</label><div class="hint">Country code, no +. Example: 6596724975</div><input type="text" id="b-wa"/></div>
+            <div class="fr2">
+              <div class="field"><label>Business Address</label><input type="text" id="b-addr"/></div>
+              <div class="field"><label>Opening Hours</label><input type="text" id="b-hours"/></div>
+            </div>
+            <button class="btn btn-p" onclick="saveBiz()">&#10003; Save</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>&#127963;&#65039; PSM Licence</h3></div>
+          <div class="card-b">
+            <div class="fr2">
+              <div class="field"><label>Licence Number</label><input type="text" id="b-psm"/></div>
+              <div class="field"><label>Valid Until</label><input type="text" id="b-psmv"/></div>
+            </div>
+            <button class="btn btn-p" onclick="saveBiz()">&#10003; Save</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEPLOY -->
+      <div class="view" id="view-deploy">
+        <div class="deploy">
+          <div class="di">&#128230;</div>
+          <h2>Publish Your Website</h2>
+          <p>This builds an updated copy of your website with all your changes applied. Download it, then upload the files to GitHub.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#128229; Step 1 &mdash; Build Your Updated Website</h3></div></div>
+          <div class="card-b">
+            <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:13px">Select your 3 current website files below. This tool will apply all your changes and give you a ZIP to download.</p>
+            <div class="field">
+              <label>Select your website files</label>
+              <div class="hint">Pick index.html, collection.html and buyback.html together (hold Ctrl or Cmd to select all 3). Any photos you changed are included automatically.</div>
+              <input type="file" id="zip-files" accept=".html" multiple style="padding:9px;border:1.5px dashed rgba(185,134,11,.4);border-radius:8px;width:100%;background:#fff;cursor:pointer;margin-bottom:7px"/>
+              <div id="zip-fstatus" style="font-size:11.5px;color:var(--muted)"></div>
+            </div>
+            <button class="btn btn-p btn-xl" onclick="buildZip()">&#128229; Build &amp; Download ZIP</button>
+            <div class="dstatus" id="zip-status"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#128228; Step 2 &mdash; Upload to GitHub</h3></div></div>
+          <div class="card-b">
+            <ol style="padding-left:19px;line-height:2;font-size:12.5px;color:var(--sub)">
+              <li>Unzip the downloaded file on your computer</li>
+              <li>Open your website repository on github.com</li>
+              <li>Click <b>Add file</b> &rarr; <b>Upload files</b></li>
+              <li>Drag in the updated files, then click <b>Commit changes</b></li>
+              <li>Your website updates automatically in about 30 seconds</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#128190; Backup (optional)</h3></div></div>
+          <div class="card-b">
+            <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:13px">Save a backup file of all your content. Keep it somewhere safe &mdash; you can restore from it anytime.</p>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button class="btn btn-g" onclick="saveBackup()">&#128190; Download Backup</button>
+              <button class="btn btn-g" onclick="loadBackup()">&#128194; Restore Backup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HELP -->
+      <div class="view" id="view-help">
+        <div class="card">
+          <div class="card-h"><h3>&#128218; How To Use This Tool</h3></div>
+          <div class="card-b">
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128181; Change a Price</h4>
+            <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
+              <li>Click <b>Products &amp; Prices</b> in the menu</li>
+              <li>Find the product, click <b>Edit</b></li>
+              <li>Change the price, click <b>Save Product</b></li>
+              <li>Go to <b>Publish</b> and follow the steps below</li>
+            </ol>
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128247; Change a Photo</h4>
+            <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
+              <li>Click <b>Photos &amp; Images</b></li>
+              <li>Find the photo, click <b>Replace</b></li>
+              <li>Pick a new photo from your computer</li>
+              <li>Publish as below</li>
+            </ol>
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#9999;&#65039; Edit Text or Carousel</h4>
+            <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
+              <li>Click <b>Website Text</b> or <b>Hero Carousel</b></li>
+              <li>Edit the fields, click <b>Save</b></li>
+              <li>Publish as below</li>
+            </ol>
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128640; Publishing Your Changes</h4>
+            <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
+              <li>Click <b>Publish</b> in the menu</li>
+              <li>Select your 3 website files (index.html, collection.html, buyback.html)</li>
+              <li>Click <b>Build &amp; Download ZIP</b> &mdash; a ZIP downloads with all your changes</li>
+              <li>Unzip it, then upload the files to your GitHub repository</li>
+              <li>Your live website updates automatically in about 30 seconds</li>
+            </ol>
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128190; Backups</h4>
+            <p style="font-size:12.5px;color:var(--sub);line-height:1.7">In the <b>Publish</b> section you can <b>Download Backup</b> to save a copy of all your content. If anything goes wrong, use <b>Restore Backup</b> to load it back. Do this now and then to stay safe.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-b" style="text-align:center;padding:24px">
+            <div style="font-family:var(--serif);font-size:17px;color:var(--g2);margin-bottom:5px">Assure Gold Website Manager</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Your simple, no-code editing tool</div>
+            <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Crafted with &#10084;&#65039; by</div>
+            <div style="font-family:var(--cinzel);font-size:15px;font-weight:600;letter-spacing:.16em;color:var(--g1)">Loomix Studios</div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<div class="ov" id="m-prod">
+  <div class="modal">
+    <div class="modal-h"><h3 id="mp-title">Edit Product</h3><button class="modal-x" onclick="closeM('m-prod')">&#215;</button></div>
+    <div class="modal-b">
+      <div class="fr2">
+        <div class="field"><label>Product Name</label><input type="text" id="mp-name"/></div>
+        <div class="field"><label>Karat</label><select id="mp-karat"><option>916 &#183; 22K</option><option>999 &#183; 24K</option><option>750 &#183; 18K</option></select></div>
+      </div>
+      <div class="field"><label>Specification</label><div class="hint">Length, weight, condition</div><input type="text" id="mp-spec"/></div>
+      <div class="field"><label>Description</label><textarea id="mp-desc" rows="2"></textarea></div>
+      <div class="fr3">
+        <div class="field"><label>Price (SGD)</label><input type="number" id="mp-price"/></div>
+        <div class="field"><label>Retail Price</label><input type="number" id="mp-retail"/></div>
+        <div class="field"><label>Saving</label><input type="number" id="mp-save"/></div>
+      </div>
+      <div class="fr2">
+        <div class="field"><label>Category</label><select id="mp-cat"><option value="chains">Chain</option><option value="pendants">Chain + Pendant Set</option></select></div>
+        <div class="field"><label>Featured on Home</label><select id="mp-feat"><option value="false">No</option><option value="true">Yes</option></select></div>
+      </div>
+      <div class="field"><label>Product Photo</label>
+        <div class="hint">The image file used for this product</div>
+        <div style="display:flex;gap:11px;align-items:center">
+          <img id="mp-imgprev" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--paper)"/>
+          <input type="text" id="mp-img" style="flex:1" readonly/>
+          <button class="btn btn-g btn-sm" onclick="document.getElementById('mp-imgfile').click()">Change</button>
+          <input type="file" id="mp-imgfile" accept="image/*" style="display:none" onchange="prodImgPick(this)"/>
+        </div>
+      </div>
+      <div class="field"><label>WhatsApp Message</label><div class="hint">Auto-fills when customer taps Enquire</div><input type="text" id="mp-wa"/></div>
+    </div>
+    <div class="modal-f">
+      <button class="btn btn-d btn-sm" id="mp-del" onclick="delProd()" style="display:none">&#128465; Delete</button>
+      <div class="r"><button class="btn btn-g" onclick="closeM('m-prod')">Cancel</button><button class="btn btn-p" onclick="saveProd()">&#10003; Save Product</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="m-slide">
+  <div class="modal">
+    <div class="modal-h"><h3 id="ms-title">Edit Slide</h3><button class="modal-x" onclick="closeM('m-slide')">&#215;</button></div>
+    <div class="modal-b">
+      <div class="field"><label>Small Label (eyebrow)</label><input type="text" id="ms-ey"/></div>
+      <div class="field"><label>Headline Line 1</label><input type="text" id="ms-l1"/></div>
+      <div class="field"><label>Headline Line 2 (shown in gold italic)</label><input type="text" id="ms-l2"/></div>
+      <div class="field"><label>Headline Line 3 (optional)</label><input type="text" id="ms-l3"/></div>
+      <div class="field"><label>Description</label><textarea id="ms-sub" rows="2"></textarea></div>
+      <div class="fr2">
+        <div class="field"><label>Button Text</label><input type="text" id="ms-btn"/></div>
+        <div class="field"><label>Button Links To</label><select id="ms-href"><option value="collection.html">Collection Page</option><option value="buyback.html">Buyback Page</option><option value="index.html#products">Products Section</option></select></div>
+      </div>
+    </div>
+    <div class="modal-f"><div></div><div class="r"><button class="btn btn-g" onclick="closeM('m-slide')">Cancel</button><button class="btn btn-p" onclick="saveSlide()">&#10003; Save Slide</button></div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+
+/* ============ DATA ============ */
+var DEFAULT_PRODUCTS = [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.", "price": 3980, "retail": 5200, "save": 1220, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.", "featured": true}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.", "price": 3150, "retail": 4200, "save": 1050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.", "featured": false}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.", "price": 3590, "retail": 4700, "save": 1110, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.", "featured": false}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.", "price": 4220, "retail": 5600, "save": 1380, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.", "featured": false}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.", "price": 1830, "retail": 2500, "save": 670, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.", "featured": false}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.", "price": 2640, "retail": 3550, "save": 910, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.", "featured": false}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.", "price": 3490, "retail": 4650, "save": 1160, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.", "featured": false}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.", "price": 2930, "retail": 3950, "save": 1020, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.", "featured": false}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.", "price": 3060, "retail": 4100, "save": 1040, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.", "featured": false}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.", "price": 1760, "retail": 2400, "save": 640, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.", "featured": false}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.", "price": 2710, "retail": 3650, "save": 940, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.", "featured": false}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.", "price": 3000, "retail": 4050, "save": 1050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.", "featured": false}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.", "price": 3720, "retail": 4980, "save": 1260, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.", "featured": true}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.", "price": 2290, "retail": 3100, "save": 810, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.", "featured": false}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.", "price": 3290, "retail": 4500, "save": 1210, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.", "featured": true}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.", "price": 3020, "retail": 4100, "save": 1080, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.", "featured": false}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.", "price": 3950, "retail": 5350, "save": 1400, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.", "featured": false}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.", "price": 3110, "retail": 4200, "save": 1090, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.", "featured": false}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.", "price": 3630, "retail": 4900, "save": 1270, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.", "featured": false}];
+var DEFAULT_SLIDES = [{"eyebrow": "The Signature Collection", "line1": "Browse our", "line2": "Rope Chain", "line3": "Collection", "sub": "Handpicked 916 gold rope chains, 16–24 inches. Every link XRF-tested. 0% GST.", "btn": "Explore Chains →", "href": "collection.html"}, {"eyebrow": "Just Arrived", "line1": "New Arrivals", "line2": "Collection", "line3": "", "sub": "Fresh pieces added weekly — chains, pendants, sets. Get your quote in 2 minutes on WhatsApp.", "btn": "View New Pieces →", "href": "collection.html"}, {"eyebrow": "Buyback Campaign", "line1": "Buyback is", "line2": "Now Live", "line3": "", "sub": "Sell your preloved gold the easy way. XRF tested. Get your quote in 2 minutes. Same-day payment.", "btn": "Learn About Buyback →", "href": "buyback.html"}, {"eyebrow": "Assay-Grade Technology", "line1": "XRF Verified", "line2": "Collection", "line3": "", "sub": "Every piece tested to 4 decimal places. You watch the screen live. No hidden steps.", "btn": "Shop Verified Gold →", "href": "collection.html"}, {"eyebrow": "PSM Licensed · Ministry of Law", "line1": "Certified", "line2": "Preloved Luxury", "line3": "Gold", "sub": "Same purity. Smarter price. 0% GST. 0% making charge. Government-licensed.", "btn": "Browse Collection →", "href": "collection.html"}];
+var DEFAULT_STATS = [{"num": "0%", "label": "GST & Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "30m", "label": "WhatsApp Reply"}];
+var DEFAULT_HEADINGS = [
+  {"id":"why","label":"Why Preloved Gold","l1":"Why preloved gold","l2":"the wiser buy","em":"ga","pre":"is "},
+  {"id":"goldbar","label":"Same Gold Section","l1":"Same gold.","l2":"Smarter price.","em":"","pre":""},
+  {"id":"compare","label":"Price Comparison","l1":"Same gold.","l2":"Very different price.","em":"ga","pre":""},
+  {"id":"products","label":"Featured Products","l1":"Real pieces.","l2":"Real prices.","em":"ga","pre":""},
+  {"id":"reviews","label":"Reviews Section","l1":"Real customers.","l2":"Real conversations.","em":"ga","pre":""},
+  {"id":"faq","label":"FAQ Section","l1":"Common questions.","l2":"Straight answers.","em":"ga","pre":""},
+  {"id":"cta","label":"Contact Section","l1":"Find your preloved piece.","l2":"Priced in pure gold.","em":"","pre":""}
+];
+
+var DATA = {
+  business:{wa:'6596724975',addr:'119A Canberra Cres, Singapore',hours:'Mon-Sat 10am-7pm SGT',psm:'PS20260000962',psmValid:'11 March 2027'},
+  products:DEFAULT_PRODUCTS,
+  slides:DEFAULT_SLIDES,
+  stats:DEFAULT_STATS,
+  headings:DEFAULT_HEADINGS,
+  images:{}   /* path -> dataURL of replaced images */
+};
+
+function persist(){ try{
+  /* images can be big — store separately, tolerate quota errors */
+  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings};
+  localStorage.setItem('ag_core', JSON.stringify(core));
+  try{ localStorage.setItem('ag_images', JSON.stringify(DATA.images)); }
+  catch(e){ toast('Images too large to auto-save. Use Save Backup.','error'); }
+}catch(e){} }
+
+function load(){ try{
+  var c=localStorage.getItem('ag_core');
+  if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business; DATA.products=p.products||DATA.products;
+    DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; }
+  var im=localStorage.getItem('ag_images');
+  if(im){ DATA.images=JSON.parse(im)||{}; }
+}catch(e){} }
+load();
+
+var EDITS=0;
+function markEdit(){ EDITS++; var el=document.getElementById('d-edits'); if(el)el.textContent=EDITS; }
+
+/* ============ UI ============ */
+var TITLES={
+  dashboard:['Dashboard','Manage your Assure Gold website'],
+  products:['Products & Prices','Edit products - changes apply to all pages'],
+  featured:['Featured on Home','Choose the 3 products shown on the homepage'],
+  images:['Photos & Images','Replace any photo on the website'],
+  carousel:['Hero Carousel','Edit the 5 rotating homepage slides'],
+  text:['Website Text','Edit headings and the stats bar'],
+  business:['Business Info','WhatsApp, address, hours, licence'],
+  deploy:['Publish Website','Send your changes live'],
+  help:['Help & Guide','Step-by-step instructions']
+};
+function showView(v){
+  document.querySelectorAll('.view').forEach(function(e){e.classList.remove('active');});
+  document.querySelectorAll('.sb-item').forEach(function(e){e.classList.remove('active');});
+  document.getElementById('view-'+v).classList.add('active');
+  document.getElementById('nav-'+v).classList.add('active');
+  document.getElementById('tb-title').textContent=TITLES[v][0];
+  document.getElementById('tb-sub').textContent=TITLES[v][1];
+  if(v==='dashboard')renderDash();
+  if(v==='products')renderProducts();
+  if(v==='featured')renderFeatured();
+  if(v==='images')renderImages();
+  if(v==='carousel')renderSlides();
+  if(v==='text')renderText();
+  if(v==='business')loadBiz();
+  
+}
+function toast(msg,type){
+  var el=document.getElementById('toast');
+  el.className='toast '+(type||'info');
+  el.innerHTML=(type==='success'?'&#10003; ':type==='error'?'&#9888; ':'&#128161; ')+msg;
+  el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove('show');},3400);
+}
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+/* resolve an image path to a display src (replaced dataURL or original) */
+function imgSrc(path){ return DATA.images[path] || path; }
+
+/* ============ DASHBOARD ============ */
+function renderDash(){
+  document.getElementById('d-prod').textContent=DATA.products.length;
+  document.getElementById('d-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
+  document.getElementById('d-img').textContent=allImages().length;
+  document.getElementById('d-edits').textContent=EDITS;
+  document.getElementById('cnt-prod').textContent=DATA.products.length;
+  document.getElementById('cnt-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
+  var feat=DATA.products.filter(function(p){return p.featured;}).slice(0,3);
+  document.getElementById('d-featured').innerHTML = feat.length
+    ? '<div class="pgrid">'+feat.map(pcard).join('')+'</div>'
+    : '<div style="padding:18px;text-align:center;color:var(--muted)">No featured products yet.</div>';
+}
+
+/* ============ PRODUCTS ============ */
+var FILT='all', EDIT_I=-1;
+function filt(c){ FILT=c; document.querySelectorAll('.fp').forEach(function(b){b.classList.toggle('active',b.dataset.c===c);}); renderProducts(); }
+function renderProducts(){
+  var q=(document.getElementById('psearch').value||'').toLowerCase().trim();
+  var list=DATA.products.filter(function(p){
+    if(FILT==='featured'&&!p.featured)return false;
+    if(FILT!=='all'&&FILT!=='featured'&&p.cat!==FILT)return false;
+    if(q&&(p.name+' '+p.spec).toLowerCase().indexOf(q)<0)return false;
+    return true;
+  });
+  document.getElementById('plist').innerHTML = list.length
+    ? list.map(function(p){return pcard(p,DATA.products.indexOf(p));}).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No products match.</div>';
+  document.getElementById('cnt-prod').textContent=DATA.products.length;
+  document.getElementById('cnt-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
+}
+function pcard(p,i){
+  if(i===undefined)i=DATA.products.indexOf(p);
+  return [
+    '<div class="pcard '+(p.featured?'feat':'')+'">',
+      '<div class="pc-top">',
+        '<img class="pc-img" src="'+esc(imgSrc(p.img))+'" onclick="openProd('+i+')"/>',
+        '<div class="pc-info"><div class="pc-name">'+esc(p.name)+'</div>',
+        '<div class="pc-spec">'+esc(p.spec)+'</div></div>',
+      '</div>',
+      '<div class="pc-row">',
+        '<div class="pc-price">SGD '+(p.price||0).toLocaleString()+'</div>',
+        '<div><span class="tag tag-gold">'+esc(p.karat)+'</span><span class="tag '+(p.cat==='pendants'?'tag-blue':'tag-green')+'">'+(p.cat==='pendants'?'Pendant':'Chain')+'</span></div>',
+      '</div>',
+      '<div class="pc-actions">',
+        '<button class="btn btn-g" onclick="openProd('+i+')">&#9998; Edit</button>',
+        '<button class="btn '+(p.featured?'btn-s':'btn-g')+'" onclick="togFeat('+i+')">'+(p.featured?'&#11088; Featured':'&#9734; Feature')+'</button>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+function togFeat(i){
+  if(!DATA.products[i].featured && DATA.products.filter(function(p){return p.featured;}).length>=3){
+    toast('Maximum 3 featured. Unfeature one first.','error'); return;
+  }
+  DATA.products[i].featured=!DATA.products[i].featured;
+  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
+  toast(DATA.products[i].featured?'Added to featured':'Removed from featured','success');
+}
+var _prodImgData=null;
+function openProd(i){
+  EDIT_I=i; _prodImgData=null;
+  var p=i>=0?DATA.products[i]:{name:'',spec:'',desc:'',price:'',retail:'',save:'',karat:'916 \u00b7 22K',cat:'chains',img:'assets/images/products/chain-20.jpeg',wa:'',featured:false};
+  document.getElementById('mp-title').textContent=i>=0?('Edit: '+p.name):'Add New Product';
+  document.getElementById('mp-name').value=p.name||'';
+  document.getElementById('mp-spec').value=p.spec||'';
+  document.getElementById('mp-desc').value=p.desc||'';
+  document.getElementById('mp-price').value=p.price||'';
+  document.getElementById('mp-retail').value=p.retail||'';
+  document.getElementById('mp-save').value=p.save||'';
+  document.getElementById('mp-karat').value=p.karat||'916 \u00b7 22K';
+  document.getElementById('mp-cat').value=p.cat||'chains';
+  document.getElementById('mp-feat').value=p.featured?'true':'false';
+  document.getElementById('mp-img').value=p.img||'';
+  document.getElementById('mp-imgprev').src=imgSrc(p.img);
+  document.getElementById('mp-wa').value=p.wa||'';
+  document.getElementById('mp-del').style.display=i>=0?'':'none';
+  openM('m-prod');
+}
+function prodImgPick(inp){
+  var f=inp.files[0]; if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){ _prodImgData=e.target.result; document.getElementById('mp-imgprev').src=e.target.result; toast('Photo ready - click Save Product','info'); };
+  r.readAsDataURL(f);
+}
+function saveProd(){
+  var name=document.getElementById('mp-name').value.trim();
+  if(!name){toast('Enter a product name','error');return;}
+  var p={
+    name:name,
+    spec:document.getElementById('mp-spec').value.trim(),
+    desc:document.getElementById('mp-desc').value.trim(),
+    price:parseInt(document.getElementById('mp-price').value)||0,
+    retail:parseInt(document.getElementById('mp-retail').value)||0,
+    save:parseInt(document.getElementById('mp-save').value)||0,
+    karat:document.getElementById('mp-karat').value,
+    cat:document.getElementById('mp-cat').value,
+    img:document.getElementById('mp-img').value,
+    wa:document.getElementById('mp-wa').value.trim(),
+    featured:document.getElementById('mp-feat').value==='true'
+  };
+  if(p.featured){
+    var fc=DATA.products.filter(function(q,idx){return q.featured&&idx!==EDIT_I;}).length;
+    if(fc>=3){p.featured=false;toast('Already 3 featured - unfeature one first','error');}
+  }
+  /* if a new photo was picked, store it under the product's image path */
+  if(_prodImgData){ DATA.images[p.img]=_prodImgData; }
+  if(EDIT_I>=0)DATA.products[EDIT_I]=p; else DATA.products.push(p);
+  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
+  closeM('m-prod'); toast('Product saved','success');
+}
+function delProd(){
+  if(EDIT_I<0)return;
+  if(!confirm('Delete "'+DATA.products[EDIT_I].name+'"?'))return;
+  DATA.products.splice(EDIT_I,1);
+  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
+  closeM('m-prod'); toast('Product deleted','info');
+}
+
+/* ============ FEATURED ============ */
+function renderFeatured(){
+  var feat=DATA.products.filter(function(p){return p.featured;});
+  document.getElementById('featlist').innerHTML = feat.length
+    ? feat.map(function(p){return pcard(p);}).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:22px;color:var(--muted)">No featured products. Click a star below.</div>';
+  document.getElementById('featall').innerHTML=DATA.products.map(function(p){return pcard(p);}).join('');
+}
+
+/* ============ IMAGES ============ */
+function allImages(){
+  /* brand images + product images */
+  var brand=[
+    {path:'assets/images/logo.png',role:'Logo (header)'},
+    {path:'assets/images/rope-chain-red.jpg',role:'Carousel Slide 1'},
+    {path:'assets/images/new-arrivals.jpg',role:'Carousel - New Arrivals'},
+    {path:'assets/images/license.jpeg',role:'Licence certificate'}
+  ];
+  return brand;
+}
+function renderImages(){
+  /* brand */
+  document.getElementById('imbrand').innerHTML=allImages().map(imtile).join('');
+  /* products */
+  var prods=DATA.products.map(function(p){return {path:p.img,role:p.name};});
+  /* dedupe by path */
+  var seen={}, uniq=[];
+  prods.forEach(function(x){ if(!seen[x.path]){seen[x.path]=1;uniq.push(x);} });
+  document.getElementById('improd').innerHTML=uniq.map(imtile).join('');
+}
+function imtile(im){
+  var changed=DATA.images[im.path]?' changed':'';
+  var safe=im.path.replace(/[^a-zA-Z0-9]/g,'_');
+  return [
+    '<div class="imtile'+changed+'" id="imt_'+safe+'">',
+      '<img class="imthumb" src="'+esc(imgSrc(im.path))+'" onclick="document.getElementById('+'\x27'+'imf_'+safe+'\x27'+').click()"/>',
+      '<div class="imbody">',
+        '<div class="imname">'+esc(im.path.split('/').pop())+'</div>',
+        '<div class="imrole">'+esc(im.role)+'</div>',
+        '<button class="btn btn-g imbtn" onclick="document.getElementById('+'\x27'+'imf_'+safe+'\x27'+').click()">&#128247; Replace</button>',
+        '<input type="file" id="imf_'+safe+'" accept="image/*" style="display:none" onchange="imgReplace(this,'+'\x27'+esc(im.path)+'\x27'+')"/>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+function imgReplace(inp,path){
+  var f=inp.files[0]; if(!f)return;
+  if(f.size>4*1024*1024){ toast('Image too large (max 4MB). Please resize it.','error'); return; }
+  var r=new FileReader();
+  r.onload=function(e){
+    DATA.images[path]=e.target.result;
+    persist(); markEdit(); renderImages();
+    toast('Photo replaced - publish to make it live','success');
+  };
+  r.readAsDataURL(f);
+}
+
+/* ============ CAROUSEL ============ */
+var SLIDE_I=-1;
+function renderSlides(){
+  document.getElementById('sllist').innerHTML=DATA.slides.map(function(s,i){
+    var h=[s.line1,s.line2,s.line3].filter(Boolean).map(esc).join(' / ');
+    return [
+      '<div class="slrow">',
+        '<div class="sln">'+(i+1)+'</div>',
+        '<div class="slc">',
+          '<div class="sle">'+esc(s.eyebrow)+'</div>',
+          '<div class="slh">'+h+'</div>',
+          '<div class="sls">'+esc(s.sub)+'</div>',
+        '</div>',
+        '<button class="btn btn-g btn-sm" onclick="openSlide('+i+')">&#9998; Edit</button>',
+      '</div>'
+    ].join('');
+  }).join('');
+}
+function openSlide(i){
+  SLIDE_I=i; var s=DATA.slides[i];
+  document.getElementById('ms-title').textContent='Slide '+(i+1);
+  document.getElementById('ms-ey').value=s.eyebrow||'';
+  document.getElementById('ms-l1').value=s.line1||'';
+  document.getElementById('ms-l2').value=s.line2||'';
+  document.getElementById('ms-l3').value=s.line3||'';
+  document.getElementById('ms-sub').value=s.sub||'';
+  document.getElementById('ms-btn').value=s.btn||'';
+  document.getElementById('ms-href').value=s.href||'collection.html';
+  openM('m-slide');
+}
+function saveSlide(){
+  var s=DATA.slides[SLIDE_I];
+  s.eyebrow=document.getElementById('ms-ey').value.trim();
+  s.line1=document.getElementById('ms-l1').value.trim();
+  s.line2=document.getElementById('ms-l2').value.trim();
+  s.line3=document.getElementById('ms-l3').value.trim();
+  s.sub=document.getElementById('ms-sub').value.trim();
+  s.btn=document.getElementById('ms-btn').value.trim();
+  s.href=document.getElementById('ms-href').value;
+  persist(); markEdit(); renderSlides(); closeM('m-slide');
+  toast('Slide saved','success');
+}
+
+/* ============ TEXT ============ */
+function renderText(){
+  document.getElementById('statlist').innerHTML=DATA.stats.map(function(st,i){
+    return [
+      '<div class="fr2" style="margin-bottom:11px">',
+        '<div class="field" style="margin:0"><label>Stat '+(i+1)+' - Number</label>',
+        '<input type="text" value="'+esc(st.num)+'" oninput="DATA.stats['+i+'].num=this.value;markEdit()"/></div>',
+        '<div class="field" style="margin:0"><label>Stat '+(i+1)+' - Label</label>',
+        '<input type="text" value="'+esc(st.label)+'" oninput="DATA.stats['+i+'].label=this.value;markEdit()"/></div>',
+      '</div>'
+    ].join('');
+  }).join('') + '<button class="btn btn-p btn-sm" onclick="persist();toast('+'\x27'+'Stats saved'+'\x27'+','+'\x27'+'success'+'\x27'+')">&#10003; Save Stats</button>';
+  document.getElementById('headlist').innerHTML=DATA.headings.map(function(h,i){
+    return [
+      '<div style="padding:11px 0;border-bottom:1px solid var(--ls)">',
+        '<div style="font-size:11px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px">'+esc(h.label)+'</div>',
+        '<div class="fr2">',
+          '<div class="field" style="margin:0"><label>Line 1</label><input type="text" value="'+esc(h.l1)+'" oninput="DATA.headings['+i+'].l1=this.value;markEdit()"/></div>',
+          '<div class="field" style="margin:0"><label>Line 2 (gold)</label><input type="text" value="'+esc(h.l2)+'" oninput="DATA.headings['+i+'].l2=this.value;markEdit()"/></div>',
+        '</div>',
+      '</div>'
+    ].join('');
+  }).join('') + '<button class="btn btn-p btn-sm" style="margin-top:13px" onclick="persist();toast('+'\x27'+'Headings saved'+'\x27'+','+'\x27'+'success'+'\x27'+')">&#10003; Save Headings</button>';
+}
+
+/* ============ BUSINESS ============ */
+function loadBiz(){
+  document.getElementById('b-wa').value=DATA.business.wa;
+  document.getElementById('b-addr').value=DATA.business.addr;
+  document.getElementById('b-hours').value=DATA.business.hours;
+  document.getElementById('b-psm').value=DATA.business.psm;
+  document.getElementById('b-psmv').value=DATA.business.psmValid;
+}
+function saveBiz(){
+  DATA.business.wa=document.getElementById('b-wa').value.trim();
+  DATA.business.addr=document.getElementById('b-addr').value.trim();
+  DATA.business.hours=document.getElementById('b-hours').value.trim();
+  DATA.business.psm=document.getElementById('b-psm').value.trim();
+  DATA.business.psmValid=document.getElementById('b-psmv').value.trim();
+  persist(); markEdit(); renderDash();
+  toast('Business info saved','success');
+}
+
+/* ============ BACKUP ============ */
+function saveBackup(){
+  var blob=new Blob([JSON.stringify(DATA,null,1)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  var d=new Date();
+  a.download='assure-gold-backup-'+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2)+'.json';
+  a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);},500);
+  toast('Backup downloaded','success');
+}
+function loadBackup(){
+  var inp=document.createElement('input'); inp.type='file'; inp.accept='.json';
+  inp.onchange=function(e){
+    var f=e.target.files[0]; if(!f)return;
+    var r=new FileReader();
+    r.onload=function(ev){
+      try{ var d=JSON.parse(ev.target.result);
+        if(!d.business||!d.products)throw new Error('bad file');
+        DATA=d; if(!DATA.images)DATA.images={};
+        persist(); renderDash();
+        toast('Backup restored','success');
+      }catch(err){ toast('Could not read that file','error'); }
+    };
+    r.readAsText(f);
+  };
+  inp.click();
+}
+
+/* ============ HTML PATCHING (alignment-safe) ============ */
+function escHtml(s){
+  return String(s==null?'':s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+    .replace(/\u2014/g,'&#8212;').replace(/\u2013/g,'&#8211;').replace(/\u00b7/g,'&#183;')
+    .replace(/\u2019/g,'&#8217;').replace(/\u201c/g,'&#8220;').replace(/\u201d/g,'&#8221;');
+}
+function fmtWA(n){ n=String(n); return (n.length===10&&n.indexOf('65')===0)?('+65 '+n.slice(2,6)+' '+n.slice(6)):('+'+n); }
+var NL=String.fromCharCode(10);
+
+/* find <div class="X"> ... matching </div> by depth */
+function blockRange(html,startTag){
+  var s=html.indexOf(startTag); if(s<0)return null;
+  var open=html.indexOf('>',s)+1, depth=1, i=open;
+  while(i<html.length){
+    var no=html.indexOf('<div',i), nc=html.indexOf('</div>',i);
+    if(nc<0)break;
+    if(no>=0&&no<nc){depth++;i=no+4;}
+    else{depth--; if(depth===0)return {start:s,bodyStart:open,bodyEnd:nc,end:nc+6}; i=nc+6;}
+  }
+  return null;
+}
+
+function patchIndex(html){
+  var b=DATA.business;
+  html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
+  html=html.replace(/\+65 9672 4975/g,fmtWA(b.wa));
+  html=html.replace(/\+65\s*\d{4}\s*\d{4}/g,fmtWA(b.wa));
+  html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
+  html=html.replace(/PS20260000962/g,b.psm);
+  html=html.replace(/11 March 2027/g,b.psmValid);
+
+  /* ---- featured products grid ---- */
+  var feat=DATA.products.filter(function(p){return p.featured;}).slice(0,3);
+  if(feat.length){
+    var r=blockRange(html,'<div class="feat-grid">');
+    if(r){
+      var WA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>';
+      var cards=feat.map(function(p){
+        var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
+        return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="feat-card">'+NL
+          +'    <div class="feat-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="feat-k">'+escHtml(p.karat)+'</span><span class="feat-xrf">&#10003; XRF</span></div>'+NL
+          +'    <div class="feat-body">'+NL
+          +'      <h3>'+escHtml(p.name)+'</h3>'+NL
+          +'      <div class="feat-spec">'+escHtml(p.spec)+'</div>'+NL
+          +'      <div class="feat-price">SGD <span class="counter-num" data-target="'+p.price+'" data-suffix="">0</span></div>'+NL
+          +'      <div class="feat-save">&#10003; Save ~SGD '+(p.save||0).toLocaleString()+' vs retail new</div>'+NL
+          +'      <span class="feat-cta">'+WA+' Enquire on WhatsApp</span>'+NL
+          +'    </div>'+NL
+          +'  </a>';
+      }).join(NL+'  ');
+      html=html.slice(0,r.start)+'<div class="feat-grid">'+NL+'  '+cards+NL+'</div>'+html.slice(r.end);
+    }
+  }
+
+  /* ---- carousel slides ---- */
+  for(var si=0;si<DATA.slides.length;si++){
+    var s=DATA.slides[si];
+    var mark='data-slide="'+si+'"';
+    var sidx=html.indexOf(mark);
+    if(sidx<0)continue;
+    /* eyebrow */
+    html=patchTagAfter(html,sidx,'<span class="sld-ey">','</span>',escHtml(s.eyebrow));
+    /* headline */
+    var h1=escHtml(s.line1);
+    if(s.line2)h1+='<br/><em>'+escHtml(s.line2)+'</em>';
+    if(s.line3)h1+='<br/>'+escHtml(s.line3);
+    html=patchTagAfter(html,sidx,'<h1 class="sld-h1">','</h1>',h1);
+    /* sub */
+    html=patchTagAfter(html,sidx,'<p class="sld-sub">','</p>',escHtml(s.sub));
+  }
+
+  /* ---- hero stats ---- */
+  html=patchStats(html);
+
+  /* ---- section headings ---- */
+  html=patchHeadings(html);
+
+  /* ---- replaced images: swap src to new filenames is not needed; we keep same path ---- */
+  return html;
+}
+
+/* replace text between openTag..closeTag at first occurrence after fromIdx */
+function patchTagAfter(html,fromIdx,openTag,closeTag,newInner){
+  var o=html.indexOf(openTag,fromIdx); if(o<0)return html;
+  var cs=o+openTag.length;
+  var c=html.indexOf(closeTag,cs); if(c<0)return html;
+  return html.slice(0,cs)+newInner+html.slice(c);
+}
+
+function patchStats(html){
+  /* hero stats: <span class="hs-n ...">NUM</span><span class="hs-l">LABEL</span> */
+  var i=0,n=0;
+  var re=/<span class="hs-n[^"]*">([\s\S]*?)<\/span><span class="hs-l">([\s\S]*?)<\/span>/g;
+  return html.replace(re,function(m){
+    var st=DATA.stats[n++]; if(!st)return m;
+    return '<span class="hs-n ga">'+escHtml(st.num)+'</span><span class="hs-l">'+escHtml(st.label)+'</span>';
+  });
+}
+
+function patchHeadings(html){
+  var hi=0;
+  return html.replace(/<h2>[\s\S]*?<\/h2>/g,function(m){
+    var h=DATA.headings[hi++]; if(!h)return m;
+    var emClass=h.em?(' class="'+h.em+'"'):'';
+    return '<h2>'+escHtml(h.l1)+'<br/>'+(h.pre?escHtml(h.pre):'')+'<em'+emClass+'>'+escHtml(h.l2)+'</em></h2>';
+  });
+}
+
+function patchCollection(html){
+  var b=DATA.business;
+  html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
+  html=html.replace(/\+65 9672 4975/g,fmtWA(b.wa));
+  html=html.replace(/\+65\s*\d{4}\s*\d{4}/g,fmtWA(b.wa));
+  html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
+  html=html.replace(/PS20260000962/g,b.psm);
+  html=html.replace(/11 March 2027/g,b.psmValid);
+
+  var gs=html.indexOf('<div class="col-grid"');
+  if(gs<0)return html;
+  var bodyStart=html.indexOf('>',gs)+1;
+  var search=html.slice(bodyStart),depth=1,i=0,bodyEnd=-1;
+  while(i<search.length){
+    var no=search.indexOf('<div',i),nc=search.indexOf('</div>',i);
+    if(nc<0)break;
+    if(no>=0&&no<nc){depth++;i=no+4;}
+    else{depth--; if(depth===0){bodyEnd=bodyStart+nc;break;} i=nc+6;}
+  }
+  if(bodyEnd<0)return html;
+
+  var WA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>';
+  var cards=DATA.products.map(function(p){
+    var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
+    return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="cc" data-cat="'+p.cat+'">'+NL
+      +'  <div class="cc-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="cc-k">'+escHtml(p.karat)+'</span><span class="cc-xrf">&#10003; XRF</span></div>'+NL
+      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-price">SGD '+p.price.toLocaleString()+'</div><div class="cc-retail">Retail new: ~SGD '+(p.retail||0).toLocaleString()+'</div><div class="cc-save">&#10003; Save ~SGD '+(p.save||0).toLocaleString()+' vs retail</div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
+      +'</a>';
+  }).join(NL);
+  return html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
+}
+
+function patchBuyback(html){
+  var b=DATA.business;
+  html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
+  html=html.replace(/\+65 9672 4975/g,fmtWA(b.wa));
+  html=html.replace(/\+65\s*\d{4}\s*\d{4}/g,fmtWA(b.wa));
+  html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
+  html=html.replace(/PS20260000962/g,b.psm);
+  html=html.replace(/11 March 2027/g,b.psmValid);
+  return html;
+}
+
+/* ============ DEPLOY: ZIP ============ */
+document.addEventListener('DOMContentLoaded',function(){
+  var fi=document.getElementById('zip-files');
+  if(fi)fi.addEventListener('change',function(){
+    var names=Array.from(fi.files).map(function(f){return f.name;});
+    var need=['index.html','collection.html','buyback.html'];
+    var have=need.filter(function(n){return names.indexOf(n)>=0;});
+    var st=document.getElementById('zip-fstatus');
+    st.innerHTML = have.length===3
+      ? '<span style="color:var(--green);font-weight:600">&#10003; All 3 files selected</span>'
+      : '<span style="color:var(--red)">Selected '+have.length+'/3 - need: '+need.join(', ')+'</span>';
+  });
+});
+async function buildZip(){
+  var fi=document.getElementById('zip-files');
+  if(!fi.files.length){ zipStatus('&#9888; Select your 3 HTML files first.','err'); return; }
+  var fmap={}; Array.from(fi.files).forEach(function(f){fmap[f.name]=f;});
+  var need=['index.html','collection.html','buyback.html'];
+  for(var i=0;i<need.length;i++){ if(!fmap[need[i]]){ zipStatus('&#9888; Missing '+need[i],'err'); return; } }
+  zipStatus('&#8987; Building ZIP...','work');
+  try{
+    var patchers={'index.html':patchIndex,'collection.html':patchCollection,'buyback.html':patchBuyback};
+    var zip=new JSZip();
+    for(var f in patchers){
+      var txt=await fmap[f].text();
+      zip.file(f,patchers[f](txt));
+    }
+    /* replaced images */
+    var imgPaths=Object.keys(DATA.images);
+    imgPaths.forEach(function(ip){
+      zip.file(ip,dataUrlB64(DATA.images[ip]),{base64:true});
+    });
+    zip.file('assure-gold-backup.json',JSON.stringify(DATA,null,1));
+    var blob=await zip.generateAsync({type:'blob'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='assure-gold-updated.zip'; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},800);
+    zipStatus('&#10003; ZIP downloaded! Unzip and upload the files to GitHub. Includes '+imgPaths.length+' changed image(s).','ok');
+    toast('ZIP downloaded','success');
+  }catch(e){ zipStatus('&#9888; '+e.message,'err'); }
+}
+function zipStatus(msg,kind){
+  var el=document.getElementById('zip-status');
+  el.className='dstatus show '+(kind||'work');
+  el.innerHTML=msg;
+}
+
+
+window.addEventListener('DOMContentLoaded',function(){ renderDash(); });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+PRODUCT IMAGE REFERENCE
+========================================
+
+Which photo file = which product:
+
+  chain-01.jpeg  =  Rope Chain - Long 24"
+  chain-02.jpeg  =  Rope Chain - Classic 20"
+  chain-03.jpeg  =  Rope Chain - Statement 22"
+  chain-04.jpeg  =  Rope Chain - Heavy Long 24"
+  chain-05.jpeg  =  Rope Chain - Dainty 16"
+  chain-06.jpeg  =  Rope Chain - Mid-Length 18"
+  chain-07.jpeg  =  Rope Chain - Angled 22"
+  chain-08.jpeg  =  Rope Chain - Detail View 20"
+  chain-09.jpeg  =  Rope Chain - Width Verified 20"
+  chain-10.jpeg  =  Rope Chain - Short Fine 16"
+  chain-11.jpeg  =  Rope Chain - Thick Gauge 18"
+  chain-12.jpeg  =  Rope Chain - Medium 20"
+  chain-13.jpeg  =  Rope Chain - Premium 22"
+  chain-14.jpeg  =  Rope Chain + Barrel Pendant
+  chain-15.jpeg  =  Rope + Dragon Abacus Pendant
+  chain-16.jpeg  =  Rope + Cylinder Pendant
+  chain-17.jpeg  =  Rope + Ornate Pendant
+  chain-18.jpeg  =  Rope + Classic Round Pendant
+  chain-19.jpeg  =  Rope + Designer Pendant
+
+All product photos are in: assets/images/products/

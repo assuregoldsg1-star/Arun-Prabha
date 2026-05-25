@@ -1,0 +1,91 @@
+==================================================================
+   ASSURE GOLD — HOW TO EDIT YOUR WEBSITE
+   A simple guide. No coding. No technical setup.
+==================================================================
+
+You edit your website using the admin tool on your computer,
+then put the updated files into GitHub. Your live website
+updates by itself.
+
+------------------------------------------------------------
+  STEP 1 — OPEN THE ADMIN TOOL
+------------------------------------------------------------
+
+  Find the file:   ag-admin.html
+  Double-click it. It opens in your web browser.
+  This is your editing panel.
+
+------------------------------------------------------------
+  STEP 2 — MAKE YOUR CHANGES
+------------------------------------------------------------
+
+  Use the menu on the left. You can edit:
+
+    Products & Prices  - any price, add or remove products,
+                         names, weights, descriptions
+    Featured on Home   - the 3 products shown on the homepage
+    Photos & Images    - replace any product photo, carousel
+                         image, or the logo (you see a preview
+                         of the current photo)
+    Hero Carousel      - the big rotating banners on top
+    Website Text       - section headings and the stats bar
+    Business Info      - WhatsApp number, address, hours
+
+  Make as many changes as you like. They are saved in the
+  tool as you go.
+
+------------------------------------------------------------
+  STEP 3 — GET YOUR UPDATED FILES
+------------------------------------------------------------
+
+  1. Click  "Publish"  in the left menu.
+
+  2. Click the file box and select your 3 website files:
+        index.html
+        collection.html
+        buyback.html
+     (They are in this same folder. Hold the Ctrl key to
+      click and select all 3 together.)
+
+  3. Click  "Build & Download ZIP".
+
+  4. A ZIP file downloads to your computer. It has all your
+     changes inside, ready to use.
+
+------------------------------------------------------------
+  STEP 4 — PUT THE FILES INTO GITHUB
+------------------------------------------------------------
+
+  1. Unzip the downloaded file (right-click -> Extract).
+
+  2. Go to github.com and open your website repository.
+
+  3. Click  "Add file"  ->  "Upload files".
+
+  4. Drag the updated files from the unzipped folder into
+     the page.
+
+  5. Click  "Commit changes" at the bottom.
+
+  That is it. Your website updates by itself in about
+  half a minute. Open your website and refresh the page
+  to see the changes.
+
+------------------------------------------------------------
+  GOOD TO KNOW
+------------------------------------------------------------
+
+  - BACKUP: In the Publish section, click "Download Backup"
+    to save a copy of all your content. Keep it safe. If
+    something ever goes wrong, "Restore Backup" brings it
+    all back.
+
+  - PHOTOS: Square photos look best for products. When you
+    change a photo, it is included in the ZIP automatically.
+
+  - KEEP THE FOLDER TOGETHER: Do not move the "assets"
+    folder or the images will stop showing.
+
+==================================================================
+  Website & admin tool crafted with love by Loomix Studios
+==================================================================
