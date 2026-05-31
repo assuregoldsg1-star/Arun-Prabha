@@ -1,0 +1,138 @@
+==================================================================
+   ASSURE GOLD — SEO ACTION PLAN
+   How to rank on Google. Honest timeline + exact steps.
+==================================================================
+
+WHAT I HAVE ALREADY DONE (in the code — just upload it)
+------------------------------------------------------------
+  [DONE] Keyword-optimised page titles & meta descriptions on
+         all 4 pages, targeting:
+           - assure gold / assure gold singapore
+           - preloved gold singapore / used gold singapore
+           - preloved rope chains singapore / rope chain preloved
+           - rope chains singapore / rope chains men
+  [DONE] One clean H1 per page (was 5 on the homepage - a real
+         SEO error, now fixed)
+  [DONE] Full structured data (schema.org):
+           - Organization + JewelryStore (business info box)
+           - WebSite with search action
+           - FAQPage (gets you expandable Q&As in Google)
+           - Product schema on the new-chains page
+  [DONE] Open Graph + Twitter cards (rich previews when shared
+         on WhatsApp, Facebook, Instagram)
+  [DONE] Keyword-rich image alt text
+  [DONE] sitemap.xml (map of all pages for Google)
+  [DONE] robots.txt (lets crawlers in, points to sitemap)
+  [DONE] Canonical URLs, geo tags (Singapore), mobile + speed
+         already strong
+
+------------------------------------------------------------
+  HONEST TIMELINE — what ranks when
+------------------------------------------------------------
+  "Assure Gold", "Assure Gold Singapore"
+      -> #1 within ~1 week of indexing (brand terms, low
+         competition). THIS is realistic.
+
+  "preloved rope chains singapore", "rope chain preloved"
+      -> top results in 2-6 weeks (long-tail, low competition,
+         and these are your BEST buyers - high intent)
+
+  "preloved gold singapore", "used gold singapore"
+      -> page 1 in 1-3 months with the steps below
+
+  "rope chains singapore", "rope chains men"
+      -> most competitive; 2-4 months + backlinks needed
+
+  Nobody legitimate can put a 1-month-old site at #1 for
+  competitive terms in 1 week. Anyone who promises that is
+  either lying or using black-hat tricks that get you BANNED
+  from Google. The plan below is the fast, safe, real way.
+
+------------------------------------------------------------
+  STEP 1 - GOOGLE SEARCH CONSOLE  (DO THIS TODAY - critical)
+------------------------------------------------------------
+  Without this, Google may take MONTHS to find you. With it,
+  days.
+
+  1. Go to search.google.com/search-console
+  2. Sign in with a Google account
+  3. Add property -> Domain -> type: assuregold.sg
+  4. Google gives you a TXT record. Add it in CLDY:
+       - CLDY -> Edit DNS -> New Record
+       - Type: TXT, Name: blank/@, Value: (paste Google's code)
+       - Save
+  5. Back in Search Console -> Verify
+  6. Left menu -> Sitemaps -> enter: sitemap.xml -> Submit
+  7. Top search bar -> paste https://assuregold.sg/ ->
+     Enter -> "Request Indexing"
+  8. Repeat step 7 for:
+       https://assuregold.sg/collection.html
+       https://assuregold.sg/buyback.html
+       https://assuregold.sg/newchains.html
+
+------------------------------------------------------------
+  STEP 2 - GOOGLE BUSINESS PROFILE  (huge for Singapore)
+------------------------------------------------------------
+  This is what puts you on Google MAPS and shows the business
+  box on the right of search results. For a local SG business
+  this can matter MORE than the website ranking.
+
+  1. Go to business.google.com
+  2. Business name: Assure Gold
+  3. Category: Jewelry Store (add: Gold dealer, Jeweler)
+  4. Add: address, phone (+65 9672 4975), website, hours
+     (Mon-Sat 10am-7pm)
+  5. Service area: Singapore
+  6. Upload 10+ good photos of chains, the XRF test, storefront
+  7. Verify (Google posts a code or calls)
+  8. Post weekly updates (new arrivals) - keeps it active
+
+------------------------------------------------------------
+  STEP 3 - BING + OTHER ENGINES  (5 minutes, free traffic)
+------------------------------------------------------------
+  1. bing.com/webmasters
+  2. "Import from Google Search Console" - one click done
+
+------------------------------------------------------------
+  STEP 4 - BACKLINKS  (the real ranking driver)
+------------------------------------------------------------
+  Google ranks sites that OTHER sites link to. Get listed on:
+    - Carousell (list items, link your site in profile)
+    - HardwareZone forums (EDMW / Bullion threads - be helpful,
+      not spammy; link where relevant)
+    - Singapore business directories: Yelp SG, Yellow Pages SG,
+      sgBusiness, Streetdirectory
+    - Instagram bio link (you have @assuregold.sg) - post often,
+      link the site every post
+    - Facebook Marketplace + a Facebook Page
+    - Reddit r/singapore / r/singaporefi (genuine, helpful only)
+  Each quality link = a vote that lifts ALL your rankings.
+
+------------------------------------------------------------
+  STEP 5 - CONTENT  (wins the competitive keywords over time)
+------------------------------------------------------------
+  Google rewards fresh, useful content. Easy wins:
+    - A blog/guide page: "916 vs 999 gold - which to buy in
+      Singapore" / "How preloved gold pricing works"
+    - Update the collection often (new stock = fresh signals)
+    - Each new product with a good title + description = more
+      keywords you can rank for
+
+------------------------------------------------------------
+  WEEKLY ROUTINE (15 min) to climb fast
+------------------------------------------------------------
+  - Post 3-4x on Instagram, link the site
+  - Add 1 Google Business post (new arrival)
+  - Add any new stock to the collection
+  - Reply to every Google review (ask happy buyers for reviews -
+    reviews are a top-3 local ranking factor)
+
+==================================================================
+  Bottom line: upload the new files, do Steps 1 & 2 TODAY.
+  You'll rank #1 for "Assure Gold" within a week, and start
+  climbing for the gold/rope-chain terms over the following
+  weeks. Reviews + backlinks + Google Business are what win
+  the competitive searches - not tricks.
+==================================================================
+  Prepared by Loomix Studios
+==================================================================
