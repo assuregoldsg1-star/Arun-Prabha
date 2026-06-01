@@ -850,7 +850,9 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
         "addressLocality": "Singapore",
         "addressCountry": "SG"
       },
-      "sameAs": ["https://www.instagram.com/assuregold.sg/"]
+      "sameAs": [
+        "https://www.instagram.com/assuregold.sg/"
+      ]
     },
     {
       "@type": "JewelryStore",
@@ -862,30 +864,41 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
       "priceRange": "$$",
       "currenciesAccepted": "SGD",
       "paymentAccepted": "Cash, Bank Transfer, PayNow",
-      "areaServed": {"@type":"Country","name":"Singapore"},
+      "areaServed": {
+        "@type": "Country",
+        "name": "Singapore"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "119A Canberra Crescent",
         "addressLocality": "Singapore",
         "addressCountry": "SG"
       },
-      "openingHoursSpecification": [{
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        "opens": "10:00","closes": "19:00"
-      }],
-      "hasCredential": "PSM Registration PS20260000962 - Ministry of Law Singapore",
-      "makesOffer": {
-        "@type": "Offer",
-        "itemOffered": {"@type":"Product","name":"Preloved 916 & 999 Gold Rope Chains"}
-      }
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "hasCredential": "PSM Registration PS20260000962 - Ministry of Law Singapore"
     },
     {
       "@type": "WebSite",
       "@id": "https://assuregold.sg/#website",
       "url": "https://assuregold.sg/",
       "name": "Assure Gold",
-      "publisher": {"@id": "https://assuregold.sg/#org"},
+      "publisher": {
+        "@id": "https://assuregold.sg/#org"
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://assuregold.sg/collection.html?q={search_term_string}",
@@ -895,12 +908,77 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     {
       "@type": "FAQPage",
       "mainEntity": [
-    {"@type":"Question","name":"How do I know preloved gold is genuine?","acceptedAnswer":{"@type":"Answer","text":"Every piece is XRF-tested — purity to four decimal places, same as government assay offices. We share the reading on WhatsApp before you commit. We are PSM-licensed under Singapore's Ministry of Law (Reg. PS20260000962). Verify at mlaw.gov.sg."}},
-    {"@type":"Question","name":"Why is the price lower than new gold?","acceptedAnswer":{"@type":"Answer","text":"Three reasons: (1) Preloved gold is GST-exempt — 0% vs 9% on new. (2) The making charge was already paid when the piece was first made. (3) No showroom overhead. You pay weight &#215; purity &#215; live SGD rate."}},
-    {"@type":"Question","name":"Is preloved gold the same quality as new?","acceptedAnswer":{"@type":"Answer","text":"Chemically, yes. Gold doesn't degrade. A 916 chain from 1995 has exactly the same 91.6% purity as one made today. We XRF-verify every piece. Condition details are always disclosed in full with photos."}},
-    {"@type":"Question","name":"Can I inspect in person before paying?","acceptedAnswer":{"@type":"Answer","text":"Yes — visit 119A Canberra Cres, Singapore. Inspect, watch the live XRF test, pay only when satisfied. Or arrange secure hand-delivery within Singapore."}},
-    {"@type":"Question","name":"How do I verify your licence is real?","acceptedAnswer":{"@type":"Answer","text":"Go to mlaw.gov.sg and search \"Assure Gold\" or Reg. No. PS20260000962 to verify our PSM registration directly with Singapore's Ministry of Law."}}
+        {
+          "@type": "Question",
+          "name": "How do I know preloved gold is genuine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every piece is XRF-tested \u2014 purity to four decimal places, same as government assay offices. We share the reading on WhatsApp before you commit. We are PSM-licensed under Singapore's Ministry of Law (Reg. PS20260000962). Verify at mlaw.gov.sg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the price lower than new gold?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three reasons: (1) Preloved gold is GST-exempt \u2014 0% vs 9% on new. (2) The making charge was already paid when the piece was first made. (3) No showroom overhead. You pay weight &#215; purity &#215; live SGD rate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is preloved gold the same quality as new?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chemically, yes. Gold doesn't degrade. A 916 chain from 1995 has exactly the same 91.6% purity as one made today. We XRF-verify every piece. Condition details are always disclosed in full with photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I inspect in person before paying?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes \u2014 visit 119A Canberra Cres, Singapore. Inspect, watch the live XRF test, pay only when satisfied. Or arrange secure hand-delivery within Singapore."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I verify your licence is real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Go to mlaw.gov.sg and search \"Assure Gold\" or Reg. No. PS20260000962 to verify our PSM registration directly with Singapore's Ministry of Law."
+          }
+        }
       ]
+    },
+    {
+      "@type": "Product",
+      "name": "Preloved 916 & 999 Gold Rope Chains",
+      "description": "Certified preloved 916 and 999 gold rope chains in Singapore. XRF-tested purity, live gold-rate pricing, 0% GST. Licensed by Ministry of Law Singapore.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Assure Gold"
+      },
+      "material": "Gold",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "SGD",
+        "lowPrice": "200",
+        "highPrice": "15000",
+        "offerCount": "19",
+        "availability": "https://schema.org/InStock",
+        "url": "https://assuregold.sg/collection.html",
+        "seller": {
+          "@type": "Organization",
+          "name": "Assure Gold"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
     }
   ]
 }
@@ -1112,7 +1190,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
   <div class="why-col">
     <span class="wc-icon">&#128181;</span>
     <div class="wc-n">No GST</div>
-    <p class="wc-p">Preloved gold is exempt from the 9% Goods &amp; Services Tax charged on brand-new gold. That is money straight back in your pocket &#8212; not the taxman&#8217;s.</p>
+    <p class="wc-p">0% GST. That&#8217;s money straight back in your pocket.</p>
     <span class="wc-tag">0% GST</span>
   </div>
   <div class="why-col">
