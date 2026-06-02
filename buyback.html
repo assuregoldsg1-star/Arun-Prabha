@@ -222,6 +222,57 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
 .loomix-footer{font-size:11px;color:var(--muted);margin-top:5px;display:block;text-align:center}
 .loomix-link{color:var(--g1);text-decoration:none;font-weight:500;transition:color .2s}
 .loomix-link:hover{color:var(--g2);text-decoration:underline}
+
+/* ── Buyback Price Calculator ── */
+.bb-calc{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:30px 28px;box-shadow:0 20px 60px rgba(26,20,16,.10)}
+.bb-calc-title{font-family:var(--cinzel);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--g1);margin-bottom:6px}
+.bb-calc-sub{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:22px;line-height:1.2}
+.bb-calc-sub em{font-style:italic;color:var(--g1)}
+.bb-calc-row{margin-bottom:16px}
+.bb-calc-row label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--sub);text-transform:uppercase;margin-bottom:7px}
+.bb-calc-select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--off);appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8860b' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;transition:border-color .2s}
+.bb-calc-select:focus{outline:none;border-color:var(--g1);box-shadow:0 0 0 3px rgba(185,134,11,.1)}
+.bb-calc-input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--off);transition:border-color .2s}
+.bb-calc-input:focus{outline:none;border-color:var(--g1);box-shadow:0 0 0 3px rgba(185,134,11,.1)}
+.bb-calc-rate{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gold-pale);border:1px solid var(--line);border-radius:8px;margin-bottom:18px}
+.bb-calc-rate span{font-size:12px;color:var(--sub)}
+.bb-calc-rate strong{font-size:13px;color:var(--g1);font-weight:600}
+.bb-calc-rate .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+.bb-calc-result{background:linear-gradient(135deg,var(--ink),#2a2018);border-radius:12px;padding:20px 22px;text-align:center;margin-top:6px}
+.bb-calc-result .r-label{font-family:var(--cinzel);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,208,96,.6);margin-bottom:8px}
+.bb-calc-result .r-amount{font-family:var(--sans);font-size:clamp(32px,5vw,44px);font-weight:700;color:var(--white);line-height:1;letter-spacing:-.01em}
+.bb-calc-result .r-amount .r-cur{font-size:20px;vertical-align:super;margin-right:3px}
+.bb-calc-result .r-note{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.bb-calc-result.empty .r-amount{color:rgba(245,208,96,.3);font-size:28px}
+.bb-calc-wa{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--wa);color:#fff;padding:14px;border-radius:10px;font-size:13.5px;font-weight:600;margin-top:14px;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.3)}
+.bb-calc-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.4)}
+.bb-calc-updated{font-size:10.5px;color:var(--muted);text-align:center;margin-top:10px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 6px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+@media(max-width:720px){.bb-calc{padding:24px 20px}}
+
+/* ── Buyback Price Table ── */
+.bb-pricetable{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:0 20px 60px rgba(26,20,16,.10)}
+.bpt-head{text-align:center;margin-bottom:18px}
+.bpt-title{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:5px}.bpt-title em{font-style:italic;color:var(--g1)}
+.bpt-nett{font-size:13px;color:var(--g1);font-weight:600}
+.bpt-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.bpt-table thead tr:first-child th{background:linear-gradient(135deg,var(--gold-lt),var(--g1));color:var(--ink);font-family:var(--cinzel);font-size:11px;letter-spacing:.12em;padding:11px 10px;text-align:center}
+.bpt-table thead tr:first-child th:first-child{border-radius:8px 0 0 0}
+.bpt-table thead tr:first-child th:last-child{border-radius:0 8px 0 0}
+.bpt-table .bpt-subhead td{font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--muted);text-align:center;padding:8px 10px;background:var(--warm);border-bottom:1.5px solid var(--line)}
+.bpt-table tbody tr{border-bottom:1px solid var(--ls)}
+.bpt-table tbody tr:last-child{border-bottom:none}
+.bpt-table tbody td{text-align:center;padding:11px 10px;font-size:14px;color:var(--text);font-weight:400}
+.bpt-table tbody td:last-child{font-weight:600;color:var(--ink);font-size:15px}
+.bpt-table tbody tr:hover{background:var(--gold-pale)}
+.bpt-footnote{font-size:11.5px;color:var(--sub);text-align:center;line-height:1.6;margin-bottom:8px;padding:0 4px}
+.bpt-updated{font-size:10.5px;color:var(--g1);font-weight:600;text-align:center;margin-bottom:16px}
+.bpt-calc-btn{width:100%;background:var(--ink);color:var(--gold-lt);border:0;border-radius:10px;padding:14px 18px;font-family:var(--sans);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .25s;letter-spacing:.02em}
+.bpt-calc-btn:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,20,16,.2)}
+.bb-calc-back{font-size:12.5px;color:var(--g1);cursor:pointer;margin-bottom:14px;display:inline-flex;align-items:center;gap:5px;font-weight:500}
+.bb-calc-back:hover{color:var(--g2);text-decoration:underline}
+@media(max-width:720px){.bb-pricetable{padding:22px 16px}.bpt-table tbody td{padding:9px 7px;font-size:13px}}
+
 </style>
 <script type="application/ld+json">
 {
@@ -264,7 +315,74 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
   <a href="https://wa.me/6596724975" target="_blank">&#128172; WhatsApp Us</a>
 </div><section style="background:linear-gradient(160deg,var(--warm),var(--white) 55%,var(--off));border-bottom:1px solid var(--line)"><div class="bb-hero"><div class="bb-hero-copy"><span class="eyebrow">SELL YOUR PRELOVED GOLD</span><h1>Your old gold.<br/><em class="ga">Fair. Live.<br/>Same-day.</em></h1><p>We buy <em>any preloved gold</em> &#8212; chains, bangles, rings, coins, broken pieces. Condition doesn&#8217;t matter. Purity and weight do &#8212; and we confirm both with live XRF in front of you before quoting.</p><p>A clear, fair quote in about 2 minutes. <em>No mystery deductions. The number we show is the number we pay.</em></p><div class="bb-hero-pills"><div class="bb-pill">&#128300; <strong>Live XRF test</strong></div><div class="bb-pill">&#128184; <strong>Same-day payment</strong></div><div class="bb-pill">&#127963;&#65039; <strong>PSM Licensed</strong></div><div class="bb-pill">&#128260; <strong>Trade-in option</strong></div></div><a href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20a%20buyback%20quote." target="_blank" class="btn-wa"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>Get My Buyback Quote
 </a>
-</div><div class="bb-hero-img reveal-r"><img src="assets/images/products/chain-03.jpeg" alt="Gold chain for buyback &#8212; Assure Gold Singapore"/><div class="bb-overlay"><b>Same-Day Payment</b><span>XRF Tested &#183; Fair SGD Rate</span></div></div>
+</div><div class="bb-hero-img reveal-r">
+
+  <!-- PRICE TABLE (shown by default) -->
+  <div class="bb-pricetable" id="bbPriceTable">
+    <div class="bpt-head">
+      <div class="bpt-title">Live Buyback Price from <em>Assure Gold</em></div>
+      <div class="bpt-nett">Prices change every 20 seconds with live market.<br/>WhatsApp us to confirm your quote.</div>
+    </div>
+    <table class="bpt-table">
+      <thead>
+        <tr>
+          <th colspan="2">PURITY</th>
+          <th>WE BUY AT</th>
+        </tr>
+        <tr class="bpt-subhead">
+          <td>NO. OF KARATS</td>
+          <td>GOLD FINENESS</td>
+          <td>S$ PER GRAM (SGD)</td>
+        </tr>
+      </thead>
+      <tbody id="bptBody">
+        <tr><td>24K</td><td>999</td><td id="bpt999">&#8212;</td></tr>
+        <tr><td>22K</td><td>916</td><td id="bpt916">&#8212;</td></tr>
+        <tr><td>20K</td><td>850</td><td id="bpt850">&#8212;</td></tr>
+        <tr><td>18K</td><td>750</td><td id="bpt750">&#8212;</td></tr>
+        <tr><td>14K</td><td>585</td><td id="bpt585">&#8212;</td></tr>
+      </tbody>
+    </table>
+    <div class="bpt-footnote">For Gold Jewellery with less than 14K Purity,<br/>please contact us for the current price</div>
+    <div class="bpt-updated">Prices updated as at: <span id="bptTime">Loading...</span></div>
+    <button class="bpt-calc-btn" onclick="bbShowCalc()">
+      &#128181; Calculate the price of your gold &#8594;
+    </button>
+  </div>
+
+  <!-- CALCULATOR (hidden by default, shown on button click) -->
+  <div class="bb-calc" id="bbCalcPanel" style="display:none">
+    <div class="bb-calc-back" onclick="bbShowTable()">&#8592; Back to prices</div>
+    <div class="bb-calc-title">Instant Estimate</div>
+    <div class="bb-calc-sub">Calculate your <em>gold value</em></div>
+
+    <div class="bb-calc-row">
+      <label>Purity / Karat</label>
+      <select class="bb-calc-select" id="calcKarat" onchange="bbCalc()">
+        <option value="999">999 &nbsp;&#183;&nbsp; 24K</option>
+        <option value="916" selected>916 &nbsp;&#183;&nbsp; 22K</option>
+        <option value="850">850 &nbsp;&#183;&nbsp; 20K</option>
+        <option value="750">750 &nbsp;&#183;&nbsp; 18K</option>
+        <option value="585">585 &nbsp;&#183;&nbsp; 14K</option>
+        <option value="375">375 &nbsp;&#183;&nbsp; 9K</option>
+      </select>
+    </div>
+    <div class="bb-calc-row">
+      <label>Weight (grams)</label>
+      <input type="number" class="bb-calc-input" id="calcWeight" placeholder="e.g. 10" min="0.1" step="0.1" oninput="bbCalc()"/>
+    </div>
+    <div class="bb-calc-result empty" id="calcResult">
+      <div class="r-label">We Buy At (Nett)</div>
+      <div class="r-amount" id="calcAmount">Enter weight</div>
+      <div class="r-note" id="calcNote">Based on today&#8217;s live gold rate</div>
+    </div>
+    <a class="bb-calc-wa" id="calcWaBtn" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20a%20buyback%20quote." target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Get Exact Quote on WhatsApp
+    </a>
+    <div class="bb-calc-updated">Updated: <span id="calcTime">&#8212;</span></div>
+  </div>
+
+</div>
 </div>
 </section>
 <section class="section section-grey"><div class="sh reveal"><span class="eyebrow">HOW BUYBACK WORKS</span><h2>Four steps.<br/><em class="ga">Same day.</em></h2><p>From your first WhatsApp message to cash in your hand &#8212; usually within the same business day.</p></div><div class="steps"><div class="step reveal"><div class="step-n">01</div><div class="step-c">&#128172;</div><h3>WhatsApp Photos</h3><p>Send us photos of your gold. We reply within 30 minutes with a preliminary estimate based on visible purity markings and weight.</p></div><div class="step reveal"><div class="step-n">02</div><div class="step-c">&#128205;</div><h3>Visit Us</h3><p>F2F meet at Toa Payoh or your convenient place, based on appointment.</p></div><div class="step reveal"><div class="step-n">03</div><div class="step-c">&#128300;</div><h3>Live XRF Test</h3><p>We XRF-test every piece on screen in front of you. Purity to four decimal places in under 30 seconds. You see the exact reading we calculate from.</p></div><div class="step reveal"><div class="step-n">04</div><div class="step-c">&#128184;</div><h3>Same-Day Payment</h3><p>Accept the quote and receive payment immediately &#8212; PayNow, bank transfer or cash. Official receipt issued for every transaction. No delays.</p></div></div>
@@ -347,6 +465,156 @@ document.querySelectorAll('.fq-btn').forEach(function(btn){
     document.querySelectorAll('.fq-item.open').forEach(function(i){i.classList.remove('open');});
     if(!open)item.classList.add('open');
   });
+});
+
+</script>
+<script>
+/* ══════════════════════════════════════
+   ASSURE GOLD — BUYBACK PRICE CALCULATOR
+   Formula: (spot999 * purity - $2) per gram
+   Source:  gold-api.com (USD) + live FX
+   ══════════════════════════════════════ */
+
+var BB_RATE_999 = 185.0;  /* SGD/g fallback — shown immediately before API loads */
+var BB_DEDUCT   = 5;      /* $5/g deduction from spot */
+
+var BB_PURITY = {
+  '999': 0.999,
+  '916': 0.916,
+  '850': 0.850,
+  '750': 0.750,
+  '585': 0.585,
+  '375': 0.375
+};
+
+function bbFmt(n) {
+  return n.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function bbRateFor(purity) {
+  /* 999 and 916 (22K+): deduct $5. Below 22K: deduct $15 */
+  var deduct = (purity >= 0.916) ? 5 : 15;
+  return BB_RATE_999 * purity - deduct;
+}
+
+function bbPopulateTable() {
+  var map = { '999':'bpt999', '916':'bpt916', '850':'bpt850', '750':'bpt750', '585':'bpt585' };
+  for (var k in map) {
+    var el = document.getElementById(map[k]);
+    if (el) el.textContent = bbFmt(bbRateFor(BB_PURITY[k]));
+  }
+
+}
+
+function bbSetTime() {
+  var now = new Date();
+  var sg  = now.toLocaleString('en-SG', {
+    timeZone: 'Asia/Singapore',
+    day:'2-digit', month:'2-digit', year:'numeric',
+    hour:'2-digit', minute:'2-digit', hour12: false
+  });
+  var t1 = document.getElementById('bptTime');
+  var t2 = document.getElementById('calcTime');
+  if (t1) t1.textContent = sg + ' SGT';
+  if (t2) t2.textContent = sg + ' SGT';
+}
+
+async function bbFetchRate() {
+  try {
+    /* Step 1: gold price in USD per troy ounce */
+    var gRes = await fetch('https://api.gold-api.com/price/XAU');
+    if (!gRes.ok) throw new Error('gold fetch failed');
+    var gData = await gRes.json();
+    if (!gData.price || gData.price < 500) throw new Error('bad gold price');
+    var usdPerOz = gData.price;
+
+    /* Step 2: live USD → SGD exchange rate */
+    var fxRate = 1.338; /* fallback */
+    try {
+      var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
+      if (fxRes.ok) {
+        var fxData = await fxRes.json();
+        var sgd = fxData.rates && fxData.rates.SGD;
+        if (sgd && sgd > 1.2 && sgd < 1.6) fxRate = sgd;
+      }
+    } catch(e2) { /* keep fallback FX */ }
+
+    /* Step 3: convert to SGD per gram (999 pure) */
+    BB_RATE_999 = (usdPerOz * fxRate) / 31.1035;
+
+  } catch(e) {
+    /* API failed — keep current BB_RATE_999 (fallback or last known) */
+  }
+
+  /* Always update display regardless of API success/failure */
+  bbPopulateTable();
+  bbSetTime();
+  bbCalc();
+}
+
+function bbCalc() {
+  var karatEl  = document.getElementById('calcKarat');
+  var wtEl     = document.getElementById('calcWeight');
+  if (!karatEl || !wtEl) return;
+
+  var weight  = parseFloat(wtEl.value);
+  var result  = document.getElementById('calcResult');
+  var amount  = document.getElementById('calcAmount');
+  var note    = document.getElementById('calcNote');
+  var waBtn   = document.getElementById('calcWaBtn');
+
+  if (!weight || weight <= 0) {
+    if (result) result.classList.add('empty');
+    if (amount) amount.textContent = 'Enter weight';
+    if (note)   note.textContent   = "Based on today's live gold rate";
+    if (waBtn)  waBtn.href = 'https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20a%20buyback%20quote.';
+    return;
+  }
+
+  var purity   = BB_PURITY[karatEl.value] || 0.916;
+  var deduct = (purity >= 0.916) ? 5 : 15;
+  var estimate = (BB_RATE_999 * purity - deduct) * weight;
+  if (estimate < 0) estimate = 0;
+
+  if (result) result.classList.remove('empty');
+  if (amount) amount.innerHTML = '<span class="r-cur">SGD</span>' + bbFmt(estimate);
+
+  var kLabel = {
+    '999':'999 (24K)', '916':'916 (22K)', '850':'850 (20K)',
+    '750':'750 (18K)', '585':'585 (14K)', '375':'375 (9K)'
+  }[karatEl.value] || karatEl.value;
+
+  if (note) note.textContent = weight + 'g · ' + kLabel + ' · Nett';
+
+  var msg = 'Hi Assure Gold, I would like a buyback quote.'
+    + '%0a%0aPurity: ' + kLabel
+    + '%0aWeight: ' + weight + 'g'
+    + '%0aEstimated value: SGD ' + bbFmt(estimate)
+    + '%0a%0aPlease confirm the actual buyback price. Thank you!';
+  if (waBtn) waBtn.href = 'https://wa.me/6596724975?text=' + msg;
+}
+
+function bbShowCalc() {
+  var table = document.getElementById('bbPriceTable');
+  var calc  = document.getElementById('bbCalcPanel');
+  if (table) table.style.display = 'none';
+  if (calc)  calc.style.display  = 'block';
+  bbCalc();
+}
+
+function bbShowTable() {
+  var table = document.getElementById('bbPriceTable');
+  var calc  = document.getElementById('bbCalcPanel');
+  if (calc)  calc.style.display  = 'none';
+  if (table) table.style.display = 'block';
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', function() {
+  bbPopulateTable();  /* show fallback prices immediately — table never blank */
+  bbSetTime();
+  bbFetchRate();      /* fetch live rate in background */
+  setInterval(bbFetchRate, 20 * 1000);  /* refresh every 20 seconds — live market */
 });
 
 </script>
