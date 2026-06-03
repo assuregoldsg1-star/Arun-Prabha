@@ -493,7 +493,7 @@ function bbFmt(n) {
 
 function bbRateFor(purity) {
   /* 24K(999): -$7, 22K(916): -$10, below 22K: -$15 */
-  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 10 : 15;
+  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 8.5 : 15;
   return BB_RATE_999 * purity - deduct;
 }
 
@@ -572,7 +572,7 @@ function bbCalc() {
   }
 
   var purity   = BB_PURITY[karatEl.value] || 0.916;
-  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 10 : 15;
+  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 8.5 : 15;
   var estimate = (BB_RATE_999 * purity - deduct) * weight;
   if (estimate < 0) estimate = 0;
 
