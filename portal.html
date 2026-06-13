@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Owner Portal · Assure Gold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF8F3; --card:#FFFFFF; --ink:#1C1814; --soft:#6B6258; --soft2:#938a7e;
+  --gold:#B8862F; --gold-lt:#D9B45A; --line:#E9E3D7; --line2:#F1ECE2;
+  --ok:#2E7D5B; --bad:#B23A3A; --buy:#2E7D5B; --sell:#B8862F;
+  --shadow:0 12px 40px rgba(28,24,20,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font-family:'Space Mono',monospace}
+.hide{display:none!important}
+button{font:inherit;cursor:pointer}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* ---------- LOGIN ---------- */
+#login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
+.lcard{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;text-align:center;animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.seal{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;
+  background:radial-gradient(circle at 30% 28%,var(--gold-lt),var(--gold));
+  box-shadow:0 6px 18px rgba(184,134,47,.35);color:#fff}
+.seal svg{width:28px;height:28px}
+.lcard h1{font-family:Fraunces,serif;font-weight:500;font-size:22px;letter-spacing:-.01em}
+.lcard p{font-size:13px;color:var(--soft);margin:7px 0 22px;line-height:1.5}
+#passInput{width:100%;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;text-align:center;
+  letter-spacing:.18em;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff}
+#passInput:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,47,.13)}
+.btn{width:100%;border:none;border-radius:12px;font-weight:600;font-size:15px;padding:14px;color:#fff;
+  background:linear-gradient(135deg,var(--gold-lt),var(--gold));box-shadow:0 8px 20px rgba(184,134,47,.30);
+  margin-top:14px;transition:.15s}
+.btn:hover{filter:brightness(1.04)} .btn:active{transform:translateY(1px)} .btn[disabled]{opacity:.55;cursor:not-allowed}
+.lmsg{font-size:12.5px;color:var(--bad);margin-top:12px;display:none}
+.lmsg.show{display:block}
+
+/* ---------- APP SHELL ---------- */
+#app{max-width:1100px;margin:0 auto;padding:0 18px 60px}
+.topbar{display:flex;align-items:center;gap:14px;padding:18px 0;position:sticky;top:0;z-index:20;
+  background:linear-gradient(var(--paper),var(--paper) 70%,transparent)}
+.topbar .mark{display:flex;align-items:center;gap:10px}
+.topbar .seal{width:38px;height:38px;margin:0}
+.topbar .seal svg{width:19px;height:19px}
+.topbar h1{font-family:Fraunces,serif;font-weight:500;font-size:18px;line-height:1}
+.topbar h1 span{display:block;font-family:'Space Mono',monospace;font-size:9.5px;color:var(--soft);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.topbar .grow{flex:1}
+.tbtn{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;
+  font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:7px;transition:.15s}
+.tbtn:hover{border-color:var(--gold)}
+.tbtn.primary{background:linear-gradient(135deg,var(--gold-lt),var(--gold));color:#fff;border:none;
+  box-shadow:0 6px 16px rgba(184,134,47,.28)}
+.tbtn svg{width:16px;height:16px}
+
+/* tabs */
+.tabs{display:flex;gap:6px;background:#f3efe6;border-radius:12px;padding:5px;margin:6px 0 18px;width:fit-content}
+.tabs button{border:none;background:none;padding:9px 18px;border-radius:9px;font-size:13.5px;font-weight:600;
+  color:var(--soft);transition:.15s}
+.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(28,24,20,.10)}
+
+/* filter bar */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.fseg{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px}
+.fseg button{border:none;background:none;padding:7px 12px;border-radius:7px;font-size:12.5px;font-weight:600;color:var(--soft)}
+.fseg button.on{background:var(--ink);color:#fff}
+.fdate{display:flex;gap:6px;align-items:center}
+.fdate input{font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+.search{flex:1;min-width:160px;position:relative}
+.search input{width:100%;font:inherit;font-size:14px;padding:10px 12px 10px 36px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--soft2)}
+.search input:focus,.fdate input:focus{outline:none;border-color:var(--gold)}
+
+/* report cards */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px}
+.stat .k{font-size:11px;font-weight:600;color:var(--soft);letter-spacing:.04em;text-transform:uppercase}
+.stat .v{font-family:'Space Mono',monospace;font-size:23px;font-weight:700;margin-top:8px;letter-spacing:-.01em}
+.stat .v small{font-size:13px;color:var(--soft);font-weight:400}
+.stat.buy .v{color:var(--buy)} .stat.sell .v{color:var(--sell)}
+.stat .d{font-size:11px;color:var(--soft2);margin-top:3px}
+
+/* table */
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--soft);font-weight:600;
+  text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);background:#fcfaf6}
+td{padding:13px 16px;border-bottom:1px solid var(--line2);font-size:13.5px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{background:#fdfcf8}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.tag.buy{background:#eaf5ef;color:var(--buy)} .tag.sell{background:#f7efdd;color:var(--sell)}
+.idpill{font-family:'Space Mono',monospace;font-size:11px;color:var(--soft);background:#f3efe6;padding:2px 7px;border-radius:6px}
+.amt{font-family:'Space Mono',monospace;font-weight:700}
+.empty{text-align:center;padding:46px 20px;color:var(--soft)}
+.empty svg{width:34px;height:34px;color:var(--line);margin-bottom:10px}
+.empty b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
+.loading{text-align:center;padding:40px;color:var(--soft);font-size:13px}
+
+/* drawer / modal */
+.scrim{position:fixed;inset:0;background:rgba(28,24,20,.45);backdrop-filter:blur(2px);z-index:40;
+  display:flex;justify-content:flex-end;animation:fade .2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.drawer{width:min(440px,100%);height:100%;background:var(--paper);overflow-y:auto;padding:22px;
+  animation:slide .25s cubic-bezier(.2,.7,.2,1) both;box-shadow:-20px 0 60px rgba(0,0,0,.2)}
+@keyframes slide{from{transform:translateX(30px);opacity:.6}to{transform:none;opacity:1}}
+.modal-center{position:fixed;inset:0;background:rgba(28,24,20,.45);backdrop-filter:blur(2px);z-index:50;
+  display:flex;align-items:center;justify-content:center;padding:20px;animation:fade .2s ease}
+.mbox{width:100%;max-width:440px;max-height:92dvh;overflow-y:auto;background:var(--card);border-radius:18px;
+  box-shadow:var(--shadow);padding:24px;animation:rise .3s ease both}
+.dh{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+.dh .grow{flex:1}
+.dh h3{font-family:Fraunces,serif;font-weight:500;font-size:20px;line-height:1.2}
+.dh .sub{font-size:12px;color:var(--soft);margin-top:4px}
+.x{background:#fff;border:1px solid var(--line);border-radius:9px;width:34px;height:34px;display:grid;place-items:center;color:var(--soft);flex:none}
+.x:hover{border-color:var(--gold);color:var(--ink)}
+
+.kv{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-bottom:16px}
+.kv .row{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line2);font-size:13px}
+.kv .row:last-child{border-bottom:none}
+.kv .row .k{color:var(--soft)} .kv .row .v{font-weight:600;text-align:right;word-break:break-word}
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.doc{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:1.58;position:relative}
+.doc img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.doc .lbl{position:absolute;left:7px;bottom:7px;font-size:10px;font-weight:600;background:rgba(28,24,20,.78);
+  color:#fff;padding:2px 7px;border-radius:5px}
+.doc.ph{display:grid;place-items:center;color:var(--soft2);font-size:11px}
+
+.sechead{display:flex;align-items:center;justify-content:space-between;margin:20px 0 10px}
+.sechead h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)}
+.miniadd{font-size:12px;font-weight:600;color:var(--gold);background:none;border:none;display:inline-flex;align-items:center;gap:5px}
+.txrow{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:8px;
+  display:flex;align-items:center;gap:12px}
+.txrow .grow{flex:1}.txrow .ti{font-size:13px;font-weight:600}.txrow .td{font-size:11.5px;color:var(--soft);margin-top:2px}
+
+/* form fields in modal */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:14px;padding:11px 12px;
+  border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,47,.12)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;gap:8px;background:#f3efe6;border-radius:11px;padding:5px}
+.seg button{flex:1;border:none;background:none;padding:9px;border-radius:8px;font-size:13px;font-weight:600;color:var(--soft)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(28,24,20,.10)}
+.codebig{font-family:'Space Mono',monospace;font-size:30px;font-weight:700;text-align:center;letter-spacing:.1em;
+  background:#f3efe6;border-radius:13px;padding:20px;margin:6px 0 14px}
+.copyrow{display:flex;gap:8px}.copyrow .btn{margin-top:0}
+.note{font-size:11.5px;color:var(--soft);line-height:1.55;margin-top:10px}
+
+@media(max-width:720px){
+  .stats{grid-template-columns:1fr 1fr}
+  .topbar h1 span{display:none}
+  th.hideS,td.hideS{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="login">
+  <div class="lcard">
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+    <h1>Assure Gold Portal</h1>
+    <p>Enter your owner access code to view customer records and transactions.</p>
+    <input type="password" id="passInput" placeholder="••••••••" autocomplete="off" />
+    <button class="btn" id="loginBtn">Unlock portal</button>
+    <div class="lmsg" id="lmsg">Incorrect code. Please try again.</div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hide">
+  <div class="topbar">
+    <div class="mark">
+      <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h1>Assure Gold<span>Verification Portal</span></h1>
+    </div>
+    <div class="grow"></div>
+    <button class="tbtn primary" id="newCodeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New customer code</button>
+    <button class="tbtn" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+  </div>
+
+  <div class="tabs">
+    <button class="on" data-tab="customers">Customers</button>
+    <button data-tab="transactions">Transactions</button>
+    <button data-tab="codes">Codes</button>
+  </div>
+
+  <!-- filter bar (shared) -->
+  <div class="filters">
+    <div class="fseg" id="rangeSeg">
+      <button data-r="today">Today</button>
+      <button data-r="week">Week</button>
+      <button data-r="month">Month</button>
+      <button class="on" data-r="all">All</button>
+      <button data-r="custom">Custom</button>
+    </div>
+    <div class="fdate hide" id="customRange">
+      <input type="date" id="dFrom"/><span style="color:var(--soft);font-size:12px">→</span><input type="date" id="dTo"/>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Search name, number, contact…"/>
+    </div>
+  </div>
+
+  <!-- report cards -->
+  <div class="stats" id="stats"></div>
+
+  <!-- table -->
+  <div class="panel" id="panel"><div class="loading">Loading…</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ============================================================
+   CONFIG — fill these in after creating your Supabase project
+   ============================================================ */
+const SUPABASE_URL      = "https://hphrrbvznveziaawwnom.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwaHJyYnZ6bnZlemlhYXd3bm9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzOTc5MDMsImV4cCI6MjA5Njk3MzkwM30.CcgOf6VDirOsNwBNIsthaJl6d265pPb5RVi-vw59fAw";
+const OWNER_EMAIL       = "owner@assuregold.sg";          // the login user you create in Supabase
+const VERIFY_URL        = "https://assuregold.sg/verify.html"; // public customer form link
+const WHATSAPP          = "6596724975";
+/* ============================================================ */
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = id => document.getElementById(id);
+
+let state = { tab:'customers', range:'all', from:null, to:null, search:'', customers:[], txns:[], codes:[] };
+
+/* ---------- AUTH ---------- */
+$('loginBtn').addEventListener('click', login);
+$('passInput').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+async function login(){
+  const code = $('passInput').value.trim();
+  if(!code) return;
+  $('loginBtn').disabled=true; $('loginBtn').textContent='Unlocking…'; $('lmsg').classList.remove('show');
+  const { error } = await sb.auth.signInWithPassword({ email: OWNER_EMAIL, password: code });
+  $('loginBtn').disabled=false; $('loginBtn').textContent='Unlock portal';
+  if(error){ $('lmsg').classList.add('show'); $('passInput').value=''; return; }
+  enterApp();
+}
+$('logoutBtn').addEventListener('click', async ()=>{ await sb.auth.signOut(); location.reload(); });
+
+sb.auth.getSession().then(({data})=>{ if(data.session) enterApp(); });
+
+function enterApp(){ $('login').classList.add('hide'); $('app').classList.remove('hide'); loadAll(); }
+
+/* ---------- FILTERS ---------- */
+$('rangeSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  state.range=b.dataset.r;
+  [...$('rangeSeg').children].forEach(x=>x.classList.toggle('on',x===b));
+  $('customRange').classList.toggle('hide', state.range!=='custom');
+  render();
+});
+$('dFrom').addEventListener('change',e=>{state.from=e.target.value;render();});
+$('dTo').addEventListener('change',e=>{state.to=e.target.value;render();});
+$('searchInput').addEventListener('input',e=>{state.search=e.target.value.toLowerCase();render();});
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  state.tab=b.dataset.tab;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $('searchInput').parentElement.style.display = state.tab==='codes' ? 'none':'';
+  render();
+}));
+
+function rangeBounds(){
+  const now=new Date(); let from=null,to=null;
+  const d=x=>x.toISOString().slice(0,10);
+  if(state.range==='today'){ from=d(now); to=d(now); }
+  else if(state.range==='week'){ const s=new Date(now); s.setDate(now.getDate()-now.getDay()); from=d(s); to=d(now); }
+  else if(state.range==='month'){ from=d(new Date(now.getFullYear(),now.getMonth(),1)); to=d(now); }
+  else if(state.range==='custom'){ from=state.from; to=state.to; }
+  return {from,to};
+}
+function inRange(dateStr){
+  const {from,to}=rangeBounds(); if(!from&&!to) return true;
+  const x=(dateStr||'').slice(0,10);
+  if(from&&x<from) return false; if(to&&x>to) return false; return true;
+}
+
+/* ---------- DATA ---------- */
+async function loadAll(){
+  const [c,t,k]=await Promise.all([
+    sb.from('customers').select('*').order('created_at',{ascending:false}),
+    sb.from('transactions').select('*').order('txn_date',{ascending:false}).order('created_at',{ascending:false}),
+    sb.from('access_codes').select('*').order('created_at',{ascending:false})
+  ]);
+  state.customers=c.data||[]; state.txns=t.data||[]; state.codes=k.data||[];
+  render();
+}
+
+/* ---------- RENDER ---------- */
+function money(n){ return n==null?'—':'$'+Number(n).toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtDate(s){ if(!s)return'—'; const d=new Date(s); return d.toLocaleDateString('en-SG',{day:'2-digit',month:'short',year:'numeric'}); }
+function custName(id){ const c=state.customers.find(x=>x.id===id); return c?c.full_name:'Unknown'; }
+
+function render(){
+  if(state.tab==='customers') renderCustomers();
+  else if(state.tab==='transactions') renderTransactions();
+  else renderCodes();
+}
+
+function renderCustomers(){
+  const q=state.search;
+  const rows=state.customers.filter(c=>inRange(c.created_at)).filter(c=>!q||
+    (c.full_name||'').toLowerCase().includes(q)||(c.id_number||'').toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q));
+  const txnFor=id=>state.txns.filter(t=>t.customer_id===id);
+  // stats
+  $('stats').innerHTML = card('New customers', rows.length, periodLabel())
+    + card('With transactions', rows.filter(c=>txnFor(c.id).length).length,'in this view')
+    + card('Pending follow-up', rows.filter(c=>!txnFor(c.id).length).length,'no transaction yet')
+    + card('Total records', state.customers.length,'all time');
+  if(!rows.length){ $('panel').innerHTML=emptyBox('No customers in this period','New submissions will appear here automatically.'); return; }
+  let h='<table><thead><tr><th>Customer</th><th class="hideS">Identity</th><th class="hideS">Contact</th><th>Submitted</th><th>Txns</th></tr></thead><tbody>';
+  rows.forEach(c=>{
+    h+=`<tr class="click" data-cust="${c.id}">
+      <td><b>${esc(c.full_name)}</b></td>
+      <td class="hideS"><span class="idpill">${(c.id_type||'').toUpperCase()} · ${esc(c.id_number)}</span></td>
+      <td class="hideS">${esc(c.contact)}</td>
+      <td>${fmtDate(c.created_at)}</td>
+      <td>${txnFor(c.id).length||'<span style="color:var(--soft2)">—</span>'}</td></tr>`;
+  });
+  h+='</tbody></table>'; $('panel').innerHTML=h;
+  $('panel').querySelectorAll('[data-cust]').forEach(r=>r.addEventListener('click',()=>openCustomer(r.dataset.cust)));
+}
+
+function renderTransactions(){
+  const q=state.search;
+  const rows=state.txns.filter(t=>inRange(t.txn_date)).map(t=>({...t,name:custName(t.customer_id)}))
+    .filter(t=>!q||t.name.toLowerCase().includes(q)||(t.item||'').toLowerCase().includes(q));
+  const buys=rows.filter(t=>t.txn_type==='buy'), sells=rows.filter(t=>t.txn_type==='sell');
+  const sum=a=>a.reduce((s,t)=>s+(Number(t.amount_sgd)||0),0);
+  $('stats').innerHTML = card('Transactions', rows.length, periodLabel())
+    + cardC('Bought from customers','buy', money(sum(buys)), buys.length+' txns')
+    + cardC('Sold to customers','sell', money(sum(sells)), sells.length+' txns')
+    + card('Net cash flow', (sum(sells)-sum(buys)>=0?'+':'−')+money(Math.abs(sum(sells)-sum(buys))), 'sold − bought');
+  if(!rows.length){ $('panel').innerHTML=emptyBox('No transactions in this period','Open a customer to log a buy or sell.'); return; }
+  let h='<table><thead><tr><th>Date</th><th>Customer</th><th class="hideS">Item</th><th>Type</th><th style="text-align:right">Amount</th></tr></thead><tbody>';
+  rows.forEach(t=>{
+    h+=`<tr><td class="mono" style="font-size:12px">${fmtDate(t.txn_date)}</td>
+      <td><b>${esc(t.name)}</b></td>
+      <td class="hideS">${esc(t.item||'—')}${t.weight_g?` · ${t.weight_g}g`:''}${t.purity?` · ${t.purity}`:''}</td>
+      <td><span class="tag ${t.txn_type}">${t.txn_type==='buy'?'Bought':'Sold'}</span></td>
+      <td class="amt" style="text-align:right;color:${t.txn_type==='buy'?'var(--buy)':'var(--sell)'}">${money(t.amount_sgd)}</td></tr>`;
+  });
+  h+='</tbody></table>'; $('panel').innerHTML=h;
+}
+
+function renderCodes(){
+  const rows=state.codes;
+  const unused=rows.filter(c=>!c.used);
+  $('stats').innerHTML = card('Codes issued', rows.length,'all time')
+    + card('Still active', unused.length,'not yet used')
+    + card('Completed', rows.filter(c=>c.used).length,'customer verified')
+    + card('Customers total', state.customers.length,'all time');
+  if(!rows.length){ $('panel').innerHTML=emptyBox('No codes yet','Tap “New customer code” to create one and send it on WhatsApp.'); return; }
+  let h='<table><thead><tr><th>Code</th><th class="hideS">Label</th><th>Status</th><th>Created</th></tr></thead><tbody>';
+  rows.forEach(c=>{
+    h+=`<tr><td class="mono"><b>${esc(c.code)}</b></td>
+      <td class="hideS">${esc(c.label||'—')}</td>
+      <td>${c.used?'<span class="tag buy">Used</span>':'<span class="tag sell">Active</span>'}</td>
+      <td>${fmtDate(c.created_at)}</td></tr>`;
+  });
+  h+='</tbody></table>'; $('panel').innerHTML=h;
+}
+
+function periodLabel(){ return {today:'today',week:'this week',month:'this month',all:'all time',custom:'selected range'}[state.range]; }
+function card(k,v,d){ return `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d||''}</div></div>`; }
+function cardC(k,c,v,d){ return `<div class="stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d||''}</div></div>`; }
+function emptyBox(t,s){ return `<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7l-2-2H5a2 2 0 0 0-2 2Z"/></svg><b>${t}</b>${s}</div>`; }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+
+/* ---------- CUSTOMER DRAWER ---------- */
+async function openCustomer(id){
+  const c=state.customers.find(x=>x.id===id); if(!c) return;
+  const txns=state.txns.filter(t=>t.customer_id===id);
+  const scrim=document.createElement('div'); scrim.className='scrim';
+  scrim.innerHTML=`<div class="drawer">
+    <div class="dh"><div class="grow"><h3>${esc(c.full_name)}</h3><div class="sub">Submitted ${fmtDate(c.created_at)}</div></div>
+      <button class="x" id="dClose"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="kv">
+      <div class="row"><span class="k">${(c.id_type||'').toUpperCase()} number</span><span class="v mono">${esc(c.id_number)}</span></div>
+      <div class="row"><span class="k">Contact</span><span class="v">${esc(c.contact)}</span></div>
+      <div class="row"><span class="k">Declaration</span><span class="v" style="color:var(--ok)">✓ Confirmed</span></div>
+      <div class="row"><span class="k">Consent</span><span class="v" style="color:var(--ok)">✓ Given</span></div>
+    </div>
+    <div class="sechead"><h4>Identity documents</h4></div>
+    <div class="docs" id="docs"><div class="doc ph">Loading…</div></div>
+    <div class="sechead"><h4>Transactions</h4><button class="miniadd" id="addTx"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add</button></div>
+    <div id="txList"></div>
+  </div>`;
+  document.body.appendChild(scrim);
+  scrim.addEventListener('click',e=>{ if(e.target===scrim) scrim.remove(); });
+  $('dClose').addEventListener('click',()=>scrim.remove());
+  $('addTx').addEventListener('click',()=>{ scrim.remove(); openTxModal(c); });
+
+  // transactions list
+  const tl=$('txList');
+  tl.innerHTML = txns.length? txns.map(t=>`<div class="txrow">
+      <span class="tag ${t.txn_type}">${t.txn_type==='buy'?'Bought':'Sold'}</span>
+      <div class="grow"><div class="ti">${esc(t.item||'Transaction')}</div>
+      <div class="td">${fmtDate(t.txn_date)}${t.weight_g?` · ${t.weight_g}g`:''}${t.purity?` · ${t.purity}`:''}</div></div>
+      <div class="amt" style="color:${t.txn_type==='buy'?'var(--buy)':'var(--sell)'}">${money(t.amount_sgd)}</div></div>`).join('')
+    : '<div style="font-size:12.5px;color:var(--soft);padding:4px 2px 8px">No transactions logged yet.</div>';
+
+  // signed photo urls
+  const docsEl=$('docs'); const imgs=[];
+  if(c.doc_front_path) imgs.push(['Front',c.doc_front_path]);
+  if(c.doc_back_path)  imgs.push(['Back',c.doc_back_path]);
+  if(!imgs.length){ docsEl.innerHTML='<div class="doc ph">No documents</div>'; }
+  else{
+    const signed=await Promise.all(imgs.map(([_,p])=>sb.storage.from('kyc-docs').createSignedUrl(p,3600)));
+    docsEl.innerHTML=imgs.map(([lbl],i)=>{
+      const u=signed[i]?.data?.signedUrl;
+      return u?`<div class="doc"><img src="${u}" alt="${lbl}" onclick="window.open('${u}','_blank')"/><span class="lbl">${lbl}</span></div>`
+              :`<div class="doc ph">${lbl}<br>unavailable</div>`;
+    }).join('');
+  }
+}
+
+/* ---------- ADD TRANSACTION ---------- */
+function openTxModal(c){
+  const m=document.createElement('div'); m.className='modal-center';
+  const today=new Date().toISOString().slice(0,10);
+  m.innerHTML=`<div class="mbox">
+    <div class="dh"><div class="grow"><h3>Log a transaction</h3><div class="sub">${esc(c.full_name)}</div></div>
+      <button class="x" id="mClose"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="field"><label>Type</label><div class="seg" id="txSeg">
+      <button type="button" data-t="buy" class="on">Bought from customer</button>
+      <button type="button" data-t="sell">Sold to customer</button></div></div>
+    <div class="field"><label>Item</label><input id="txItem" placeholder="e.g. Rope chain, bangle, ring"/></div>
+    <div class="grid2">
+      <div class="field"><label>Purity</label><select id="txPurity"><option value="">—</option><option>999</option><option>916</option><option>750</option><option>585</option><option>Other</option></select></div>
+      <div class="field"><label>Weight (g)</label><input id="txWeight" type="number" step="0.01" inputmode="decimal" placeholder="0.00"/></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Amount (SGD)</label><input id="txAmount" type="number" step="0.01" inputmode="decimal" placeholder="0.00"/></div>
+      <div class="field"><label>Date</label><input id="txDate" type="date" value="${today}"/></div>
+    </div>
+    <div class="field"><label>Notes (optional)</label><textarea id="txNotes" rows="2" placeholder="Any reference or remark"></textarea></div>
+    <button class="btn" id="txSave">Save transaction</button>
+    <div class="lmsg" id="txMsg" style="text-align:center">Could not save. Please try again.</div>
+  </div>`;
+  document.body.appendChild(m);
+  let txType='buy';
+  m.addEventListener('click',e=>{ if(e.target===m) m.remove(); });
+  $('mClose').addEventListener('click',()=>m.remove());
+  $('txSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; txType=b.dataset.t; [...$('txSeg').children].forEach(x=>x.classList.toggle('on',x===b)); });
+  $('txSave').addEventListener('click',async ()=>{
+    const payload={ customer_id:c.id, txn_type:txType,
+      item:$('txItem').value.trim()||null, purity:$('txPurity').value||null,
+      weight_g:$('txWeight').value?Number($('txWeight').value):null,
+      amount_sgd:$('txAmount').value?Number($('txAmount').value):null,
+      txn_date:$('txDate').value||today, notes:$('txNotes').value.trim()||null };
+    $('txSave').disabled=true; $('txSave').textContent='Saving…'; $('txMsg').classList.remove('show');
+    const { error }=await sb.from('transactions').insert(payload);
+    if(error){ $('txMsg').classList.add('show'); $('txSave').disabled=false; $('txSave').textContent='Save transaction'; return; }
+    m.remove(); await loadAll();
+  });
+}
+
+/* ---------- NEW CODE ---------- */
+$('newCodeBtn').addEventListener('click', openCodeModal);
+function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return 'AG-'+s; }
+function openCodeModal(){
+  const m=document.createElement('div'); m.className='modal-center';
+  m.innerHTML=`<div class="mbox">
+    <div class="dh"><div class="grow"><h3>New customer code</h3><div class="sub">One-time code to send your customer</div></div>
+      <button class="x" id="cClose"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="field"><label>Customer name / note (optional)</label><input id="cLabel" placeholder="So you remember who it's for"/></div>
+    <button class="btn" id="cGen" style="margin-top:4px">Generate code</button>
+    <div id="cResult" class="hide">
+      <div class="codebig" id="cCode"></div>
+      <div class="copyrow">
+        <button class="tbtn" id="cCopy" style="flex:1;justify-content:center">Copy code</button>
+        <button class="tbtn primary" id="cWa" style="flex:1;justify-content:center">Send on WhatsApp</button>
+      </div>
+      <div class="note">Share this code and the verification link with your customer. It works once, then expires automatically.</div>
+    </div>
+    <div class="lmsg" id="cMsg" style="text-align:center">Could not create code. Try again.</div>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{ if(e.target===m) m.remove(); });
+  $('cClose').addEventListener('click',()=>m.remove());
+  $('cGen').addEventListener('click',async ()=>{
+    const code=genCode(); const label=$('cLabel').value.trim()||null;
+    $('cGen').disabled=true; $('cGen').textContent='Creating…'; $('cMsg').classList.remove('show');
+    const { error }=await sb.from('access_codes').insert({ code, label });
+    if(error){ $('cMsg').classList.add('show'); $('cGen').disabled=false; $('cGen').textContent='Generate code'; return; }
+    $('cGen').classList.add('hide'); $('cResult').classList.remove('hide'); $('cCode').textContent=code;
+    const wamsg=`Hello! To verify your identity with Assure Gold, please open this secure link and enter your code.%0a%0aLink: ${VERIFY_URL}%0aYour code: ${code}%0a%0aIt only takes a minute. Thank you!`;
+    $('cCopy').addEventListener('click',()=>{ navigator.clipboard.writeText(code); $('cCopy').textContent='Copied ✓'; setTimeout(()=>$('cCopy').textContent='Copy code',1500); });
+    $('cWa').addEventListener('click',()=>{ window.open(`https://wa.me/?text=${wamsg}`,'_blank'); });
+    await loadAll();
+  });
+}
+</script>
+</body>
+</html>
