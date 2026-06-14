@@ -221,6 +221,24 @@ img{display:block;max-width:100%}
 </style>
 </head>
 <body>
+
+<!-- ============ LOGIN GATE ============ -->
+<div id="ag-login" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#1a1410,#2a2016);display:flex;align-items:center;justify-content:center;padding:24px;font-family:var(--sans)">
+  <div style="width:100%;max-width:360px;background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:34px 28px;text-align:center">
+    <div style="width:56px;height:56px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold-lt),var(--g1));color:#fff;font-size:24px">&#9874;</div>
+    <h1 style="font-family:var(--cinzel);font-size:18px;letter-spacing:.12em;color:var(--ink)">ASSURE GOLD</h1>
+    <p style="font-family:var(--cinzel);font-size:9px;letter-spacing:.2em;color:var(--g1);margin-top:4px;text-transform:uppercase">Website Manager</p>
+
+    <div style="margin-top:22px">
+      <p style="font-size:13px;color:var(--sub);margin-bottom:14px">Enter your passcode to open the editor.</p>
+      <input type="password" id="lg-pass" placeholder="passcode" inputmode="numeric" autocomplete="off"
+        style="width:100%;font-size:20px;font-weight:600;padding:14px;border:1px solid var(--line);border-radius:11px;text-align:center;letter-spacing:.3em;font-family:monospace;background:var(--off)"/>
+      <button id="lg-btn" style="width:100%;margin-top:12px;padding:14px;border:none;border-radius:11px;color:#fff;font-weight:600;font-size:15px;background:linear-gradient(135deg,var(--gold-lt),var(--g1));box-shadow:0 8px 20px rgba(184,134,11,.3)">Open editor</button>
+      <div id="lg-msg1" style="font-size:12.5px;color:var(--red);margin-top:10px;display:none"></div>
+    </div>
+  </div>
+</div>
+
 <div class="layout">
 
   <aside class="sidebar">
@@ -387,12 +405,26 @@ img{display:block;max-width:100%}
       <!-- DEPLOY -->
       <div class="view" id="view-deploy">
         <div class="deploy">
-          <div class="di">&#128230;</div>
+          <div class="di">&#128640;</div>
           <h2>Publish Your Website</h2>
-          <p>This builds an updated copy of your website with all your changes applied. Download it, then upload the files to GitHub.</p>
+          <p>Make your changes live with one tap. No downloads, no GitHub. Updates appear at assuregold.sg in about a minute.</p>
         </div>
 
-        <div class="card">
+        <div class="card" style="border:2px solid var(--g1)">
+          <div class="card-h"><div><h3>&#9889; One-Tap Publish</h3></div></div>
+          <div class="card-b">
+            <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:14px">This sends all your current changes straight to your live website automatically. Your edits are already saved in the cloud, so you can publish from any device.</p>
+            <button class="btn btn-p btn-xl" id="publishBtn" onclick="publishLive()">&#128640; Publish to live website</button>
+            <div class="dstatus" id="publish-status"></div>
+            <div style="margin-top:12px;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px">
+              <span style="font-size:13px">&#128274;</span> Secure - only you can publish, signed in with your code + email verification.
+            </div>
+          </div>
+        </div>
+
+        <details style="margin-bottom:18px">
+        <summary style="cursor:pointer;font-size:12.5px;color:var(--muted);padding:6px 2px">Advanced: download as ZIP instead (manual upload)</summary>
+        <div class="card" style="margin-top:10px">
           <div class="card-h"><div><h3>&#128229; Step 1 &mdash; Build Your Updated Website</h3></div></div>
           <div class="card-b">
             <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:13px">Select your 3 current website files below. This tool will apply all your changes and give you a ZIP to download.</p>
@@ -420,6 +452,7 @@ img{display:block;max-width:100%}
             <div style="margin-top:13px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="font-size:14px">&#9989;</span> Your website at <b>assuregold.sg</b> updates automatically in about 30 seconds.</div>
           </div>
         </div>
+        </details>
 
         <div class="card">
           <div class="card-h"><div><h3>&#128190; Backup (optional)</h3></div></div>
@@ -1117,6 +1150,124 @@ function zipStatus(msg,kind){
 
 window.addEventListener('DOMContentLoaded',function(){ renderDash(); });
 
+</script>
+
+<script>
+/* ============================================================
+   CLOUD LAYER - passcode unlock + load from repo + one-tap publish
+   ============================================================ */
+var AG_RAW   = "https://raw.githubusercontent.com/assuregoldsg1-star/Arun-Prabha/main/";
+var AG_PAGES = ["index.html","collection.html","buyback.html"];
+var AG_CODE  = null;  /* validated passcode, kept only in memory/session */
+
+function lgEl(id){ return document.getElementById(id); }
+function lgShow(id,t){ var e=lgEl(id); e.textContent=t; e.style.display='block'; }
+
+lgEl('lg-btn').addEventListener('click', lgUnlock);
+lgEl('lg-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') lgUnlock(); });
+
+async function lgUnlock(){
+  var code = lgEl('lg-pass').value.trim();
+  if(!code) return;
+  lgEl('lg-btn').disabled=true; lgEl('lg-btn').textContent='Checking...'; lgEl('lg-msg1').style.display='none';
+  try{
+    var r = await fetch('/api/publish', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'auth', code: code })
+    });
+    var out = await r.json();
+    if(!r.ok || !out.ok){ throw new Error(out.error || 'Wrong passcode.'); }
+    AG_CODE = code;
+    try{ sessionStorage.setItem('ag_code', code); }catch(e){}
+    enterEditor();
+  }catch(err){
+    lgShow('lg-msg1', err.message || 'Could not verify. Check your connection.');
+    lgEl('lg-btn').disabled=false; lgEl('lg-btn').textContent='Open editor'; lgEl('lg-pass').value='';
+  }
+}
+
+async function enterEditor(){
+  lgEl('ag-login').style.display='none';
+  await loadFromRepo();
+  try{ renderDash(); }catch(e){}
+}
+
+/* resume an unlocked session without re-typing */
+(function(){
+  try{
+    var saved = sessionStorage.getItem('ag_code');
+    if(saved){ AG_CODE = saved; enterEditor(); }
+  }catch(e){}
+})();
+
+/* Load the latest published content so any device starts from the same place */
+async function loadFromRepo(){
+  try{
+    var r = await fetch(AG_RAW + 'assure-gold-backup.json?t=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) return;
+    var d = await r.json();
+    if(d.products && d.products.length){ DATA.products = d.products; }
+    if(d.business){ DATA.business = d.business; }
+    if(d.slides){ DATA.slides = d.slides; }
+    if(d.stats){ DATA.stats = d.stats; }
+    if(d.headings){ DATA.headings = d.headings; }
+    try{ persistLocalOnly(); }catch(e){}
+  }catch(e){ /* offline or first run - keep local/defaults */ }
+}
+
+/* keep local autosave as the original tool did */
+var persistLocalOnly = persist;
+
+/* ---- one-tap publish ---- */
+function pStatus(msg, kind){
+  var el=document.getElementById('publish-status');
+  el.className='dstatus show '+(kind||'work');
+  el.innerHTML=msg;
+}
+
+async function publishLive(){
+  if(!AG_CODE){ pStatus('&#9888; Please sign in again.','err'); return; }
+  var btn=document.getElementById('publishBtn');
+  btn.disabled=true;
+  try{
+    pStatus('&#8987; Building your website...','work');
+    var patchers={'index.html':patchIndex,'collection.html':patchCollection,'buyback.html':patchBuyback};
+    var files=[];
+
+    for(var i=0;i<AG_PAGES.length;i++){
+      var name=AG_PAGES[i];
+      var resp=await fetch(AG_RAW+name+'?t='+Date.now(),{cache:'no-store'});
+      if(!resp.ok){ throw new Error('Could not read '+name+' ('+resp.status+')'); }
+      var html=await resp.text();
+      files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
+    }
+
+    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings };
+    files.push({ path:'assure-gold-backup.json', content:JSON.stringify(backup,null,1), encoding:'utf-8' });
+
+    var imgPaths=Object.keys(DATA.images||{});
+    imgPaths.forEach(function(ip){
+      var dataUrl=DATA.images[ip];
+      var b64=dataUrl.indexOf(',')>=0 ? dataUrl.split(',')[1] : dataUrl;
+      files.push({ path:ip, content:b64, encoding:'base64' });
+    });
+
+    pStatus('&#8987; Publishing to your live website...','work');
+    var pub=await fetch('/api/publish',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ code:AG_CODE, files:files, message:'Website update via manager' })
+    });
+    var out=await pub.json();
+    if(!pub.ok || !out.ok){ throw new Error(out.error || ('Publish failed ('+pub.status+')')); }
+
+    DATA.images={}; try{ persistLocalOnly(); }catch(e){}
+    pStatus('&#10003; Published! Your website updates at assuregold.sg in about a minute.'+(imgPaths.length?(' '+imgPaths.length+' image(s) updated.'):''),'ok');
+    try{ toast('Published to live website','success'); }catch(e){}
+  }catch(e){
+    pStatus('&#9888; '+ (e.message||'Something went wrong. Please try again.'),'err');
+  }
+  btn.disabled=false;
+}
 </script>
 </body>
 </html>
