@@ -332,7 +332,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
         <tr class="bpt-subhead">
           <td>NO. OF KARATS</td>
           <td>GOLD FINENESS</td>
-          <td>S$ PER GRAM (SGD)</td>
+          <td>S$ PER GRAM (S$)</td>
         </tr>
       </thead>
       <tbody id="bptBody">
@@ -475,7 +475,7 @@ document.querySelectorAll('.fq-btn').forEach(function(btn){
    Source:  gold-api.com (USD) + live FX
    ══════════════════════════════════════ */
 
-var BB_RATE_999 = 185.0;  /* SGD/g fallback — shown immediately before API loads */
+var BB_RATE_999 = 185.0;  /* S$/g fallback — shown immediately before API loads */
 var BB_DEDUCT   = 5;      /* $5/g deduction from spot */
 
 var BB_PURITY = {
@@ -528,18 +528,18 @@ async function bbFetchRate() {
     if (!gData.price || gData.price < 500) throw new Error('bad gold price');
     var usdPerOz = gData.price;
 
-    /* Step 2: live USD → SGD exchange rate */
+    /* Step 2: live USD → S$ exchange rate */
     var fxRate = 1.338; /* fallback */
     try {
       var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
       if (fxRes.ok) {
         var fxData = await fxRes.json();
-        var sgd = fxData.rates && fxData.rates.SGD;
+        var sgd = fxData.rates && fxData.rates.S$;
         if (sgd && sgd > 1.2 && sgd < 1.6) fxRate = sgd;
       }
     } catch(e2) { /* keep fallback FX */ }
 
-    /* Step 3: convert to SGD per gram (999 pure) */
+    /* Step 3: convert to S$ per gram (999 pure) */
     BB_RATE_999 = (usdPerOz * fxRate) / 31.1035;
 
   } catch(e) {
@@ -577,7 +577,7 @@ function bbCalc() {
   if (estimate < 0) estimate = 0;
 
   if (result) result.classList.remove('empty');
-  if (amount) amount.innerHTML = '<span class="r-cur">SGD</span>' + bbFmt(estimate);
+  if (amount) amount.innerHTML = '<span class="r-cur">S$</span>' + bbFmt(estimate);
 
   var kLabel = {
     '999':'999 (24K)', '916':'916 (22K)', '850':'850 (20K)',
@@ -589,7 +589,7 @@ function bbCalc() {
   var msg = 'Hi Assure Gold, I would like a buyback quote.'
     + '%0a%0aPurity: ' + kLabel
     + '%0aWeight: ' + weight + 'g'
-    + '%0aEstimated value: SGD ' + bbFmt(estimate)
+    + '%0aEstimated value: S$ ' + bbFmt(estimate)
     + '%0a%0aPlease confirm the actual buyback price. Thank you!';
   if (waBtn) waBtn.href = 'https://wa.me/6596724975?text=' + msg;
 }

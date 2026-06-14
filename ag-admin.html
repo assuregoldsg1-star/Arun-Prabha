@@ -437,15 +437,15 @@ img{display:block;max-width:100%}
         <div class="topbar"><div><h2>&#128181; Buyback Prices</h2><p>Set your displayed buyback margin below. The live market rate is fetched automatically from the gold API &mdash; your margin is subtracted from it.</p></div></div>
 
         <div class="card">
-          <div class="card-h"><div><h3>&#128184; Buyback Margin (per gram, SGD)</h3><p>This is deducted from the live gold spot price to get your buyback price shown to customers.</p></div></div>
+          <div class="card-h"><div><h3>&#128184; Buyback Margin (per gram, S$)</h3><p>This is deducted from the live gold spot price to get your buyback price shown to customers.</p></div></div>
           <div class="card-b">
             <div class="notice" style="margin-bottom:16px"><span class="ni">&#128161;</span><div><strong>How it works</strong><p>Live gold price (from API) &minus; your margin = price shown on website. Lower margin = higher payout to customer. Example: if gold is $120/g and margin is $5, customer sees $115/g.</p></div></div>
             <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
-              <div class="field"><label>999 (24K) Margin (SGD/g)</label><input type="number" id="bb-m999" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
-              <div class="field"><label>916 (22K) Margin (SGD/g)</label><input type="number" id="bb-m916" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
-              <div class="field"><label>850 (20K) Margin (SGD/g)</label><input type="number" id="bb-m850" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
-              <div class="field"><label>750 (18K) Margin (SGD/g)</label><input type="number" id="bb-m750" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
-              <div class="field"><label>585 (14K) Margin (SGD/g)</label><input type="number" id="bb-m585" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>999 (24K) Margin (S$/g)</label><input type="number" id="bb-m999" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>916 (22K) Margin (S$/g)</label><input type="number" id="bb-m916" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>850 (20K) Margin (S$/g)</label><input type="number" id="bb-m850" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>750 (18K) Margin (S$/g)</label><input type="number" id="bb-m750" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>585 (14K) Margin (S$/g)</label><input type="number" id="bb-m585" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
             </div>
             <button class="btn btn-p" onclick="saveBuybackMargins()" style="margin-top:6px">&#10003; Save Margins</button>
             <div id="bb-save-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Publish the website to make this live.</div>
@@ -456,8 +456,8 @@ img{display:block;max-width:100%}
           <div class="card-h"><div><h3>&#127968; Hero Buyback Prices (index.html)</h3><p>The two prices shown in the hero section of the homepage (e.g. SGD 6,200+ and SGD 5,000).</p></div></div>
           <div class="card-b">
             <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
-              <div class="field"><label>Retail Price (crossed out, SGD)</label><input type="number" id="bb-retail" step="1" min="0" placeholder="e.g. 6200"/><div class="hint">The higher price shown with SGD prefix (retail value)</div></div>
-              <div class="field"><label>You Pay Price (SGD)</label><input type="number" id="bb-youpay" step="1" min="0" placeholder="e.g. 5000"/><div class="hint">The lower price shown as "YOU PAY"</div></div>
+              <div class="field"><label>Retail Price (crossed out, S$)</label><input type="number" id="bb-retail" step="1" min="0" placeholder="e.g. 6200"/><div class="hint">The higher price shown with SGD prefix (retail value)</div></div>
+              <div class="field"><label>You Pay Price (S$)</label><input type="number" id="bb-youpay" step="1" min="0" placeholder="e.g. 5000"/><div class="hint">The lower price shown as "YOU PAY"</div></div>
             </div>
             <button class="btn btn-p" onclick="saveBuybackHero()" style="margin-top:6px">&#10003; Save Hero Prices</button>
             <div id="bb-hero-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Publish the website to make this live.</div>
@@ -598,7 +598,7 @@ img{display:block;max-width:100%}
       <div class="field"><label>Specification</label><div class="hint">Length, weight, condition</div><input type="text" id="mp-spec"/></div>
       <div class="field"><label>Description</label><textarea id="mp-desc" rows="2"></textarea></div>
       <div class="fr3">
-        <div class="field"><label>Price (SGD)</label><input type="number" id="mp-price"/></div>
+        <div class="field"><label>Price (S$)</label><input type="number" id="mp-price"/></div>
         <div class="field"><label>Retail Price</label><input type="number" id="mp-retail"/></div>
         <div class="field"><label>Saving</label><input type="number" id="mp-save"/></div>
       </div>
@@ -782,7 +782,7 @@ function pcard(p,i){
         '<div class="pc-spec">'+esc(p.spec)+'</div></div>',
       '</div>',
       '<div class="pc-row">',
-        '<div class="pc-price">SGD '+(p.price||0).toLocaleString()+'</div>',
+        '<div class="pc-price">S$ '+(p.price||0).toLocaleString()+'</div>',
         '<div><span class="tag tag-gold">'+esc(p.karat)+'</span><span class="tag '+(p.cat==='pendants'?'tag-blue':'tag-green')+'">'+(p.cat==='pendants'?'Pendant':'Chain')+'</span></div>',
       '</div>',
       '<div class="pc-actions">',
@@ -1075,8 +1075,8 @@ function patchIndex(html){
           +'    <div class="feat-body">'+NL
           +'      <h3>'+escHtml(p.name)+'</h3>'+NL
           +'      <div class="feat-spec">'+escHtml(p.spec)+'</div>'+NL
-          +'      <div class="feat-price">SGD '+Number(p.price).toLocaleString()+'</div>'+NL
-          +'      <div class="feat-save">&#10003; Save ~SGD '+(p.save||0).toLocaleString()+' vs retail new</div>'+NL
+          +'      <div class="feat-price">S$ '+Number(p.price).toLocaleString()+'</div>'+NL
+          +'      <div class="feat-save">&#10003; Save ~S$ '+(p.save||0).toLocaleString()+' vs retail new</div>'+NL
           +'      <span class="feat-cta">'+WA+' Enquire on WhatsApp</span>'+NL
           +'    </div>'+NL
           +'  </a>';
@@ -1165,7 +1165,7 @@ function patchCollection(html){
     var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
     return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="cc" data-cat="'+p.cat+'">'+NL
       +'  <div class="cc-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="cc-k">'+escHtml(p.karat)+'</span><span class="cc-xrf">&#10003; XRF</span></div>'+NL
-      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-price">SGD '+p.price.toLocaleString()+'</div><div class="cc-retail">Retail new: ~SGD '+(p.retail||0).toLocaleString()+'</div><div class="cc-save">&#10003; Save ~SGD '+(p.save||0).toLocaleString()+' vs retail</div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
+      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-price">S$ '+p.price.toLocaleString()+'</div><div class="cc-retail">Retail new: ~S$ '+(p.retail||0).toLocaleString()+'</div><div class="cc-save">&#10003; Save ~S$ '+(p.save||0).toLocaleString()+' vs retail</div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
       +'</a>';
   }).join(NL);
   return html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
@@ -1236,12 +1236,12 @@ function patchBuyback(html){
 
   /* patch hero retail/youpay prices */
   if(bb.retail){
-    html = html.replace(/(<span[^>]*class="[^"]*bb-retail[^"]*"[^>]*>)[^<]*/,'$1SGD '+Number(bb.retail).toLocaleString()+'+');
-    html = html.replace(/SGD 6[,.]200\+/g, 'SGD '+Number(bb.retail).toLocaleString()+'+');
+    html = html.replace(/(<span[^>]*class="[^"]*bb-retail[^"]*"[^>]*>)[^<]*/,'$1S$ '+Number(bb.retail).toLocaleString()+'+');
+    html = html.replace(/S\$ 6[,.]200\+/g, 'S$ '+Number(bb.retail).toLocaleString()+'+');
   }
   if(bb.youpay){
-    html = html.replace(/(<span[^>]*class="[^"]*bb-youpay[^"]*"[^>]*>)[^<]*/,'$1SGD '+Number(bb.youpay).toLocaleString());
-    html = html.replace(/SGD 5[,.]000(?![0-9])/g, 'SGD '+Number(bb.youpay).toLocaleString());
+    html = html.replace(/(<span[^>]*class="[^"]*bb-youpay[^"]*"[^>]*>)[^<]*/,'$1S$ '+Number(bb.youpay).toLocaleString());
+    html = html.replace(/S\$ 5[,.]000(?![0-9])/g, 'S$ '+Number(bb.youpay).toLocaleString());
   }
 
   /* patch footnote */
