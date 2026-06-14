@@ -102,14 +102,13 @@ input[type=file]{display:none}
 
     <div class="field">
       <label class="req" for="fullName">Full name</label>
-      <input type="text" id="fullName" placeholder="As per NRIC / FIN / Passport" autocomplete="name" />
+      <input type="text" id="fullName" placeholder="As per NRIC / Passport" autocomplete="name" />
     </div>
 
     <div class="field">
       <label class="req">Identity document</label>
       <div class="seg" id="idSeg">
         <button type="button" data-t="nric" class="on">NRIC</button>
-        <button type="button" data-t="fin">FIN</button>
         <button type="button" data-t="passport">Passport</button>
       </div>
     </div>
@@ -249,13 +248,13 @@ gid('idSeg').addEventListener('click', function(e){
   if(!b) return;
   idType = b.dataset.t;
   Array.from(gid('idSeg').children).forEach(function(x){ x.classList.toggle('on', x === b); });
-  var labels = {nric:'NRIC number', fin:'FIN number', passport:'Passport number'};
-  var phs = {nric:'e.g. S1234567A', fin:'e.g. G1234567X', passport:'e.g. E1234567'};
+  var labels = {nric:'NRIC number', passport:'Passport number'};
+  var phs = {nric:'e.g. S1234567A', passport:'e.g. E1234567'};
   gid('idNumLabel').textContent = labels[idType];
   gid('idNumber').placeholder = phs[idType];
   var single = idType === 'passport';
-  gid('uploadLabel').textContent = single ? 'Upload passport photo' : 'Upload ' + (idType === 'fin' ? 'FIN' : 'NRIC') + ' photos';
-  gid('txFront').querySelector('b').textContent = single ? 'Passport - photo page' : (idType === 'fin' ? 'FIN - Front' : 'NRIC - Front');
+  gid('uploadLabel').textContent = single ? 'Upload passport photo' : 'Upload NRIC photos';
+  gid('txFront').querySelector('b').textContent = single ? 'Passport - photo page' : 'NRIC - Front';
   gid('dropBack').classList.toggle('hide', single);
   if(single){ files.back = null; }
 });
@@ -333,10 +332,10 @@ function submitForm(){
   var single = idType === 'passport';
 
   if(!name){ return fail('Please enter your full name.'); }
-  if(!num){ return fail('Please enter your ' + (single ? 'passport' : idType.toUpperCase()) + ' number.'); }
+  if(!num){ return fail('Please enter your ' + (single ? 'Passport' : 'NRIC') + ' number.'); }
   if(!tel){ return fail('Please enter your contact number.'); }
   if(!files.front){ return fail('Please upload the ' + (single ? 'passport photo page' : 'front of your ' + idType.toUpperCase()) + '.'); }
-  if(!single && !files.back){ return fail('Please upload the back of your ' + idType.toUpperCase() + '.'); }
+  if(!single && !files.back){ return fail('Please upload the back of your NRIC.'); }
   if(!gid('declare').checked){ return fail('Please confirm the declaration.'); }
   if(!gid('consent').checked){ return fail('Please give your consent to proceed.'); }
 
