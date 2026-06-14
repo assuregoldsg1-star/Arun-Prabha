@@ -227,7 +227,7 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
    ============================================================ */
 const SUPABASE_URL      = "https://hphrrbvznveziaawwnom.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwaHJyYnZ6bnZlemlhYXd3bm9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzOTc5MDMsImV4cCI6MjA5Njk3MzkwM30.CcgOf6VDirOsNwBNIsthaJl6d265pPb5RVi-vw59fAw";
-const OWNER_EMAIL       = "owner@assuregold.sg";          // the login user you create in Supabase
+const OWNER_EMAIL       = "assuregoldsg1@gmail.com";
 const VERIFY_URL        = "https://assuregold.sg/verify.html"; // public customer form link
 const WHATSAPP          = "6596724975";
 /* ============================================================ */
@@ -413,17 +413,19 @@ async function openCustomer(id){
       <div class="amt" style="color:${t.txn_type==='buy'?'var(--buy)':'var(--sell)'}">${money(t.amount_sgd)}</div></div>`).join('')
     : '<div style="font-size:12.5px;color:var(--soft);padding:4px 2px 8px">No transactions logged yet.</div>';
 
-  // signed photo urls
-  const docsEl=$('docs'); const imgs=[];
-  if(c.doc_front_path) imgs.push(['Front',c.doc_front_path]);
-  if(c.doc_back_path)  imgs.push(['Back',c.doc_back_path]);
-  if(!imgs.length){ docsEl.innerHTML='<div class="doc ph">No documents</div>'; }
+  // Display base64 photos stored in database
+  const docsEl=$('docs');
+  const imgs=[];
+  if(c.doc_front_b64) imgs.push(['Front', c.doc_front_b64]);
+  else if(c.doc_front_path) imgs.push(['Front', null]);
+  if(c.doc_back_b64)  imgs.push(['Back',  c.doc_back_b64]);
+  else if(c.doc_back_path) imgs.push(['Back', null]);
+  if(!imgs.length){ docsEl.innerHTML='<div class="doc ph">No documents uploaded</div>'; }
   else{
-    const signed=await Promise.all(imgs.map(([_,p])=>sb.storage.from('kyc-docs').createSignedUrl(p,3600)));
-    docsEl.innerHTML=imgs.map(([lbl],i)=>{
-      const u=signed[i]?.data?.signedUrl;
-      return u?`<div class="doc"><img src="${u}" alt="${lbl}" onclick="window.open('${u}','_blank')"/><span class="lbl">${lbl}</span></div>`
-              :`<div class="doc ph">${lbl}<br>unavailable</div>`;
+    docsEl.innerHTML=imgs.map(([lbl, src])=>{
+      return src
+        ? `<div class="doc"><img src="${src}" alt="${lbl}" onclick="window.open('${src}','_blank')"/><span class="lbl">${lbl}</span></div>`
+        : `<div class="doc ph">${lbl}<br>unavailable</div>`;
     }).join('');
   }
 }
