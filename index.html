@@ -26,7 +26,7 @@
 <meta name="theme-color" content="#1a1410"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -41,9 +41,9 @@
   --gold-lt:#f5d060;--gold-pale:#fdf6d8;
   --line:rgba(185,134,11,.18);--ls:rgba(26,20,16,.07);
   --wa:#25d366;--green:#16a34a;
-  --serif:"Cormorant Garamond",Georgia,serif;
+  --serif:"Playfair Display",Georgia,serif;
   --sans:"Inter",system-ui,sans-serif;
-  --cinzel:"Cinzel",serif;
+  --cinzel:"Playfair Display",sans-serif;
   --spring:cubic-bezier(.34,1.56,.64,1);
   --ease:cubic-bezier(.25,.46,.45,.94);
   --pad:clamp(20px,5vw,72px);--r:12px;
@@ -100,7 +100,7 @@ a{text-decoration:none;color:inherit}
 .section-grey{background:var(--off)}
 .section-warm{background:var(--warm)}
 .sh{text-align:center;max-width:740px;margin:0 auto 56px}
-.eyebrow{font-family:var(--cinzel);font-size:11px;letter-spacing:.48em;color:var(--g1);display:block;margin-bottom:12px;text-transform:uppercase}
+.eyebrow{font-family:var(--cinzel);font-size:11px;letter-spacing:.22em;color:#1C1814;display:block;margin-bottom:12px;text-transform:uppercase}
 .sh h2{font-family:var(--serif);font-size:clamp(32px,4.5vw,56px);font-weight:400;line-height:1.06;letter-spacing:-.018em;color:var(--ink)}
 .sh h2 em{font-style:italic}
 .sh p{font-size:17px;line-height:1.75;color:var(--sub);margin-top:14px;font-family:var(--serif);font-style:italic}
@@ -506,7 +506,7 @@ a{text-decoration:none;color:inherit}
 
 /* Gold bar copy */
 .gb3d-copy{max-width:400px;position:relative;z-index:1}
-.gb3d-copy .eyebrow{color:var(--g1)}
+.gb3d-copy .eyebrow{color:#1C1814}
 .gb3d-copy h2{font-family:var(--serif);font-size:clamp(28px,3.8vw,50px);font-weight:300;line-height:1.05;color:var(--ink);margin-bottom:14px;letter-spacing:-.016em}
 .gb3d-copy h2 em{font-style:italic;color:var(--gold-lt)}
 .gb3d-copy p{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--sub);line-height:1.76;margin-bottom:26px}
@@ -1154,10 +1154,10 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 
 <!-- Stats row -->
 <div class="hero-stats">
-  <div class="hs"><span class="hs-n ga">0%</span><span class="hs-l">GST &amp; Making Charge</span></div>
-  <div class="hs"><span class="hs-n ga">XRF</span><span class="hs-l">Live Purity Testing</span></div>
-  <div class="hs"><span class="hs-n ga">PSM</span><span class="hs-l">Ministry of Law Licensed</span></div>
-  <div class="hs"><span class="hs-n ga">30m</span><span class="hs-l">WhatsApp Reply</span></div>
+  <div class="hs"><span class="hs-n">0%</span><span class="hs-l">GST &amp; Making Charge</span></div>
+  <div class="hs"><span class="hs-n">XRF</span><span class="hs-l">Live Purity Testing</span></div>
+  <div class="hs"><span class="hs-n">PSM</span><span class="hs-l">Ministry of Law Licensed</span></div>
+  <div class="hs"><span class="hs-n">30m</span><span class="hs-l">WhatsApp Reply</span></div>
 </div>
 </section>
 
@@ -1223,7 +1223,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <p>Every piece carries the same chemical purity as newly minted gold. The difference? You don&#8217;t pay the GST, the making charge, or the showroom markup.</p>
     <div class="gb3d-facts">
       <div class="gbf">
-        <span class="gbf-n counter-num" style="color:var(--g1)" data-target="916" data-suffix="">0</span>
+        <span class="gbf-n" style="color:var(--g1)"  >916</span>
         <span class="gbf-l">Purity</span>
       </div>
       <div class="gbf">
@@ -1231,7 +1231,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
         <span class="gbf-l">GST</span>
       </div>
       <div class="gbf">
-        <span class="gbf-n counter-num" style="color:var(--g1)" data-target="29" data-suffix="%">0%</span>
+        <span class="gbf-n" style="color:var(--g1)"  >29%</span>
         <span class="gbf-l">Max Saving</span>
       </div>
     </div>
@@ -1276,7 +1276,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
       <div class="cbox-row"><span class="cbox-lbl">Making charge</span><span class="neg">+SGD 750</span></div>
       <div class="cbox-row"><span class="cbox-lbl">Retail margin</span><span class="neg">baked in</span></div>
     </div>
-    <div class="cbox-tot"><span class="cbox-tot-lbl">You pay</span><span class="cbox-tot-val">SGD <span class="counter-num" data-target="6200" data-suffix="+">0</span></span></div>
+    <div class="cbox-tot"><span class="cbox-tot-lbl">You pay</span><span class="cbox-tot-val">SGD 6200+</span></div>
   </div>
   <div class="vs-badge">VS</div>
   <div class="cbox good">
@@ -1287,7 +1287,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
       <div class="cbox-row"><span class="cbox-lbl">Making charge</span><span class="pos">SGD 0</span></div>
       <div class="cbox-row"><span class="cbox-lbl">Retail margin</span><span class="pos">SGD 0</span></div>
     </div>
-    <div class="cbox-tot"><span class="cbox-tot-lbl">You pay</span><span class="cbox-tot-val">SGD <span class="counter-num" data-target="5000" data-suffix="">0</span></span></div>
+    <div class="cbox-tot"><span class="cbox-tot-lbl">You pay</span><span class="cbox-tot-val">SGD 5000</span></div>
   </div>
 </div>
 <blockquote class="cmp-quote">&#8220;Preloved gold is the same metal. The purity is identical. <em>The price you pay is not.</em>&#8221;<cite>&#8212; The Assure Gold Preloved Philosophy</cite></blockquote>
@@ -1306,7 +1306,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <div class="feat-body">
       <h3>Rope Chain &#8212; Long</h3>
       <div class="feat-spec">24 inches &#183; 22.3g &#183; Excellent condition</div>
-      <div class="feat-price">SGD <span class="counter-num" data-target="3980" data-suffix="">0</span></div>
+      <div class="feat-price">SGD 3980</div>
       <div class="feat-save">&#10003; Save ~SGD 1,220 vs retail new</div>
       <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
@@ -1316,7 +1316,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <div class="feat-body">
       <h3>Rope Chain + Pendant Set</h3>
       <div class="feat-spec">18 inches &#183; 12.8g total &#183; Good condition</div>
-      <div class="feat-price">SGD <span class="counter-num" data-target="2290" data-suffix="">0</span></div>
+      <div class="feat-price">SGD 2290</div>
       <div class="feat-save">&#10003; Save ~SGD 810 vs retail new</div>
       <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
@@ -1326,7 +1326,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <div class="feat-body">
       <h3>Rope + Dragon Abacus Pendant</h3>
       <div class="feat-spec">20 inches &#183; 18.4g total &#183; Very good</div>
-      <div class="feat-price">SGD <span class="counter-num" data-target="3290" data-suffix="">0</span></div>
+      <div class="feat-price">SGD 3290</div>
       <div class="feat-save">&#10003; Save ~SGD 1,210 vs retail new</div>
       <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
@@ -1767,18 +1767,6 @@ window.addEventListener('load',function(){
   }
 
   // 12. ANIMATED COUNTERS
-  document.querySelectorAll('.counter-num').forEach(function(el){
-    var target=parseFloat(el.dataset.target)||0;
-    var suffix=el.dataset.suffix||'';
-    var counted=false;
-    ScrollTrigger.create({
-      trigger:el,start:'top 92%',
-      onEnter:function(){
-        if(counted)return;counted=true;
-        var obj={val:0};
-        gsap.to(obj,{val:target,duration:1.9,ease:'power2.out',
-          onUpdate:function(){el.textContent=Math.round(obj.val).toLocaleString()+suffix;}
-        });
       }
     });
   });

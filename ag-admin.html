@@ -260,6 +260,7 @@ img{display:block;max-width:100%}
       <div class="sb-item" id="nav-carousel" onclick="showView('carousel')"><span class="i">&#127909;</span><span>Hero Carousel</span></div>
       <div class="sb-item" id="nav-text" onclick="showView('text')"><span class="i">&#9999;&#65039;</span><span>Website Text</span></div>
       <div class="sb-item" id="nav-business" onclick="showView('business')"><span class="i">&#127970;</span><span>Business Info</span></div>
+      <div class="sb-item" id="nav-buyback" onclick="showView('buyback')"><span class="i">&#128181;</span><span>Buyback Prices</span></div>
       <div class="sb-sec">Publish</div>
       <div class="sb-item" id="nav-deploy" onclick="showView('deploy')"><span class="i">&#128640;</span><span>Publish Website</span></div>
       <div class="sb-item" id="nav-help" onclick="showView('help')"><span class="i">&#10067;</span><span>Help &amp; Guide</span></div>
@@ -403,7 +404,48 @@ img{display:block;max-width:100%}
       </div>
 
       <!-- DEPLOY -->
-      <div class="view" id="view-deploy">
+      <div class="view" id="view-buyback">
+        <div class="topbar"><div><h2>&#128181; Buyback Prices</h2><p>Set your displayed buyback margin below. The live market rate is fetched automatically from the gold API &mdash; your margin is subtracted from it.</p></div></div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#128184; Buyback Margin (per gram, SGD)</h3><p>This is deducted from the live gold spot price to get your buyback price shown to customers.</p></div></div>
+          <div class="card-b">
+            <div class="notice" style="margin-bottom:16px"><span class="ni">&#128161;</span><div><strong>How it works</strong><p>Live gold price (from API) &minus; your margin = price shown on website. Lower margin = higher payout to customer. Example: if gold is $120/g and margin is $5, customer sees $115/g.</p></div></div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+              <div class="field"><label>999 (24K) Margin (SGD/g)</label><input type="number" id="bb-m999" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>916 (22K) Margin (SGD/g)</label><input type="number" id="bb-m916" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>850 (20K) Margin (SGD/g)</label><input type="number" id="bb-m850" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>750 (18K) Margin (SGD/g)</label><input type="number" id="bb-m750" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+              <div class="field"><label>585 (14K) Margin (SGD/g)</label><input type="number" id="bb-m585" step="0.01" min="0" placeholder="e.g. 5.00"/></div>
+            </div>
+            <button class="btn btn-p" onclick="saveBuybackMargins()" style="margin-top:6px">&#10003; Save Margins</button>
+            <div id="bb-save-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Publish the website to make this live.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#127968; Hero Buyback Prices (index.html)</h3><p>The two prices shown in the hero section of the homepage (e.g. SGD 6,200+ and SGD 5,000).</p></div></div>
+          <div class="card-b">
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+              <div class="field"><label>Retail Price (crossed out, SGD)</label><input type="number" id="bb-retail" step="1" min="0" placeholder="e.g. 6200"/><div class="hint">The higher price shown with SGD prefix (retail value)</div></div>
+              <div class="field"><label>You Pay Price (SGD)</label><input type="number" id="bb-youpay" step="1" min="0" placeholder="e.g. 5000"/><div class="hint">The lower price shown as "YOU PAY"</div></div>
+            </div>
+            <button class="btn btn-p" onclick="saveBuybackHero()" style="margin-top:6px">&#10003; Save Hero Prices</button>
+            <div id="bb-hero-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Publish the website to make this live.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><div><h3>&#128203; Footnote Text</h3></div></div>
+          <div class="card-b">
+            <div class="field"><label>Footnote (below table)</label><input type="text" id="bb-footnote" placeholder="e.g. For less than 14K purity, please contact us."/></div>
+            <button class="btn btn-p" onclick="saveBuybackFootnote()" style="margin-top:2px">&#10003; Save</button>
+            <div id="bb-fn-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved!</div>
+          </div>
+        </div>
+      </div>
+
+            <div class="view" id="view-deploy">
         <div class="deploy">
           <div class="di">&#128640;</div>
           <h2>Publish Your Website</h2>
@@ -594,12 +636,13 @@ var DATA = {
   slides:DEFAULT_SLIDES,
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
-  images:{}   /* path -> dataURL of replaced images */
+  images:{},   /* path -> dataURL of replaced images */
+  buyback:{ margins:{m999:5,m916:5,m850:6,m750:7,m585:9}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
 };
 
 function persist(){ try{
   /* images can be big — store separately, tolerate quota errors */
-  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings};
+  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback};
   localStorage.setItem('ag_core', JSON.stringify(core));
   try{ localStorage.setItem('ag_images', JSON.stringify(DATA.images)); }
   catch(e){ toast('Images too large to auto-save. Use Save Backup.','error'); }
@@ -608,7 +651,7 @@ function persist(){ try{
 function load(){ try{
   var c=localStorage.getItem('ag_core');
   if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business; DATA.products=p.products||DATA.products;
-    DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; }
+    DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; DATA.buyback=p.buyback||DATA.buyback; }
   var im=localStorage.getItem('ag_images');
   if(im){ DATA.images=JSON.parse(im)||{}; }
 }catch(e){} }
@@ -626,6 +669,7 @@ var TITLES={
   carousel:['Hero Carousel','Edit the 5 rotating homepage slides'],
   text:['Website Text','Edit headings and the stats bar'],
   business:['Business Info','WhatsApp, address, hours, licence'],
+  buyback:['Buyback Prices','Set your margin and hero prices for the buyback page'],
   deploy:['Publish Website','Send your changes live'],
   help:['Help & Guide','Step-by-step instructions']
 };
@@ -643,7 +687,7 @@ function showView(v){
   if(v==='carousel')renderSlides();
   if(v==='text')renderText();
   if(v==='business')loadBiz();
-  
+  if(v==='buyback')renderBuyback();
 }
 function toast(msg,type){
   var el=document.getElementById('toast');
@@ -1089,6 +1133,49 @@ function patchCollection(html){
   return html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
 }
 
+/* ============ BUYBACK EDITOR ============ */
+function renderBuyback(){
+  var bb = DATA.buyback;
+  if(!bb) return;
+  var m = bb.margins || {};
+  ['999','916','850','750','585'].forEach(function(k){
+    var el = document.getElementById('bb-m'+k);
+    if(el) el.value = m['m'+k] !== undefined ? m['m'+k] : '';
+  });
+  var rEl = document.getElementById('bb-retail');
+  var yEl = document.getElementById('bb-youpay');
+  var fEl = document.getElementById('bb-footnote');
+  if(rEl) rEl.value = bb.retail || '';
+  if(yEl) yEl.value = bb.youpay || '';
+  if(fEl) fEl.value = bb.footnote || '';
+}
+function saveBuybackMargins(){
+  if(!DATA.buyback) DATA.buyback = {};
+  if(!DATA.buyback.margins) DATA.buyback.margins = {};
+  ['999','916','850','750','585'].forEach(function(k){
+    var el = document.getElementById('bb-m'+k);
+    if(el) DATA.buyback.margins['m'+k] = parseFloat(el.value)||0;
+  });
+  persist(); markEdit();
+  var msg = document.getElementById('bb-save-msg');
+  if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
+}
+function saveBuybackHero(){
+  if(!DATA.buyback) DATA.buyback = {};
+  DATA.buyback.retail = parseFloat(document.getElementById('bb-retail').value)||0;
+  DATA.buyback.youpay = parseFloat(document.getElementById('bb-youpay').value)||0;
+  persist(); markEdit();
+  var msg = document.getElementById('bb-hero-msg');
+  if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
+}
+function saveBuybackFootnote(){
+  if(!DATA.buyback) DATA.buyback = {};
+  DATA.buyback.footnote = document.getElementById('bb-footnote').value.trim();
+  persist(); markEdit();
+  var msg = document.getElementById('bb-fn-msg');
+  if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
+}
+
 function patchBuyback(html){
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
@@ -1097,6 +1184,32 @@ function patchBuyback(html){
   html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
   html=html.replace(/PS20260000962/g,b.psm);
   html=html.replace(/11 March 2027/g,b.psmValid);
+
+  /* patch buyback margin into fallback prices */
+  var bb = DATA.buyback || {};
+  var margins = bb.margins || {};
+  ['999','916','850','750','585'].forEach(function(k){
+    var m = margins['m'+k];
+    if(m !== undefined){
+      var re = new RegExp('(data-margin-'+k+'=")[^"]*(")', 'g');
+      html = html.replace(re, '$1'+m+'$2');
+    }
+  });
+
+  /* patch hero retail/youpay prices */
+  if(bb.retail){
+    html = html.replace(/(<span[^>]*class="[^"]*bb-retail[^"]*"[^>]*>)[^<]*/,'$1SGD '+Number(bb.retail).toLocaleString()+'+');
+    html = html.replace(/SGD 6[,.]200\+/g, 'SGD '+Number(bb.retail).toLocaleString()+'+');
+  }
+  if(bb.youpay){
+    html = html.replace(/(<span[^>]*class="[^"]*bb-youpay[^"]*"[^>]*>)[^<]*/,'$1SGD '+Number(bb.youpay).toLocaleString());
+    html = html.replace(/SGD 5[,.]000(?![0-9])/g, 'SGD '+Number(bb.youpay).toLocaleString());
+  }
+
+  /* patch footnote */
+  if(bb.footnote){
+    html = html.replace(/(<div class="bpt-footnote">)[^<]*(<\/div>)/,'$1'+escHtml(bb.footnote)+'$2');
+  }
   return html;
 }
 
@@ -1211,6 +1324,7 @@ async function loadFromRepo(){
     if(d.slides){ DATA.slides = d.slides; }
     if(d.stats){ DATA.stats = d.stats; }
     if(d.headings){ DATA.headings = d.headings; }
+    if(d.buyback){ DATA.buyback = d.buyback; }
     try{ persistLocalOnly(); }catch(e){}
   }catch(e){ /* offline or first run - keep local/defaults */ }
 }
@@ -1242,7 +1356,7 @@ async function publishLive(){
       files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
     }
 
-    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings };
+    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback };
     files.push({ path:'assure-gold-backup.json', content:JSON.stringify(backup,null,1), encoding:'utf-8' });
 
     var imgPaths=Object.keys(DATA.images||{});
