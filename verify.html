@@ -4,74 +4,48 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Customer Verification · Assure Gold</title>
+<title>Customer Verification - Assure Gold</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAF8F3; --card:#FFFFFF; --ink:#1C1814; --soft:#6B6258;
-  --gold:#B8862F; --gold-lt:#D9B45A; --line:#E9E3D7;
-  --ok:#2E7D5B; --bad:#B23A3A; --shadow:0 12px 40px rgba(28,24,20,.10);
+  --paper:#FAF8F3;--card:#FFFFFF;--ink:#1C1814;--soft:#6B6258;
+  --gold:#B8862F;--gold-lt:#D9B45A;--line:#E9E3D7;
+  --ok:#2E7D5B;--bad:#B23A3A;--shadow:0 12px 40px rgba(28,24,20,.10);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 body{min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:24px 18px 60px}
 .wrap{width:100%;max-width:480px}
-
-/* header */
 .brand{display:flex;flex-direction:column;align-items:center;text-align:center;margin:14px 0 22px}
-.brand .seal{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
-  background:radial-gradient(circle at 30% 28%,var(--gold-lt),var(--gold));
-  box-shadow:0 6px 18px rgba(184,134,47,.35);color:#fff;margin-bottom:12px}
+.brand .seal{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 28%,var(--gold-lt),var(--gold));box-shadow:0 6px 18px rgba(184,134,47,.35);color:#fff;margin-bottom:12px}
 .brand .seal svg{width:26px;height:26px}
 .brand h1{font-family:Fraunces,serif;font-weight:500;font-size:23px;letter-spacing:-.01em}
-.brand .lic{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--soft);
-  letter-spacing:.06em;margin-top:7px;text-transform:uppercase}
-
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;
-  box-shadow:var(--shadow);padding:26px 22px;animation:rise .5s ease both}
+.brand .lic{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--soft);letter-spacing:.06em;margin-top:7px;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:26px 22px;animation:rise .5s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-.eyebrow{display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.eyebrow{display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
 .eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold-lt),transparent)}
 h2{font-family:Fraunces,serif;font-weight:500;font-size:22px;line-height:1.2;margin-bottom:6px;letter-spacing:-.01em}
 .lede{font-size:13.5px;color:var(--soft);line-height:1.55;margin-bottom:20px}
-
 label{display:block;font-size:12.5px;font-weight:600;margin:0 0 7px;letter-spacing:.01em}
 .req::after{content:" *";color:var(--gold)}
 .field{margin-bottom:18px}
-input[type=text],input[type=tel]{width:100%;font:inherit;font-size:15px;padding:13px 14px;
-  border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);transition:.15s}
+input[type=text],input[type=tel]{width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);transition:.15s}
 input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,47,.13)}
 .hint{font-size:11.5px;color:var(--soft);margin-top:6px}
-
-/* code gate */
-#codeInput{text-align:center;letter-spacing:.32em;font-family:'Space Mono',monospace;
-  font-size:21px;font-weight:700;text-transform:uppercase}
-.btn{width:100%;border:none;border-radius:12px;font:inherit;font-weight:600;font-size:15px;
-  padding:15px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--gold-lt),var(--gold));
-  box-shadow:0 8px 20px rgba(184,134,47,.30);transition:.15s}
-.btn:hover{filter:brightness(1.04)}
-.btn:active{transform:translateY(1px)}
-.btn[disabled]{opacity:.55;cursor:not-allowed;filter:grayscale(.3)}
-.btn.ghost{background:none;color:var(--gold);box-shadow:none;border:1px solid var(--line)}
-
+#codeInput{text-align:center;letter-spacing:.32em;font-family:'Space Mono',monospace;font-size:21px;font-weight:700;text-transform:uppercase}
+.btn{width:100%;border:none;border-radius:12px;font:inherit;font-weight:600;font-size:15px;padding:15px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--gold-lt),var(--gold));box-shadow:0 8px 20px rgba(184,134,47,.30);transition:.15s}
+.btn:hover{filter:brightness(1.04)}.btn:active{transform:translateY(1px)}.btn[disabled]{opacity:.55;cursor:not-allowed}
 .msg{font-size:12.5px;padding:11px 13px;border-radius:10px;margin-top:14px;display:none;line-height:1.5}
 .msg.bad{display:block;background:#fbecec;color:var(--bad);border:1px solid #f0d4d4}
 .msg.ok{display:block;background:#eaf5ef;color:var(--ok);border:1px solid #cfe8db}
-
-/* segmented ID toggle */
 .seg{display:flex;gap:8px;background:#f3efe6;border-radius:12px;padding:5px}
-.seg button{flex:1;border:none;background:none;font:inherit;font-size:13px;font-weight:600;
-  padding:10px 6px;border-radius:9px;color:var(--soft);cursor:pointer;transition:.15s}
+.seg button{flex:1;border:none;background:none;font:inherit;font-size:13px;font-weight:600;padding:10px 6px;border-radius:9px;color:var(--soft);cursor:pointer;transition:.15s}
 .seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(28,24,20,.10)}
-
-/* uploads */
 .up{display:flex;flex-direction:column;gap:10px}
-.drop{border:1.5px dashed var(--line);border-radius:12px;padding:16px;display:flex;
-  align-items:center;gap:13px;cursor:pointer;transition:.15s;background:#fff}
+.drop{border:1.5px dashed var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:.15s;background:#fff}
 .drop:hover{border-color:var(--gold);background:#fffdf8}
 .drop.filled{border-style:solid;border-color:var(--ok);background:#f5fbf8}
 .drop .ic{width:40px;height:40px;border-radius:9px;background:#f3efe6;display:grid;place-items:center;flex:none;color:var(--gold)}
@@ -80,76 +54,61 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,
 .drop .tx span{font-size:11.5px;color:var(--soft)}
 .thumb{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none}
 input[type=file]{display:none}
-
-/* checkboxes */
-.check{display:flex;gap:11px;align-items:flex-start;padding:14px;border:1px solid var(--line);
-  border-radius:12px;margin-bottom:12px;cursor:pointer;transition:.15s;background:#fff}
+.check{display:flex;gap:11px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;cursor:pointer;transition:.15s;background:#fff}
 .check:hover{border-color:var(--gold)}
 .check input{margin-top:2px;width:18px;height:18px;accent-color:var(--gold);flex:none;cursor:pointer}
 .check .ct{font-size:12.5px;line-height:1.55;color:var(--ink)}
 .check .ct ul{margin:7px 0 0;padding-left:17px;color:var(--soft)}
 .check .ct li{margin-bottom:3px}
-
-.privacy{font-size:11.5px;color:var(--soft);line-height:1.6;background:#f6f3ec;
-  border-radius:12px;padding:14px 15px;margin:6px 0 20px;border:1px solid var(--line)}
+.privacy{font-size:11.5px;color:var(--soft);line-height:1.6;background:#f6f3ec;border-radius:12px;padding:14px 15px;margin:6px 0 20px;border:1px solid var(--line)}
 .privacy b{color:var(--ink)}
-
-/* success */
 .done{text-align:center;padding:14px 6px}
-.done .big{width:72px;height:72px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;
-  background:radial-gradient(circle at 30% 28%,#3ea877,var(--ok));color:#fff;
-  box-shadow:0 10px 26px rgba(46,125,91,.35);animation:pop .5s ease both}
+.done .big{width:72px;height:72px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:radial-gradient(circle at 30% 28%,#3ea877,var(--ok));color:#fff;box-shadow:0 10px 26px rgba(46,125,91,.35);animation:pop .5s ease both}
 @keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
-.done .ref{font-family:'Space Mono',monospace;font-size:14px;background:#f3efe6;border-radius:9px;
-  padding:9px 12px;display:inline-block;margin-top:14px;letter-spacing:.04em}
-
+.done .ref{font-family:'Space Mono',monospace;font-size:14px;background:#f3efe6;border-radius:9px;padding:9px 12px;display:inline-block;margin-top:14px;letter-spacing:.04em}
 .foot{text-align:center;font-size:11px;color:var(--soft);margin-top:22px;line-height:1.6}
-.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);
-  border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .hide{display:none!important}
-@media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <div class="brand">
     <div class="seal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
     </div>
     <h1>Assure Gold</h1>
-    <div class="lic">PSM Licensed Dealer · Singapore</div>
+    <div class="lic">PSM Licensed Dealer &middot; Singapore</div>
   </div>
 
-  <!-- STEP 1 — code gate -->
+  <!-- STEP 1: code gate -->
   <div class="card" id="gate">
     <div class="eyebrow">Secure Verification</div>
     <h2>Enter your access code</h2>
-    <p class="lede">Your dealer sent you a one-time code. Enter it below to begin your identity verification — it only takes a minute.</p>
+    <p class="lede">Your dealer sent you a one-time code. Enter it below to begin your identity verification.</p>
     <div class="field">
       <input type="text" id="codeInput" maxlength="12" placeholder="AG-XXXX" autocomplete="off" inputmode="text" />
     </div>
-    <button class="btn" id="codeBtn">Continue</button>
+    <button class="btn" id="codeBtn" onclick="checkCode()">Continue</button>
     <div class="msg" id="codeMsg"></div>
   </div>
 
-  <!-- STEP 2 — form -->
+  <!-- STEP 2: form -->
   <div class="card hide" id="form">
     <div class="eyebrow">Customer Details</div>
     <h2>Verify your identity</h2>
-    <p class="lede">All fields are required by Singapore regulations for precious-metals dealers. Your information is encrypted and used only for verification.</p>
+    <p class="lede">All fields are required by Singapore regulations. Your information is encrypted and used only for verification.</p>
 
     <div class="field">
       <label class="req" for="fullName">Full name</label>
-      <input type="text" id="fullName" placeholder="As per NRIC / FIN / Passport" autocomplete="name" />
+      <input type="text" id="fullName" placeholder="As per NRIC / Passport" autocomplete="name" />
     </div>
 
     <div class="field">
       <label class="req">Identity document</label>
       <div class="seg" id="idSeg">
         <button type="button" data-t="nric" class="on">NRIC</button>
-        <button type="button" data-t="fin">FIN</button>
         <button type="button" data-t="passport">Passport</button>
       </div>
     </div>
@@ -171,18 +130,18 @@ input[type=file]{display:none}
           <span class="ic" id="icFront">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h.93a2 2 0 0 0 1.66-.9l.82-1.2A2 2 0 0 1 10.07 4h3.86a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3"/></svg>
           </span>
-          <span class="tx" id="txFront"><b>NRIC — Front</b><span>Tap to take or choose a photo</span></span>
-          <input type="file" id="fileFront" accept="image/*" capture="environment" />
+          <span class="tx" id="txFront"><b>NRIC &mdash; Front</b><span>Tap to take or choose a photo</span></span>
+          <input type="file" id="fileFront" accept="image/*" />
         </label>
         <label class="drop" id="dropBack">
           <span class="ic" id="icBack">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h.93a2 2 0 0 0 1.66-.9l.82-1.2A2 2 0 0 1 10.07 4h3.86a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3"/></svg>
           </span>
-          <span class="tx" id="txBack"><b>NRIC — Back</b><span>Tap to take or choose a photo</span></span>
-          <input type="file" id="fileBack" accept="image/*" capture="environment" />
+          <span class="tx" id="txBack"><b>NRIC &mdash; Back</b><span>Tap to take or choose a photo</span></span>
+          <input type="file" id="fileBack" accept="image/*" />
         </label>
       </div>
-      <div class="hint">Photos are compressed on your device before upload. Make sure all text is clear and readable.</div>
+      <div class="hint">Photos are compressed on your device before upload. Make sure text is clear.</div>
     </div>
 
     <div class="field" style="margin-top:24px">
@@ -208,11 +167,11 @@ input[type=file]{display:none}
       <b>Your privacy matters.</b> Your information is used only for identity verification, transaction processing and compliance with Singapore regulations. It is stored securely and will <b>never</b> be sold or shared for marketing. We disclose it only if required by law or regulatory authorities.
     </div>
 
-    <button class="btn" id="submitBtn">Submit verification</button>
+    <button class="btn" id="submitBtn" onclick="submitForm()">Submit verification</button>
     <div class="msg" id="formMsg"></div>
   </div>
 
-  <!-- STEP 3 — done -->
+  <!-- STEP 3: done -->
   <div class="card hide" id="done">
     <div class="done">
       <div class="big">
@@ -224,181 +183,205 @@ input[type=file]{display:none}
     </div>
   </div>
 
-  <div class="foot">🔒 Encrypted submission · Assure Gold · PS20260000962</div>
+  <div class="foot">&#x1F512; Encrypted submission &middot; Assure Gold &middot; PS20260000962</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ============================================================
-   CONFIG — replace these two values after creating your project
-   (Supabase Dashboard → Project Settings → Data API / API Keys)
-   ============================================================ */
-const SUPABASE_URL      = "https://hphrrbvznveziaawwnom.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwaHJyYnZ6bnZlemlhYXd3bm9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzOTc5MDMsImV4cCI6MjA5Njk3MzkwM30.CcgOf6VDirOsNwBNIsthaJl6d265pPb5RVi-vw59fAw";
-/* ============================================================ */
+var SUPABASE_URL = "https://hphrrbvznveziaawwnom.supabase.co";
+var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwaHJyYnZ6bnZlemlhYXd3bm9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzOTc5MDMsImV4cCI6MjA5Njk3MzkwM30.CcgOf6VDirOsNwBNIsthaJl6d265pPb5RVi-vw59fAw";
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var idType = 'nric';
+var validCode = '';
+var files = {front: null, back: null};
 
-const $ = id => document.getElementById(id);
-let idType = 'nric';
-let validCode = '';
-const files = { front:null, back:null };
+function gid(id){ return document.getElementById(id); }
 
-/* ---- code gate ---- */
-$('codeInput').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase(); });
-$('codeBtn').addEventListener('click', checkCode);
-$('codeInput').addEventListener('keydown', e => { if(e.key==='Enter') checkCode(); });
+function showMsg(id, text, type){
+  var el = gid(id);
+  el.className = 'msg ' + type;
+  el.textContent = text;
+}
 
-async function checkCode(){
-  const code = $('codeInput').value.trim().toUpperCase();
-  const msg = $('codeMsg'); msg.className='msg';
-  if(code.length < 3){ msg.className='msg bad'; msg.textContent='Please enter the code your dealer sent you.'; return; }
-  setBtn('codeBtn', true, 'Checking…');
-  try{
-    const { data, error } = await sb.rpc('check_access_code', { p_code: code });
-    if(error) throw error;
-    if(data === true){
+function setBtn(id, busy, text){
+  var b = gid(id);
+  b.disabled = busy;
+  b.innerHTML = text;
+}
+
+// Code input uppercase
+gid('codeInput').addEventListener('input', function(e){
+  e.target.value = e.target.value.toUpperCase();
+});
+gid('codeInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') checkCode();
+});
+
+function checkCode(){
+  var code = gid('codeInput').value.trim().toUpperCase();
+  gid('codeMsg').className = 'msg';
+  if(code.length < 3){
+    showMsg('codeMsg', 'Please enter the code your dealer sent you.', 'bad');
+    return;
+  }
+  setBtn('codeBtn', true, 'Checking...');
+  sb.rpc('check_access_code', {p_code: code}).then(function(res){
+    if(res.error){
+      console.error('checkCode error:', res.error);
+      showMsg('codeMsg', 'Connection problem. Please check your internet and try again.', 'bad');
+    } else if(res.data === true){
       validCode = code;
-      $('gate').classList.add('hide');
-      $('form').classList.remove('hide');
-      window.scrollTo({top:0,behavior:'smooth'});
-    }else{
-      msg.className='msg bad';
-      msg.textContent='This code is invalid or has already been used. Please contact Assure Gold for a new one.';
+      gid('gate').classList.add('hide');
+      gid('form').classList.remove('hide');
+      window.scrollTo({top:0, behavior:'smooth'});
+    } else {
+      showMsg('codeMsg', 'This code is invalid or has already been used. Please contact Assure Gold for a new one.', 'bad');
     }
-  }catch(err){
-    msg.className='msg bad'; msg.textContent='Connection problem. Please check your internet and try again.';
-  }finally{ setBtn('codeBtn', false, 'Continue'); }
+    setBtn('codeBtn', false, 'Continue');
+  });
 }
 
-/* ---- ID type toggle ---- */
-$('idSeg').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
+// ID type toggle
+gid('idSeg').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if(!b) return;
   idType = b.dataset.t;
-  [...$('idSeg').children].forEach(x=>x.classList.toggle('on', x===b));
-  const labels = { nric:'NRIC number', fin:'FIN number', passport:'Passport number' };
-  const ph = { nric:'e.g. S1234567A', fin:'e.g. G1234567X', passport:'e.g. E1234567' };
-  $('idNumLabel').textContent = labels[idType];
-  $('idNumber').placeholder = ph[idType];
-  // passport = single photo; nric/fin = front + back
-  const single = idType==='passport';
-  $('uploadLabel').textContent = single ? 'Upload passport photo' : 'Upload '+(idType==='fin'?'FIN':'NRIC')+' photos';
-  $('txFront').querySelector('b').textContent = single ? 'Passport — photo page' : (idType==='fin'?'FIN — Front':'NRIC — Front');
-  $('dropBack').classList.toggle('hide', single);
-  if(single){ files.back=null; resetDrop('Back'); }
+  Array.from(gid('idSeg').children).forEach(function(x){ x.classList.toggle('on', x === b); });
+  var labels = {nric:'NRIC number', passport:'Passport number'};
+  var phs = {nric:'e.g. S1234567A', passport:'e.g. E1234567'};
+  gid('idNumLabel').textContent = labels[idType];
+  gid('idNumber').placeholder = phs[idType];
+  var single = idType === 'passport';
+  gid('uploadLabel').textContent = single ? 'Upload passport photo' : 'Upload NRIC photos';
+  gid('txFront').querySelector('b').textContent = single ? 'Passport - photo page' : 'NRIC - Front';
+  gid('dropBack').classList.toggle('hide', single);
+  if(single){ files.back = null; }
 });
 
-/* ---- file pick + compress ---- */
-[['fileFront','front','Front'],['fileBack','back','Back']].forEach(([inp,key,tag])=>{
-  $(inp).addEventListener('change', async e=>{
-    const f = e.target.files[0]; if(!f) return;
-    try{
-      const blob = await compress(f);
+// File pickers
+function setupFilePicker(inputId, key, tag){
+  gid(inputId).addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if(!f) return;
+    compress(f).then(function(blob){
       files[key] = blob;
-      const drop = $('drop'+tag); drop.classList.add('filled');
-      const url = URL.createObjectURL(blob);
-      $('ic'+tag).outerHTML = `<img class="thumb" id="ic${tag}" src="${url}" alt="preview"/>`;
-      $('tx'+tag).querySelector('span').textContent = 'Photo added · tap to change';
-    }catch(err){
+      var drop = gid('drop' + tag);
+      drop.classList.add('filled');
+      var url = URL.createObjectURL(blob);
+      var ic = gid('ic' + tag);
+      var img = document.createElement('img');
+      img.className = 'thumb';
+      img.id = 'ic' + tag;
+      img.src = url;
+      img.alt = 'preview';
+      ic.parentNode.replaceChild(img, ic);
+      gid('tx' + tag).querySelector('span').textContent = 'Photo added - tap to change';
+    }).catch(function(){
       alert('Could not read that image. Please try another photo.');
-    }
+    });
   });
-});
-function resetDrop(tag){
-  const d = $('drop'+tag); if(!d) return; d.classList.remove('filled');
 }
+setupFilePicker('fileFront', 'front', 'Front');
+setupFilePicker('fileBack', 'back', 'Back');
+
 function compress(file){
-  return new Promise((res,rej)=>{
-    const img = new Image();
-    img.onload = ()=>{
-      const max=1400; let {width:w,height:h}=img;
-      if(w>max||h>max){ const r=Math.min(max/w,max/h); w=Math.round(w*r); h=Math.round(h*r); }
-      const c=document.createElement('canvas'); c.width=w; c.height=h;
-      c.getContext('2d').drawImage(img,0,0,w,h);
-      c.toBlob(b=> b?res(b):rej(), 'image/jpeg', 0.72);
+  return new Promise(function(res, rej){
+    var img = new Image();
+    img.onload = function(){
+      var max = 1400;
+      var w = img.width;
+      var h = img.height;
+      if(w > max || h > max){
+        var r = Math.min(max/w, max/h);
+        w = Math.round(w * r);
+        h = Math.round(h * r);
+      }
+      var c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      c.toBlob(function(b){ b ? res(b) : rej(); }, 'image/jpeg', 0.72);
     };
-    img.onerror=rej;
-    img.src=URL.createObjectURL(file);
+    img.onerror = rej;
+    img.src = URL.createObjectURL(file);
   });
 }
 
-/* ---- submit ---- */
-$('submitBtn').addEventListener('click', submitForm);
-async function submitForm(){
-  const msg=$('formMsg'); msg.className='msg';
-  const name=$('fullName').value.trim();
-  const num =$('idNumber').value.trim().toUpperCase();
-  const tel =$('contact').value.trim();
-  const single = idType==='passport';
+function blobToBase64(blob){
+  return new Promise(function(res, rej){
+    var r = new FileReader();
+    r.onload = function(){ res(r.result); };
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+
+function fail(text){
+  var m = gid('formMsg');
+  m.className = 'msg bad';
+  m.textContent = text;
+  window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
+}
+
+function submitForm(){
+  var msg = gid('formMsg');
+  msg.className = 'msg';
+  var name = gid('fullName').value.trim();
+  var num  = gid('idNumber').value.trim().toUpperCase();
+  var tel  = gid('contact').value.trim();
+  var single = idType === 'passport';
 
   if(!name){ return fail('Please enter your full name.'); }
-  if(!num){  return fail('Please enter your '+(single?'passport':idType.toUpperCase())+' number.'); }
-  if(!tel){  return fail('Please enter your contact number.'); }
-  if(!files.front){ return fail('Please upload the '+(single?'passport photo page':'front of your '+idType.toUpperCase())+'.'); }
-  if(!single && !files.back){ return fail('Please upload the back of your '+idType.toUpperCase()+'.'); }
-  if(!$('declare').checked){ return fail('Please confirm the declaration.'); }
-  if(!$('consent').checked){ return fail('Please give your consent to proceed.'); }
+  if(!num){ return fail('Please enter your ' + (single ? 'Passport' : 'NRIC') + ' number.'); }
+  if(!tel){ return fail('Please enter your contact number.'); }
+  if(!files.front){ return fail('Please upload the ' + (single ? 'passport photo page' : 'front of your ' + idType.toUpperCase()) + '.'); }
+  if(!single && !files.back){ return fail('Please upload the back of your NRIC.'); }
+  if(!gid('declare').checked){ return fail('Please confirm the declaration.'); }
+  if(!gid('consent').checked){ return fail('Please give your consent to proceed.'); }
 
-  setBtn('submitBtn', true, '<span class="spin"></span>Submitting…');
-  try{
-<<<<<<< HEAD
-    // Convert photos to base64 — stored directly in database, no storage needed
-    function blobToBase64(blob){
-      return new Promise((res,rej)=>{
-        const r=new FileReader();
-        r.onload=()=>res(r.result);
-        r.onerror=rej;
-        r.readAsDataURL(blob);
-      });
-    }
-    const frontB64 = await blobToBase64(files.front);
-    const backB64  = (!single && files.back) ? await blobToBase64(files.back) : null;
-=======
-    // Upload photos first — required
-    const folder = crypto.randomUUID();
-    const frontPath = folder + '/front.jpg';
-    let backPath = null;
+  setBtn('submitBtn', true, 'Submitting...');
 
-    const up1 = await sb.storage.from('kyc-docs').upload(frontPath, files.front, {contentType:'image/jpeg', upsert:false});
-    if(up1.error){
-      console.error('Front upload error:', JSON.stringify(up1.error));
-      throw new Error('Photo upload failed: ' + up1.error.message);
-    }
+  var frontB64Promise = blobToBase64(files.front);
+  var backB64Promise  = (!single && files.back) ? blobToBase64(files.back) : Promise.resolve(null);
 
-    if(!single){
-      backPath = folder + '/back.jpg';
-      const up2 = await sb.storage.from('kyc-docs').upload(backPath, files.back, {contentType:'image/jpeg', upsert:false});
-      if(up2.error){
-        console.error('Back upload error:', JSON.stringify(up2.error));
-        throw new Error('Photo upload failed: ' + up2.error.message);
-      }
-    }
->>>>>>> 443ef17eb49658d456b93a37c3868e49bffc9c18
+  Promise.all([frontB64Promise, backB64Promise]).then(function(results){
+    var frontB64 = results[0];
+    var backB64  = results[1];
 
-    const { data, error } = await sb.rpc('submit_kyc', {
-      p_code: validCode, p_full_name: name, p_id_type: idType, p_id_number: num,
-      p_contact: tel, p_doc_front_path: null, p_doc_back_path: null,
-      p_declaration_ok: true, p_consent_ok: true,
-      p_doc_front_b64: frontB64, p_doc_back_b64: backB64
+    return sb.rpc('submit_kyc', {
+      p_code: validCode,
+      p_full_name: name,
+      p_id_type: idType,
+      p_id_number: num,
+      p_contact: tel,
+      p_doc_front_path: null,
+      p_doc_back_path: null,
+      p_declaration_ok: true,
+      p_consent_ok: true,
+      p_doc_front_b64: frontB64,
+      p_doc_back_b64: backB64
     });
-    if(error){ console.error('RPC error:', JSON.stringify(error)); throw error; }
-
-    $('refCode').textContent = 'REF · ' + String(data).slice(0,8).toUpperCase();
-    $('form').classList.add('hide');
-    $('done').classList.remove('hide');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }catch(err){
-    const m = (err && err.message)||'';
-    console.error('Submit failed:', m);
-    if(m.includes('CODE_USED')) fail('This code has already been used. Please contact Assure Gold for a new one.');
-    else if(m.includes('INVALID_CODE')) fail('This code is no longer valid. Please contact Assure Gold.');
-    else if(m.includes('Photo upload failed')) fail(m + ' — Please try a smaller image or different format.');
-    else fail('Error: ' + (m || 'Unknown. Please try again.'));
+  }).then(function(res){
+    if(res.error){
+      console.error('submit_kyc error:', res.error);
+      var m = res.error.message || '';
+      if(m.indexOf('CODE_USED') >= 0) fail('This code has already been used. Please contact Assure Gold for a new one.');
+      else if(m.indexOf('INVALID_CODE') >= 0) fail('This code is no longer valid. Please contact Assure Gold.');
+      else fail('Error: ' + (m || 'Please try again.'));
+      setBtn('submitBtn', false, 'Submit verification');
+      return;
+    }
+    var ref = String(res.data).slice(0,8).toUpperCase();
+    gid('refCode').textContent = 'REF: ' + ref;
+    gid('form').classList.add('hide');
+    gid('done').classList.remove('hide');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }).catch(function(err){
+    console.error('Unexpected error:', err);
+    fail('Something went wrong. Please try again.');
     setBtn('submitBtn', false, 'Submit verification');
-  }
+  });
 }
-function fail(t){ const m=$('formMsg'); m.className='msg bad'; m.textContent=t; window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); }
-function setBtn(id,busy,html){ const b=$(id); b.disabled=busy; b.innerHTML=html; }
 </script>
 </body>
 </html>
