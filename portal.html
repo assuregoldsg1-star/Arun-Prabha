@@ -179,12 +179,16 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
       <div class="lmsg" id="lmsg"></div>
     </div>
 
-    <!-- Screen 2: email OTP -->
+    <!-- Screen 2: OTP input -->
     <div id="s2" style="display:none">
-      <p>A 6-digit code was sent to your Gmail. Enter it below.</p>
+      <p style="font-size:13px;color:var(--soft);line-height:1.6;margin-bottom:14px">
+        A 6-digit code was sent to<br/>
+        <b style="color:var(--ink)">assuregoldsg1@gmail.com</b><br/>
+        Enter it below to access the portal.
+      </p>
       <input type="text" id="otpInput" maxlength="6" placeholder="000000" autocomplete="one-time-code" inputmode="numeric"
-        style="text-align:center;letter-spacing:.3em;font-family:monospace;font-size:24px;font-weight:700;width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;margin:10px 0 4px" />
-      <button class="btn" id="otpBtn">Verify &amp; enter portal</button>
+        style="text-align:center;letter-spacing:.3em;font-family:monospace;font-size:28px;font-weight:700;width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:4px" />
+      <button class="btn" id="otpBtn" style="margin-top:10px">Verify &amp; enter portal</button>
       <div class="lmsg" id="otpMsg"></div>
       <p style="font-size:11px;color:var(--soft);text-align:center;margin-top:12px">
         Check spam if not received &middot; <a href="#" id="resendLink" style="color:var(--gold);text-decoration:none">Resend code</a>
@@ -254,15 +258,13 @@ const $ = id => document.getElementById(id);
 let state = { tab:'customers', range:'all', from:null, to:null, search:'', customers:[], txns:[], codes:[] };
 
 /* ---------- AUTH + EMAIL OTP 2FA ---------- */
-var passwordVerified = false;
-
 function showLMsg(id, text){
   var el = document.getElementById(id);
   el.textContent = text;
   el.classList.add('show');
 }
 
-// STEP 1: password check
+// STEP 1: password
 document.getElementById('loginBtn').addEventListener('click', doPassword);
 document.getElementById('passInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doPassword(); });
 
@@ -283,17 +285,20 @@ async function doPassword(){
     return;
   }
 
-  // Password correct — sign out and send OTP
+  // Password correct — sign out and send OTP email
   await sb.auth.signOut();
-  var otpRes = await sb.auth.signInWithOtp({ email: OWNER_EMAIL, options: { shouldCreateUser: false } });
+  var otpRes = await sb.auth.signInWithOtp({
+    email: OWNER_EMAIL,
+    options: { shouldCreateUser: false }
+  });
   if(otpRes.error){
-    showLMsg('lmsg', 'Could not send OTP: ' + otpRes.error.message);
+    showLMsg('lmsg', 'Could not send code: ' + otpRes.error.message);
     document.getElementById('loginBtn').disabled = false;
     document.getElementById('loginBtn').textContent = 'Continue';
     return;
   }
 
-  // Show OTP screen
+  // Show OTP input screen
   document.getElementById('s1').style.display = 'none';
   document.getElementById('s2').style.display = 'block';
   document.getElementById('otpInput').focus();
@@ -301,7 +306,7 @@ async function doPassword(){
   document.getElementById('loginBtn').textContent = 'Continue';
 }
 
-// STEP 2: OTP verify
+// STEP 2: verify OTP
 document.getElementById('otpBtn').addEventListener('click', doOtp);
 document.getElementById('otpInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doOtp(); });
 
@@ -318,18 +323,20 @@ async function doOtp(){
     document.getElementById('otpBtn').disabled = false;
     document.getElementById('otpBtn').textContent = 'Verify & enter portal';
     document.getElementById('otpInput').value = '';
+    document.getElementById('otpInput').focus();
     return;
   }
   enterApp();
 }
 
-// Resend OTP
+// Resend
 document.getElementById('resendLink').addEventListener('click', async function(e){
   e.preventDefault();
-  this.textContent = 'Sending...';
+  var self = this;
+  self.textContent = 'Sending...';
   await sb.auth.signInWithOtp({ email: OWNER_EMAIL, options: { shouldCreateUser: false } });
-  this.textContent = 'Sent!';
-  setTimeout(function(){ document.getElementById('resendLink').textContent = 'Resend code'; }, 3000);
+  self.textContent = 'Sent!';
+  setTimeout(function(){ self.textContent = 'Resend code'; }, 3000);
 });
 
 $('logoutBtn').addEventListener('click', async function(){ await sb.auth.signOut(); location.reload(); });
