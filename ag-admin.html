@@ -1329,7 +1329,6 @@ async function lgUnlock(){
     var out = await r.json();
     if(!r.ok || !out.ok){ throw new Error(out.error || 'Wrong passcode.'); }
     AG_CODE = code;
-    try{ sessionStorage.setItem('ag_code', code); }catch(e){}
     enterEditor();
   }catch(err){
     lgShow('lg-msg1', err.message || 'Could not verify. Check your connection.');
@@ -1343,13 +1342,7 @@ async function enterEditor(){
   try{ renderDash(); }catch(e){}
 }
 
-/* resume an unlocked session without re-typing */
-(function(){
-  try{
-    var saved = sessionStorage.getItem('ag_code');
-    if(saved){ AG_CODE = saved; enterEditor(); }
-  }catch(e){}
-})();
+/* No session resume: passcode is required on every load / refresh / new tab */
 
 /* Load the latest published content so any device starts from the same place */
 async function loadFromRepo(){
