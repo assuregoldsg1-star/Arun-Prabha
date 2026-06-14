@@ -19,7 +19,8 @@ html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,s
 body{min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:24px 18px 60px}
 .wrap{width:100%;max-width:480px}
 .brand{display:flex;flex-direction:column;align-items:center;text-align:center;margin:14px 0 22px}
-.brand .seal{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 28%,var(--gold-lt),var(--gold));box-shadow:0 6px 18px rgba(184,134,47,.35);color:#fff;margin-bottom:12px}
+.brand .seal{width:64px;height:64px;display:grid;place-items:center;margin-bottom:12px}
+.brand .seal-logo{width:64px;height:64px;object-fit:contain;display:block}
 .brand .seal svg{width:26px;height:26px}
 .brand h1{font-family:Fraunces,serif;font-weight:500;font-size:23px;letter-spacing:-.01em}
 .brand .lic{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--soft);letter-spacing:.06em;margin-top:7px;text-transform:uppercase}
@@ -76,7 +77,7 @@ input[type=file]{display:none}
 <div class="wrap">
   <div class="brand">
     <div class="seal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <img src="assets/images/logo.png" alt="Assure Gold" class="seal-logo"/>
     </div>
     <h1>Assure Gold</h1>
     <div class="lic">PSM Licensed Dealer &middot; Singapore</div>
@@ -115,12 +116,12 @@ input[type=file]{display:none}
 
     <div class="field">
       <label class="req" for="idNumber" id="idNumLabel">NRIC number</label>
-      <input type="text" id="idNumber" placeholder="e.g. S1234567A" autocomplete="off" style="text-transform:uppercase" />
+      <input type="text" id="idNumber" placeholder="e.g. S1234567A" autocomplete="off" maxlength="9" style="text-transform:uppercase" />
     </div>
 
     <div class="field">
       <label class="req" for="contact">Contact number</label>
-      <input type="tel" id="contact" placeholder="+65 9XXX XXXX" autocomplete="tel" />
+      <input type="tel" id="contact" placeholder="+65 9XXX XXXX" autocomplete="tel" inputmode="numeric" maxlength="13" />
     </div>
 
     <div class="field">
@@ -193,6 +194,14 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 var idType = 'nric';
+
+/* keep the contact field to digits / +/spaces only as the user types */
+(function(){
+  var c = document.getElementById('contact');
+  if(c){ c.addEventListener('input', function(){
+    this.value = this.value.replace(/[^\d+\s]/g, '');
+  }); }
+})();
 var validCode = '';
 var files = {front: null, back: null};
 
@@ -252,6 +261,7 @@ gid('idSeg').addEventListener('click', function(e){
   var phs = {nric:'e.g. S1234567A', passport:'e.g. E1234567'};
   gid('idNumLabel').textContent = labels[idType];
   gid('idNumber').placeholder = phs[idType];
+  gid('idNumber').maxLength = (idType === 'passport') ? 9 : 9;
   var single = idType === 'passport';
   gid('uploadLabel').textContent = single ? 'Upload passport photo' : 'Upload NRIC photos';
   gid('txFront').querySelector('b').textContent = single ? 'Passport - photo page' : 'NRIC - Front';
@@ -333,7 +343,29 @@ function submitForm(){
 
   if(!name){ return fail('Please enter your full name.'); }
   if(!num){ return fail('Please enter your ' + (single ? 'Passport' : 'NRIC') + ' number.'); }
+
+  // ---- Strict ID format validation ----
+  if(!single){
+    // Singapore NRIC/FIN: 1 letter + 7 digits + 1 letter, e.g. S1234567A
+    if(!/^[STFGM]\d{7}[A-Z]$/.test(num)){
+      return fail('Please enter a valid NRIC in the format S1234567A (1 letter, 7 digits, 1 letter).');
+    }
+  } else {
+    // Passport: 1 letter + 7-8 digits/letters, e.g. E1234567
+    if(!/^[A-Z][A-Z0-9]{6,8}$/.test(num)){
+      return fail('Please enter a valid passport number (e.g. E1234567).');
+    }
+  }
+
   if(!tel){ return fail('Please enter your contact number.'); }
+
+  // ---- Strict phone validation: exactly 8 digits, SG mobile/landline (starts 6/8/9) ----
+  var telDigits = tel.replace(/[^\d]/g, '').replace(/^65/, '');
+  if(!/^[689]\d{7}$/.test(telDigits)){
+    return fail('Please enter a valid 8-digit Singapore number (e.g. 9123 4567).');
+  }
+  tel = '+65 ' + telDigits.slice(0,4) + ' ' + telDigits.slice(4);
+
   if(!files.front){ return fail('Please upload the ' + (single ? 'passport photo page' : 'front of your ' + idType.toUpperCase()) + '.'); }
   if(!single && !files.back){ return fail('Please upload the back of your NRIC.'); }
   if(!gid('declare').checked){ return fail('Please confirm the declaration.'); }

@@ -27,10 +27,10 @@ button{font:inherit;cursor:pointer}
 .lcard{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);
   border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;text-align:center;animation:rise .5s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.seal{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;
-  background:radial-gradient(circle at 30% 28%,var(--gold-lt),var(--gold));
-  box-shadow:0 6px 18px rgba(184,134,47,.35);color:#fff}
+.seal{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 16px}
 .seal svg{width:28px;height:28px}
+.seal-logo{width:64px;height:64px;object-fit:contain;display:block}
+.topbar .seal-logo{width:42px;height:42px}
 .lcard h1{font-family:Fraunces,serif;font-weight:500;font-size:22px;letter-spacing:-.01em}
 .lcard p{font-size:13px;color:var(--soft);margin:7px 0 22px;line-height:1.5}
 #passInput{width:100%;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;text-align:center;
@@ -48,7 +48,7 @@ button{font:inherit;cursor:pointer}
 .topbar{display:flex;align-items:center;gap:14px;padding:18px 0;position:sticky;top:0;z-index:20;
   background:linear-gradient(var(--paper),var(--paper) 70%,transparent)}
 .topbar .mark{display:flex;align-items:center;gap:10px}
-.topbar .seal{width:38px;height:38px;margin:0}
+.topbar .seal{width:42px;height:42px;margin:0}
 .topbar .seal svg{width:19px;height:19px}
 .topbar h1{font-family:Fraunces,serif;font-weight:500;font-size:18px;line-height:1}
 .topbar h1 span{display:block;font-family:'Space Mono',monospace;font-size:9.5px;color:var(--soft);
@@ -99,6 +99,14 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
 .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
 .tag.buy{background:#eaf5ef;color:var(--buy)} .tag.sell{background:#f7efdd;color:var(--sell)}
 .idpill{font-family:'Space Mono',monospace;font-size:11px;color:var(--soft);background:#f3efe6;padding:2px 7px;border-radius:6px}
+.fu-btn{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:20px;border:1px solid #16a34a;background:#16a34a;color:#fff;cursor:pointer;white-space:nowrap;transition:.15s;text-decoration:none}
+.fu-btn:hover{background:#15803d;border-color:#15803d}
+.fu-btn svg{width:13px;height:13px}
+.fu-done{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--soft2);font-weight:500}
+.pend-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.05em;color:#b45309;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+tbody tr.pending td{background:#fffdf5}
+.stat.clickable{cursor:pointer;transition:.15s} .stat.clickable:hover{border-color:var(--gold);box-shadow:0 4px 14px rgba(184,134,11,.12)}
+.stat.active{border-color:var(--gold);background:#fffdf5}
 .amt{font-family:'Space Mono',monospace;font-weight:700}
 .empty{text-align:center;padding:46px 20px;color:var(--soft)}
 .empty svg{width:34px;height:34px;color:var(--line);margin-bottom:10px}
@@ -168,7 +176,7 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
 <!-- ============ LOGIN ============ -->
 <div id="login">
   <div class="lcard">
-    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+    <div class="seal"><img src="assets/images/logo.png" alt="Assure Gold" class="seal-logo"/></div>
     <h1>Assure Gold Portal</h1>
 
     <!-- Screen 1: password -->
@@ -201,7 +209,7 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
 <div id="app" class="hide">
   <div class="topbar">
     <div class="mark">
-      <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div class="seal"><img src="assets/images/logo.png" alt="Assure Gold" class="seal-logo"/></div>
       <h1>Assure Gold<span>Verification Portal</span></h1>
     </div>
     <div class="grow"></div>
@@ -258,7 +266,7 @@ const WHATSAPP          = "6596724975";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = id => document.getElementById(id);
 
-let state = { tab:'customers', range:'all', from:null, to:null, search:'', customers:[], txns:[], codes:[] };
+let state = { tab:'customers', range:'all', from:null, to:null, search:'', pendingOnly:false, customers:[], txns:[], codes:[] };
 
 /* ---------- AUTH + EMAIL OTP 2FA ---------- */
 function showLMsg(id, text){
@@ -405,26 +413,61 @@ function render(){
 
 function renderCustomers(){
   const q=state.search;
-  const rows=state.customers.filter(c=>inRange(c.created_at)).filter(c=>!q||
+  let rows=state.customers.filter(c=>inRange(c.created_at)).filter(c=>!q||
     (c.full_name||'').toLowerCase().includes(q)||(c.id_number||'').toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q));
   const txnFor=id=>state.txns.filter(t=>t.customer_id===id);
-  // stats
+  const isPending=c=>!txnFor(c.id).length;
+  const pendingCount=rows.filter(isPending).length;
+
+  // stats (Pending card is clickable to filter)
   $('stats').innerHTML = card('New customers', rows.length, periodLabel())
     + card('With transactions', rows.filter(c=>txnFor(c.id).length).length,'in this view')
-    + card('Pending follow-up', rows.filter(c=>!txnFor(c.id).length).length,'no transaction yet')
+    + `<div class="stat clickable${state.pendingOnly?' active':''}" id="pendStat"><div class="k">Pending follow-up</div><div class="v">${pendingCount}</div><div class="d">${state.pendingOnly?'showing pending · tap to clear':'tap to show only these'}</div></div>`
     + card('Total records', state.customers.length,'all time');
-  if(!rows.length){ $('panel').innerHTML=emptyBox('No customers in this period','New submissions will appear here automatically.'); return; }
-  let h='<table><thead><tr><th>Customer</th><th class="hideS">Identity</th><th class="hideS">Contact</th><th>Submitted</th><th>Txns</th></tr></thead><tbody>';
+
+  const pendStat=$('pendStat');
+  if(pendStat) pendStat.addEventListener('click',()=>{ state.pendingOnly=!state.pendingOnly; renderCustomers(); });
+
+  // apply pending-only filter
+  if(state.pendingOnly) rows=rows.filter(isPending);
+
+  if(!rows.length){ $('panel').innerHTML=emptyBox(state.pendingOnly?'No pending follow-ups':'No customers in this period', state.pendingOnly?'Everyone in this view has a transaction logged.':'New submissions will appear here automatically.'); return; }
+
+  let h='<table><thead><tr><th>Customer</th><th class="hideS">Identity</th><th class="hideS">Contact</th><th>Submitted</th><th>Txns</th><th>Follow-up</th></tr></thead><tbody>';
   rows.forEach(c=>{
-    h+=`<tr class="click" data-cust="${c.id}">
-      <td><b>${esc(c.full_name)}</b></td>
+    const pending=isPending(c);
+    h+=`<tr class="click${pending?' pending':''}" data-cust="${c.id}">
+      <td><b>${esc(c.full_name)}</b>${pending?'<span class="pend-badge">PENDING</span>':''}</td>
       <td class="hideS"><span class="idpill">${(c.id_type||'').toUpperCase()} · ${esc(c.id_number)}</span></td>
       <td class="hideS">${esc(c.contact)}</td>
       <td>${fmtDate(c.created_at)}</td>
-      <td>${txnFor(c.id).length||'<span style="color:var(--soft2)">—</span>'}</td></tr>`;
+      <td>${txnFor(c.id).length||'<span style="color:var(--soft2)">—</span>'}</td>
+      <td>${followBtn(c, pending)}</td></tr>`;
   });
   h+='</tbody></table>'; $('panel').innerHTML=h;
+
+  // row opens drawer
   $('panel').querySelectorAll('[data-cust]').forEach(r=>r.addEventListener('click',()=>openCustomer(r.dataset.cust)));
+  // follow-up buttons (stop row click)
+  $('panel').querySelectorAll('.fu-btn').forEach(btn=>btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const c=state.customers.find(x=>x.id===btn.dataset.fu); if(c) followUp(c);
+  }));
+}
+
+/* WhatsApp follow-up button + action */
+function followBtn(c, pending){
+  const digits=(c.contact||'').replace(/[^\d]/g,'');
+  if(!digits) return '<span class="fu-done">no contact</span>';
+  const waSvg='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>';
+  return `<button class="fu-btn" data-fu="${c.id}">${waSvg}Follow up</button>`;
+}
+function followUp(c){
+  let digits=(c.contact||'').replace(/[^\d]/g,'');
+  if(!digits) return;
+  if(digits.length===8) digits='65'+digits;        // SG local -> add country code
+  const msg=encodeURIComponent(`Hi ${c.full_name||'there'}, this is Assure Gold following up on your recent verification. We'd be happy to help complete your gold transaction whenever you're ready. Thank you!`);
+  window.open(`https://wa.me/${digits}?text=${msg}`,'_blank');
 }
 
 function renderTransactions(){
