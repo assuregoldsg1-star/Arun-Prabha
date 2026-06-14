@@ -666,7 +666,7 @@ var DATA = {
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
   images:{},   /* path -> dataURL of replaced images */
-  buyback:{ margins:{m999:5,m916:5,m850:6,m750:7,m585:9}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
+  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
 };
 
 function persist(){ try{
@@ -1223,16 +1223,12 @@ function patchBuyback(html){
   html=html.replace(/PS20260000962/g,b.psm);
   html=html.replace(/11 March 2027/g,b.psmValid);
 
-  /* patch buyback margin into fallback prices */
+  /* patch buyback margins into the live BB_MARGIN map */
   var bb = DATA.buyback || {};
   var margins = bb.margins || {};
-  ['999','916','850','750','585'].forEach(function(k){
-    var m = margins['m'+k];
-    if(m !== undefined){
-      var re = new RegExp('(data-margin-'+k+'=")[^"]*(")', 'g');
-      html = html.replace(re, '$1'+m+'$2');
-    }
-  });
+  function mv(k,def){ return (margins['m'+k]!==undefined && margins['m'+k]!=='') ? margins['m'+k] : def; }
+  var marginObj = "{ '999':"+mv('999',7)+", '916':"+mv('916',8.5)+", '850':"+mv('850',15)+", '750':"+mv('750',15)+", '585':"+mv('585',15)+", '375':15 }";
+  html = html.replace(/var BB_MARGIN = \{[^}]*\};/, 'var BB_MARGIN = '+marginObj+';');
 
   /* patch hero retail/youpay prices */
   if(bb.retail){

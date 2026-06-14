@@ -477,6 +477,12 @@ document.querySelectorAll('.fq-btn').forEach(function(btn){
 
 var BB_RATE_999 = 185.0;  /* S$/g fallback — shown immediately before API loads */
 var BB_DEDUCT   = 5;      /* $5/g deduction from spot */
+/* Per-purity margin (S$/g) deducted from spot. Controlled from the cloud editor. */
+var BB_MARGIN = { '999':7, '916':8.5, '850':15, '750':15, '585':15, '375':15 };
+function bbDeductFor(purity){
+  var key = String(Math.round(purity*1000));
+  return (BB_MARGIN[key] !== undefined) ? BB_MARGIN[key] : 15;
+}
 
 var BB_PURITY = {
   '999': 0.999,
@@ -493,7 +499,7 @@ function bbFmt(n) {
 
 function bbRateFor(purity) {
   /* 24K(999): -$7, 22K(916): -$10, below 22K: -$15 */
-  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 8.5 : 15;
+  var deduct = bbDeductFor(purity);
   return BB_RATE_999 * purity - deduct;
 }
 
@@ -534,7 +540,7 @@ async function bbFetchRate() {
       var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
       if (fxRes.ok) {
         var fxData = await fxRes.json();
-        var sgd = fxData.rates && fxData.rates.S$;
+        var sgd = fxData.rates && fxData.rates.SGD;
         if (sgd && sgd > 1.2 && sgd < 1.6) fxRate = sgd;
       }
     } catch(e2) { /* keep fallback FX */ }
@@ -572,7 +578,7 @@ function bbCalc() {
   }
 
   var purity   = BB_PURITY[karatEl.value] || 0.916;
-  var deduct = (purity >= 0.999) ? 7 : (purity >= 0.916) ? 8.5 : 15;
+  var deduct = bbDeductFor(purity);
   var estimate = (BB_RATE_999 * purity - deduct) * weight;
   if (estimate < 0) estimate = 0;
 

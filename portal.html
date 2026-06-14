@@ -205,6 +205,7 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
       <h1>Assure Gold<span>Verification Portal</span></h1>
     </div>
     <div class="grow"></div>
+    <button class="tbtn" id="pdfBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF Report</button>
     <button class="tbtn primary" id="newCodeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New customer code</button>
     <button class="tbtn" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
   </div>
@@ -241,6 +242,8 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script>
 /* ============================================================
    CONFIG — fill these in after creating your Supabase project
@@ -563,6 +566,111 @@ function openTxModal(c){
 
 /* ---------- NEW CODE ---------- */
 $('newCodeBtn').addEventListener('click', openCodeModal);
+
+/* ============ PDF REPORT ============ */
+$('pdfBtn').addEventListener('click', generatePdfReport);
+
+function generatePdfReport(){
+  if(!window.jspdf || !window.jspdf.jsPDF){ alert('PDF library still loading, please try again in a moment.'); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:'a4' });
+  const W = doc.internal.pageSize.getWidth();
+  const GOLD = [184,134,11];
+  const INK  = [28,24,20];
+
+  // current filtered data
+  const custs = state.customers.filter(c=>inRange(c.created_at));
+  const txns  = state.txns.filter(t=>inRange(t.txn_date||t.created_at));
+  const sum   = a=>a.reduce((s,t)=>s+(Number(t.amount_sgd)||0),0);
+  const buys  = txns.filter(t=>t.txn_type==='buy');
+  const sells = txns.filter(t=>t.txn_type==='sell');
+  const moneyP = n => 'S$ ' + Number(n||0).toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const nameFor = id => { const c=state.customers.find(x=>x.id===id); return c?c.full_name:'Unknown'; };
+  const periodTxt = {today:'Today',week:'This Week',month:'This Month',all:'All Time',custom:'Selected Range'}[state.range] || 'All Time';
+  const genOn = new Date().toLocaleString('en-SG',{ timeZone:'Asia/Singapore', day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true });
+
+  // ---- Header ----
+  doc.setFillColor(...INK); doc.rect(0,0,W,86,'F');
+  doc.setTextColor(...GOLD); doc.setFont('helvetica','bold'); doc.setFontSize(20);
+  doc.text('ASSURE GOLD', 40, 44);
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+  doc.text('Verification & Transaction Report', 40, 62);
+  doc.setFontSize(8); doc.setTextColor(200,200,200);
+  doc.text('PSM Reg. PS20260000962  ·  Singapore', 40, 75);
+  doc.setFontSize(8.5); doc.setTextColor(255,255,255);
+  doc.text('Period: ' + periodTxt, W-40, 50, {align:'right'});
+  doc.text('Generated: ' + genOn, W-40, 64, {align:'right'});
+
+  // ---- Summary cards ----
+  let y = 112;
+  doc.setTextColor(...INK); doc.setFont('helvetica','bold'); doc.setFontSize(12);
+  doc.text('Summary', 40, y); y += 10;
+  doc.setDrawColor(220,210,190); doc.line(40, y, W-40, y); y += 18;
+
+  const cards = [
+    ['Customers', String(custs.length)],
+    ['Transactions', String(txns.length)],
+    ['Bought', moneyP(sum(buys))],
+    ['Sold', moneyP(sum(sells))],
+    ['Net (sold − bought)', (sum(sells)-sum(buys)>=0?'+':'−')+moneyP(Math.abs(sum(sells)-sum(buys))).replace('S$ ','S$ ')],
+  ];
+  const cw = (W-80)/cards.length;
+  cards.forEach((c,i)=>{
+    const x = 40 + i*cw;
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(120,110,95);
+    doc.text(c[0].toUpperCase(), x, y);
+    doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(...INK);
+    doc.text(c[1], x, y+17);
+  });
+  y += 56;
+
+  // ---- Customers table ----
+  doc.autoTable({
+    startY: y,
+    head: [['#','Full Name','ID Type','ID Number','Contact','Submitted']],
+    body: custs.map((c,i)=>[ i+1, c.full_name||'—', (c.id_type||'').toUpperCase(), c.id_number||'—', c.contact||'—', fmtDate(c.created_at) ]),
+    theme:'striped',
+    headStyles:{ fillColor:INK, textColor:[255,255,255], fontSize:8.5, fontStyle:'bold' },
+    bodyStyles:{ fontSize:8.5, textColor:INK },
+    alternateRowStyles:{ fillColor:[250,247,240] },
+    margin:{ left:40, right:40 },
+    didDrawPage: ()=>{ doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(...INK); }
+  });
+  // section title above customers table (drawn after to know position)
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...INK);
+  doc.text('Customers ('+custs.length+')', 40, y-6);
+
+  // ---- Transactions table ----
+  let ty = doc.lastAutoTable.finalY + 26;
+  if(ty > doc.internal.pageSize.getHeight()-120){ doc.addPage(); ty = 50; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...INK);
+  doc.text('Transactions ('+txns.length+')', 40, ty);
+  doc.autoTable({
+    startY: ty+8,
+    head: [['Date','Customer','Type','Item','Weight','Purity','Amount']],
+    body: txns.map(t=>[ fmtDate(t.txn_date||t.created_at), nameFor(t.customer_id), t.txn_type==='buy'?'Bought':'Sold', t.item||'—', t.weight_g?t.weight_g+' g':'—', t.purity||'—', moneyP(t.amount_sgd) ]),
+    theme:'striped',
+    headStyles:{ fillColor:INK, textColor:[255,255,255], fontSize:8.5, fontStyle:'bold' },
+    bodyStyles:{ fontSize:8.5, textColor:INK },
+    alternateRowStyles:{ fillColor:[250,247,240] },
+    columnStyles:{ 6:{ halign:'right' } },
+    margin:{ left:40, right:40 }
+  });
+
+  // ---- Footer on every page ----
+  const pages = doc.internal.getNumberOfPages();
+  for(let p=1;p<=pages;p++){
+    doc.setPage(p);
+    const H = doc.internal.pageSize.getHeight();
+    doc.setDrawColor(220,210,190); doc.line(40, H-34, W-40, H-34);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(140,130,115);
+    doc.text('Assure Gold · Confidential — contains personal data. Handle per PDPA.', 40, H-20);
+    doc.text('Page '+p+' of '+pages, W-40, H-20, {align:'right'});
+  }
+
+  const stamp = new Date().toISOString().slice(0,10);
+  doc.save('AssureGold-Report-'+periodTxt.replace(/\s+/g,'')+'-'+stamp+'.pdf');
+}
 function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return 'AG-'+s; }
 function openCodeModal(){
   const m=document.createElement('div'); m.className='modal-center';
