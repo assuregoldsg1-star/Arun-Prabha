@@ -208,8 +208,35 @@ img{display:block;max-width:100%}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(185,134,11,.25);border-radius:3px}
 
-'media(max-width:980px){.sgrid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.fr2,.fr3{grid-template-columns:1fr}}
-'media(max-width:720px){.sidebar{width:54px}.sb-brand p,.sb-sec,.sb-item span:not(.i),.sb-item .c,.sb-foot{display:none}.sb-item{justify-content:center}}
+@media(max-width:980px){.sgrid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.fr2,.fr3{grid-template-columns:1fr}}
+
+/* ---- mobile / iOS responsive layout ---- */
+.hamb{display:none}
+.scrim{display:none}
+@media(max-width:860px){
+  .layout{display:block;height:auto;min-height:100vh;overflow:visible}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:264px;z-index:300;transform:translateX(-100%);transition:transform .26s ease;box-shadow:0 0 40px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .main{width:100%;overflow:visible;height:auto}
+  .topbar{position:sticky;top:0;z-index:120;padding:14px 16px}
+  .topbar h2{font-size:18px}
+  .hamb{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--white);font-size:20px;color:var(--ink);flex-shrink:0;cursor:pointer}
+  .scrim.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:250}
+  .view{padding:16px !important}
+  .sgrid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .stile .n{font-size:26px}
+  .pgrid{grid-template-columns:1fr !important}
+  .imgrid{grid-template-columns:repeat(2,1fr) !important}
+  .field input,.field select,.field textarea{font-size:16px}  /* 16px stops iOS zoom-on-focus */
+  .btn{font-size:15px}
+  .card-b{padding:16px}
+  .topbar .btn span:not(.i){display:none}
+  .tb-actions{display:none}
+}
+@media(max-width:480px){
+  .sgrid{grid-template-columns:1fr}
+  .imgrid{grid-template-columns:1fr !important}
+}
 
 /* ── Loomix Studios credit ── */
 .loomix-credit{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
@@ -274,8 +301,10 @@ img{display:block;max-width:100%}
     </div>
   </aside>
 
+  <div class="scrim" id="agScrim" onclick="agToggleNav()"></div>
   <div class="main">
     <div class="topbar">
+      <button class="hamb" onclick="agToggleNav()" aria-label="Menu">&#9776;</button>
       <div>
         <h2 id="tb-title">Dashboard</h2>
         <p id="tb-sub">Manage your Assure Gold website</p>
@@ -688,6 +717,15 @@ function showView(v){
   if(v==='text')renderText();
   if(v==='business')loadBiz();
   if(v==='buyback')renderBuyback();
+  agCloseNav();
+}
+function agToggleNav(){
+  var sb=document.querySelector('.sidebar'); var sc=document.getElementById('agScrim');
+  var open=sb.classList.toggle('open'); if(sc) sc.classList.toggle('show', open);
+}
+function agCloseNav(){
+  var sb=document.querySelector('.sidebar'); var sc=document.getElementById('agScrim');
+  if(sb) sb.classList.remove('open'); if(sc) sc.classList.remove('show');
 }
 function toast(msg,type){
   var el=document.getElementById('toast');
@@ -1344,15 +1382,23 @@ async function publishLive(){
   var btn=document.getElementById('publishBtn');
   btn.disabled=true;
   try{
-    pStatus('&#8987; Building your website...','work');
+    pStatus('&#8987; Reading your current website...','work');
     var patchers={'index.html':patchIndex,'collection.html':patchCollection,'buyback.html':patchBuyback};
     var files=[];
 
+    // Get the FRESH current pages straight from GitHub (no cache) to avoid conflicts
+    var gf = await fetch('/api/publish',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ action:'getfiles', code:AG_CODE, paths:AG_PAGES })
+    });
+    var gfOut = await gf.json();
+    if(!gf.ok || !gfOut.ok){ throw new Error(gfOut.error || 'Could not read current website.'); }
+
+    pStatus('&#8987; Building your website...','work');
     for(var i=0;i<AG_PAGES.length;i++){
       var name=AG_PAGES[i];
-      var resp=await fetch(AG_RAW+name+'?t='+Date.now(),{cache:'no-store'});
-      if(!resp.ok){ throw new Error('Could not read '+name+' ('+resp.status+')'); }
-      var html=await resp.text();
+      var html=gfOut.files[name];
+      if(html==null){ throw new Error('Could not read '+name+' from the repository.'); }
       files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
     }
 

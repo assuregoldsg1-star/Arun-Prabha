@@ -66,6 +66,21 @@ module.exports = async function(req, res){
 
     if(!GITHUB_TOKEN){ res.status(500).json({error:'Server not configured: GITHUB_TOKEN is missing in Vercel.'}); return; }
 
+    // Return FRESH file contents straight from GitHub (no CDN cache) so the
+    // editor always patches the true current version of each page.
+    if(body.action === 'getfiles'){
+      var want = body.paths || [];
+      var result = {};
+      for(var gi=0; gi<want.length; gi++){
+        try{
+          var info = await gh('/repos/'+REPO_OWNER+'/'+REPO_NAME+'/contents/'+want[gi]+'?ref='+BRANCH);
+          result[want[gi]] = Buffer.from(info.content || '', 'base64').toString('utf-8');
+        }catch(e){ result[want[gi]] = null; }
+      }
+      res.status(200).json({ ok:true, files: result });
+      return;
+    }
+
     var files = body.files || [];
     var message = body.message || 'Website update via manager';
     if(!files.length){ res.status(400).json({error:'No files to publish.'}); return; }
