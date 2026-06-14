@@ -341,6 +341,7 @@ async function submitForm(){
 
   setBtn('submitBtn', true, '<span class="spin"></span>Submitting…');
   try{
+<<<<<<< HEAD
     // Convert photos to base64 — stored directly in database, no storage needed
     function blobToBase64(blob){
       return new Promise((res,rej)=>{
@@ -352,6 +353,27 @@ async function submitForm(){
     }
     const frontB64 = await blobToBase64(files.front);
     const backB64  = (!single && files.back) ? await blobToBase64(files.back) : null;
+=======
+    // Upload photos first — required
+    const folder = crypto.randomUUID();
+    const frontPath = folder + '/front.jpg';
+    let backPath = null;
+
+    const up1 = await sb.storage.from('kyc-docs').upload(frontPath, files.front, {contentType:'image/jpeg', upsert:false});
+    if(up1.error){
+      console.error('Front upload error:', JSON.stringify(up1.error));
+      throw new Error('Photo upload failed: ' + up1.error.message);
+    }
+
+    if(!single){
+      backPath = folder + '/back.jpg';
+      const up2 = await sb.storage.from('kyc-docs').upload(backPath, files.back, {contentType:'image/jpeg', upsert:false});
+      if(up2.error){
+        console.error('Back upload error:', JSON.stringify(up2.error));
+        throw new Error('Photo upload failed: ' + up2.error.message);
+      }
+    }
+>>>>>>> 443ef17eb49658d456b93a37c3868e49bffc9c18
 
     const { data, error } = await sb.rpc('submit_kyc', {
       p_code: validCode, p_full_name: name, p_id_type: idType, p_id_number: num,
