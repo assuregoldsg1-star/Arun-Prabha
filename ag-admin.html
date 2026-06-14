@@ -1075,7 +1075,7 @@ function patchIndex(html){
           +'    <div class="feat-body">'+NL
           +'      <h3>'+escHtml(p.name)+'</h3>'+NL
           +'      <div class="feat-spec">'+escHtml(p.spec)+'</div>'+NL
-          +'      <div class="feat-price">SGD <span class="counter-num" data-target="'+p.price+'" data-suffix="">0</span></div>'+NL
+          +'      <div class="feat-price">SGD '+Number(p.price).toLocaleString()+'</div>'+NL
           +'      <div class="feat-save">&#10003; Save ~SGD '+(p.save||0).toLocaleString()+' vs retail new</div>'+NL
           +'      <span class="feat-cta">'+WA+' Enquire on WhatsApp</span>'+NL
           +'    </div>'+NL
@@ -1126,7 +1126,7 @@ function patchStats(html){
   var re=/<span class="hs-n[^"]*">([\s\S]*?)<\/span><span class="hs-l">([\s\S]*?)<\/span>/g;
   return html.replace(re,function(m){
     var st=DATA.stats[n++]; if(!st)return m;
-    return '<span class="hs-n ga">'+escHtml(st.num)+'</span><span class="hs-l">'+escHtml(st.label)+'</span>';
+    return '<span class="hs-n">'+escHtml(st.num)+'</span><span class="hs-l">'+escHtml(st.label)+'</span>';
   });
 }
 
