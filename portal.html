@@ -170,10 +170,26 @@ tbody tr{transition:.12s} tbody tr.click{cursor:pointer} tbody tr.click:hover{ba
   <div class="lcard">
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
     <h1>Assure Gold Portal</h1>
-    <p>Enter your owner access code to view customer records and transactions.</p>
-    <input type="password" id="passInput" placeholder="••••••••" autocomplete="off" />
-    <button class="btn" id="loginBtn">Unlock portal</button>
-    <div class="lmsg" id="lmsg">Incorrect code. Please try again.</div>
+
+    <!-- Screen 1: password -->
+    <div id="s1">
+      <p>Enter your owner access code to continue.</p>
+      <input type="password" id="passInput" placeholder="password" autocomplete="off" style="letter-spacing:.2em" />
+      <button class="btn" id="loginBtn">Continue</button>
+      <div class="lmsg" id="lmsg"></div>
+    </div>
+
+    <!-- Screen 2: email OTP -->
+    <div id="s2" style="display:none">
+      <p>A 6-digit code was sent to your Gmail. Enter it below.</p>
+      <input type="text" id="otpInput" maxlength="6" placeholder="000000" autocomplete="one-time-code" inputmode="numeric"
+        style="text-align:center;letter-spacing:.3em;font-family:monospace;font-size:24px;font-weight:700;width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;margin:10px 0 4px" />
+      <button class="btn" id="otpBtn">Verify &amp; enter portal</button>
+      <div class="lmsg" id="otpMsg"></div>
+      <p style="font-size:11px;color:var(--soft);text-align:center;margin-top:12px">
+        Check spam if not received &middot; <a href="#" id="resendLink" style="color:var(--gold);text-decoration:none">Resend code</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -237,21 +253,88 @@ const $ = id => document.getElementById(id);
 
 let state = { tab:'customers', range:'all', from:null, to:null, search:'', customers:[], txns:[], codes:[] };
 
-/* ---------- AUTH ---------- */
-$('loginBtn').addEventListener('click', login);
-$('passInput').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
-async function login(){
-  const code = $('passInput').value.trim();
-  if(!code) return;
-  $('loginBtn').disabled=true; $('loginBtn').textContent='Unlocking…'; $('lmsg').classList.remove('show');
-  const { error } = await sb.auth.signInWithPassword({ email: OWNER_EMAIL, password: code });
-  $('loginBtn').disabled=false; $('loginBtn').textContent='Unlock portal';
-  if(error){ $('lmsg').classList.add('show'); $('passInput').value=''; return; }
+/* ---------- AUTH + EMAIL OTP 2FA ---------- */
+var passwordVerified = false;
+
+function showLMsg(id, text){
+  var el = document.getElementById(id);
+  el.textContent = text;
+  el.classList.add('show');
+}
+
+// STEP 1: password check
+document.getElementById('loginBtn').addEventListener('click', doPassword);
+document.getElementById('passInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doPassword(); });
+
+async function doPassword(){
+  var pass = document.getElementById('passInput').value.trim();
+  if(!pass) return;
+  document.getElementById('loginBtn').disabled = true;
+  document.getElementById('loginBtn').textContent = 'Checking...';
+  document.getElementById('lmsg').classList.remove('show');
+
+  // Verify password
+  var res = await sb.auth.signInWithPassword({ email: OWNER_EMAIL, password: pass });
+  if(res.error){
+    showLMsg('lmsg', 'Incorrect code. Please try again.');
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginBtn').textContent = 'Continue';
+    document.getElementById('passInput').value = '';
+    return;
+  }
+
+  // Password correct — sign out and send OTP
+  await sb.auth.signOut();
+  var otpRes = await sb.auth.signInWithOtp({ email: OWNER_EMAIL, options: { shouldCreateUser: false } });
+  if(otpRes.error){
+    showLMsg('lmsg', 'Could not send OTP: ' + otpRes.error.message);
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginBtn').textContent = 'Continue';
+    return;
+  }
+
+  // Show OTP screen
+  document.getElementById('s1').style.display = 'none';
+  document.getElementById('s2').style.display = 'block';
+  document.getElementById('otpInput').focus();
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('loginBtn').textContent = 'Continue';
+}
+
+// STEP 2: OTP verify
+document.getElementById('otpBtn').addEventListener('click', doOtp);
+document.getElementById('otpInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doOtp(); });
+
+async function doOtp(){
+  var code = document.getElementById('otpInput').value.trim();
+  document.getElementById('otpMsg').classList.remove('show');
+  if(code.length !== 6){ showLMsg('otpMsg', 'Please enter the full 6-digit code.'); return; }
+  document.getElementById('otpBtn').disabled = true;
+  document.getElementById('otpBtn').textContent = 'Verifying...';
+
+  var res = await sb.auth.verifyOtp({ email: OWNER_EMAIL, token: code, type: 'email' });
+  if(res.error){
+    showLMsg('otpMsg', 'Wrong code or expired. Please try again.');
+    document.getElementById('otpBtn').disabled = false;
+    document.getElementById('otpBtn').textContent = 'Verify & enter portal';
+    document.getElementById('otpInput').value = '';
+    return;
+  }
   enterApp();
 }
-$('logoutBtn').addEventListener('click', async ()=>{ await sb.auth.signOut(); location.reload(); });
 
-sb.auth.getSession().then(({data})=>{ if(data.session) enterApp(); });
+// Resend OTP
+document.getElementById('resendLink').addEventListener('click', async function(e){
+  e.preventDefault();
+  this.textContent = 'Sending...';
+  await sb.auth.signInWithOtp({ email: OWNER_EMAIL, options: { shouldCreateUser: false } });
+  this.textContent = 'Sent!';
+  setTimeout(function(){ document.getElementById('resendLink').textContent = 'Resend code'; }, 3000);
+});
+
+$('logoutBtn').addEventListener('click', async function(){ await sb.auth.signOut(); location.reload(); });
+
+sb.auth.getSession().then(function(res){ if(res.data.session) enterApp(); });
 
 function enterApp(){ $('login').classList.add('hide'); $('app').classList.remove('hide'); loadAll(); }
 
