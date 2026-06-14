@@ -534,7 +534,7 @@ async function bbFetchRate() {
       var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
       if (fxRes.ok) {
         var fxData = await fxRes.json();
-        var sgd = fxData.rates && fxData.rates.S$;
+        var sgd = fxData.rates && fxData.rates.SGD;
         if (sgd && sgd > 1.2 && sgd < 1.6) fxRate = sgd;
       }
     } catch(e2) { /* keep fallback FX */ }
