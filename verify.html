@@ -341,31 +341,44 @@ async function submitForm(){
 
   setBtn('submitBtn', true, '<span class="spin"></span>Submitting…');
   try{
+    // Upload photos first — required
     const folder = crypto.randomUUID();
-    const frontPath = `${folder}/front.jpg`;
+    const frontPath = folder + '/front.jpg';
     let backPath = null;
-    const up1 = await sb.storage.from('kyc-docs').upload(frontPath, files.front, {contentType:'image/jpeg'});
-    if(up1.error) throw up1.error;
-    if(!single){
-      backPath = `${folder}/back.jpg`;
-      const up2 = await sb.storage.from('kyc-docs').upload(backPath, files.back, {contentType:'image/jpeg'});
-      if(up2.error) throw up2.error;
+
+    const up1 = await sb.storage.from('kyc-docs').upload(frontPath, files.front, {contentType:'image/jpeg', upsert:false});
+    if(up1.error){
+      console.error('Front upload error:', JSON.stringify(up1.error));
+      throw new Error('Photo upload failed: ' + up1.error.message);
     }
+
+    if(!single){
+      backPath = folder + '/back.jpg';
+      const up2 = await sb.storage.from('kyc-docs').upload(backPath, files.back, {contentType:'image/jpeg', upsert:false});
+      if(up2.error){
+        console.error('Back upload error:', JSON.stringify(up2.error));
+        throw new Error('Photo upload failed: ' + up2.error.message);
+      }
+    }
+
     const { data, error } = await sb.rpc('submit_kyc', {
       p_code: validCode, p_full_name: name, p_id_type: idType, p_id_number: num,
       p_contact: tel, p_doc_front_path: frontPath, p_doc_back_path: backPath,
       p_declaration_ok: true, p_consent_ok: true
     });
-    if(error) throw error;
+    if(error){ console.error('RPC error:', JSON.stringify(error)); throw error; }
+
     $('refCode').textContent = 'REF · ' + String(data).slice(0,8).toUpperCase();
     $('form').classList.add('hide');
     $('done').classList.remove('hide');
     window.scrollTo({top:0,behavior:'smooth'});
   }catch(err){
     const m = (err && err.message)||'';
+    console.error('Submit failed:', m);
     if(m.includes('CODE_USED')) fail('This code has already been used. Please contact Assure Gold for a new one.');
     else if(m.includes('INVALID_CODE')) fail('This code is no longer valid. Please contact Assure Gold.');
-    else fail('Something went wrong submitting your details. Please try again.');
+    else if(m.includes('Photo upload failed')) fail(m + ' — Please try a smaller image or different format.');
+    else fail('Error: ' + (m || 'Unknown. Please try again.'));
     setBtn('submitBtn', false, 'Submit verification');
   }
 }
