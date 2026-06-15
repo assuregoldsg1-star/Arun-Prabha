@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "controlpanel.assuregold.sg" }],
+      "destination": "/hub.html"
+    }
+  ]
+}
