@@ -478,7 +478,7 @@ document.querySelectorAll('.fq-btn').forEach(function(btn){
 var BB_RATE_999 = 185.0;  /* S$/g fallback — shown immediately before API loads */
 var BB_DEDUCT   = 5;      /* $5/g deduction from spot */
 /* Per-purity margin (S$/g) deducted from spot. Controlled from the cloud editor. */
-var BB_MARGIN = { '999':7, '916':8.5, '850':15, '750':15, '585':15, '375':15 };
+var BB_MARGIN = { '999':5, '916':5, '850':6, '750':7, '585':9, '375':15 };
 function bbDeductFor(purity){
   var key = String(Math.round(purity*1000));
   return (BB_MARGIN[key] !== undefined) ? BB_MARGIN[key] : 15;

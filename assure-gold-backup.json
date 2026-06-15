@@ -374,7 +374,7 @@
   {
    "id": "reviews",
    "label": "Reviews Section",
-   "l1": "Real customers.",
+   "l1": "Real customers",
    "l2": "Real conversations.",
    "em": "ga",
    "pre": ""
@@ -395,5 +395,17 @@
    "em": "",
    "pre": ""
   }
- ]
+ ],
+ "buyback": {
+  "margins": {
+   "m999": 5,
+   "m916": 5,
+   "m850": 6,
+   "m750": 7,
+   "m585": 9
+  },
+  "retail": 6200,
+  "youpay": 5000,
+  "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
+ }
 }
