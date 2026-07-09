@@ -1,6 +1,6 @@
 {
  "business": {
-  "wa": "6596724975",
+  "wa": "6593430242",
   "addr": "119A Canberra Cres, Singapore",
   "hours": "Mon-Sat 10am-7pm SGT",
   "psm": "PS20260000962",
@@ -8,6 +8,7 @@
  },
  "products": [
   {
+   "id": 1,
    "name": "Rope Chain — Long 24\"",
    "spec": "24 inches · 22.3g · Excellent condition",
    "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.",
@@ -374,7 +375,7 @@
   {
    "id": "reviews",
    "label": "Reviews Section",
-   "l1": "Real customers",
+   "l1": "Real customers.",
    "l2": "Real conversations.",
    "em": "ga",
    "pre": ""
@@ -391,18 +392,18 @@
    "id": "cta",
    "label": "Contact Section",
    "l1": "Find your preloved piece.",
-   "l2": "Priced in pure gold !",
+   "l2": "Priced in pure gold.",
    "em": "",
    "pre": ""
   }
  ],
  "buyback": {
   "margins": {
-   "m999": 5,
-   "m916": 5,
-   "m850": 6,
-   "m750": 7,
-   "m585": 9
+   "m999": 7,
+   "m916": 8.5,
+   "m850": 15,
+   "m750": 15,
+   "m585": 15
   },
   "retail": 6200,
   "youpay": 5000,
