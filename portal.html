@@ -686,6 +686,15 @@ $('newCodeBtn').addEventListener('click', openCodeModal);
 /* ============ EXCEL REPORT ============ */
 $('pdfBtn').addEventListener('click', generateExcelReport);
 
+function fmtDateShort(s){
+  if(!s) return '';
+  const d = new Date(s);
+  const day = String(d.getDate()).padStart(2,'0');
+  const mon = d.toLocaleDateString('en-SG',{month:'short'});
+  const yr  = String(d.getFullYear()).slice(-2);
+  return day+'-'+mon+'-'+yr;
+}
+
 function generateExcelReport(){
   if(!window.XLSX){ alert('Excel library still loading, please try again in a moment.'); return; }
 
@@ -705,18 +714,18 @@ function generateExcelReport(){
   }));
 
   const txnRows = txns.map(t=>({
-    'Date': fmtDate(t.txn_date||t.created_at),
-    'Customer': nameFor(t.customer_id),
-    'Type': t.txn_type==='buy'?'Bought':'Sold',
+    'Date': fmtDateShort(t.txn_date||t.created_at),
+    'Transaction': t.txn_type==='buy' ? 'Buy Back' : 'Sale',
     'Item': t.item||'',
-    'Weight (g)': t.weight_g||'',
-    'Purity': t.purity||'',
-    'Amount (SGD)': Number(t.amount_sgd)||0
+    'Amount': Number(t.amount_sgd)||0,
+    'Buyers name': nameFor(t.customer_id),
+    'Country': '',
+    'Payment Method': ''
   }));
 
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(custRows), 'Customers');
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(txnRows), 'Transactions');
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(custRows), 'Customers');
 
   const stamp = new Date().toISOString().slice(0,10);
   XLSX.writeFile(wb, 'AssureGold-Report-'+periodTxt.replace(/\s+/g,'')+'-'+stamp+'.xlsx');
