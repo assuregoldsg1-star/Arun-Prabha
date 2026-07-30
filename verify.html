@@ -527,7 +527,7 @@ function submitForm(){
     var frontB64 = results[0];
     var backB64  = results[1];
 
-    return sb.rpc('submit_kyc', {
+    return sb.rpc('submit_kyc_v2', {
       p_code: validCode,
       p_full_name: name,
       p_id_type: idType,
@@ -538,11 +538,15 @@ function submitForm(){
       p_declaration_ok: true,
       p_consent_ok: true,
       p_doc_front_b64: frontB64,
-      p_doc_back_b64: backB64
+      p_doc_back_b64: backB64,
+      p_transaction_type: txnType,
+      p_acting_for_self: actingForSelf,
+      p_third_party_name: actingForSelf ? null : tpName,
+      p_third_party_details: actingForSelf ? null : tpDetail
     });
   }).then(function(res){
     if(res.error){
-      console.error('submit_kyc error:', res.error);
+      console.error('submit_kyc_v2 error:', res.error);
       var m = res.error.message || '';
       if(m.indexOf('CODE_USED') >= 0) fail('This code has already been used. Please contact Assure Gold for a new one.');
       else if(m.indexOf('INVALID_CODE') >= 0) fail('This code is no longer valid. Please contact Assure Gold.');
