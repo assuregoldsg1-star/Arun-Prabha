@@ -645,6 +645,10 @@ function openTxModal(c, tx){
       <div class="field"><label>Amount (S$)</label><input id="txAmount" type="number" step="0.01" inputmode="decimal" placeholder="0.00" value="${editing&&tx.amount_sgd!=null?tx.amount_sgd:''}"/></div>
       <div class="field"><label>Date</label><input id="txDate" type="date" value="${editing?(tx.txn_date||today):today}"/></div>
     </div>
+    <div class="grid2">
+      <div class="field"><label>Country</label><input id="txCountry" placeholder="e.g. Singapore" value="${editing?esc(tx.country||''):'Singapore'}"/></div>
+      <div class="field"><label>Payment Method</label><select id="txPayment"><option value="">—</option><option>Cash</option><option>Paynow</option><option>Bank Transfer</option><option>Cheque</option><option>Other</option></select></div>
+    </div>
     <div class="field"><label>Notes (optional)</label><textarea id="txNotes" rows="2" placeholder="Any reference or remark">${editing?esc(tx.notes||''):''}</textarea></div>
     <button class="btn" id="txSave">${editing?'Update transaction':'Save transaction'}</button>
     ${editing?'<button class="btn" id="txDelete" style="background:#fff;color:#dc2626;border:1px solid #f0c0c0;margin-top:8px">Delete this transaction</button>':''}
@@ -653,6 +657,7 @@ function openTxModal(c, tx){
   document.body.appendChild(m);
   let txType = editing ? tx.txn_type : 'buy';
   if(editing && tx.purity){ $('txPurity').value = tx.purity; }
+  if(editing && tx.payment_method){ $('txPayment').value = tx.payment_method; }
   m.addEventListener('click',e=>{ if(e.target===m) m.remove(); });
   $('mClose').addEventListener('click',()=>m.remove());
   $('txSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; txType=b.dataset.t; [...$('txSeg').children].forEach(x=>x.classList.toggle('on',x===b)); });
@@ -661,7 +666,8 @@ function openTxModal(c, tx){
       item:$('txItem').value.trim()||null, purity:$('txPurity').value||null,
       weight_g:$('txWeight').value?Number($('txWeight').value):null,
       amount_sgd:$('txAmount').value?Number($('txAmount').value):null,
-      txn_date:$('txDate').value||today, notes:$('txNotes').value.trim()||null };
+      txn_date:$('txDate').value||today, notes:$('txNotes').value.trim()||null,
+      country:$('txCountry').value.trim()||null, payment_method:$('txPayment').value||null };
     $('txSave').disabled=true; $('txSave').textContent=editing?'Updating…':'Saving…'; $('txMsg').classList.remove('show');
     let error;
     if(editing){ ({ error } = await sb.from('transactions').update(payload).eq('id', tx.id)); }
@@ -719,8 +725,8 @@ function generateExcelReport(){
     'Item': t.item||'',
     'Amount': Number(t.amount_sgd)||0,
     'Buyers name': nameFor(t.customer_id),
-    'Country': '',
-    'Payment Method': ''
+    'Country': t.country||'',
+    'Payment Method': t.payment_method||''
   }));
 
   const wb = XLSX.utils.book_new();
