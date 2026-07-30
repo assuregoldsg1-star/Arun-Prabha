@@ -570,6 +570,8 @@ async function openCustomer(id){
     <div class="docs" id="docs"><div class="doc ph">Loading…</div></div>
     <div class="sechead"><h4>Transactions</h4><button class="miniadd" id="addTx"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add</button></div>
     <div id="txList"></div>
+    <button class="btn" id="delCust" style="background:#fff;color:#dc2626;border:1px solid #f0c0c0;margin-top:22px">Delete this customer</button>
+    <div class="lmsg" id="delMsg" style="text-align:center">Could not delete. Please try again.</div>
   </div>`;
   document.body.appendChild(scrim);
   scrim.addEventListener('click',e=>{ if(e.target===scrim) scrim.remove(); });
@@ -606,6 +608,21 @@ async function openCustomer(id){
         : `<div class="doc ph">${lbl}<br>unavailable</div>`;
     }).join('');
   }
+
+  $('delCust').addEventListener('click', async ()=>{
+    const warn = txns.length
+      ? `Delete ${c.full_name} permanently? This also deletes all ${txns.length} transaction${txns.length>1?'s':''} logged for them. This cannot be undone.`
+      : `Delete ${c.full_name} permanently? This cannot be undone.`;
+    if(!confirm(warn)) return;
+    $('delCust').disabled=true; $('delCust').textContent='Deleting…';
+    let error;
+    ({ error } = await sb.from('transactions').delete().eq('customer_id', c.id));
+    if(!error) ({ error } = await sb.from('access_codes').update({ customer_id: null }).eq('customer_id', c.id));
+    if(!error) ({ error } = await sb.from('customers').delete().eq('id', c.id));
+    if(error){ $('delMsg').classList.add('show'); $('delCust').disabled=false; $('delCust').textContent='Delete this customer'; return; }
+    scrim.remove();
+    await loadAll();
+  });
 }
 
 /* ---------- ADD TRANSACTION ---------- */
