@@ -401,6 +401,17 @@ img{display:block;max-width:100%}
       <!-- CAROUSEL -->
       <div class="view" id="view-carousel">
         <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the 5 rotating slides at the top of the homepage</strong><p>Change the small label, the big headline (up to 3 lines), the description, and the button. Layout stays perfect automatically.</p></div></div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-h"><div><h3>&#127916; Slide 1 Video (optional)</h3><p>Slide 1 can play a video instead of a photo. It shows for 10 seconds; slides 2-5 still show for 4 seconds each.</p></div></div>
+          <div class="card-b">
+            <div class="notice blue" style="margin-bottom:14px"><span class="ni">&#9888;&#65039;</span><div><strong>Keep the file small</strong><p>Max 3MB, MP4 format. A short (3-8 second) looping clip works best &mdash; large videos can fail to publish.</p></div></div>
+            <video id="hvid-prev" muted loop playsinline controls style="width:100%;max-width:360px;border-radius:10px;background:#111;display:none;margin-bottom:12px"></video>
+            <div id="hvid-empty" style="color:var(--muted);font-size:13px;margin-bottom:12px">No video uploaded yet &mdash; slide 1 currently shows the photo.</div>
+            <button class="btn btn-g btn-sm" onclick="document.getElementById('hvid-file').click()">&#127909; Upload Video</button>
+            <button class="btn btn-d btn-sm" id="hvid-remove" onclick="removeHeroVideo()" style="display:none">&#128465; Remove Video</button>
+            <input type="file" id="hvid-file" accept="video/mp4,video/*" style="display:none" onchange="heroVidPick(this)"/>
+          </div>
+        </div>
         <div id="sllist"></div>
       </div>
 
@@ -782,7 +793,7 @@ function showView(v){
   if(v==='products'){renderProducts();renderSellMarkupPreview();}
   if(v==='featured')renderFeatured();
   if(v==='images')renderImages();
-  if(v==='carousel')renderSlides();
+  if(v==='carousel'){renderSlides();renderHeroVideo();}
   if(v==='text')renderText();
   if(v==='business')loadBiz();
   if(v==='buyback')renderBuyback();
@@ -1023,6 +1034,35 @@ function imgReplace(inp,path){
 
 /* ============ CAROUSEL ============ */
 var SLIDE_I=-1;
+var HERO_VIDEO_PATH='assets/videos/hero-slide1.mp4';
+function heroVidPick(inp){
+  var f=inp.files[0]; if(!f)return;
+  if(!/^video\//.test(f.type)){ toast('Please choose a video file','error'); return; }
+  if(f.size>3*1024*1024){ toast('Video too large (max 3MB). Please compress it first.','error'); return; }
+  var r=new FileReader();
+  r.onload=function(e){
+    DATA.images[HERO_VIDEO_PATH]=e.target.result;
+    persist(); markEdit(); renderHeroVideo();
+    toast('Video ready - publish to make it live','success');
+  };
+  r.readAsDataURL(f);
+}
+function removeHeroVideo(){
+  if(!DATA.images[HERO_VIDEO_PATH])return;
+  if(!confirm('Remove the uploaded video? Slide 1 will go back to showing the photo.'))return;
+  delete DATA.images[HERO_VIDEO_PATH];
+  persist(); markEdit(); renderHeroVideo();
+  toast('Video removed','info');
+}
+function renderHeroVideo(){
+  var v=document.getElementById('hvid-prev'), empty=document.getElementById('hvid-empty'), rm=document.getElementById('hvid-remove');
+  if(!v)return;
+  rm.style.display = DATA.images[HERO_VIDEO_PATH] ? '' : 'none';
+  v.onerror=function(){ v.style.display='none'; empty.style.display='block'; };
+  v.onloadeddata=function(){ v.style.display='block'; empty.style.display='none'; };
+  v.style.display='none'; empty.style.display='none';
+  v.src=imgSrc(HERO_VIDEO_PATH);
+}
 function renderSlides(){
   document.getElementById('sllist').innerHTML=DATA.slides.map(function(s,i){
     var h=[s.line1,s.line2,s.line3].filter(Boolean).map(esc).join(' / ');

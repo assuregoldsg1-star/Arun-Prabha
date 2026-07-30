@@ -125,6 +125,7 @@ a{text-decoration:none;color:inherit}
 .hero-slide.active{opacity:1;visibility:visible}
 .hero-slide::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(20,23,27,.80) 0%,rgba(20,23,27,.48) 46%,rgba(20,23,27,.14) 75%,transparent 100%)}
 .hs1{background-image:url('assets/images/rope-chain-red.jpg')}
+.sld-video{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover}
 .hs2{background-image:url('assets/images/new-arrivals.jpg')}
 .hs3{background-image:url('assets/images/products/chain-14.jpeg')}
 .hs4{background-image:url('assets/images/products/chain-09.jpeg')}
@@ -782,10 +783,12 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 <!-- HERO CAROUSEL -->
 <section id="hero">
 <div class="hero-carousel" id="heroCarousel">
-<div class="hero-carousel" id="heroCarousel">
 
-  <!-- Slide 1: Rope Chain Collection -->
+  <!-- Slide 1: Rope Chain Collection (video background, 10s) -->
   <div class="hero-slide hs1 active" data-slide="0">
+    <video class="sld-video" autoplay muted loop playsinline poster="assets/images/rope-chain-red.jpg">
+      <source src="assets/videos/hero-slide1.mp4" type="video/mp4">
+    </video>
     <div class="sld-text">
       <span class="sld-badge">916 &#183; 22K GOLD</span>
       <span class="sld-ey">The Signature Collection</span>
@@ -1231,20 +1234,23 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 })();
 
 // =====================================================
-// CAROUSEL — 4 seconds, NO pause on hover, instant swap (no entrance animation)
+// CAROUSEL — slide 1 (video) 10s, others 4s, NO pause on hover, instant swap (no entrance animation)
 // =====================================================
 (function(){
   var slides=document.querySelectorAll('.hero-slide');
   var dots=document.querySelectorAll('.carousel-dot');
   var prog=document.getElementById('carouselProgress');
-  var INTERVAL=4000; // 4 seconds — never pauses
+  var DURATIONS=[10000,4000,4000,4000,4000]; // slide 1 = 10s (video), rest = 4s
   var cur=0,tot=slides.length,timer=null;
+
+  function durFor(i){return DURATIONS[i]!==undefined?DURATIONS[i]:4000;}
 
   function startProg(){
     if(!prog)return;
+    var d=durFor(cur);
     prog.style.transition='none';prog.style.width='0%';
     void prog.offsetWidth;
-    prog.style.transition='width '+INTERVAL+'ms linear';prog.style.width='100%';
+    prog.style.transition='width '+d+'ms linear';prog.style.width='100%';
   }
 
   function goTo(idx){
@@ -1259,7 +1265,10 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
   function next(){goTo(cur+1);}
   function prev(){goTo(cur-1);}
 
-  function startTimer(){clearInterval(timer);timer=setInterval(next,INTERVAL);}
+  function startTimer(){
+    clearTimeout(timer);
+    timer=setTimeout(function(){next();startTimer();},durFor(cur));
+  }
 
   // Init
   startProg();
