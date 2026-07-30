@@ -400,7 +400,7 @@ img{display:block;max-width:100%}
 
       <!-- CAROUSEL -->
       <div class="view" id="view-carousel">
-        <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the 5 rotating slides at the top of the homepage</strong><p>Change the small label, the big headline (up to 3 lines), the description, and the button. Layout stays perfect automatically.</p></div></div>
+        <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the rotating slides at the top of the homepage</strong><p>Change the small label, the big headline (up to 3 lines), the description, and the button. Add or remove slides &mdash; up to 5. Layout stays perfect automatically.</p></div></div>
         <div class="card" style="margin-bottom:16px">
           <div class="card-h"><div><h3>&#127916; Slide 1 Video (optional)</h3><p>Slide 1 can play a video instead of a photo. It shows for 10 seconds; slides 2-5 still show for 4 seconds each.</p></div></div>
           <div class="card-b">
@@ -411,6 +411,10 @@ img{display:block;max-width:100%}
             <button class="btn btn-d btn-sm" id="hvid-remove" onclick="removeHeroVideo()" style="display:none">&#128465; Remove Video</button>
             <input type="file" id="hvid-file" accept="video/mp4,video/*" style="display:none" onchange="heroVidPick(this)"/>
           </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:12px">
+          <span id="addSlideHint" style="font-size:12px;color:var(--muted);display:none">Maximum of 5 slides reached</span>
+          <button class="btn btn-p btn-sm" id="addSlideBtn" onclick="addSlide()">&#10011; Add Slide</button>
         </div>
         <div id="sllist"></div>
       </div>
@@ -670,6 +674,15 @@ img{display:block;max-width:100%}
 /* ============ DATA ============ */
 var DEFAULT_PRODUCTS = [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.", "retail": 5200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.", "featured": true, "weight_g": 22.3}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.", "retail": 4200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.", "featured": false, "weight_g": 17.6}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.", "retail": 4700, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.", "featured": false, "weight_g": 20.1}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.", "retail": 5600, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.", "featured": false, "weight_g": 23.7}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.", "retail": 2500, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.", "featured": false, "weight_g": 10.2}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.", "retail": 3550, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.", "featured": false, "weight_g": 14.8}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.", "retail": 4650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.", "featured": false, "weight_g": 19.6}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.", "retail": 3950, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.", "featured": false, "weight_g": 16.4}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.", "retail": 4100, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.", "featured": false, "weight_g": 17.1}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.", "retail": 2400, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.", "featured": false, "weight_g": 9.8}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.", "retail": 3650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.", "featured": false, "weight_g": 15.2}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.", "retail": 4050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.", "featured": false, "weight_g": 16.8}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.", "retail": 4980, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.", "featured": true, "weight_g": 20.8}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.", "retail": 3100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.", "featured": false, "weight_g": 12.8}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.", "retail": 4500, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.", "featured": true, "weight_g": 18.4}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.", "retail": 4100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.", "featured": false, "weight_g": 16.9}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.", "retail": 5350, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.", "featured": false, "weight_g": 22.1}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.", "retail": 4200, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.", "featured": false, "weight_g": 17.4}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.", "retail": 4900, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.", "featured": false, "weight_g": 20.3}];
 var DEFAULT_SLIDES = [{"eyebrow": "The Signature Collection", "line1": "Browse our", "line2": "Rope Chain", "line3": "Collection", "sub": "Handpicked 916 gold rope chains, 16–24 inches. Every link XRF-tested. 0% GST.", "btn": "Explore Chains →", "href": "collection.html"}, {"eyebrow": "Just Arrived", "line1": "New Arrivals", "line2": "Collection", "line3": "", "sub": "Fresh pieces added weekly — chains, pendants, sets. Get your quote in 2 minutes on WhatsApp.", "btn": "View New Pieces →", "href": "collection.html"}, {"eyebrow": "Buyback Campaign", "line1": "Buyback is", "line2": "Now Live", "line3": "", "sub": "Sell your preloved gold the easy way. XRF tested. Get your quote in 2 minutes. Same-day payment.", "btn": "Learn About Buyback →", "href": "buyback.html"}, {"eyebrow": "Assay-Grade Technology", "line1": "XRF Verified", "line2": "Collection", "line3": "", "sub": "Every piece tested to 4 decimal places. You watch the screen live. No hidden steps.", "btn": "Shop Verified Gold →", "href": "collection.html"}, {"eyebrow": "PSM Licensed · Ministry of Law", "line1": "Certified", "line2": "Preloved Luxury", "line3": "Gold", "sub": "Same purity. Smarter price. 0% GST. 0% making charge. Government-licensed.", "btn": "Browse Collection →", "href": "collection.html"}];
+/* Fixed per-position chrome (background class, badge, secondary CTA) for the 5 carousel slots.
+   Slide text content (DATA.slides) is user-editable; this visual "shell" stays tied to position. */
+var SLOT_CHROME = [
+  {cls:'hs1', badge:'916 &#183; 22K GOLD', ghostText:'&#128172; WhatsApp Us', ghostWa:'Hello Assure Gold, I would like to see your rope chains.'},
+  {cls:'hs2', badge:'NEW IN', ghostText:'&#128172; Get First Access', ghostWa:'Hello Assure Gold, show me new arrivals.'},
+  {cls:'hs3', badge:'LIVE RATE', ghostText:'&#128172; Sell Your Gold', ghostWa:'Hello Assure Gold, I want to sell my gold.'},
+  {cls:'hs4', badge:'XRF CERT', ghostText:'&#128172; Ask About XRF', ghostWa:'Hello Assure Gold, tell me about XRF testing.'},
+  {cls:'hs5', badge:'PSM REG.', ghostText:'View Our Licence', ghostHref:'#trust'}
+];
 var DEFAULT_STATS = [{"num": "0%", "label": "GST & Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "30m", "label": "WhatsApp Reply"}];
 var DEFAULT_HEADINGS = [
   {"id":"why","label":"Why Preloved Gold","l1":"Why preloved gold","l2":"the wiser buy","em":"ga","pre":"is "},
@@ -1064,8 +1077,16 @@ function renderHeroVideo(){
   v.src=imgSrc(HERO_VIDEO_PATH);
 }
 function renderSlides(){
+  var addBtn=document.getElementById('addSlideBtn'), addHint=document.getElementById('addSlideHint');
+  var atMax=DATA.slides.length>=5;
+  if(addBtn) addBtn.style.display=atMax?'none':'';
+  if(addHint) addHint.style.display=atMax?'':'none';
+
   document.getElementById('sllist').innerHTML=DATA.slides.map(function(s,i){
     var h=[s.line1,s.line2,s.line3].filter(Boolean).map(esc).join(' / ');
+    var delBtn=DATA.slides.length>1
+      ? '<button class="btn btn-d btn-sm" onclick="delSlide('+i+')">&#128465;</button>'
+      : '';
     return [
       '<div class="slrow">',
         '<div class="sln">'+(i+1)+'</div>',
@@ -1074,10 +1095,27 @@ function renderSlides(){
           '<div class="slh">'+h+'</div>',
           '<div class="sls">'+esc(s.sub)+'</div>',
         '</div>',
-        '<button class="btn btn-g btn-sm" onclick="openSlide('+i+')">&#9998; Edit</button>',
+        '<div style="display:flex;gap:8px;flex-shrink:0">',
+          '<button class="btn btn-g btn-sm" onclick="openSlide('+i+')">&#9998; Edit</button>',
+          delBtn,
+        '</div>',
       '</div>'
     ].join('');
   }).join('');
+}
+function addSlide(){
+  if(DATA.slides.length>=5){ toast('Maximum 5 slides allowed','error'); return; }
+  DATA.slides.push({eyebrow:'New Slide',line1:'Your headline here',line2:'',line3:'',sub:'Add a short description for this slide.',btn:'Learn More →',href:'collection.html'});
+  persist(); markEdit(); renderSlides();
+  openSlide(DATA.slides.length-1);
+  toast('Slide added - edit the details, then Save','success');
+}
+function delSlide(i){
+  if(DATA.slides.length<=1){ toast('At least 1 slide is required','error'); return; }
+  if(!confirm('Delete slide '+(i+1)+'? This cannot be undone.'))return;
+  DATA.slides.splice(i,1);
+  persist(); markEdit(); renderSlides();
+  toast('Slide deleted','info');
 }
 function openSlide(i){
   SLIDE_I=i; var s=DATA.slides[i];
@@ -1308,22 +1346,8 @@ function patchIndex(html){
     }
   }
 
-  /* ---- carousel slides ---- */
-  for(var si=0;si<DATA.slides.length;si++){
-    var s=DATA.slides[si];
-    var mark='data-slide="'+si+'"';
-    var sidx=html.indexOf(mark);
-    if(sidx<0)continue;
-    /* eyebrow */
-    html=patchTagAfter(html,sidx,'<span class="sld-ey">','</span>',escHtml(s.eyebrow));
-    /* headline */
-    var h1=escHtml(s.line1);
-    if(s.line2)h1+='<br/><em>'+escHtml(s.line2)+'</em>';
-    if(s.line3)h1+='<br/>'+escHtml(s.line3);
-    html=patchTagAfter(html,sidx,'<h1 class="sld-h1">','</h1>',h1);
-    /* sub */
-    html=patchTagAfter(html,sidx,'<p class="sld-sub">','</p>',escHtml(s.sub));
-  }
+  /* ---- carousel slides (full rebuild: supports 1-5 slides) ---- */
+  html=patchCarousel(html);
 
   /* ---- hero stats ---- */
   html=patchStats(html);
@@ -1337,6 +1361,55 @@ function patchIndex(html){
   html=injectPriceEngine(html);
 
   return html;
+}
+
+/* rebuild the whole hero carousel block from DATA.slides (1-5 slides supported) */
+function patchCarousel(html){
+  var b=DATA.business;
+  var r=blockRange(html,'<div class="hero-carousel" id="heroCarousel">');
+  if(!r)return html;
+  var n=Math.min(DATA.slides.length,5);
+  var slidesHtml=[], dotsHtml=[];
+  for(var i=0;i<n;i++){
+    var s=DATA.slides[i], chrome=SLOT_CHROME[i];
+    var h1=escHtml(s.line1);
+    if(s.line2)h1+='<br/><em>'+escHtml(s.line2)+'</em>';
+    if(s.line3)h1+='<br/>'+escHtml(s.line3);
+    var videoHtml = i===0
+      ? '    <video class="sld-video" autoplay muted loop playsinline poster="assets/images/rope-chain-red.jpg">'+NL
+        +'      <source src="assets/videos/hero-slide1.mp4" type="video/mp4">'+NL
+        +'    </video>'+NL
+      : '';
+    var ghost = chrome.ghostHref
+      ? '<a href="'+chrome.ghostHref+'" class="btn-ghost-light">'+chrome.ghostText+'</a>'
+      : '<a href="https://wa.me/'+b.wa+'?text='+encodeURIComponent(chrome.ghostWa)+'" target="_blank" class="btn-ghost-light">'+chrome.ghostText+'</a>';
+    slidesHtml.push(
+      '  <div class="hero-slide '+chrome.cls+(i===0?' active':'')+'" data-slide="'+i+'">'+NL
+      +videoHtml
+      +'    <div class="sld-text">'+NL
+      +'      <span class="sld-badge">'+chrome.badge+'</span>'+NL
+      +'      <span class="sld-ey">'+escHtml(s.eyebrow)+'</span>'+NL
+      +'      <div class="sld-h1" role="heading" aria-level="1">'+h1+'</div>'+NL
+      +'      <p class="sld-sub">'+escHtml(s.sub)+'</p>'+NL
+      +'      <div class="sld-ctas">'+NL
+      +'        <a href="'+escHtml(s.href||'collection.html')+'" class="btn-gold">'+escHtml(s.btn||'Learn More →')+'</a>'+NL
+      +'        '+ghost+NL
+      +'      </div>'+NL
+      +'    </div>'+NL
+      +'  </div>'
+    );
+    dotsHtml.push('<button class="carousel-dot'+(i===0?' active':'')+'" data-slide="'+i+'"></button>');
+  }
+  var body = NL+NL+slidesHtml.join(NL+NL)+NL+NL
+    +'  <div class="carousel-arrows">'+NL
+    +'    <button class="carousel-arrow" id="carouselPrev">&#10094;</button>'+NL
+    +'    <button class="carousel-arrow" id="carouselNext">&#10095;</button>'+NL
+    +'  </div>'+NL
+    +'  <div class="carousel-dots" id="carouselDots">'+NL
+    +'    '+dotsHtml.join(NL+'    ')+NL
+    +'  </div>'+NL
+    +'  <div class="carousel-progress" id="carouselProgress"></div>'+NL;
+  return html.slice(0,r.bodyStart)+body+html.slice(r.bodyEnd);
 }
 
 /* replace text between openTag..closeTag at first occurrence after fromIdx */
