@@ -372,5 +372,6 @@
   "youpay": 5000,
   "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price",
   "sellMarkup": 28
- }
+ },
+ "heroVideoActive": true
 }
