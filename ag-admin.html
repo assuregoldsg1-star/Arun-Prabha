@@ -400,18 +400,7 @@ img{display:block;max-width:100%}
 
       <!-- CAROUSEL -->
       <div class="view" id="view-carousel">
-        <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the rotating slides at the top of the homepage</strong><p>Change the small label, the big headline (up to 3 lines), the description, and the button. Add or remove slides &mdash; up to 5. Layout stays perfect automatically.</p></div></div>
-        <div class="card" style="margin-bottom:16px">
-          <div class="card-h"><div><h3>&#127916; Slide 1 Video (optional)</h3><p>Slide 1 can play a video instead of a photo. It shows for 10 seconds; slides 2-5 still show for 4 seconds each.</p></div></div>
-          <div class="card-b">
-            <div class="notice blue" style="margin-bottom:14px"><span class="ni">&#9888;&#65039;</span><div><strong>Keep the file small</strong><p>Max 3MB, MP4 format. A short (3-8 second) looping clip works best &mdash; large videos can fail to publish.</p></div></div>
-            <video id="hvid-prev" muted loop playsinline controls style="width:100%;max-width:360px;border-radius:10px;background:#111;display:none;margin-bottom:12px"></video>
-            <div id="hvid-empty" style="color:var(--muted);font-size:13px;margin-bottom:12px">No video uploaded yet &mdash; slide 1 currently shows the photo.</div>
-            <button class="btn btn-g btn-sm" onclick="document.getElementById('hvid-file').click()">&#127909; Upload Video</button>
-            <button class="btn btn-d btn-sm" id="hvid-remove" onclick="removeHeroVideo()" style="display:none">&#128465; Remove Video</button>
-            <input type="file" id="hvid-file" accept="video/mp4,video/*" style="display:none" onchange="heroVidPick(this)"/>
-          </div>
-        </div>
+        <div class="notice"><span class="ni">&#127909;</span><div><strong>Edit the rotating slides at the top of the homepage</strong><p>Change the small label, headline, description, button, and background photo/video &mdash; all from one place. Add or remove slides, up to 5.</p></div></div>
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:12px">
           <span id="addSlideHint" style="font-size:12px;color:var(--muted);display:none">Maximum of 5 slides reached</span>
           <button class="btn btn-p btn-sm" id="addSlideBtn" onclick="addSlide()">&#10011; Add Slide</button>
@@ -663,6 +652,27 @@ img{display:block;max-width:100%}
         <div class="field"><label>Button Text</label><input type="text" id="ms-btn"/></div>
         <div class="field"><label>Button Links To</label><select id="ms-href"><option value="collection.html">Collection Page</option><option value="buyback.html">Buyback Page</option><option value="index.html#products">Products Section</option></select></div>
       </div>
+      <div class="field" id="ms-bg-wrap">
+        <label>Background Photo</label>
+        <div style="display:flex;gap:11px;align-items:center">
+          <img id="ms-bg-prev" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--paper)"/>
+          <button class="btn btn-g btn-sm" onclick="document.getElementById('ms-bg-file').click()">&#128247; Replace Photo</button>
+          <input type="file" id="ms-bg-file" accept="image/*" style="display:none" onchange="slideBgPick(this)"/>
+        </div>
+      </div>
+      <div class="field" id="ms-bg-note-wrap" style="background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub)">
+        <span id="ms-bg-note"></span>
+      </div>
+      <div class="field" id="ms-video-wrap">
+        <label>Background Video (optional)</label>
+        <div class="hint">Plays instead of the photo above. This slide shows for 10 seconds while it has a video; other slides show for 4.</div>
+        <div class="notice blue" style="margin:8px 0"><span class="ni">&#9888;&#65039;</span><div><strong>Keep the file small</strong><p>Max 3MB, MP4 format. A short (3-8 second) looping clip works best &mdash; large videos can fail to publish.</p></div></div>
+        <video id="hvid-prev" muted loop playsinline controls style="width:100%;max-width:320px;border-radius:10px;background:#111;display:none;margin-bottom:10px"></video>
+        <div id="hvid-empty" style="color:var(--muted);font-size:13px;margin-bottom:10px">No video uploaded yet &mdash; this slide shows the photo above.</div>
+        <button class="btn btn-g btn-sm" onclick="document.getElementById('hvid-file').click()">&#127909; Upload Video</button>
+        <button class="btn btn-d btn-sm" id="hvid-remove" onclick="removeHeroVideo()" style="display:none">&#128465; Remove Video</button>
+        <input type="file" id="hvid-file" accept="video/mp4,video/*" style="display:none" onchange="heroVidPick(this)"/>
+      </div>
     </div>
     <div class="modal-f"><div></div><div class="r"><button class="btn btn-g" onclick="closeM('m-slide')">Cancel</button><button class="btn btn-p" onclick="saveSlide()">&#10003; Save Slide</button></div></div>
   </div>
@@ -677,11 +687,16 @@ var DEFAULT_SLIDES = [{"eyebrow": "The Signature Collection", "line1": "Browse o
 /* Fixed per-position chrome (background class, badge, secondary CTA) for the 5 carousel slots.
    Slide text content (DATA.slides) is user-editable; this visual "shell" stays tied to position. */
 var SLOT_CHROME = [
-  {cls:'hs1', badge:'916 &#183; 22K GOLD', ghostText:'&#128172; WhatsApp Us', ghostWa:'Hello Assure Gold, I would like to see your rope chains.'},
-  {cls:'hs2', badge:'NEW IN', ghostText:'&#128172; Get First Access', ghostWa:'Hello Assure Gold, show me new arrivals.'},
-  {cls:'hs3', badge:'LIVE RATE', ghostText:'&#128172; Sell Your Gold', ghostWa:'Hello Assure Gold, I want to sell my gold.'},
-  {cls:'hs4', badge:'XRF CERT', ghostText:'&#128172; Ask About XRF', ghostWa:'Hello Assure Gold, tell me about XRF testing.'},
-  {cls:'hs5', badge:'PSM REG.', ghostText:'View Our Licence', ghostHref:'#trust'}
+  {cls:'hs1', badge:'916 &#183; 22K GOLD', ghostText:'&#128172; WhatsApp Us', ghostWa:'Hello Assure Gold, I would like to see your rope chains.',
+    imgPath:'assets/images/rope-chain-red.jpg', imgEditable:true, hasVideo:true},
+  {cls:'hs2', badge:'NEW IN', ghostText:'&#128172; Get First Access', ghostWa:'Hello Assure Gold, show me new arrivals.',
+    imgPath:'assets/images/new-arrivals.jpg', imgEditable:true},
+  {cls:'hs3', badge:'LIVE RATE', ghostText:'&#128172; Sell Your Gold', ghostWa:'Hello Assure Gold, I want to sell my gold.',
+    imgPath:'assets/images/products/chain-14.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit that product\'s photo under Photos & Images - Product Photos.'},
+  {cls:'hs4', badge:'XRF CERT', ghostText:'&#128172; Ask About XRF', ghostWa:'Hello Assure Gold, tell me about XRF testing.',
+    imgPath:'assets/images/products/chain-09.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit that product\'s photo under Photos & Images - Product Photos.'},
+  {cls:'hs5', badge:'PSM REG.', ghostText:'View Our Licence', ghostHref:'#trust',
+    imgPath:'assets/images/license.jpeg', imgEditable:false, imgNote:'This slide uses the licence certificate photo. To change it, edit it under Photos & Images.'}
 ];
 var DEFAULT_STATS = [{"num": "0%", "label": "GST & Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "30m", "label": "WhatsApp Reply"}];
 var DEFAULT_HEADINGS = [
@@ -806,7 +821,7 @@ function showView(v){
   if(v==='products'){renderProducts();renderSellMarkupPreview();}
   if(v==='featured')renderFeatured();
   if(v==='images')renderImages();
-  if(v==='carousel'){renderSlides();renderHeroVideo();}
+  if(v==='carousel')renderSlides();
   if(v==='text')renderText();
   if(v==='business')loadBiz();
   if(v==='buyback')renderBuyback();
@@ -1002,8 +1017,6 @@ function allImages(){
   /* brand images + product images */
   var brand=[
     {path:'assets/images/logo.png',role:'Logo (header)'},
-    {path:'assets/images/rope-chain-red.jpg',role:'Carousel Slide 1'},
-    {path:'assets/images/new-arrivals.jpg',role:'Carousel - New Arrivals'},
     {path:'assets/images/license.jpeg',role:'Licence certificate'}
   ];
   return brand;
@@ -1087,9 +1100,12 @@ function renderSlides(){
     var delBtn=DATA.slides.length>1
       ? '<button class="btn btn-d btn-sm" onclick="delSlide('+i+')">&#128465;</button>'
       : '';
+    var chrome=SLOT_CHROME[i];
+    var thumb=chrome?'<img src="'+esc(imgSrc(chrome.imgPath))+'" style="width:52px;height:52px;border-radius:8px;object-fit:cover;border:1px solid var(--line);flex-shrink:0"/>':'';
     return [
       '<div class="slrow">',
         '<div class="sln">'+(i+1)+'</div>',
+        thumb,
         '<div class="slc">',
           '<div class="sle">'+esc(s.eyebrow)+'</div>',
           '<div class="slh">'+h+'</div>',
@@ -1118,7 +1134,7 @@ function delSlide(i){
   toast('Slide deleted','info');
 }
 function openSlide(i){
-  SLIDE_I=i; var s=DATA.slides[i];
+  SLIDE_I=i; var s=DATA.slides[i]; var chrome=SLOT_CHROME[i]||{};
   document.getElementById('ms-title').textContent='Slide '+(i+1);
   document.getElementById('ms-ey').value=s.eyebrow||'';
   document.getElementById('ms-l1').value=s.line1||'';
@@ -1127,7 +1143,36 @@ function openSlide(i){
   document.getElementById('ms-sub').value=s.sub||'';
   document.getElementById('ms-btn').value=s.btn||'';
   document.getElementById('ms-href').value=s.href||'collection.html';
+
+  var bgWrap=document.getElementById('ms-bg-wrap'), noteWrap=document.getElementById('ms-bg-note-wrap'), vidWrap=document.getElementById('ms-video-wrap');
+  if(chrome.imgEditable){
+    bgWrap.style.display=''; noteWrap.style.display='none';
+    document.getElementById('ms-bg-prev').src=imgSrc(chrome.imgPath);
+  } else if(chrome.imgPath){
+    bgWrap.style.display='none'; noteWrap.style.display='';
+    document.getElementById('ms-bg-note').textContent=chrome.imgNote||'';
+  } else {
+    bgWrap.style.display='none'; noteWrap.style.display='none';
+  }
+  vidWrap.style.display = chrome.hasVideo ? '' : 'none';
+  if(chrome.hasVideo) renderHeroVideo();
+
   openM('m-slide');
+}
+function slideBgPick(inp){
+  var chrome=SLOT_CHROME[SLIDE_I];
+  if(!chrome||!chrome.imgEditable)return;
+  var f=inp.files[0]; if(!f)return;
+  if(f.size>4*1024*1024){ toast('Image too large (max 4MB). Please resize it.','error'); return; }
+  var r=new FileReader();
+  r.onload=function(e){
+    DATA.images[chrome.imgPath]=e.target.result;
+    persist(); markEdit();
+    document.getElementById('ms-bg-prev').src=e.target.result;
+    renderSlides();
+    toast('Photo updated - publish to make it live','success');
+  };
+  r.readAsDataURL(f);
 }
 function saveSlide(){
   var s=DATA.slides[SLIDE_I];
