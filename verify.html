@@ -33,7 +33,14 @@ h2{font-family:Fraunces,serif;font-weight:500;font-size:22px;line-height:1.2;mar
 label{display:block;font-size:12.5px;font-weight:600;margin:0 0 7px;letter-spacing:.01em}
 .req::after{content:" *";color:var(--gold)}
 .field{margin-bottom:18px}
-input[type=text],input[type=tel]{width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);transition:.15s}
+input[type=text],input[type=tel],textarea{width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);transition:.15s}
+textarea{resize:vertical}
+.radio{display:flex;gap:11px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:.15s;background:#fff}
+.radio:hover{border-color:var(--gold)}
+.radio input{width:17px;height:17px;accent-color:var(--gold);flex:none;cursor:pointer}
+.radio span{font-size:13.5px;color:var(--ink)}
+.dsec{font-family:Fraunces,serif;font-weight:500;font-size:15px;margin:18px 0 10px}
+.dsec:first-child{margin-top:0}
 input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,47,.13)}
 .hint{font-size:11.5px;color:var(--soft);margin-top:6px}
 #codeInput{text-align:center;letter-spacing:.32em;font-family:'Space Mono',monospace;font-size:21px;font-weight:700;text-transform:uppercase}
@@ -145,23 +152,109 @@ input[type=file]{display:none}
       <div class="hint">Photos are compressed on your device before upload. Make sure text is clear.</div>
     </div>
 
+    <div class="field">
+      <label class="req">Transaction type</label>
+      <div class="seg" id="txnSeg">
+        <button type="button" data-t="buy" class="on">Buying Gold</button>
+        <button type="button" data-t="sell">Selling Gold</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="req" id="selfQLabel">Are you buying this jewellery for yourself?</label>
+      <label class="radio">
+        <input type="radio" name="selfAnswer" id="selfYes" value="yes" />
+        <span>Yes</span>
+      </label>
+      <label class="radio">
+        <input type="radio" name="selfAnswer" id="selfNo" value="no" />
+        <span id="selfNoLabel">No, I am acting for or on behalf of another person</span>
+      </label>
+      <div class="field hide" id="thirdPartyBlock" style="margin-top:6px">
+        <label class="req" id="tpNameLabel" for="tpName">Full name of the person you are acting for</label>
+        <input type="text" id="tpName" placeholder="Full name" />
+        <label class="req" id="tpDetailLabel" for="tpDetail" style="margin-top:10px">Details of your authorisation</label>
+        <textarea id="tpDetail" rows="3" placeholder="e.g. how you know this person and why you are acting on their behalf"></textarea>
+      </div>
+    </div>
+
     <div class="field" style="margin-top:24px">
-      <label class="req">Declaration</label>
-      <label class="check">
-        <input type="checkbox" id="declare" />
-        <span class="ct">I confirm that:
-          <ul>
-            <li>I am acting on my own behalf, not for any undisclosed third party.</li>
-            <li>I am the lawful owner of any jewellery sold or traded to Assure Gold, or the lawful purchaser of any jewellery bought.</li>
-            <li>The information provided is true and accurate.</li>
-            <li>Assure Gold may request more information or decline a transaction to comply with Singapore law.</li>
-          </ul>
-        </span>
-      </label>
-      <label class="check">
-        <input type="checkbox" id="consent" />
-        <span class="ct">I consent to Assure Gold collecting, using, storing and retaining my personal information and identity documents for identity verification, transaction processing, fraud prevention, regulatory compliance and record-keeping.</span>
-      </label>
+      <div id="declBuy">
+        <div class="dsec">1. Buyer Declaration</div>
+        <label class="check">
+          <input type="checkbox" id="declareBuy1" />
+          <span class="ct">I confirm that:
+            <ul>
+              <li>I am acting on my own behalf and not for any undisclosed third party.</li>
+              <li>All information and documents provided by me are true, complete, accurate and current.</li>
+              <li>The funds used for this purchase are from legitimate sources.</li>
+              <li>I will inform Assure Gold if any information provided by me changes before the transaction is completed.</li>
+              <li>I understand that Assure Gold may request additional information, conduct identity and compliance checks, or suspend or decline the transaction where required or permitted under Singapore law.</li>
+              <li>I understand that Assure Gold may make reports or provide information to the relevant authorities where legally required.</li>
+            </ul>
+          </span>
+        </label>
+        <div class="dsec">2. Personal Data and Identity Verification</div>
+        <label class="check">
+          <input type="checkbox" id="declareBuy2" />
+          <span class="ct">I acknowledge that:
+            <br>I have read Assure Gold's Privacy Notice and understand that Assure Gold may collect, use, disclose and retain my personal data and identification information for:
+            <ul>
+              <li>verifying my identity;</li>
+              <li>processing and documenting my purchase;</li>
+              <li>payment and transaction administration;</li>
+              <li>preventing and detecting fraud, money laundering, terrorism financing and other unlawful activity;</li>
+              <li>screening and regulatory compliance;</li>
+              <li>responding to lawful requests from government, regulatory or law-enforcement authorities; and</li>
+              <li>maintaining required records and protecting Assure Gold's legal rights.</li>
+            </ul>
+            I understand that my personal data will be protected and retained only for as long as reasonably necessary or as required by Singapore law. If I do not provide information required for identity verification or legal compliance, Assure Gold may be unable to proceed with my purchase.</span>
+        </label>
+      </div>
+      <div id="declSell" class="hide">
+        <div class="dsec">1. Seller Declaration</div>
+        <label class="check">
+          <input type="checkbox" id="declareSell1" />
+          <span class="ct">I confirm that:
+            <ul>
+              <li>I am acting on my own behalf and not for any undisclosed third party.</li>
+              <li>I am the lawful owner of the jewellery, or I have lawful authority from the owner to sell it.</li>
+              <li>The jewellery is not stolen, unlawfully obtained, pledged, subject to an ownership dispute or otherwise encumbered.</li>
+              <li>All information and documents provided by me are true, complete, accurate and current.</li>
+              <li>I authorise Assure Gold to inspect, weigh and test the jewellery to determine its identity, authenticity, purity, condition and value.</li>
+              <li>I understand that Assure Gold may request additional information, conduct identity, ownership and compliance checks, or suspend or decline the transaction where required or permitted under Singapore law.</li>
+              <li>I understand that Assure Gold may make reports or provide information to the relevant authorities where legally required.</li>
+            </ul>
+          </span>
+        </label>
+        <div class="dsec">2. Payment Declaration</div>
+        <label class="check">
+          <input type="checkbox" id="declareSell2" />
+          <span class="ct">I confirm that:
+            <ul>
+              <li>The bank account provided for payment belongs to me, or I have disclosed and satisfactorily explained any third-party account arrangement to Assure Gold.</li>
+              <li>The bank-account information provided is accurate.</li>
+              <li>I understand that Assure Gold may withhold payment until the required identity, ownership, jewellery and bank-account checks are completed.</li>
+            </ul>
+          </span>
+        </label>
+        <div class="dsec">3. Personal Data and Identity Verification</div>
+        <label class="check">
+          <input type="checkbox" id="declareSell3" />
+          <span class="ct">I acknowledge that:
+            <br>I have read Assure Gold's Privacy Notice and understand that Assure Gold may collect, use, disclose and retain my personal data, identification documents and transaction information for:
+            <ul>
+              <li>verifying my identity and ownership of the jewellery;</li>
+              <li>inspecting, valuing and documenting the jewellery;</li>
+              <li>processing and recording the transaction and payment;</li>
+              <li>preventing and detecting stolen goods, fraud, money laundering, terrorism financing and other unlawful activity;</li>
+              <li>screening and regulatory compliance;</li>
+              <li>responding to lawful requests from government, regulatory or law-enforcement authorities; and</li>
+              <li>maintaining required records and protecting Assure Gold's legal rights.</li>
+            </ul>
+            I understand that my personal data will be protected and retained only for as long as reasonably necessary or as required by Singapore law. If I do not provide information required for verification or legal compliance, Assure Gold may be unable to proceed with the transaction.</span>
+        </label>
+      </div>
     </div>
 
     <div class="privacy">
@@ -269,6 +362,44 @@ gid('idSeg').addEventListener('click', function(e){
   if(single){ files.back = null; }
 });
 
+// Transaction type toggle (buy / sell)
+var txnType = 'buy';
+var selfQText = {
+  buy: 'Are you buying this jewellery for yourself?',
+  sell: 'Are you the legal owner of the jewellery?'
+};
+var selfNoText = {
+  buy: 'No, I am acting for or on behalf of another person',
+  sell: 'No, I am authorised to sell it for someone else'
+};
+var tpNameText = {
+  buy: 'Full name of the person you are acting for',
+  sell: 'Full name of the legal owner'
+};
+var tpDetailText = {
+  buy: 'Details of your authorisation',
+  sell: "Details of your authority to sell (e.g. written authorisation, proof of relationship)"
+};
+gid('txnSeg').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if(!b) return;
+  txnType = b.dataset.t;
+  Array.from(gid('txnSeg').children).forEach(function(x){ x.classList.toggle('on', x === b); });
+  gid('selfQLabel').textContent = selfQText[txnType];
+  gid('selfNoLabel').textContent = selfNoText[txnType];
+  gid('tpNameLabel').textContent = tpNameText[txnType];
+  gid('tpDetailLabel').textContent = tpDetailText[txnType];
+  gid('declBuy').classList.toggle('hide', txnType !== 'buy');
+  gid('declSell').classList.toggle('hide', txnType !== 'sell');
+});
+
+// Self / on-behalf-of question
+Array.from(document.getElementsByName('selfAnswer')).forEach(function(r){
+  r.addEventListener('change', function(){
+    gid('thirdPartyBlock').classList.toggle('hide', gid('selfNo').checked !== true);
+  });
+});
+
 // File pickers
 function setupFilePicker(inputId, key, tag){
   gid(inputId).addEventListener('change', function(e){
@@ -368,8 +499,24 @@ function submitForm(){
 
   if(!files.front){ return fail('Please upload the ' + (single ? 'passport photo page' : 'front of your ' + idType.toUpperCase()) + '.'); }
   if(!single && !files.back){ return fail('Please upload the back of your NRIC.'); }
-  if(!gid('declare').checked){ return fail('Please confirm the declaration.'); }
-  if(!gid('consent').checked){ return fail('Please give your consent to proceed.'); }
+
+  if(!gid('selfYes').checked && !gid('selfNo').checked){ return fail('Please answer: ' + selfQText[txnType]); }
+  var actingForSelf = gid('selfYes').checked;
+  var tpName = gid('tpName').value.trim();
+  var tpDetail = gid('tpDetail').value.trim();
+  if(!actingForSelf){
+    if(!tpName){ return fail('Please enter the ' + (txnType === 'sell' ? "legal owner's" : "person's") + ' full name.'); }
+    if(!tpDetail){ return fail('Please provide details of your authorisation.'); }
+  }
+
+  if(txnType === 'buy'){
+    if(!gid('declareBuy1').checked){ return fail('Please confirm the Buyer Declaration.'); }
+    if(!gid('declareBuy2').checked){ return fail('Please confirm the Personal Data and Identity Verification declaration.'); }
+  } else {
+    if(!gid('declareSell1').checked){ return fail('Please confirm the Seller Declaration.'); }
+    if(!gid('declareSell2').checked){ return fail('Please confirm the Payment Declaration.'); }
+    if(!gid('declareSell3').checked){ return fail('Please confirm the Personal Data and Identity Verification declaration.'); }
+  }
 
   setBtn('submitBtn', true, 'Submitting...');
 
