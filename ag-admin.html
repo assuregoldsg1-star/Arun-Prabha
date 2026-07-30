@@ -663,15 +663,15 @@ img{display:block;max-width:100%}
       <div class="field" id="ms-bg-note-wrap" style="background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub)">
         <span id="ms-bg-note"></span>
       </div>
-      <div class="field" id="ms-video-wrap">
-        <label>Background Video (optional)</label>
-        <div class="hint">Plays instead of the photo above. This slide shows for 10 seconds while it has a video; other slides show for 4.</div>
-        <div class="notice blue" style="margin:8px 0"><span class="ni">&#9888;&#65039;</span><div><strong>Keep the file small</strong><p>Max 3MB, MP4 format. A short (3-8 second) looping clip works best &mdash; large videos can fail to publish.</p></div></div>
-        <video id="hvid-prev" muted loop playsinline controls style="width:100%;max-width:320px;border-radius:10px;background:#111;display:none;margin-bottom:10px"></video>
-        <div id="hvid-empty" style="color:var(--muted);font-size:13px;margin-bottom:10px">No video uploaded yet &mdash; this slide shows the photo above.</div>
-        <button class="btn btn-g btn-sm" onclick="document.getElementById('hvid-file').click()">&#127909; Upload Video</button>
-        <button class="btn btn-d btn-sm" id="hvid-remove" onclick="removeHeroVideo()" style="display:none">&#128465; Remove Video</button>
-        <input type="file" id="hvid-file" accept="video/mp4,video/*" style="display:none" onchange="heroVidPick(this)"/>
+      <div class="field" id="ms-media-wrap">
+        <label>Background Photo or Video</label>
+        <div class="hint">Upload either one. A video plays automatically and this slide shows for 10 seconds; a photo-only slide shows for 4, same as the others.</div>
+        <img id="ms-media-img" style="width:100%;max-width:320px;border-radius:10px;object-fit:cover;background:var(--paper);border:1px solid var(--line);display:none;margin:8px 0"/>
+        <video id="ms-media-vid" muted loop playsinline controls style="width:100%;max-width:320px;border-radius:10px;background:#111;display:none;margin:8px 0"></video>
+        <div class="notice blue" style="margin:8px 0"><span class="ni">&#9888;&#65039;</span><div><strong>Keep video files small</strong><p>Videos: max 3MB, MP4 format, 3-8 seconds, looping. Photos: max 4MB.</p></div></div>
+        <button class="btn btn-g btn-sm" onclick="document.getElementById('ms-media-file').click()">&#128247; Upload Photo or Video</button>
+        <button class="btn btn-d btn-sm" id="ms-media-remove" onclick="removeSlideVideo()" style="display:none">&#128465; Remove Video (use photo)</button>
+        <input type="file" id="ms-media-file" accept="image/*,video/*" style="display:none" onchange="slideMediaPick(this)"/>
       </div>
     </div>
     <div class="modal-f"><div></div><div class="r"><button class="btn btn-g" onclick="closeM('m-slide')">Cancel</button><button class="btn btn-p" onclick="saveSlide()">&#10003; Save Slide</button></div></div>
@@ -716,12 +716,13 @@ var DATA = {
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
   images:{},   /* path -> dataURL of replaced images */
-  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, sellMarkup:30, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
+  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, sellMarkup:30, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' },
+  heroVideoActive:true  /* whether slide 1 shows the uploaded video (true) or just the photo (false) */
 };
 
 function persist(){ try{
   /* images can be big — store separately, tolerate quota errors */
-  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback};
+  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback,heroVideoActive:DATA.heroVideoActive};
   localStorage.setItem('ag_core', JSON.stringify(core));
   try{ localStorage.setItem('ag_images', JSON.stringify(DATA.images)); }
   catch(e){ toast('Images too large to auto-save. Use Save Backup.','error'); }
@@ -730,7 +731,8 @@ function persist(){ try{
 function load(){ try{
   var c=localStorage.getItem('ag_core');
   if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business; DATA.products=p.products||DATA.products;
-    DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; DATA.buyback=p.buyback||DATA.buyback; }
+    DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; DATA.buyback=p.buyback||DATA.buyback;
+    DATA.heroVideoActive=(p.heroVideoActive!==undefined)?p.heroVideoActive:DATA.heroVideoActive; }
   var im=localStorage.getItem('ag_images');
   if(im){ DATA.images=JSON.parse(im)||{}; }
 }catch(e){} }
@@ -1061,33 +1063,52 @@ function imgReplace(inp,path){
 /* ============ CAROUSEL ============ */
 var SLIDE_I=-1;
 var HERO_VIDEO_PATH='assets/videos/hero-slide1.mp4';
-function heroVidPick(inp){
+function slideMediaPick(inp){
+  var chrome=SLOT_CHROME[SLIDE_I];
+  if(!chrome||!chrome.hasVideo)return;
   var f=inp.files[0]; if(!f)return;
-  if(!/^video\//.test(f.type)){ toast('Please choose a video file','error'); return; }
-  if(f.size>3*1024*1024){ toast('Video too large (max 3MB). Please compress it first.','error'); return; }
-  var r=new FileReader();
-  r.onload=function(e){
-    DATA.images[HERO_VIDEO_PATH]=e.target.result;
-    persist(); markEdit(); renderHeroVideo();
-    toast('Video ready - publish to make it live','success');
-  };
-  r.readAsDataURL(f);
+  if(/^video\//.test(f.type)){
+    if(f.size>3*1024*1024){ toast('Video too large (max 3MB). Please compress it first.','error'); return; }
+    var r=new FileReader();
+    r.onload=function(e){
+      DATA.images[HERO_VIDEO_PATH]=e.target.result;
+      DATA.heroVideoActive=true;
+      persist(); markEdit(); renderSlideMedia(chrome); renderSlides();
+      toast('Video ready - publish to make it live','success');
+    };
+    r.readAsDataURL(f);
+  } else if(/^image\//.test(f.type)){
+    if(f.size>4*1024*1024){ toast('Image too large (max 4MB). Please resize it.','error'); return; }
+    var r2=new FileReader();
+    r2.onload=function(e){
+      DATA.images[chrome.imgPath]=e.target.result;
+      DATA.heroVideoActive=false;
+      persist(); markEdit(); renderSlideMedia(chrome); renderSlides();
+      toast('Photo updated - publish to make it live','success');
+    };
+    r2.readAsDataURL(f);
+  } else {
+    toast('Please choose a photo or video file','error');
+  }
 }
-function removeHeroVideo(){
-  if(!DATA.images[HERO_VIDEO_PATH])return;
-  if(!confirm('Remove the uploaded video? Slide 1 will go back to showing the photo.'))return;
-  delete DATA.images[HERO_VIDEO_PATH];
-  persist(); markEdit(); renderHeroVideo();
+function removeSlideVideo(){
+  var chrome=SLOT_CHROME[SLIDE_I];
+  if(!chrome||!DATA.heroVideoActive)return;
+  if(!confirm('Remove the video? This slide will go back to showing the photo.'))return;
+  DATA.heroVideoActive=false;
+  persist(); markEdit(); renderSlideMedia(chrome); renderSlides();
   toast('Video removed','info');
 }
-function renderHeroVideo(){
-  var v=document.getElementById('hvid-prev'), empty=document.getElementById('hvid-empty'), rm=document.getElementById('hvid-remove');
-  if(!v)return;
-  rm.style.display = DATA.images[HERO_VIDEO_PATH] ? '' : 'none';
-  v.onerror=function(){ v.style.display='none'; empty.style.display='block'; };
-  v.onloadeddata=function(){ v.style.display='block'; empty.style.display='none'; };
-  v.style.display='none'; empty.style.display='none';
-  v.src=imgSrc(HERO_VIDEO_PATH);
+function renderSlideMedia(chrome){
+  var imgEl=document.getElementById('ms-media-img'), vidEl=document.getElementById('ms-media-vid'), rm=document.getElementById('ms-media-remove');
+  if(!imgEl||!chrome)return;
+  if(DATA.heroVideoActive){
+    vidEl.src=imgSrc(HERO_VIDEO_PATH);
+    vidEl.style.display='block'; imgEl.style.display='none'; rm.style.display='';
+  } else {
+    imgEl.src=imgSrc(chrome.imgPath);
+    imgEl.style.display='block'; vidEl.style.display='none'; vidEl.removeAttribute('src'); rm.style.display='none';
+  }
 }
 function renderSlides(){
   var addBtn=document.getElementById('addSlideBtn'), addHint=document.getElementById('addSlideHint');
@@ -1144,18 +1165,18 @@ function openSlide(i){
   document.getElementById('ms-btn').value=s.btn||'';
   document.getElementById('ms-href').value=s.href||'collection.html';
 
-  var bgWrap=document.getElementById('ms-bg-wrap'), noteWrap=document.getElementById('ms-bg-note-wrap'), vidWrap=document.getElementById('ms-video-wrap');
-  if(chrome.imgEditable){
-    bgWrap.style.display=''; noteWrap.style.display='none';
+  var bgWrap=document.getElementById('ms-bg-wrap'), noteWrap=document.getElementById('ms-bg-note-wrap'), mediaWrap=document.getElementById('ms-media-wrap');
+  bgWrap.style.display='none'; noteWrap.style.display='none'; mediaWrap.style.display='none';
+  if(chrome.hasVideo){
+    mediaWrap.style.display='';
+    renderSlideMedia(chrome);
+  } else if(chrome.imgEditable){
+    bgWrap.style.display='';
     document.getElementById('ms-bg-prev').src=imgSrc(chrome.imgPath);
   } else if(chrome.imgPath){
-    bgWrap.style.display='none'; noteWrap.style.display='';
+    noteWrap.style.display='';
     document.getElementById('ms-bg-note').textContent=chrome.imgNote||'';
-  } else {
-    bgWrap.style.display='none'; noteWrap.style.display='none';
   }
-  vidWrap.style.display = chrome.hasVideo ? '' : 'none';
-  if(chrome.hasVideo) renderHeroVideo();
 
   openM('m-slide');
 }
@@ -1420,9 +1441,9 @@ function patchCarousel(html){
     var h1=escHtml(s.line1);
     if(s.line2)h1+='<br/><em>'+escHtml(s.line2)+'</em>';
     if(s.line3)h1+='<br/>'+escHtml(s.line3);
-    var videoHtml = i===0
-      ? '    <video class="sld-video" autoplay muted loop playsinline poster="assets/images/rope-chain-red.jpg">'+NL
-        +'      <source src="assets/videos/hero-slide1.mp4" type="video/mp4">'+NL
+    var videoHtml = (chrome.hasVideo && DATA.heroVideoActive)
+      ? '    <video class="sld-video" autoplay muted loop playsinline poster="'+escHtml(chrome.imgPath)+'">'+NL
+        +'      <source src="'+escHtml(HERO_VIDEO_PATH)+'" type="video/mp4">'+NL
         +'    </video>'+NL
       : '';
     var ghost = chrome.ghostHref
@@ -1699,6 +1720,7 @@ async function loadFromRepo(){
     if(d.stats){ DATA.stats = d.stats; }
     if(d.headings){ DATA.headings = d.headings; }
     if(d.buyback){ DATA.buyback = d.buyback; }
+    if(d.heroVideoActive!==undefined){ DATA.heroVideoActive = d.heroVideoActive; }
     try{ persistLocalOnly(); }catch(e){}
   }catch(e){ /* offline or first run - keep local/defaults */ }
 }
@@ -1738,7 +1760,7 @@ async function publishLive(){
       files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
     }
 
-    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback };
+    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback, heroVideoActive:DATA.heroVideoActive };
     files.push({ path:'assure-gold-backup.json', content:JSON.stringify(backup,null,1), encoding:'utf-8' });
 
     var imgPaths=Object.keys(DATA.images||{});
