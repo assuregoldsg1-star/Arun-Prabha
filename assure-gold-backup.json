@@ -1,394 +1,394 @@
 {
-  "business": {
-    "wa": "6593430242",
-    "addr": "119A Canberra Cres, Singapore",
-    "hours": "Mon-Sat 10am-7pm SGT",
-    "psm": "PS20260000962",
-    "psmValid": "11 March 2027"
+ "business": {
+  "wa": "6593430242",
+  "addr": "119A Canberra Cres, Singapore",
+  "hours": "Mon-Sat 10am-7pm SGT",
+  "psm": "PS20260000962",
+  "psmValid": "11 March 2027"
+ },
+ "products": [
+  {
+   "id": 1,
+   "name": "Rope Chain — Long 24\"",
+   "spec": "24 inches · 22.3g · Excellent condition",
+   "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.",
+   "retail": 5200,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-01.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.",
+   "featured": true,
+   "weight_g": 22.3
   },
-  "products": [
-    {
-      "id": 1,
-      "name": "Rope Chain — Long 24\"",
-      "spec": "24 inches · 22.3g · Excellent condition",
-      "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.",
-      "retail": 5200,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-01.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.",
-      "featured": true,
-      "weight_g": 22.3
-    },
-    {
-      "id": 2,
-      "name": "Rope Chain — Classic 20\"",
-      "spec": "20 inches · 17.6g · Very good condition",
-      "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.",
-      "retail": 4200,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-03.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.",
-      "featured": false,
-      "weight_g": 17.6
-    },
-    {
-      "id": 3,
-      "name": "Rope Chain — Statement 22\"",
-      "spec": "22 inches · 20.1g · Good condition",
-      "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.",
-      "retail": 4700,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-04.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.",
-      "featured": false,
-      "weight_g": 20.1
-    },
-    {
-      "id": 4,
-      "name": "Rope Chain — Heavy Long 24\"",
-      "spec": "24 inches · 23.7g · Good condition",
-      "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.",
-      "retail": 5600,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-02.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.",
-      "featured": false,
-      "weight_g": 23.7
-    },
-    {
-      "id": 5,
-      "name": "Rope Chain — Dainty 16\"",
-      "spec": "16 inches · 10.2g · Excellent condition",
-      "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.",
-      "retail": 2500,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-06.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.",
-      "featured": false,
-      "weight_g": 10.2
-    },
-    {
-      "id": 6,
-      "name": "Rope Chain — Mid-Length 18\"",
-      "spec": "18 inches · 14.8g · Good condition",
-      "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.",
-      "retail": 3550,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-05.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.",
-      "featured": false,
-      "weight_g": 14.8
-    },
-    {
-      "id": 7,
-      "name": "Rope Chain — Angled 22\"",
-      "spec": "22 inches · 19.6g · Good condition",
-      "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.",
-      "retail": 4650,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-08.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.",
-      "featured": false,
-      "weight_g": 19.6
-    },
-    {
-      "id": 8,
-      "name": "Rope Chain — Detail View 20\"",
-      "spec": "20 inches · 16.4g · Excellent condition",
-      "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.",
-      "retail": 3950,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-07.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.",
-      "featured": false,
-      "weight_g": 16.4
-    },
-    {
-      "id": 9,
-      "name": "Rope Chain — Width Verified 20\"",
-      "spec": "20 inches · 17.1g · Very good condition",
-      "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.",
-      "retail": 4100,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-09.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.",
-      "featured": false,
-      "weight_g": 17.1
-    },
-    {
-      "id": 10,
-      "name": "Rope Chain — Short Fine 16\"",
-      "spec": "16 inches · 9.8g · Very good condition",
-      "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.",
-      "retail": 2400,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-11.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.",
-      "featured": false,
-      "weight_g": 9.8
-    },
-    {
-      "id": 11,
-      "name": "Rope Chain — Thick Gauge 18\"",
-      "spec": "18 inches · 15.2g · Good condition",
-      "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.",
-      "retail": 3650,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-10.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.",
-      "featured": false,
-      "weight_g": 15.2
-    },
-    {
-      "id": 12,
-      "name": "Rope Chain — Medium 20\"",
-      "spec": "20 inches · 16.8g · Very good condition",
-      "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.",
-      "retail": 4050,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-13.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.",
-      "featured": false,
-      "weight_g": 16.8
-    },
-    {
-      "id": 13,
-      "name": "Rope Chain — Premium 22\"",
-      "spec": "22 inches · 20.8g · Excellent condition",
-      "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.",
-      "retail": 4980,
-      "karat": "916 · 22K",
-      "cat": "chains",
-      "img": "assets/images/products/chain-14.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.",
-      "featured": true,
-      "weight_g": 20.8
-    },
-    {
-      "id": 14,
-      "name": "Rope Chain + Barrel Pendant",
-      "spec": "18 inches · 12.8g total · Good condition",
-      "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.",
-      "retail": 3100,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-12.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.",
-      "featured": false,
-      "weight_g": 12.8
-    },
-    {
-      "id": 15,
-      "name": "Rope + Dragon Abacus Pendant",
-      "spec": "20 inches · 18.4g total · Very good",
-      "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.",
-      "retail": 4500,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-16.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.",
-      "featured": true,
-      "weight_g": 18.4
-    },
-    {
-      "id": 16,
-      "name": "Rope + Cylinder Pendant",
-      "spec": "18 inches · 16.9g total · Very good",
-      "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.",
-      "retail": 4100,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-15.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.",
-      "featured": false,
-      "weight_g": 16.9
-    },
-    {
-      "id": 17,
-      "name": "Rope + Ornate Pendant",
-      "spec": "20 inches · 22.1g total · Good",
-      "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.",
-      "retail": 5350,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-18.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.",
-      "featured": false,
-      "weight_g": 22.1
-    },
-    {
-      "id": 18,
-      "name": "Rope + Classic Round Pendant",
-      "spec": "18 inches · 17.4g total · Very good",
-      "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.",
-      "retail": 4200,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-19.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.",
-      "featured": false,
-      "weight_g": 17.4
-    },
-    {
-      "id": 19,
-      "name": "Rope + Designer Pendant",
-      "spec": "20 inches · 20.3g total · Good",
-      "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.",
-      "retail": 4900,
-      "karat": "916 · 22K",
-      "cat": "pendants",
-      "img": "assets/images/products/chain-17.jpeg",
-      "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.",
-      "featured": false,
-      "weight_g": 20.3
-    }
-  ],
-  "slides": [
-    {
-      "eyebrow": "The Signature Collection",
-      "line1": "Browse our",
-      "line2": "Rope Chain",
-      "line3": "Collection",
-      "sub": "Handpicked 916 gold rope chains, 16–24 inches. Every link XRF-tested. 0% GST.",
-      "btn": "Explore Chains →",
-      "href": "collection.html"
-    },
-    {
-      "eyebrow": "Just Arrived",
-      "line1": "New Arrivals",
-      "line2": "Collection",
-      "line3": "",
-      "sub": "Fresh pieces added weekly — chains, pendants, sets. Get your quote in 2 minutes on WhatsApp.",
-      "btn": "View New Pieces →",
-      "href": "collection.html"
-    },
-    {
-      "eyebrow": "Buyback Campaign",
-      "line1": "Buyback is",
-      "line2": "Now Live",
-      "line3": "",
-      "sub": "Sell your preloved gold the easy way. XRF tested. Get your quote in 2 minutes. Same-day payment.",
-      "btn": "Learn About Buyback →",
-      "href": "buyback.html"
-    },
-    {
-      "eyebrow": "Assay-Grade Technology",
-      "line1": "XRF Verified",
-      "line2": "Collection",
-      "line3": "",
-      "sub": "Every piece tested to 4 decimal places. You watch the screen live. No hidden steps.",
-      "btn": "Shop Verified Gold →",
-      "href": "collection.html"
-    },
-    {
-      "eyebrow": "PSM Licensed · Ministry of Law",
-      "line1": "Certified",
-      "line2": "Preloved Luxury",
-      "line3": "Gold",
-      "sub": "Same purity. Smarter price. 0% GST. 0% making charge. Government-licensed.",
-      "btn": "Browse Collection →",
-      "href": "collection.html"
-    }
-  ],
-  "stats": [
-    {
-      "num": "0%",
-      "label": "GST & Making Charge"
-    },
-    {
-      "num": "XRF",
-      "label": "Live Purity Testing"
-    },
-    {
-      "num": "PSM",
-      "label": "Ministry of Law Licensed"
-    },
-    {
-      "num": "30m",
-      "label": "WhatsApp Reply"
-    }
-  ],
-  "headings": [
-    {
-      "id": "why",
-      "label": "Why Preloved Gold",
-      "l1": "Why preloved gold",
-      "l2": "the wiser buy",
-      "em": "ga",
-      "pre": "is "
-    },
-    {
-      "id": "goldbar",
-      "label": "Same Gold Section",
-      "l1": "Same gold.",
-      "l2": "Smarter price.",
-      "em": "",
-      "pre": ""
-    },
-    {
-      "id": "compare",
-      "label": "Price Comparison",
-      "l1": "Same gold.",
-      "l2": "Very different price.",
-      "em": "ga",
-      "pre": ""
-    },
-    {
-      "id": "products",
-      "label": "Featured Products",
-      "l1": "Real pieces.",
-      "l2": "Real prices.",
-      "em": "ga",
-      "pre": ""
-    },
-    {
-      "id": "reviews",
-      "label": "Reviews Section",
-      "l1": "Real customers.",
-      "l2": "Real conversations.",
-      "em": "ga",
-      "pre": ""
-    },
-    {
-      "id": "faq",
-      "label": "FAQ Section",
-      "l1": "Common questions.",
-      "l2": "Straight answers.",
-      "em": "ga",
-      "pre": ""
-    },
-    {
-      "id": "cta",
-      "label": "Contact Section",
-      "l1": "Find your preloved piece.",
-      "l2": "Priced in pure gold.",
-      "em": "",
-      "pre": ""
-    }
-  ],
-  "buyback": {
-    "margins": {
-      "m999": 7,
-      "m916": 8.5,
-      "m850": 15,
-      "m750": 15,
-      "m585": 15
-    },
-    "retail": 6200,
-    "youpay": 5000,
-    "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price",
-    "sellMarkup": 30
+  {
+   "id": 2,
+   "name": "Rope Chain — Classic 20\"",
+   "spec": "20 inches · 17.6g · Very good condition",
+   "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.",
+   "retail": 4200,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-03.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.",
+   "featured": false,
+   "weight_g": 17.6
+  },
+  {
+   "id": 3,
+   "name": "Rope Chain — Statement 22\"",
+   "spec": "22 inches · 20.1g · Good condition",
+   "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.",
+   "retail": 4700,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-04.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.",
+   "featured": false,
+   "weight_g": 20.1
+  },
+  {
+   "id": 4,
+   "name": "Rope Chain — Heavy Long 24\"",
+   "spec": "24 inches · 23.7g · Good condition",
+   "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.",
+   "retail": 5600,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-02.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.",
+   "featured": false,
+   "weight_g": 23.7
+  },
+  {
+   "id": 5,
+   "name": "Rope Chain — Dainty 16\"",
+   "spec": "16 inches · 10.2g · Excellent condition",
+   "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.",
+   "retail": 2500,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-06.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.",
+   "featured": false,
+   "weight_g": 10.2
+  },
+  {
+   "id": 6,
+   "name": "Rope Chain — Mid-Length 18\"",
+   "spec": "18 inches · 14.8g · Good condition",
+   "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.",
+   "retail": 3550,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-05.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.",
+   "featured": false,
+   "weight_g": 14.8
+  },
+  {
+   "id": 7,
+   "name": "Rope Chain — Angled 22\"",
+   "spec": "22 inches · 19.6g · Good condition",
+   "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.",
+   "retail": 4650,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-08.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.",
+   "featured": false,
+   "weight_g": 19.6
+  },
+  {
+   "id": 8,
+   "name": "Rope Chain — Detail View 20\"",
+   "spec": "20 inches · 16.4g · Excellent condition",
+   "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.",
+   "retail": 3950,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-07.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.",
+   "featured": false,
+   "weight_g": 16.4
+  },
+  {
+   "id": 9,
+   "name": "Rope Chain — Width Verified 20\"",
+   "spec": "20 inches · 17.1g · Very good condition",
+   "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.",
+   "retail": 4100,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-09.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.",
+   "featured": false,
+   "weight_g": 17.1
+  },
+  {
+   "id": 10,
+   "name": "Rope Chain — Short Fine 16\"",
+   "spec": "16 inches · 9.8g · Very good condition",
+   "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.",
+   "retail": 2400,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-11.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.",
+   "featured": false,
+   "weight_g": 9.8
+  },
+  {
+   "id": 11,
+   "name": "Rope Chain — Thick Gauge 18\"",
+   "spec": "18 inches · 15.2g · Good condition",
+   "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.",
+   "retail": 3650,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-10.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.",
+   "featured": false,
+   "weight_g": 15.2
+  },
+  {
+   "id": 12,
+   "name": "Rope Chain — Medium 20\"",
+   "spec": "20 inches · 16.8g · Very good condition",
+   "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.",
+   "retail": 4050,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-13.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.",
+   "featured": false,
+   "weight_g": 16.8
+  },
+  {
+   "id": 13,
+   "name": "Rope Chain — Premium 22\"",
+   "spec": "22 inches · 20.8g · Excellent condition",
+   "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.",
+   "retail": 4980,
+   "karat": "916 · 22K",
+   "cat": "chains",
+   "img": "assets/images/products/chain-14.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.",
+   "featured": true,
+   "weight_g": 20.8
+  },
+  {
+   "id": 14,
+   "name": "Rope Chain + Barrel Pendant",
+   "spec": "18 inches · 12.8g total · Good condition",
+   "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.",
+   "retail": 3100,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-12.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.",
+   "featured": false,
+   "weight_g": 12.8
+  },
+  {
+   "id": 15,
+   "name": "Rope + Dragon Abacus Pendant",
+   "spec": "20 inches · 18.4g total · Very good",
+   "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.",
+   "retail": 4500,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-16.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.",
+   "featured": true,
+   "weight_g": 18.4
+  },
+  {
+   "id": 16,
+   "name": "Rope + Cylinder Pendant",
+   "spec": "18 inches · 16.9g total · Very good",
+   "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.",
+   "retail": 4100,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-15.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.",
+   "featured": false,
+   "weight_g": 16.9
+  },
+  {
+   "id": 17,
+   "name": "Rope + Ornate Pendant",
+   "spec": "20 inches · 22.1g total · Good",
+   "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.",
+   "retail": 5350,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-18.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.",
+   "featured": false,
+   "weight_g": 22.1
+  },
+  {
+   "id": 18,
+   "name": "Rope + Classic Round Pendant",
+   "spec": "18 inches · 17.4g total · Very good",
+   "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.",
+   "retail": 4200,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-19.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.",
+   "featured": false,
+   "weight_g": 17.4
+  },
+  {
+   "id": 19,
+   "name": "Rope + Designer Pendant",
+   "spec": "20 inches · 20.3g total · Good",
+   "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.",
+   "retail": 4900,
+   "karat": "916 · 22K",
+   "cat": "pendants",
+   "img": "assets/images/products/chain-17.jpeg",
+   "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.",
+   "featured": false,
+   "weight_g": 20.3
   }
+ ],
+ "slides": [
+  {
+   "eyebrow": "The Signature Collection",
+   "line1": "Browse our",
+   "line2": "Rope Chain",
+   "line3": "Collection",
+   "sub": "Handpicked 916 gold rope chains, 16–24 inches. Every link XRF-tested. 0% GST.",
+   "btn": "Explore Chains →",
+   "href": "collection.html"
+  },
+  {
+   "eyebrow": "Just Arrived",
+   "line1": "New Arrivals",
+   "line2": "Collection",
+   "line3": "",
+   "sub": "Fresh pieces added weekly — chains, pendants, sets. Get your quote in 2 minutes on WhatsApp.",
+   "btn": "View New Pieces →",
+   "href": "collection.html"
+  },
+  {
+   "eyebrow": "Buyback Campaign",
+   "line1": "Buyback is",
+   "line2": "Now Live",
+   "line3": "",
+   "sub": "Sell your preloved gold the easy way. XRF tested. Get your quote in 2 minutes. Same-day payment.",
+   "btn": "Learn About Buyback →",
+   "href": "buyback.html"
+  },
+  {
+   "eyebrow": "Assay-Grade Technology",
+   "line1": "XRF Verified",
+   "line2": "Collection",
+   "line3": "",
+   "sub": "Every piece tested to 4 decimal places. You watch the screen live. No hidden steps.",
+   "btn": "Shop Verified Gold →",
+   "href": "collection.html"
+  },
+  {
+   "eyebrow": "PSM Licensed · Ministry of Law",
+   "line1": "Certified",
+   "line2": "Preloved Luxury",
+   "line3": "Gold",
+   "sub": "Same purity. Smarter price. 0% GST. 0% making charge. Government-licensed.",
+   "btn": "Browse Collection →",
+   "href": "collection.html"
+  }
+ ],
+ "stats": [
+  {
+   "num": "0%",
+   "label": "GST & Making Charge"
+  },
+  {
+   "num": "XRF",
+   "label": "Live Purity Testing"
+  },
+  {
+   "num": "PSM",
+   "label": "Ministry of Law Licensed"
+  },
+  {
+   "num": "30m",
+   "label": "WhatsApp Reply"
+  }
+ ],
+ "headings": [
+  {
+   "id": "why",
+   "label": "Why Preloved Gold",
+   "l1": "Why preloved gold",
+   "l2": "the wiser buy",
+   "em": "ga",
+   "pre": "is "
+  },
+  {
+   "id": "goldbar",
+   "label": "Same Gold Section",
+   "l1": "Same gold.",
+   "l2": "Smarter price.",
+   "em": "",
+   "pre": ""
+  },
+  {
+   "id": "compare",
+   "label": "Price Comparison",
+   "l1": "Same gold.",
+   "l2": "Very different price.",
+   "em": "ga",
+   "pre": ""
+  },
+  {
+   "id": "products",
+   "label": "Featured Products",
+   "l1": "Real pieces.",
+   "l2": "Real prices.",
+   "em": "ga",
+   "pre": ""
+  },
+  {
+   "id": "reviews",
+   "label": "Reviews Section",
+   "l1": "Real customers.",
+   "l2": "Real conversations.",
+   "em": "ga",
+   "pre": ""
+  },
+  {
+   "id": "faq",
+   "label": "FAQ Section",
+   "l1": "Common questions.",
+   "l2": "Straight answers.",
+   "em": "ga",
+   "pre": ""
+  },
+  {
+   "id": "cta",
+   "label": "Contact Section",
+   "l1": "Find your preloved piece.",
+   "l2": "Priced in pure gold.",
+   "em": "",
+   "pre": ""
+  }
+ ],
+ "buyback": {
+  "margins": {
+   "m999": 7,
+   "m916": 8.5,
+   "m850": 15,
+   "m750": 15,
+   "m585": 15
+  },
+  "retail": 6200,
+  "youpay": 5000,
+  "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price",
+  "sellMarkup": 28
+ }
 }
