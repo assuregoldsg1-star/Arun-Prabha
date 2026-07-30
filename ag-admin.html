@@ -348,6 +348,17 @@ img{display:block;max-width:100%}
 
       <!-- PRODUCTS -->
       <div class="view" id="view-products">
+        <div class="card" style="border:2px solid var(--g1);margin-bottom:16px">
+          <div class="card-h"><div><h3>&#128176; Selling Price Formula</h3><p>One control drives every product price automatically.</p></div></div>
+          <div class="card-b">
+            <div class="notice" style="margin-bottom:14px"><span class="ni">&#128161;</span><div><strong>How it works</strong><p>Selling price (S$/g) = current buyback price (S$/g) + your markup below. Each product's total = its weight &times; that rate, updating live on the website. Shown to customers as a <b>nett price</b> &mdash; no further deductions.</p></div></div>
+            <div class="field"><label>Markup over buyback (S$ per gram)</label><input type="number" id="sp-markup" step="0.01" min="0" placeholder="e.g. 30.00"/></div>
+            <button class="btn btn-p" onclick="saveSellMarkup()">&#10003; Save Markup</button>
+            <div id="sp-save-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Prices update immediately &mdash; live on the website too.</div>
+            <h4 style="font-family:var(--serif);font-size:15px;color:var(--g2);margin:18px 0 9px;border-bottom:1px solid var(--ls);padding-bottom:7px">Live selling rate by karat</h4>
+            <table style="width:100%;border-collapse:collapse" id="sp-preview"></table>
+          </div>
+        </div>
         <div class="notice"><span class="ni">&#128181;</span><div><strong>Edit any product &mdash; changes apply to ALL pages automatically</strong><p>Change a price here and it updates on the Collection page and the Home page together. No more mismatches.</p></div></div>
         <input type="search" class="search" id="psearch" placeholder="Search products by name..." oninput="renderProducts()"/>
         <div class="frow">
@@ -597,11 +608,11 @@ img{display:block;max-width:100%}
       </div>
       <div class="field"><label>Specification</label><div class="hint">Length, weight, condition</div><input type="text" id="mp-spec"/></div>
       <div class="field"><label>Description</label><textarea id="mp-desc" rows="2"></textarea></div>
-      <div class="fr3">
-        <div class="field"><label>Price (S$)</label><input type="number" id="mp-price"/></div>
-        <div class="field"><label>Retail Price</label><input type="number" id="mp-retail"/></div>
-        <div class="field"><label>Saving</label><input type="number" id="mp-save"/></div>
+      <div class="fr2">
+        <div class="field"><label>Weight (g)</label><input type="number" id="mp-weight" step="0.1" min="0"/></div>
+        <div class="field"><label>Retail Price (new, S$)</label><input type="number" id="mp-retail"/></div>
       </div>
+      <div class="field" id="mp-priceinfo" style="background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub)">Enter a weight to see the computed selling price.</div>
       <div class="fr2">
         <div class="field"><label>Category</label><select id="mp-cat"><option value="chains">Chain</option><option value="pendants">Chain + Pendant Set</option></select></div>
         <div class="field"><label>Featured on Home</label><select id="mp-feat"><option value="false">No</option><option value="true">Yes</option></select></div>
@@ -646,7 +657,7 @@ img{display:block;max-width:100%}
 <script>
 
 /* ============ DATA ============ */
-var DEFAULT_PRODUCTS = [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.", "price": 3980, "retail": 5200, "save": 1220, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.", "featured": true}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.", "price": 3150, "retail": 4200, "save": 1050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.", "featured": false}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.", "price": 3590, "retail": 4700, "save": 1110, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.", "featured": false}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.", "price": 4220, "retail": 5600, "save": 1380, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.", "featured": false}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.", "price": 1830, "retail": 2500, "save": 670, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.", "featured": false}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.", "price": 2640, "retail": 3550, "save": 910, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.", "featured": false}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.", "price": 3490, "retail": 4650, "save": 1160, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.", "featured": false}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.", "price": 2930, "retail": 3950, "save": 1020, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.", "featured": false}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.", "price": 3060, "retail": 4100, "save": 1040, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.", "featured": false}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.", "price": 1760, "retail": 2400, "save": 640, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.", "featured": false}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.", "price": 2710, "retail": 3650, "save": 940, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.", "featured": false}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.", "price": 3000, "retail": 4050, "save": 1050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.", "featured": false}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.", "price": 3720, "retail": 4980, "save": 1260, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.", "featured": true}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.", "price": 2290, "retail": 3100, "save": 810, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.", "featured": false}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.", "price": 3290, "retail": 4500, "save": 1210, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.", "featured": true}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.", "price": 3020, "retail": 4100, "save": 1080, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.", "featured": false}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.", "price": 3950, "retail": 5350, "save": 1400, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.", "featured": false}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.", "price": 3110, "retail": 4200, "save": 1090, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.", "featured": false}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.", "price": 3630, "retail": 4900, "save": 1270, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.", "featured": false}];
+var DEFAULT_PRODUCTS = [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.", "retail": 5200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.", "featured": true, "weight_g": 22.3}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.", "retail": 4200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.", "featured": false, "weight_g": 17.6}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.", "retail": 4700, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.", "featured": false, "weight_g": 20.1}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.", "retail": 5600, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.", "featured": false, "weight_g": 23.7}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.", "retail": 2500, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.", "featured": false, "weight_g": 10.2}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.", "retail": 3550, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.", "featured": false, "weight_g": 14.8}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.", "retail": 4650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.", "featured": false, "weight_g": 19.6}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.", "retail": 3950, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.", "featured": false, "weight_g": 16.4}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.", "retail": 4100, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.", "featured": false, "weight_g": 17.1}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.", "retail": 2400, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.", "featured": false, "weight_g": 9.8}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.", "retail": 3650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.", "featured": false, "weight_g": 15.2}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.", "retail": 4050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.", "featured": false, "weight_g": 16.8}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.", "retail": 4980, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.", "featured": true, "weight_g": 20.8}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.", "retail": 3100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.", "featured": false, "weight_g": 12.8}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.", "retail": 4500, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.", "featured": true, "weight_g": 18.4}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.", "retail": 4100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.", "featured": false, "weight_g": 16.9}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.", "retail": 5350, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.", "featured": false, "weight_g": 22.1}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.", "retail": 4200, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.", "featured": false, "weight_g": 17.4}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.", "retail": 4900, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.", "featured": false, "weight_g": 20.3}];
 var DEFAULT_SLIDES = [{"eyebrow": "The Signature Collection", "line1": "Browse our", "line2": "Rope Chain", "line3": "Collection", "sub": "Handpicked 916 gold rope chains, 16–24 inches. Every link XRF-tested. 0% GST.", "btn": "Explore Chains →", "href": "collection.html"}, {"eyebrow": "Just Arrived", "line1": "New Arrivals", "line2": "Collection", "line3": "", "sub": "Fresh pieces added weekly — chains, pendants, sets. Get your quote in 2 minutes on WhatsApp.", "btn": "View New Pieces →", "href": "collection.html"}, {"eyebrow": "Buyback Campaign", "line1": "Buyback is", "line2": "Now Live", "line3": "", "sub": "Sell your preloved gold the easy way. XRF tested. Get your quote in 2 minutes. Same-day payment.", "btn": "Learn About Buyback →", "href": "buyback.html"}, {"eyebrow": "Assay-Grade Technology", "line1": "XRF Verified", "line2": "Collection", "line3": "", "sub": "Every piece tested to 4 decimal places. You watch the screen live. No hidden steps.", "btn": "Shop Verified Gold →", "href": "collection.html"}, {"eyebrow": "PSM Licensed · Ministry of Law", "line1": "Certified", "line2": "Preloved Luxury", "line3": "Gold", "sub": "Same purity. Smarter price. 0% GST. 0% making charge. Government-licensed.", "btn": "Browse Collection →", "href": "collection.html"}];
 var DEFAULT_STATS = [{"num": "0%", "label": "GST & Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "30m", "label": "WhatsApp Reply"}];
 var DEFAULT_HEADINGS = [
@@ -666,7 +677,7 @@ var DATA = {
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
   images:{},   /* path -> dataURL of replaced images */
-  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
+  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, sellMarkup:30, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' }
 };
 
 function persist(){ try{
@@ -685,9 +696,67 @@ function load(){ try{
   if(im){ DATA.images=JSON.parse(im)||{}; }
 }catch(e){} }
 load();
+agFetchRate();
 
 var EDITS=0;
 function markEdit(){ EDITS++; var el=document.getElementById('d-edits'); if(el)el.textContent=EDITS; }
+
+/* ============ LIVE PRICE ENGINE ============
+   Same formula as buyback.html: fetch live gold spot (USD/oz) + FX, convert
+   to S$/g at 999 purity, then per-karat buyback rate = spot999*purity - margin.
+   Selling rate = buyback rate + your markup (Products & Prices > Selling Price Formula). */
+var AG_RATE_999 = 185.0; /* fallback until live fetch completes */
+var AG_PURITY = { '999':0.999, '916':0.916, '850':0.850, '750':0.750, '585':0.585, '375':0.375 };
+function agKaratKey(karatStr){ var m=/^(\d+)/.exec(String(karatStr||'').trim()); return m?m[1]:'916'; }
+function agMarginFor(key){
+  var m=(DATA.buyback&&DATA.buyback.margins)||{};
+  var v=m['m'+key];
+  return (v!==undefined&&v!=='') ? Number(v) : 15;
+}
+function agSellMarkup(){
+  var v=DATA.buyback&&DATA.buyback.sellMarkup;
+  return (v!==undefined&&v!=='') ? Number(v) : 30;
+}
+function agBuybackRate(karatStr){
+  var key=agKaratKey(karatStr);
+  var purity=AG_PURITY[key]||0.916;
+  return AG_RATE_999*purity - agMarginFor(key);
+}
+function agSellRate(karatStr){ return agBuybackRate(karatStr) + agSellMarkup(); }
+function agProductPrice(p){
+  var w=Number(p.weight_g)||0;
+  return Math.round(agSellRate(p.karat) * w);
+}
+async function agFetchRate(){
+  try{
+    var gRes = await fetch('https://api.gold-api.com/price/XAU');
+    if(!gRes.ok) throw new Error('gold fetch failed');
+    var gData = await gRes.json();
+    if(!gData.price || gData.price<500) throw new Error('bad gold price');
+    var usdPerOz = gData.price;
+    var fxRate = 1.338;
+    try{
+      var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
+      if(fxRes.ok){
+        var fxData = await fxRes.json();
+        var sgd = fxData.rates && fxData.rates.SGD;
+        if(sgd && sgd>1.2 && sgd<1.6) fxRate=sgd;
+      }
+    }catch(e2){ /* keep fallback FX */ }
+    AG_RATE_999 = (usdPerOz*fxRate)/31.1035;
+  }catch(e){ /* keep last known rate */ }
+  agRefreshPriceViews();
+}
+function agRefreshPriceViews(){
+  var v=document.querySelector('.view.active');
+  var id=v?v.id:'';
+  if(id==='view-products') renderProducts();
+  if(id==='view-featured') renderFeatured();
+  if(id==='view-dashboard') renderDash();
+  updateProdPricePreview();
+  renderSellMarkupPreview();
+}
+setInterval(agFetchRate, 20*1000);
 
 /* ============ UI ============ */
 var TITLES={
@@ -710,7 +779,7 @@ function showView(v){
   document.getElementById('tb-title').textContent=TITLES[v][0];
   document.getElementById('tb-sub').textContent=TITLES[v][1];
   if(v==='dashboard')renderDash();
-  if(v==='products')renderProducts();
+  if(v==='products'){renderProducts();renderSellMarkupPreview();}
   if(v==='featured')renderFeatured();
   if(v==='images')renderImages();
   if(v==='carousel')renderSlides();
@@ -774,6 +843,8 @@ function renderProducts(){
 }
 function pcard(p,i){
   if(i===undefined)i=DATA.products.indexOf(p);
+  var price=agProductPrice(p);
+  var rate=agSellRate(p.karat);
   return [
     '<div class="pcard '+(p.featured?'feat':'')+'">',
       '<div class="pc-top">',
@@ -782,7 +853,7 @@ function pcard(p,i){
         '<div class="pc-spec">'+esc(p.spec)+'</div></div>',
       '</div>',
       '<div class="pc-row">',
-        '<div class="pc-price">S$ '+(p.price||0).toLocaleString()+'</div>',
+        '<div><div class="pc-price">S$ '+price.toLocaleString()+'</div><div style="font-size:10.5px;color:var(--muted)">S$ '+rate.toFixed(2)+'/g nett</div></div>',
         '<div><span class="tag tag-gold">'+esc(p.karat)+'</span><span class="tag '+(p.cat==='pendants'?'tag-blue':'tag-green')+'">'+(p.cat==='pendants'?'Pendant':'Chain')+'</span></div>',
       '</div>',
       '<div class="pc-actions">',
@@ -803,14 +874,13 @@ function togFeat(i){
 var _prodImgData=null;
 function openProd(i){
   EDIT_I=i; _prodImgData=null;
-  var p=i>=0?DATA.products[i]:{name:'',spec:'',desc:'',price:'',retail:'',save:'',karat:'916 \u00b7 22K',cat:'chains',img:'assets/images/products/chain-20.jpeg',wa:'',featured:false};
+  var p=i>=0?DATA.products[i]:{name:'',spec:'',desc:'',weight_g:'',retail:'',karat:'916 \u00b7 22K',cat:'chains',img:'assets/images/products/chain-20.jpeg',wa:'',featured:false};
   document.getElementById('mp-title').textContent=i>=0?('Edit: '+p.name):'Add New Product';
   document.getElementById('mp-name').value=p.name||'';
   document.getElementById('mp-spec').value=p.spec||'';
   document.getElementById('mp-desc').value=p.desc||'';
-  document.getElementById('mp-price').value=p.price||'';
+  document.getElementById('mp-weight').value=p.weight_g||'';
   document.getElementById('mp-retail').value=p.retail||'';
-  document.getElementById('mp-save').value=p.save||'';
   document.getElementById('mp-karat').value=p.karat||'916 \u00b7 22K';
   document.getElementById('mp-cat').value=p.cat||'chains';
   document.getElementById('mp-feat').value=p.featured?'true':'false';
@@ -818,6 +888,7 @@ function openProd(i){
   document.getElementById('mp-imgprev').src=imgSrc(p.img);
   document.getElementById('mp-wa').value=p.wa||'';
   document.getElementById('mp-del').style.display=i>=0?'':'none';
+  updateProdPricePreview();
   openM('m-prod');
 }
 function prodImgPick(inp){
@@ -833,9 +904,8 @@ function saveProd(){
     name:name,
     spec:document.getElementById('mp-spec').value.trim(),
     desc:document.getElementById('mp-desc').value.trim(),
-    price:parseInt(document.getElementById('mp-price').value)||0,
+    weight_g:parseFloat(document.getElementById('mp-weight').value)||0,
     retail:parseInt(document.getElementById('mp-retail').value)||0,
-    save:parseInt(document.getElementById('mp-save').value)||0,
     karat:document.getElementById('mp-karat').value,
     cat:document.getElementById('mp-cat').value,
     img:document.getElementById('mp-img').value,
@@ -858,6 +928,40 @@ function delProd(){
   DATA.products.splice(EDIT_I,1);
   persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
   closeM('m-prod'); toast('Product deleted','info');
+}
+function updateProdPricePreview(){
+  var wEl=document.getElementById('mp-weight'), kEl=document.getElementById('mp-karat'), el=document.getElementById('mp-priceinfo');
+  if(!wEl||!kEl||!el) return;
+  var w=parseFloat(wEl.value)||0;
+  var rate=agSellRate(kEl.value);
+  el.innerHTML = w>0
+    ? ('<b>Auto price: S$ '+Math.round(rate*w).toLocaleString()+'</b> &nbsp;(S$ '+rate.toFixed(2)+'/g nett &times; '+w+'g)')
+    : 'Enter a weight to see the computed selling price.';
+}
+document.getElementById('mp-weight').addEventListener('input', updateProdPricePreview);
+document.getElementById('mp-karat').addEventListener('change', updateProdPricePreview);
+
+/* ============ SELLING PRICE FORMULA (single markup control) ============ */
+function saveSellMarkup(){
+  if(!DATA.buyback) DATA.buyback = {};
+  DATA.buyback.sellMarkup = parseFloat(document.getElementById('sp-markup').value)||0;
+  persist(); markEdit();
+  renderProducts(); renderFeatured(); renderDash(); renderSellMarkupPreview();
+  var msg = document.getElementById('sp-save-msg');
+  if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
+}
+function renderSellMarkupPreview(){
+  var el = document.getElementById('sp-markup');
+  if(el && document.activeElement!==el) el.value = (DATA.buyback&&DATA.buyback.sellMarkup!==undefined) ? DATA.buyback.sellMarkup : 30;
+  var tbl = document.getElementById('sp-preview');
+  if(!tbl) return;
+  var rows = ['999','916','850','750','585'].map(function(k){
+    var buy=agBuybackRate(k), sell=agSellRate(k);
+    return '<tr><td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px">'+k+'</td>'
+      +'<td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px;text-align:right">S$ '+buy.toFixed(2)+'/g</td>'
+      +'<td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px;text-align:right;font-weight:700;color:var(--g1)">S$ '+sell.toFixed(2)+'/g</td></tr>';
+  }).join('');
+  tbl.innerHTML = '<thead><tr><th style="text-align:left;padding:7px 4px;font-size:11px;color:var(--muted)">Karat</th><th style="text-align:right;padding:7px 4px;font-size:11px;color:var(--muted)">Buyback</th><th style="text-align:right;padding:7px 4px;font-size:11px;color:var(--muted)">Selling (nett)</th></tr></thead><tbody>'+rows+'</tbody>';
 }
 
 /* ============ FEATURED ============ */
@@ -1053,6 +1157,85 @@ function blockRange(html,startTag){
   return null;
 }
 
+/* ---- live price engine injected into index.html / collection.html ----
+   Self-contained: fetches live gold rate + FX itself (same source as
+   buyback.html), so product prices stay in sync with the buyback price
+   without needing a republish. Margins + markup are baked in as constants
+   and refreshed every publish. */
+function buildPriceEngineScript(){
+  var bb = DATA.buyback || {};
+  var margins = bb.margins || {};
+  function mv(k,def){ return (margins['m'+k]!==undefined && margins['m'+k]!=='') ? margins['m'+k] : def; }
+  var marginObj = "{ '999':"+mv('999',7)+", '916':"+mv('916',8.5)+", '850':"+mv('850',15)+", '750':"+mv('750',15)+", '585':"+mv('585',15)+", '375':15 }";
+  var markup = (bb.sellMarkup!==undefined && bb.sellMarkup!=='') ? bb.sellMarkup : 30;
+  return '<script>\n'
+    +'/* AG-PRICE-ENGINE:START — managed by ag-admin.html, do not edit by hand */\n'
+    +'var AGP_RATE_999 = 185.0;\n'
+    +'var AGP_MARGIN = '+marginObj+';\n'
+    +'var AGP_MARKUP = '+markup+';\n'
+    +"var AGP_PURITY = { '999':0.999, '916':0.916, '850':0.850, '750':0.750, '585':0.585, '375':0.375 };\n"
+    +'function agpKaratKey(k){ var m=/^(\\d+)/.exec(String(k||"").trim()); return m?m[1]:"916"; }\n'
+    +'function agpMarginFor(k){ return (AGP_MARGIN[k]!==undefined)?AGP_MARGIN[k]:15; }\n'
+    +'function agpSellRate(karatStr){ var k=agpKaratKey(karatStr); var purity=AGP_PURITY[k]||0.916; return AGP_RATE_999*purity - agpMarginFor(k) + AGP_MARKUP; }\n'
+    +'function agpFmt(n){ return n.toLocaleString("en-SG",{minimumFractionDigits:2,maximumFractionDigits:2}); }\n'
+    +'function agpPopulate(){\n'
+    +'  document.querySelectorAll("[data-agp-karat]").forEach(function(el){\n'
+    +'    var karat = el.getAttribute("data-agp-karat");\n'
+    +'    var weight = parseFloat(el.getAttribute("data-agp-weight"))||0;\n'
+    +'    var retail = parseFloat(el.getAttribute("data-agp-retail"))||0;\n'
+    +'    var rate = agpSellRate(karat);\n'
+    +'    var total = Math.round(rate*weight);\n'
+    +'    var a = el.querySelector(".agp-amt"); if(a) a.textContent = "S$ " + total.toLocaleString();\n'
+    +'    var r = el.querySelector(".agp-rate"); if(r) r.textContent = "S$ " + agpFmt(rate) + "/g";\n'
+    +'    var container = el.closest(".feat-body") || el.closest(".cc-body") || el.parentElement;\n'
+    +'    var s = container ? container.querySelector(".agp-save") : null;\n'
+    +'    if(s && retail) s.textContent = Math.max(0, retail-total).toLocaleString();\n'
+    +'  });\n'
+    +'}\n'
+    +'async function agpFetchRate(){\n'
+    +'  try{\n'
+    +'    var gRes = await fetch("https://api.gold-api.com/price/XAU");\n'
+    +'    if(!gRes.ok) throw new Error("gold fetch failed");\n'
+    +'    var gData = await gRes.json();\n'
+    +'    if(!gData.price || gData.price<500) throw new Error("bad gold price");\n'
+    +'    var usdPerOz = gData.price;\n'
+    +'    var fxRate = 1.338;\n'
+    +'    try{\n'
+    +'      var fxRes = await fetch("https://open.er-api.com/v6/latest/USD");\n'
+    +'      if(fxRes.ok){\n'
+    +'        var fxData = await fxRes.json();\n'
+    +'        var sgd = fxData.rates && fxData.rates.SGD;\n'
+    +'        if(sgd && sgd>1.2 && sgd<1.6) fxRate=sgd;\n'
+    +'      }\n'
+    +'    }catch(e2){}\n'
+    +'    AGP_RATE_999 = (usdPerOz*fxRate)/31.1035;\n'
+    +'  }catch(e){}\n'
+    +'  agpPopulate();\n'
+    +'}\n'
+    +'document.addEventListener("DOMContentLoaded", function(){\n'
+    +'  agpPopulate();\n'
+    +'  agpFetchRate();\n'
+    +'  setInterval(agpFetchRate, 20*1000);\n'
+    +'});\n'
+    +'/* AG-PRICE-ENGINE:END */\n'
+    +'<\/script>';
+}
+function injectPriceEngine(html){
+  var script = buildPriceEngineScript();
+  var si = html.indexOf('/* AG-PRICE-ENGINE:START');
+  if(si>=0){
+    var tagStart = html.lastIndexOf('<script', si);
+    var ei = html.indexOf('/* AG-PRICE-ENGINE:END */', si);
+    var tagEnd = ei>=0 ? html.indexOf('<\/script>', ei) + '<\/script>'.length : -1;
+    if(tagStart>=0 && tagEnd>0){
+      return html.slice(0,tagStart) + script + html.slice(tagEnd);
+    }
+  }
+  var bi = html.lastIndexOf('</body>');
+  if(bi<0) return html;
+  return html.slice(0,bi) + script + '\n' + html.slice(bi);
+}
+
 function patchIndex(html){
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
@@ -1075,8 +1258,8 @@ function patchIndex(html){
           +'    <div class="feat-body">'+NL
           +'      <h3>'+escHtml(p.name)+'</h3>'+NL
           +'      <div class="feat-spec">'+escHtml(p.spec)+'</div>'+NL
-          +'      <div class="feat-price">S$ '+Number(p.price).toLocaleString()+'</div>'+NL
-          +'      <div class="feat-save">&#10003; Save ~S$ '+(p.save||0).toLocaleString()+' vs retail new</div>'+NL
+          +'      <div class="feat-pricebox" data-agp-karat="'+escHtml(p.karat)+'" data-agp-weight="'+(p.weight_g||0)+'" data-agp-retail="'+(p.retail||0)+'"><div class="feat-price"><span class="agp-amt">S$ &mdash;</span> <span class="feat-nett">nett</span></div><div class="feat-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div>'+NL
+          +'      <div class="feat-save">&#10003; Save ~S$ <span class="agp-save">'+Math.max(0,(p.retail||0)-agProductPrice(p)).toLocaleString()+'</span> vs retail new</div>'+NL
           +'      <span class="feat-cta">'+WA+' Enquire on WhatsApp</span>'+NL
           +'    </div>'+NL
           +'  </a>';
@@ -1109,6 +1292,10 @@ function patchIndex(html){
   html=patchHeadings(html);
 
   /* ---- replaced images: swap src to new filenames is not needed; we keep same path ---- */
+
+  /* ---- live price engine (auto selling price = buyback + markup) ---- */
+  html=injectPriceEngine(html);
+
   return html;
 }
 
@@ -1165,10 +1352,12 @@ function patchCollection(html){
     var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
     return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="cc" data-cat="'+p.cat+'">'+NL
       +'  <div class="cc-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="cc-k">'+escHtml(p.karat)+'</span><span class="cc-xrf">&#10003; XRF</span></div>'+NL
-      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-price">S$ '+p.price.toLocaleString()+'</div><div class="cc-retail">Retail new: ~S$ '+(p.retail||0).toLocaleString()+'</div><div class="cc-save">&#10003; Save ~S$ '+(p.save||0).toLocaleString()+' vs retail</div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
+      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-pricebox" data-agp-karat="'+escHtml(p.karat)+'" data-agp-weight="'+(p.weight_g||0)+'" data-agp-retail="'+(p.retail||0)+'"><div class="cc-price"><span class="agp-amt">S$ &mdash;</span> <span class="cc-nett">nett</span></div><div class="cc-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div><div class="cc-retail">Retail new: ~S$ '+(p.retail||0).toLocaleString()+'</div><div class="cc-save">&#10003; Save ~S$ <span class="agp-save">'+Math.max(0,(p.retail||0)-agProductPrice(p)).toLocaleString()+'</span> vs retail</div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
       +'</a>';
   }).join(NL);
-  return html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
+  html = html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
+  html = injectPriceEngine(html);
+  return html;
 }
 
 /* ============ BUYBACK EDITOR ============ */
