@@ -764,7 +764,7 @@ function generatePdfReport(){
   const stamp = new Date().toISOString().slice(0,10);
   doc.save('AssureGold-Report-'+periodTxt.replace(/\s+/g,'')+'-'+stamp+'.pdf');
 }
-function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return 'AG-'+s; }
+function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return s; }
 function openCodeModal(){
   const m=document.createElement('div'); m.className='modal-center';
   m.innerHTML=`<div class="mbox">

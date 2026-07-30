@@ -107,7 +107,7 @@ body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(170deg,#f
 
     <!-- step: result -->
     <div id="resStep" class="hide">
-      <div class="codebig" id="codeOut">AG-XXXX</div>
+      <div class="codebig" id="codeOut">XXXX</div>
       <div class="codename hide" id="codeName"></div>
       <div class="row2">
         <button class="act ghost" id="copyCode">Copy code</button>
@@ -233,7 +233,7 @@ $('otpBtn').addEventListener('click', async ()=>{
   $('loginStep').classList.add('hide'); doGenerate();
 });
 
-function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return 'AG-'+s; }
+function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)]; return s; }
 
 async function doGenerate(){
   hideMsg();
