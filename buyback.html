@@ -275,6 +275,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
 .bpt-table tbody tr:hover{background:var(--gold-pale)}
 .bpt-footnote{font-size:11.5px;color:var(--sub);text-align:center;line-height:1.6;margin-bottom:8px;padding:0 4px}
 .bpt-updated{font-size:10.5px;color:var(--g1);font-weight:600;text-align:center;margin-bottom:16px}
+.bpt-updated.bpt-stale,.bb-calc-updated.bpt-stale{color:var(--red);font-size:11px}
 .bpt-calc-btn{width:100%;background:var(--ink);color:var(--gold-lt);border:0;border-radius:10px;padding:14px 18px;font-family:var(--sans);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .25s;letter-spacing:.02em}
 .bpt-calc-btn:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,23,27,.2)}
 .bb-calc-back{font-size:12.5px;color:var(--g1);cursor:pointer;margin-bottom:14px;display:inline-flex;align-items:center;gap:5px;font-weight:500}
@@ -329,7 +330,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
   <div class="bb-pricetable" id="bbPriceTable">
     <div class="bpt-head">
       <div class="bpt-title">Live Buyback Price from <em>Assure Gold</em></div>
-      <div class="bpt-nett">Prices change every 20 seconds with live market.<br/>WhatsApp us to confirm your quote.</div>
+      <div class="bpt-nett">Prices refresh live from the market.<br/>WhatsApp us to confirm your quote.</div>
     </div>
     <table class="bpt-table">
       <thead>
@@ -352,7 +353,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
       </tbody>
     </table>
     <div class="bpt-footnote">For Gold Jewellery with less than 14K Purity,<br/>please contact us for the current price</div>
-    <div class="bpt-updated">Prices updated as at: <span id="bptTime">Loading...</span></div>
+    <div class="bpt-updated" id="bptUpdatedWrap">Checking live rate&#8230;</div>
     <button class="bpt-calc-btn" onclick="bbShowCalc()">
       &#128181; Calculate the price of your gold &#8594;
     </button>
@@ -387,7 +388,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
     <a class="bb-calc-wa" id="calcWaBtn" href="https://wa.me/6593430242?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20a%20buyback%20quote." target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Get Exact Quote on WhatsApp
     </a>
-    <div class="bb-calc-updated">Updated: <span id="calcTime">&#8212;</span></div>
+    <div class="bb-calc-updated" id="calcUpdatedWrap">Checking live rate&#8230;</div>
   </div>
 
 </div>
@@ -485,6 +486,8 @@ document.querySelectorAll('.fq-btn').forEach(function(btn){
 
 var BB_RATE_999 = 185.0;  /* S$/g fallback — shown immediately before API loads */
 var BB_DEDUCT   = 5;      /* $5/g deduction from spot */
+var BB_LIVE      = false; /* true only when the last fetch actually succeeded */
+var BB_LAST_LIVE = null;  /* Date of the last successful live fetch */
 /* Per-purity margin (S$/g) deducted from spot. Controlled from the cloud editor. */
 var BB_MARGIN = { '999':7, '916':8.5, '850':15, '750':15, '585':15, '375':15 };
 function bbDeductFor(purity){
@@ -521,19 +524,30 @@ function bbPopulateTable() {
 }
 
 function bbSetTime() {
-  var now = new Date();
-  var sg  = now.toLocaleString('en-SG', {
-    timeZone: 'Asia/Singapore',
-    day:'2-digit', month:'2-digit', year:'numeric',
-    hour:'2-digit', minute:'2-digit', hour12: false
-  });
-  var t1 = document.getElementById('bptTime');
-  var t2 = document.getElementById('calcTime');
-  if (t1) t1.textContent = sg + ' SGT';
-  if (t2) t2.textContent = sg + ' SGT';
+  var wrap1 = document.getElementById('bptUpdatedWrap');
+  var wrap2 = document.getElementById('calcUpdatedWrap');
+  var sg = null;
+  if (BB_LIVE && BB_LAST_LIVE) {
+    sg = BB_LAST_LIVE.toLocaleString('en-SG', {
+      timeZone: 'Asia/Singapore',
+      day:'2-digit', month:'2-digit', year:'numeric',
+      hour:'2-digit', minute:'2-digit', hour12: false
+    }) + ' SGT';
+  }
+  if (wrap1) {
+    wrap1.classList.toggle('bpt-stale', !BB_LIVE);
+    wrap1.textContent = BB_LIVE
+      ? ('Prices updated as at: ' + sg)
+      : 'Live rate unavailable right now — prices below are indicative. Please confirm on WhatsApp.';
+  }
+  if (wrap2) {
+    wrap2.classList.toggle('bpt-stale', !BB_LIVE);
+    wrap2.textContent = BB_LIVE ? ('Updated: ' + sg) : 'Indicative price — please confirm on WhatsApp';
+  }
 }
 
 async function bbFetchRate() {
+  var ok = false;
   try {
     /* Step 1: gold price in USD per troy ounce */
     var gRes = await fetch('https://api.gold-api.com/price/XAU');
@@ -555,10 +569,14 @@ async function bbFetchRate() {
 
     /* Step 3: convert to S$ per gram (999 pure) */
     BB_RATE_999 = (usdPerOz * fxRate) / 31.1035;
+    ok = true;
 
   } catch(e) {
-    /* API failed — keep current BB_RATE_999 (fallback or last known) */
+    /* API failed — keep current BB_RATE_999 (fallback or last known live rate) */
   }
+
+  BB_LIVE = ok;
+  if (ok) BB_LAST_LIVE = new Date();
 
   /* Always update display regardless of API success/failure */
   bbPopulateTable();
@@ -628,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function() {
   bbPopulateTable();  /* show fallback prices immediately — table never blank */
   bbSetTime();
   bbFetchRate();      /* fetch live rate in background */
-  setInterval(bbFetchRate, 20 * 1000);  /* refresh every 20 seconds — live market */
+  setInterval(bbFetchRate, 60 * 1000);  /* refresh every 60 seconds */
 });
 
 </script>
