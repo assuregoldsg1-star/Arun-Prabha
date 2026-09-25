@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8"/>
 <title>Preloved Rope Chains Singapore | 916 & 999 Gold — Assure Gold</title>
-<meta name="description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-verified to 4 decimals, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
+<meta name="description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-tested, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
 <meta name="keywords" content="preloved rope chains singapore, rope chains singapore, rope chains men, used gold chain singapore, preloved gold chain, 916 rope chain singapore, mens gold rope chain"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="geo.region" content="SG"/>
@@ -20,13 +20,13 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://assuregold.sg/collection.html"/>
 <meta property="og:title" content="Preloved Rope Chains Singapore | 916 & 999 Gold — Assure Gold"/>
-<meta property="og:description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-verified to 4 decimals, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
+<meta property="og:description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-tested, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
 <meta property="og:image" content="https://assuregold.sg/assets/images/logo.png"/>
 <meta property="og:locale" content="en_SG"/>
 <meta property="og:site_name" content="Assure Gold"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Preloved Rope Chains Singapore | 916 & 999 Gold — Assure Gold"/>
-<meta name="twitter:description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-verified to 4 decimals, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
+<meta name="twitter:description" content="Browse preloved rope chains in Singapore — 916 & 999 used gold, XRF-tested, No GST charged. Men’s & women’s gold rope chains at live gold-rate prices. Assure Gold."/>
 <meta name="twitter:image" content="https://assuregold.sg/assets/images/logo.png"/>
 <link rel="icon" type="image/png" href="assets/images/logo.png"/>
 <link rel="apple-touch-icon" href="assets/images/logo.png"/>
@@ -437,5 +437,15 @@ document.addEventListener("DOMContentLoaded", function(){
   setInterval(agpFetchRate, 60*1000);
 });
 /* AG-PRICE-ENGINE:END */
+</script>
+<script>
+/* Count contact clicks without sending phone numbers or message contents. */
+document.addEventListener('click', function(event) {
+  var link = event.target.closest && event.target.closest('a[href]');
+  if (!link || typeof gtag !== 'function') return;
+  var href = link.getAttribute('href') || '';
+  var method = /^https:\/\/wa\.me\//i.test(href) ? 'whatsapp' : (/^tel:/i.test(href) ? 'phone' : '');
+  if (method) gtag('event', 'contact_click', {contact_method: method, page_path: location.pathname});
+});
 </script>
 </body></html>
