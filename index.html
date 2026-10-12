@@ -54,7 +54,7 @@
   --cinzel:"Manrope",sans-serif;
   --spring:cubic-bezier(.34,1.56,.64,1);
   --ease:cubic-bezier(.25,.46,.45,.94);
-  --pad:clamp(20px,5vw,72px);--r:12px;--max-w:1200px;
+  --pad:clamp(20px,5vw,72px);--r:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto}
@@ -67,8 +67,7 @@ a{text-decoration:none;color:inherit}
 .ga{background:linear-gradient(270deg,#c6992f,#ae8a3e,#8c6d2e,#c39a4e,#c6992f);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldShift 5s ease infinite}
 
 /* ─── NAV ─── */
-#nav{position:fixed;inset:0 0 auto;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);transition:box-shadow .3s;padding:0 var(--pad)}
-.nav-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+#nav{position:fixed;inset:0 0 auto;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:10px var(--pad);background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
 #nav.scrolled{box-shadow:0 2px 28px rgba(20,23,27,.1)}
 .nav-brand{display:flex;align-items:center;gap:11px;text-decoration:none}
 /* Logo: black scripted A on transparent — NO circle crop, NO border */
@@ -108,8 +107,6 @@ a{text-decoration:none;color:inherit}
 .section{padding:88px var(--pad)}
 .section-grey{background:var(--off)}
 .section-warm{background:var(--warm)}
-/* PC max-width container — centres content on wide screens */
-.section-inner{max-width:var(--max-w);margin:0 auto;width:100%}
 .sh{text-align:center;max-width:740px;margin:0 auto 56px}
 .eyebrow{font-family:var(--cinzel);font-size:11px;letter-spacing:.22em;color:#1C1814;display:block;margin-bottom:12px;text-transform:uppercase}
 .sh h2{font-family:var(--serif);font-size:clamp(32px,4.5vw,56px);font-weight:400;line-height:1.06;letter-spacing:-.018em;color:var(--ink)}
@@ -582,16 +579,6 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:52px var
   .sh h2{font-size:clamp(23px,7.5vw,32px)}
   .btn-gold,.btn-ghost,.btn-wa{font-size:12px;padding:13px 20px}
 }
-/* ── DESKTOP / WIDE SCREEN FIX ── */
-@media(min-width:1280px){
-  :root{--pad:max(40px,calc((100vw - var(--max-w)) / 2))}
-  .section{padding:96px var(--pad)}
-  #nav{padding:0 var(--pad)}
-  footer{padding:52px var(--pad) 24px}
-  #goldbar-section{padding:80px var(--pad)}
-  #cta-section{padding:88px var(--pad)}
-}
-
 /* prevent any horizontal overflow site-wide */
 html,body{max-width:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 img,svg,video{max-width:100%}
@@ -739,7 +726,6 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 
 <!-- NAV -->
 <header id="nav">
-  <div class="nav-inner">
   <a href="index.html" class="nav-brand">
     <img src="assets/images/logo.png" alt="Assure Gold Singapore - preloved gold dealer logo" class="nav-logo-img"/>
     <span class="nav-name">ASSURE GOLD</span>
@@ -749,7 +735,6 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <a href="collection.html">Collection</a>
     <a href="buyback.html">Buyback</a>
     <a href="#trust">Trust</a>
-    <a href="verify.html">Verify</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="nav-right">
@@ -758,14 +743,12 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     </a>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-  </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="collection.html">Collection</a>
   <a href="buyback.html">Buyback</a>
   <a href="#trust">Trust &amp; Licence</a>
-  <a href="verify.html">✓ Verify</a>
   <a href="https://wa.me/6593430242" target="_blank">&#128172; WhatsApp Us</a>
 </div>
 
