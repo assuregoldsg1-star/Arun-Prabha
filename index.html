@@ -1,1017 +1,1816 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assure Gold — Fine Gold Jewellery Singapore</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4W2BF830X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4W2BF830X');
+</script>
+
+<meta charset="UTF-8"/>
+<title>Sell Gold Singapore | Gold Buyback & Jewellery | Assure Gold</title>
+<meta name="description" content="Sell old gold in Singapore with Assure Gold. Gold buyback with in-person weighing and XRF testing in Canberra by appointment. Request a WhatsApp quote."/>
+<meta name="keywords" content="assure gold, assure gold singapore, preloved gold singapore, used gold singapore, preloved rope chains singapore, rope chain preloved, rope chains singapore, 916 gold singapore, 999 gold chain, sell gold singapore"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="geo.region" content="SG"/>
+<meta name="geo.placename" content="Singapore"/>
+<link rel="canonical" href="https://assuregold.sg/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://assuregold.sg/"/>
+<meta property="og:title" content="Sell Gold Singapore | Gold Buyback & Jewellery | Assure Gold"/>
+<meta property="og:description" content="Sell old gold in Singapore with Assure Gold. Gold buyback with in-person weighing and XRF testing in Canberra by appointment. Request a WhatsApp quote."/>
+<meta property="og:image" content="https://assuregold.sg/assets/images/logo.png"/>
+<meta property="og:locale" content="en_SG"/>
+<meta property="og:site_name" content="Assure Gold"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Sell Gold Singapore | Gold Buyback & Jewellery | Assure Gold"/>
+<meta name="twitter:description" content="Sell old gold in Singapore with Assure Gold. Gold buyback with in-person weighing and XRF testing in Canberra by appointment. Request a WhatsApp quote."/>
+<meta name="twitter:image" content="https://assuregold.sg/assets/images/logo.png"/>
+<link rel="icon" type="image/png" href="assets/images/logo.png"/>
+<link rel="apple-touch-icon" href="assets/images/logo.png"/>
+<meta name="theme-color" content="#14171b"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* =====================================================
+   ASSURE GOLD — Full Premium CSS
+   ===================================================== */
+:root{
+  --white:#fff;--off:#ffffff;--warm:#ffffff;--paper:#f4f3ef;
+  --ink:#14171b;--text:#242220;--sub:#5b5a56;--muted:#847f74;
+  --g0:#c39a4e;--g1:#ae8a3e;--g2:#8c6d2e;
+  --gold-lt:#c6992f;--gold-pale:#fafaf9;
+  --line:rgba(174,138,62,.18);--ls:rgba(20,23,27,.07);
+  --wa:#25d366;--green:#16a34a;--red:#9e2a3e;--red-deep:#7f2131;
+  --serif:"Libre Caslon Display",Georgia,serif;
+  --sans:"Manrope",system-ui,sans-serif;
+  --cinzel:"Manrope",sans-serif;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --pad:clamp(20px,5vw,72px);--r:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--g1);color:#fff}
 
-  :root {
-    --gold: #B8973A;
-    --gold-light: #D4B96A;
-    --gold-pale: #F5EDD5;
-    --gold-faint: #FAF5E8;
-    --cream: #FDFAF3;
-    --warm-white: #FFFEF9;
-    --text-dark: #1C1710;
-    --text-mid: #5A4E38;
-    --text-light: #9A8E76;
-    --border: rgba(184,151,58,0.18);
-    --border-soft: rgba(184,151,58,0.10);
-  }
+@keyframes goldShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.ga{background:linear-gradient(270deg,#c6992f,#ae8a3e,#8c6d2e,#c39a4e,#c6992f);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldShift 5s ease infinite}
 
-  html { scroll-behavior: smooth; }
+/* ─── NAV ─── */
+#nav{position:fixed;inset:0 0 auto;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:10px var(--pad);background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+#nav.scrolled{box-shadow:0 2px 28px rgba(20,23,27,.1)}
+.nav-brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+/* Logo: black scripted A on transparent — NO circle crop, NO border */
+.nav-logo-img{width:44px;height:44px;object-fit:contain;display:block}
+.nav-name{font-family:var(--cinzel);font-size:15px;letter-spacing:.28em;color:var(--ink);font-weight:600}
+.nav-links{display:flex;gap:22px}
+.nav-links a{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);font-weight:500;transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1.5px;background:var(--g1);transform:scaleX(0);transform-origin:right;transition:transform .35s}
+.nav-links a:hover{color:var(--g1)}.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-wa{display:flex;align-items:center;gap:7px;padding:9px 18px;background:var(--red);border-radius:999px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-weight:600;transition:background .2s,transform .2s}
+.nav-wa:hover{background:var(--red-deep);transform:translateY(-1px)}
+.wdot{width:7px;height:7px;border-radius:50%;background:var(--wa);animation:wap 2s infinite;flex-shrink:0}
+@keyframes wap{0%{box-shadow:0 0 0 0 rgba(37,211,102,.7)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:62px 0 0;background:rgba(255,255,255,.98);backdrop-filter:blur(6px);z-index:899;display:flex;flex-direction:column;padding:24px var(--pad);gap:22px;transform:translateX(100%);transition:transform .4s var(--spring)}
+.mobile-menu.open{transform:none}
+.mobile-menu a{font-family:var(--cinzel);font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ls);padding-bottom:18px;transition:color .2s}
+.mobile-menu a:hover{color:var(--g1)}
+@media(max-width:860px){.nav-links{display:none}.nav-wa .nav-wa-txt{display:none}.nav-wa{padding:9px 12px}.hamburger{display:flex}}
 
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--warm-white);
-    color: var(--text-dark);
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+/* ─── BUTTONS ─── */
+.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--red);color:#fff;border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:all .3s;border:0;cursor:pointer;line-height:1;box-shadow:0 4px 18px rgba(158,42,62,.28)}
+.btn-gold:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 8px 28px rgba(158,42,62,.4)}
+.btn-ghost-light{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1.5px solid rgba(174,138,62,.5);border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);font-weight:500;transition:all .3s;cursor:pointer;background:rgba(174,138,62,.06);line-height:1;backdrop-filter:blur(4px)}
+.btn-ghost-light:hover{background:var(--g1);color:#fff;border-color:var(--g1)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1.5px solid var(--g1);border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--g1);font-weight:500;transition:all .3s;cursor:pointer;background:transparent;line-height:1}
+.btn-ghost:hover{background:var(--g1);color:#fff}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:var(--wa);color:#fff;border-radius:999px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;box-shadow:0 8px 28px rgba(37,211,102,.3);transition:all .4s;border:0;cursor:pointer}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(37,211,102,.4);background:#1cb958}
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(253,250,243,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-soft);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px;
-    height: 72px;
-  }
+/* ─── SECTIONS ─── */
+.section{padding:88px var(--pad)}
+.section-grey{background:var(--off)}
+.section-warm{background:var(--warm)}
+.sh{text-align:center;max-width:740px;margin:0 auto 56px}
+.eyebrow{font-family:var(--cinzel);font-size:11px;letter-spacing:.22em;color:#1C1814;display:block;margin-bottom:12px;text-transform:uppercase}
+.sh h2{font-family:var(--serif);font-size:clamp(32px,4.5vw,56px);font-weight:400;line-height:1.06;letter-spacing:-.018em;color:var(--ink)}
+.sh h2 em{font-style:italic}
+.sh p{font-size:17px;line-height:1.75;color:var(--sub);margin-top:14px;font-family:var(--serif);font-style:italic}
 
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--text-dark);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
+/* =====================================================
+   HERO CAROUSEL — Shorter (65vh), 2-col layout, 4s
+   ===================================================== */
+#hero{position:relative;overflow:hidden;background:#faf6ee}
+.hero-carousel{
+  position:relative;width:100%;
+  height:100vh;min-height:560px;
+  overflow:hidden;
+}
+/* Each slide: full-bleed photo background, text overlaid on a dark scrim */
+.hero-slide{
+  position:absolute;inset:0;z-index:0;
+  display:flex;align-items:center;
+  padding:0 var(--pad);
+  background-size:cover;background-position:center;
+  opacity:0;visibility:hidden;
+}
+.hero-slide.active{opacity:1;visibility:visible}
+.hero-slide::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(20,23,27,.80) 0%,rgba(20,23,27,.48) 46%,rgba(20,23,27,.14) 75%,transparent 100%)}
+.hs1{background-image:url('assets/images/rope-chain-red.jpg')}
+.sld-video{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover}
+.hs2{background-image:url('assets/images/new-arrivals.jpg')}
+.hs3{background-image:url('assets/images/products/chain-14.jpeg')}
+.hs4{background-image:url('assets/images/products/chain-09.jpeg')}
+.hs5{background-image:url('assets/images/license.jpeg')}
+/* Gold line top */
+.hero-slide::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;z-index:1;background:linear-gradient(90deg,transparent,rgba(174,138,62,.7) 30%,var(--g1) 50%,rgba(174,138,62,.7) 70%,transparent);opacity:0}
+.hero-slide.active::after{opacity:1}
 
-  .nav-links {
-    display: flex; gap: 36px; list-style: none;
-  }
-  .nav-links a {
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-mid); text-decoration: none; font-weight: 400;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+/* Text overlay */
+.sld-text{position:relative;z-index:2;max-width:600px}
+.sld-badge{display:inline-block;font-family:var(--cinzel);font-size:9px;letter-spacing:.36em;color:#F4EDDC;border:1px solid rgba(244,237,220,.4);border-radius:999px;padding:5px 14px;margin-bottom:14px;background:rgba(255,255,255,.08)}
+.sld-ey{font-family:var(--cinzel);font-size:12px;letter-spacing:.56em;color:#D9BE85;text-transform:uppercase;display:block;margin-bottom:16px}
+.sld-h1{font-family:var(--serif);font-size:clamp(40px,6vw,92px);line-height:.88;font-weight:300;letter-spacing:-.025em;color:#ffffff;margin-bottom:20px}
+.sld-h1 em{font-style:italic;color:var(--gold-lt)}
+.sld-sub{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,.75);margin-bottom:30px;line-height:1.7;max-width:500px}
+.sld-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-ghost-light{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1.5px solid rgba(255,255,255,.55);border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#fff;font-weight:500;transition:all .3s;cursor:pointer;background:rgba(255,255,255,.08);line-height:1;backdrop-filter:blur(4px)}
+.btn-ghost-light:hover{background:rgba(255,255,255,.18)}
 
-  .nav-cta {
-    background: var(--gold);
-    color: #fff;
-    padding: 10px 24px;
-    border: none; cursor: pointer;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    font-weight: 400;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+/* Carousel controls */
+.carousel-arrows{position:absolute;top:50%;z-index:10;width:100%;display:flex;justify-content:space-between;padding:0 14px;pointer-events:none;transform:translateY(-50%)}
+.carousel-arrow{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:15px;cursor:pointer;pointer-events:auto;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.carousel-arrow:hover{background:var(--g1);border-color:var(--g1);color:#fff}
+.carousel-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:1.5px solid rgba(255,255,255,.55);cursor:pointer;transition:all .4s;padding:0}
+.carousel-dot.active{background:var(--g1);border-color:var(--g1);transform:scale(1.35)}
+.carousel-progress{position:absolute;bottom:0;left:0;z-index:10;height:3px;background:linear-gradient(90deg,var(--gold-lt),var(--g1));width:0%}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    background: var(--cream);
-    overflow: hidden;
-  }
+/* Stats row under carousel */
+.hero-stats{display:flex;justify-content:center;background:var(--ink);border-top:2px solid rgba(174,138,62,.3)}
+.hs{padding:15px 22px;text-align:center;border-right:1px solid rgba(174,138,62,.14);flex:1}
+.hs:last-child{border-right:0}
+.hs-n{font-family:Inter,system-ui,sans-serif;font-size:clamp(18px,2.5vw,30px);font-weight:700;line-height:1;display:block;color:#1C1814}
+.hs-l{font-family:var(--cinzel);font-size:8.5px;letter-spacing:.2em;color:rgba(217,190,133,.42);display:block;margin-top:4px;text-transform:uppercase}
+@media(max-width:720px){
+  .hero-slide{padding:0 22px;text-align:center;justify-content:center}
+  .sld-text{max-width:460px;margin:0 auto}
+  .sld-sub{max-width:100%;margin-left:auto;margin-right:auto}
+  .sld-ctas{justify-content:center}
+  .hero-stats{flex-wrap:wrap}
+  .hs{min-width:50%;border-bottom:1px solid rgba(174,138,62,.14)}
+  .hs:nth-child(2n){border-right:0}.hs:nth-last-child(-n+2){border-bottom:0}
+  .carousel-dots{bottom:18px}
+  .carousel-arrows{top:42%}
+}
+@media(max-width:440px){
+  .sld-h1{font-size:clamp(32px,9vw,48px)}
+  .carousel-arrow{width:36px;height:36px;font-size:13px}
+  .carousel-arrows{padding:0 6px}
+}
 
-  .hero-bg-ornament {
-    position: absolute; right: -80px; top: 50%;
-    transform: translateY(-50%);
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    border: 1px solid rgba(184,151,58,0.12);
-    pointer-events: none;
-  }
-  .hero-bg-ornament::before {
-    content: '';
-    position: absolute; inset: 40px;
-    border-radius: 50%;
-    border: 1px solid rgba(184,151,58,0.10);
-  }
-  .hero-bg-ornament::after {
-    content: '';
-    position: absolute; inset: 80px;
-    border-radius: 50%;
-    border: 1px solid rgba(184,151,58,0.08);
-  }
+/* ─── MARQUEE ─── */
+.marquee{overflow:hidden;padding:15px 0;background:var(--ink);border-top:none}
+.mq-track{display:flex;gap:48px;white-space:nowrap;animation:mqa 28s linear infinite;font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(217,190,133,.78)}
+.mq-track span{flex-shrink:0}
+@keyframes mqa{to{transform:translateX(-50%)}}
 
-  .hero-content { max-width: 620px; position: relative; z-index: 1; }
+/* ─── WHY COLS ─── */
+.why-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
+.why-col{padding:32px 26px;border:1px solid var(--line);border-radius:var(--r);background:var(--white);position:relative;overflow:hidden;transition:box-shadow .4s,transform .4s}
+.why-col:hover{box-shadow:0 14px 40px rgba(174,138,62,.12);transform:translateY(-5px)}
+.why-col::before{content:"";position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,transparent,var(--g1),transparent);transform:scaleX(0);transform-origin:left;transition:transform .6s}
+.why-col:hover::before{transform:scaleX(1)}
+.wc-icon{font-size:30px;margin-bottom:13px;display:block}
+.wc-n{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:9px}
+.wc-p{font-size:15px;line-height:1.76;color:var(--sub);margin-bottom:13px}
+.wc-tag{font-family:var(--cinzel);font-size:9px;letter-spacing:.2em;color:var(--g1);padding:5px 12px;border:1px solid rgba(174,138,62,.3);border-radius:999px}
+@media(max-width:720px){.why-cols{grid-template-columns:1fr}}
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--gold-faint);
-    border: 1px solid var(--border);
-    padding: 6px 16px;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); font-weight: 400;
-    margin-bottom: 32px;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: inline-block;
-  }
+/* =====================================================
+   3D GOLD BAR SECTION (Standalone dark section)
+   ===================================================== */
+.gbchain-frame{position:relative;width:min(340px,32vw);animation:gbFloat 5s ease-in-out infinite}
+.gbchain-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 40%;border-radius:16px;border:3px solid rgba(217,190,133,.4);box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px rgba(174,138,62,.3)}
+.gbchain-glow{position:absolute;inset:-30px;background:radial-gradient(ellipse,rgba(174,138,62,.18),transparent 70%);z-index:-1;pointer-events:none}
+@keyframes gbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+#goldbar-section{
+  background:var(--warm);padding:80px var(--pad);
+  display:flex;align-items:center;gap:clamp(40px,6vw,96px);
+  justify-content:center;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+#goldbar-section::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 50%,rgba(174,138,62,.08),transparent 66%);
+  pointer-events:none
+}
+/* The large interactive 3D bar */
+#gb3d{
+  position:relative;width:min(320px,34vw);
+  transform-style:preserve-3d;
+  cursor:grab;flex-shrink:0;
+}
+#gb3d:active{cursor:grabbing}
+.gb3d-bar{
+  width:100%;aspect-ratio:2.4/1;
+  background:linear-gradient(148deg,
+    #fdf0a0 0%,#c6992f 6%,#e8c040 14%,
+    #c8901a 26%,#a86c0a 38%,#d4a030 49%,
+    #c6992f 56%,#d4a030 64%,#8c6d2e 76%,
+    #c89018 86%,#f0c848 100%);
+  border-radius:6px 6px 3px 3px;
+  position:relative;overflow:hidden;
+  box-shadow:
+    0 0 0 1.5px rgba(100,58,0,.55),
+    0 7px 0 #7a5a00,0 13px 0 #5a3e00,
+    0 18px 0 #3a2800,0 22px 44px rgba(0,0,0,.65),
+    inset 0 2px 0 rgba(255,255,255,.58),
+    inset 0 -2px 0 rgba(0,0,0,.28);
+  animation:gb3dFloat 4.5s ease-in-out infinite;
+}
+@keyframes gb3dFloat{
+  0%,100%{transform:rotateX(4deg) rotateY(-10deg)}
+  50%{transform:rotateX(-2deg) rotateY(7deg) translateY(-16px)}
+}
+.gb3d-bar::before{
+  content:"999.9\A FINE GOLD";white-space:pre;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--cinzel);font-size:clamp(7px,1.3vw,11px);
+  letter-spacing:.3em;color:rgba(72,42,0,.8);text-align:center;line-height:1.7
+}
+.gb3d-bar::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(112deg,transparent 20%,rgba(255,255,255,.48) 42%,rgba(255,255,255,.08) 53%,transparent 70%);
+  animation:gb3dShine 4s ease-in-out infinite
+}
+@keyframes gb3dShine{0%,100%{transform:translateX(-130%)}54%{transform:translateX(130%)}}
+.gb3d-side{width:100%;height:18px;background:linear-gradient(180deg,#7a5a00,#5a3e00 55%,#3a2800);border-radius:0 0 3px 3px;box-shadow:0 7px 20px rgba(0,0,0,.55)}
+.gb3d-shadow{width:76%;height:12px;margin:12px auto 0;background:radial-gradient(ellipse,rgba(0,0,0,.48),transparent 70%);filter:blur(5px)}
+/* Small second bar floating behind */
+.gb3d-bar2{
+  position:absolute;top:-24px;right:-28px;width:52%;
+  transform:rotate(11deg);opacity:.6;
+  animation:gb3dFloat2 5.5s ease-in-out infinite;animation-delay:-.7s
+}
+@keyframes gb3dFloat2{
+  0%,100%{transform:rotate(11deg) rotateX(6deg) rotateY(9deg)}
+  50%{transform:rotate(11deg) rotateX(-3deg) rotateY(-6deg) translateY(-10px)}
+}
 
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 6vw, 82px);
-    font-weight: 300;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    color: var(--text-dark);
-    margin-bottom: 24px;
-  }
-  .hero h1 em { font-style: italic; color: var(--gold); }
+/* Gold bar copy */
+.gb3d-copy{max-width:400px;position:relative;z-index:1}
+.gb3d-copy .eyebrow{color:#1C1814}
+.gb3d-copy h2{font-family:var(--serif);font-size:clamp(28px,3.8vw,50px);font-weight:300;line-height:1.05;color:var(--ink);margin-bottom:14px;letter-spacing:-.016em}
+.gb3d-copy h2 em{font-style:italic;color:var(--gold-lt)}
+.gb3d-copy p{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--sub);line-height:1.76;margin-bottom:26px}
+.gb3d-facts{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:30px}
+.gbf{text-align:center}
+.gbf-n{font-family:var(--serif);font-size:clamp(22px,2.8vw,30px);font-weight:500;color:var(--g1);display:block;line-height:1}
+.gbf-l{font-family:var(--cinzel);font-size:8px;letter-spacing:.2em;color:var(--muted);margin-top:3px;display:block}
 
-  .hero p {
-    font-size: 16px; color: var(--text-mid);
-    max-width: 480px; margin-bottom: 48px;
-    line-height: 1.8;
-  }
+/* ─── LICENCE (364px = +30% from 280px) ─── */
+.lic-strip{max-width:1100px;margin:0 auto;background:var(--gold-pale);border:1px solid rgba(174,138,62,.25);border-radius:var(--r);padding:48px 52px}
+.lic-top{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:start}
+.lic-copy h3{font-family:var(--serif);font-size:clamp(24px,3vw,38px);font-weight:400;margin-bottom:14px;color:var(--ink);line-height:1.06}
+.lic-copy h3 em{font-style:italic}
+.lic-copy p{font-size:16px;line-height:1.78;color:var(--sub);margin-bottom:18px}
+.lic-badge{display:inline-block;font-family:var(--cinzel);font-size:10px;letter-spacing:.24em;color:var(--g1);padding:8px 18px;border:1px solid rgba(174,138,62,.35);border-radius:999px;margin-bottom:16px}
+.verify-links{display:flex;flex-direction:column;gap:8px}
+.verify-link{font-size:13px;color:var(--muted);font-family:var(--cinzel);letter-spacing:.1em}
+.verify-link a{color:var(--g1);text-decoration:underline}
+/* KEY FIX: 364px = 280px * 1.3 */
+.lic-img-wrap{
+  width:min(364px,38vw);flex-shrink:0;
+  border-radius:8px;overflow:hidden;
+  border:2px solid rgba(174,138,62,.3);
+  box-shadow:0 24px 70px rgba(20,23,27,.15);
+  position:relative;background:#fff
+}
+.lic-img-wrap img{width:100%;display:block}
+.lic-img-wrap::after{content:"";position:absolute;inset:0;border:10px solid rgba(174,138,62,.07);pointer-events:none;border-radius:6px}
+@media(max-width:720px){.lic-strip{padding:28px 22px}.lic-top{grid-template-columns:1fr;gap:24px}.lic-img-wrap{width:100%;max-width:380px;margin:0 auto}}
 
-  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+/* ─── COMPARE ─── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;margin:0 auto;position:relative}
+.cbox{border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
+.cbox-h{padding:20px 22px 16px}.cbox-h h3{font-family:var(--serif);font-size:18px;font-style:italic;margin-bottom:7px;color:var(--ink)}
+.cbox-badge{font-family:var(--cinzel);font-size:9px;letter-spacing:.16em;padding:4px 11px;border-radius:999px}
+.cbox-b{padding:0 22px 16px}.cbox-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--ls);font-size:14px}.cbox-row:last-of-type{border:0}.cbox-lbl{color:var(--sub)}
+.cbox-tot{padding:14px 22px;border-top:2px solid;display:flex;justify-content:space-between;align-items:baseline}
+.cbox-tot-lbl{font-family:Inter,system-ui,sans-serif;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.cbox-tot-val{font-family:Inter,system-ui,sans-serif;font-size:36px;font-weight:800;line-height:1}
+.cbox.bad{background:rgba(158,42,62,.03)}.cbox.bad .cbox-h{background:rgba(158,42,62,.04)}.cbox.bad .cbox-badge{background:rgba(158,42,62,.1);color:#9e2a3e;border:1px solid rgba(158,42,62,.22)}.cbox.bad .neg{color:#9e2a3e}.cbox.bad .cbox-tot{border-color:rgba(158,42,62,.2)}.cbox.bad .cbox-tot-val{color:#9e2a3e}
+.cbox.good{background:rgba(174,138,62,.04);border-color:rgba(174,138,62,.32);position:relative}.cbox.good::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-lt),var(--g1),var(--g2))}.cbox.good .cbox-h{background:rgba(174,138,62,.05)}.cbox.good .cbox-badge{background:rgba(174,138,62,.1);color:var(--g2);border:1px solid rgba(174,138,62,.28)}.cbox.good .pos{color:var(--green)}.cbox.good .cbox-tot{border-color:var(--g1)}.cbox.good .cbox-tot-val{color:#1C1814}
+.vs-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border:1.5px solid var(--g1);border-radius:50%;background:var(--white);font-family:var(--cinzel);font-size:9px;color:var(--g1);display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 2px 10px rgba(174,138,62,.15)}
+.cmp-quote{text-align:center;max-width:620px;margin:36px auto 0;font-family:var(--serif);font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--sub);line-height:1.6}
+.cmp-quote em{color:var(--g1)}.cmp-quote cite{display:block;margin-top:10px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;font-style:normal;color:var(--muted);font-family:var(--cinzel)}
+@media(max-width:580px){.cmp{grid-template-columns:1fr}}
 
-  .btn-primary {
-    background: var(--gold);
-    color: #fff; border: none;
-    padding: 16px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    cursor: pointer; font-weight: 400;
-    text-decoration: none; display: inline-block;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .btn-primary:hover { background: #9E7D2A; transform: translateY(-2px); }
+/* ─── PRODUCT CARDS ─── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto 40px}
+.feat-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white);text-decoration:none;color:inherit;transition:transform .4s,box-shadow .4s}
+.feat-card:hover{transform:translateY(-8px);box-shadow:0 22px 60px rgba(20,23,27,.12)}
+.feat-img{position:relative;aspect-ratio:1;overflow:hidden;background:var(--paper)}
+.feat-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.feat-card:hover .feat-img img{transform:scale(1.06)}
+.feat-k{position:absolute;top:11px;left:11px;font-family:var(--cinzel);font-size:9px;letter-spacing:.16em;color:var(--g2);background:rgba(255,255,255,.92);border:1px solid rgba(174,138,62,.4);border-radius:999px;padding:5px 12px}
+.feat-xrf{position:absolute;top:11px;right:11px;font-family:var(--cinzel);font-size:9px;background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.3);border-radius:999px;padding:5px 10px}
+.feat-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.feat-body h3{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:5px;line-height:1.15}
+.feat-spec{font-family:var(--cinzel);font-size:9px;letter-spacing:.14em;color:var(--muted);margin-bottom:11px}
+.feat-pricebox{margin-bottom:3px}
+.feat-price{font-family:Inter,system-ui,sans-serif;font-size:26px;color:#1C1814;font-weight:700;display:flex;align-items:baseline;gap:6px}
+.feat-nett{font-family:var(--cinzel);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g1);font-weight:600}
+.feat-rate{font-size:12px;color:var(--muted);margin-top:1px}
+.feat-save{font-size:13px;color:#1C1814;font-weight:500;margin-bottom:13px}
+.feat-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;background:#f5f0e4;color:var(--g2);border:1.5px solid rgba(174,138,62,.35);font-family:var(--cinzel);font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border-radius:999px;transition:all .2s;margin-top:auto}
+.feat-cta:hover{background:var(--g1);color:#fff;border-color:var(--g1)}
+.feat-cta svg{width:14px;height:14px;flex-shrink:0}
+@media(max-width:860px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.feat-grid{grid-template-columns:1fr}}
 
-  .btn-outline {
-    background: transparent;
-    color: var(--text-dark); border: 1px solid rgba(28,23,16,0.25);
-    padding: 16px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    cursor: pointer; font-weight: 400;
-    text-decoration: none; display: inline-block;
-    transition: border-color 0.3s, color 0.3s, transform 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+/* ─── TRUST PILLS ─── */
+.trust-pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:900px;margin:0 auto}
+.tp{display:flex;align-items:center;gap:9px;padding:13px 18px;border:1px solid var(--line);border-radius:999px;background:var(--white);font-size:14px;color:var(--text);transition:box-shadow .3s,border-color .3s,transform .25s}
+.tp:hover{border-color:var(--g1);box-shadow:0 4px 16px rgba(174,138,62,.12);transform:translateY(-2px)}
+.tp-icon{font-size:18px}
 
-  .hero-stats {
-    display: flex; gap: 48px; margin-top: 72px;
-    padding-top: 48px;
-    border-top: 1px solid var(--border-soft);
-  }
-  .stat-item {}
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 400;
-    color: var(--gold); line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-label {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-light);
-  }
+/* ─── CTA DARK ─── */
+#cta-section{background:var(--ink);text-align:center;padding:88px var(--pad)}
+#cta-section .eyebrow{color:rgba(217,190,133,.72)}
+#cta-section h2{font-family:var(--serif);font-size:clamp(30px,5vw,66px);font-weight:300;line-height:1.04;color:#fff;margin-bottom:14px;letter-spacing:-.018em}
+#cta-section h2 em{font-style:italic;color:var(--gold-lt)}
+#cta-section p{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.48);font-size:17px;margin-bottom:32px}
+.cta-dets{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:640px;margin:44px auto 0;border-top:1px solid rgba(255,255,255,.1);padding-top:30px}
+.cdet span{font-family:var(--cinzel);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.34);display:block;margin-bottom:6px}
+.cdet b{font-family:var(--serif);font-size:15px;color:var(--gold-lt);font-style:italic}
+@media(max-width:480px){.cta-dets{grid-template-columns:1fr;gap:14px}}
 
-  /* ─── TRUST BAR ─── */
-  .trust-bar {
-    background: var(--text-dark);
-    padding: 20px 48px;
-    display: flex; align-items: center; justify-content: center;
-    gap: 48px; flex-wrap: wrap;
-  }
-  .trust-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase;
-    color: rgba(255,255,255,0.7); font-weight: 400;
-  }
-  .trust-icon {
-    width: 20px; height: 20px;
-    fill: var(--gold);
-    flex-shrink: 0;
-  }
+/* ─── REVIEWS ─── */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+.rcard{padding:22px 20px;border:1px solid var(--line);border-radius:14px;background:var(--white);transition:box-shadow .3s,transform .3s}
+.rcard:hover{box-shadow:0 8px 32px rgba(20,23,27,.08);transform:translateY(-3px)}
+.rcard-h{display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid var(--ls)}
+.rcard-ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-lt),var(--g1));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:600;font-style:italic;color:#fff;border:2px solid var(--g1);flex-shrink:0}
+.rcard-name{font-size:14px;font-weight:500;color:var(--ink)}
+.rcard-status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-top:2px}
+.rcard-status::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--wa);flex-shrink:0}
+.rcard-stars{color:var(--g1);font-size:12px;letter-spacing:2px;margin-bottom:9px}
+.rcard-bubble{background:rgba(37,211,102,.06);border:1px solid rgba(37,211,102,.18);border-radius:12px 12px 12px 4px;padding:12px 14px}
+.rcard-bubble p{font-size:14px;line-height:1.65;color:var(--text)}
+.rcard-bubble p em{color:var(--g1);font-style:normal;font-weight:500}
+.rcard-prod{margin-top:10px;font-family:var(--cinzel);font-size:9px;letter-spacing:.14em;color:var(--g1)}
+@media(max-width:800px){.rev-grid{grid-template-columns:1fr}}
 
-  /* ─── SECTION COMMON ─── */
-  section { padding: 100px 48px; }
+/* ─── FAQ ─── */
+.fql{max-width:720px;margin:0 auto}
+.fq-item{border-bottom:1px solid var(--ls)}
+.fq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 0;font-family:var(--serif);font-size:19px;color:var(--ink);text-align:left;background:none;border:0;cursor:pointer;transition:color .2s;line-height:1.3}
+.fq-btn:hover{color:var(--g1)}
+.fq-ico{flex-shrink:0;width:22px;height:22px;border:1.5px solid var(--g1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g1);font-size:14px;transition:transform .4s,background .2s}
+.fq-item.open .fq-ico{transform:rotate(45deg);background:var(--g1);color:#fff}
+.fq-ans{max-height:0;overflow:hidden;transition:max-height .5s;font-size:15px;line-height:1.76;color:var(--sub)}
+.fq-item.open .fq-ans{max-height:300px;padding-bottom:18px}
 
-  .section-label {
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); font-weight: 400;
-    margin-bottom: 12px;
-    display: block;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 4vw, 52px);
-    font-weight: 300; line-height: 1.12;
-    color: var(--text-dark);
-    margin-bottom: 16px;
-  }
-  .section-sub {
-    font-size: 15px; color: var(--text-mid);
-    max-width: 520px; line-height: 1.8;
-    margin-bottom: 60px;
-  }
+/* ─── FOOTER ─── */
+footer{background:var(--paper);border-top:1px solid var(--line);padding:52px var(--pad) 24px}
+.foot-inner{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;padding-bottom:24px;border-bottom:1px solid var(--ls)}
+.foot-brand{display:flex;align-items:center;gap:10px}
+/* Footer logo — same treatment: no circle, no border */
+.foot-logo-img{width:36px;height:36px;object-fit:contain;display:block}
+.foot-brand strong{font-family:var(--cinzel);font-size:13px;letter-spacing:.22em;color:var(--ink);display:block}
+.foot-brand span{font-size:13px;color:var(--muted);margin-top:2px;display:block}
+.foot-nav{display:flex;gap:16px;flex-wrap:wrap}
+.foot-nav a{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.foot-nav a:hover{color:var(--g1)}
+.foot-bot{padding-top:16px;display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);flex-wrap:wrap;gap:8px;letter-spacing:.05em}
 
-  /* ─── PRODUCTS ─── */
-  #products { background: var(--warm-white); }
+/* ─── FAB ─── */
+.fab{position:fixed;bottom:24px;right:24px;width:54px;height:54px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;z-index:700;box-shadow:0 10px 32px rgba(37,211,102,.4);transition:transform .3s;animation:fabp 2.5s ease infinite;border:0;cursor:pointer;text-decoration:none}
+.fab:hover{transform:scale(1.08)}
+@keyframes fabp{0%,100%{box-shadow:0 10px 32px rgba(37,211,102,.4),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 10px 32px rgba(37,211,102,.4),0 0 0 14px rgba(37,211,102,0)}}
 
-  .products-header { text-align: center; }
-  .products-header .section-sub { margin: 0 auto 60px; }
+/* ─── MISHI ─── */
+#mishi-btn{position:fixed;bottom:88px;right:22px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold-lt),var(--g1));border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:800;box-shadow:0 6px 24px rgba(174,138,62,.45);animation:mishiP 3s ease infinite;transition:transform .3s}
+#mishi-btn:hover{transform:scale(1.1)}
+@keyframes mishiP{0%,100%{box-shadow:0 6px 24px rgba(174,138,62,.45),0 0 0 0 rgba(174,138,62,.4)}50%{box-shadow:0 6px 24px rgba(174,138,62,.45),0 0 0 12px rgba(174,138,62,0)}}
+.mishi-pip{position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:#25d366;border:2px solid #fff;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+#mishi-chat{position:fixed;right:22px;bottom:150px;width:330px;max-width:calc(100vw - 28px);background:#fff;border:1px solid rgba(174,138,62,.22);border-radius:16px 16px 4px 16px;box-shadow:0 20px 64px rgba(20,23,27,.16);transform:translateY(22px) scale(.9);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;display:flex;flex-direction:column;overflow:hidden;z-index:800}
+#mishi-chat.open{transform:none;opacity:1;pointer-events:auto}
+.mishi-hd{padding:13px 14px;background:linear-gradient(135deg,var(--gold-pale),rgba(174,138,62,.06));border-bottom:1px solid rgba(174,138,62,.12);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.mishi-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold-lt),var(--g1));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.mishi-nm{font-family:var(--cinzel);font-size:11px;letter-spacing:.14em;color:var(--ink)}
+.mishi-st{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-top:2px}
+.mishi-st::before{content:"";width:5px;height:5px;border-radius:50%;background:#25d366}
+.mishi-x{margin-left:auto;background:none;border:0;color:var(--muted);font-size:17px;cursor:pointer;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s}
+.mishi-x:hover{background:rgba(20,23,27,.06)}
+.mishi-msgs{flex:1;overflow-y:auto;padding:12px 11px;display:flex;flex-direction:column;gap:8px;min-height:200px;max-height:310px;scrollbar-width:thin}
+.mishi-msg{display:flex;align-items:flex-end;gap:6px}
+.mishi-msg.bot{flex-direction:row}.mishi-msg.user{flex-direction:row-reverse}
+.msg-av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--gold-lt),var(--g1));display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.msg-bbl{max-width:83%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.55;font-family:var(--sans)}
+.mishi-msg.bot .msg-bbl{background:var(--off);border:1px solid var(--ls);color:var(--text);border-radius:4px 12px 12px 12px}
+.mishi-msg.user .msg-bbl{background:var(--g1);color:#fff;border-radius:12px 4px 12px 12px}
+.mishi-dots{display:flex;gap:4px;padding:10px 12px}
+.mdot{width:5px;height:5px;border-radius:50%;background:rgba(174,138,62,.5);animation:mdot 1.2s ease infinite}
+.mdot:nth-child(2){animation-delay:.2s}.mdot:nth-child(3){animation-delay:.4s}
+@keyframes mdot{0%,100%{transform:none;opacity:.5}50%{transform:translateY(-4px);opacity:1}}
+.mishi-chips{padding:7px 11px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--ls);flex-shrink:0}
+.mchip{font-family:var(--cinzel);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border:1px solid rgba(174,138,62,.3);border-radius:999px;color:var(--g1);cursor:pointer;background:transparent;transition:all .2s;white-space:nowrap}
+.mchip:hover{background:var(--g1);color:#fff}
+.mishi-in-row{padding:8px 11px 10px;display:flex;gap:7px;align-items:flex-end;border-top:1px solid var(--ls);flex-shrink:0}
+.mishi-in{flex:1;background:var(--off);border:1px solid rgba(174,138,62,.2);border-radius:18px;padding:8px 13px;font-size:13px;color:var(--ink);outline:none;resize:none;min-height:36px;max-height:70px;font-family:var(--sans);line-height:1.4}
+.mishi-in::placeholder{color:var(--muted)}.mishi-in:focus{border-color:var(--g1)}
+.mishi-send{width:34px;height:34px;border-radius:50%;background:var(--g1);border:0;cursor:pointer;color:#fff;font-size:14px;flex-shrink:0;transition:background .2s;display:flex;align-items:center;justify-content:center}
+.mishi-send:hover{background:var(--g2)}
+.mishi-wa-cta{display:flex;align-items:center;gap:7px;padding:8px 11px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:8px;color:#16a34a;font-size:12px;text-decoration:none;margin-top:4px;transition:background .2s}
+.mishi-wa-cta:hover{background:rgba(37,211,102,.14)}
+.mishi-nudge{position:fixed;bottom:150px;right:22px;z-index:799;background:#fff;border:1px solid rgba(174,138,62,.3);border-radius:12px 12px 4px 12px;padding:11px 15px;font-size:13px;color:var(--text);max-width:200px;box-shadow:0 6px 20px rgba(20,23,27,.12);animation:nudgeIn .4s ease forwards;pointer-events:none}
+@keyframes nudgeIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+@media(max-width:480px){#mishi-btn{bottom:80px;right:14px}.fab{bottom:14px;right:14px}#mishi-chat{left:8px;right:8px;width:auto;border-radius:16px 16px 0 0;bottom:0;max-height:80dvh;transform:translateY(100%)}#mishi-chat.open{transform:none}}
 
-  .category-tabs {
-    display: flex; gap: 0; justify-content: center;
-    border: 1px solid var(--border);
-    width: fit-content; margin: 0 auto 60px;
-    overflow: hidden;
-  }
-  .tab-btn {
-    padding: 10px 28px;
-    background: transparent; border: none;
-    border-right: 1px solid var(--border);
-    font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-mid); cursor: pointer; font-weight: 400;
-    transition: background 0.25s, color 0.25s;
-  }
-  .tab-btn:last-child { border-right: none; }
-  .tab-btn.active { background: var(--gold); color: #fff; }
-  .tab-btn:hover:not(.active) { background: var(--gold-faint); color: var(--gold); }
+/* ═══════ ENHANCED INTERACTIVITY ═══════ */
+/* Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:1000;
+  background:linear-gradient(90deg,var(--gold-lt),var(--g1),var(--g0));
+  box-shadow:0 0 10px rgba(174,138,62,.5);transition:width .1s linear}
 
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2px;
-    max-width: 1300px; margin: 0 auto;
-  }
+/* 3D tilt cards */
+.tilt3d{transition:transform .3s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;will-change:transform}
 
-  .product-card {
-    background: var(--cream);
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-  }
-  .product-card:hover { transform: translateY(-4px); }
-  .product-card:hover .product-cta { opacity: 1; transform: translateY(0); }
+/* magnetic buttons */
+.btn-gold,.btn-ghost,.btn-ghost-light,.btn-wa{will-change:transform}
 
-  .product-img {
-    width: 100%; aspect-ratio: 1;
-    background: var(--gold-faint);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
+/* shimmer-in heading effect */
+.shimmer-text{background:linear-gradient(100deg,var(--ink) 35%,var(--gold-lt) 50%,var(--ink) 65%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:shimmerSweep 1.4s ease-out forwards}
+@keyframes shimmerSweep{0%{background-position:130% 0}100%{background-position:-30% 0}}
 
-  .product-img svg {
-    width: 80px; height: 80px;
-    opacity: 0.35;
-  }
+/* card hover glow */
+.feat-card,.why-col,.rcard{position:relative;overflow:hidden}
+.feat-card::after,.why-col::after,.rcard::after{content:"";position:absolute;
+  width:160px;height:160px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(217,190,133,.22),transparent 70%);
+  opacity:0;transition:opacity .35s;transform:translate(-50%,-50%);z-index:0}
+.feat-card:hover::after,.why-col:hover::after,.rcard:hover::after{opacity:1}
+.feat-card>*,.why-col>*,.rcard>*{position:relative;z-index:1}
 
-  .purity-badge {
-    position: absolute; top: 16px; right: 16px;
-    background: var(--text-dark);
-    color: var(--gold-light);
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 4px 10px; font-weight: 400;
-  }
+/* cursor spotlight on dark sections */
+.spotlight-sec{position:relative}
+.spotlight-sec::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),
+    rgba(217,190,133,.10),transparent 70%);opacity:0;transition:opacity .4s}
+.spotlight-sec:hover::before{opacity:1}
 
-  .product-info { padding: 24px; }
+/* float-in reveal (used by JS) */
+.reveal-up{opacity:0;transform:translateY(40px)}
+.reveal-in{opacity:1;transform:translateY(0);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 
-  .product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 400;
-    color: var(--text-dark); margin-bottom: 6px;
-  }
-  .product-desc {
-    font-size: 13px; color: var(--text-light);
-    margin-bottom: 16px; line-height: 1.6;
-  }
-  .product-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 500;
-    color: var(--gold);
-    display: flex; align-items: baseline; gap: 6px;
-  }
-  .product-price span {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px; color: var(--text-light);
-    font-weight: 300;
-  }
+/* marquee pause on hover */
+.marquee:hover .mq-track{animation-play-state:paused}
 
-  .product-cta {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: var(--gold);
-    color: #fff;
-    text-align: center;
-    padding: 14px;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    font-weight: 400;
-    opacity: 0; transform: translateY(10px);
-    transition: opacity 0.3s, transform 0.3s;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-  }
+/* nav links underline grow already; add icon pop on wa */
+.nav-wa:hover .wdot{animation:wap .6s infinite}
 
-  /* ─── WHY US ─── */
-  #why { background: var(--cream); }
+/* pill / badge breathing */
+.sld-badge{animation:badgePulse 3s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(174,138,62,.25)}50%{box-shadow:0 0 14px 2px rgba(174,138,62,.18)}}
 
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1100px;
-    align-items: center;
-  }
+/* link-arrow nudge */
+.btn-gold,.btn-ghost{overflow:hidden;position:relative}
+.btn-gold::before,.btn-ghost::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.btn-gold:hover::before,.btn-ghost:hover::before{left:100%}
 
-  .why-visual {
-    position: relative;
-    aspect-ratio: 1;
-    background: var(--gold-faint);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .why-visual svg { width: 160px; height: 160px; opacity: 0.3; }
+/* stat tiles count pop */
+.hs-num,.counter-num{display:inline-block}
 
-  .why-inner-border {
-    position: absolute; inset: 20px;
-    border: 1px solid var(--border);
-  }
+/* smooth image zoom on scroll */
+.zoom-parallax{overflow:hidden}
+.zoom-parallax img{transition:transform .1s linear}
 
-  .why-features { display: flex; flex-direction: column; gap: 36px; }
 
-  .why-feature {
-    display: flex; gap: 24px; align-items: flex-start;
-    padding-bottom: 36px;
-    border-bottom: 1px solid var(--border-soft);
+/* ═══════════ COMPREHENSIVE MOBILE POLISH ═══════════ */
+@media(max-width:860px){
+  /* generous section padding scale-down */
+  .section{padding:60px var(--pad)}
+  .sh{margin-bottom:40px}
+  /* feature/goldbar section stacks cleanly */
+  #goldbar-section{flex-direction:column;text-align:center;padding:56px var(--pad) 60px;gap:32px}
+  #goldbar-section .gb3d-copy{max-width:100%}
+  /* #gb3d parent must be full width so the chain image isn't squeezed */
+  #gb3d{order:1;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
+  .gbchain-frame{width:min(340px,78vw);margin:0 auto}
+  .gb3d-copy{order:2;width:100%}
+}
+@media(max-width:720px){
+  /* compare boxes stack with no VS overlap weirdness */
+  .cmp{gap:0}
+  /* VS badge sits centered BETWEEN the two stacked boxes */
+  .vs-badge{
+    position:relative;top:auto;left:auto;
+    transform:none;
+    margin:-14px auto;
+    display:flex;
+    z-index:5;
   }
-  .why-feature:last-child { border-bottom: none; padding-bottom: 0; }
+  /* licence section already stacks; tighten */
+  .lic-strip{padding:26px 20px}
+  /* reviews & products full width handled; tighten gaps */
+  .feat-grid,.rev-grid,.why-cols{gap:16px}
+  /* marquee a touch smaller */
+  .mq-track{font-size:13px;gap:32px}
+  /* footer stacks & centers */
+  .foot-inner{flex-direction:column;align-items:center;text-align:center;gap:20px}
+  .foot-brand{flex-direction:column;text-align:center}
+  .foot-nav{justify-content:center}
+  .foot-bot{flex-direction:column;align-items:center;gap:6px;text-align:center}
+  /* headings shrink gracefully */
+  .sh h2{font-size:clamp(26px,7vw,40px)}
+  /* nav: keep brand + hamburger only */
+  .nav-links{gap:14px}
+}
+@media(max-width:560px){
+  .section{padding:48px 18px}
+  :root{--pad:18px}
+  /* product cards single column, comfortable */
+  .feat-grid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
+  .feat-card{max-width:100%}
+  /* why cards single column */
+  .why-cols{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+  /* reviews single column */
+  .rev-grid{max-width:400px;margin-left:auto;margin-right:auto}
+  /* buttons full-width friendly */
+  .sld-ctas{flex-direction:column;width:100%;align-items:center}
+  .sld-ctas .btn-gold,.sld-ctas .btn-ghost-light{width:100%;max-width:300px;justify-content:center}
+  .cta-buttons,.cta-row{flex-direction:column;align-items:center}
+  /* gbchain — show FULL image, no crop, on phones */
+  .gbchain-frame{width:min(330px,86vw)}
+  .gbchain-img{aspect-ratio:auto;object-fit:contain;background:rgba(255,255,255,.03)}
+  /* compare boxes comfy */
+  .cbox{padding:18px 16px}
+  /* FAQ comfortable tap targets */
+  .faq-q{padding:16px 0;font-size:15px}
+  /* licence image full width */
+  .lic-img-wrap{max-width:100%}
+  /* mishi chatbot fits screen */
+  .mishi-window{width:calc(100vw - 32px);right:16px;left:16px}
+}
+@media(max-width:400px){
+  .sld-h1{font-size:clamp(28px,8.5vw,40px)}
+  .sh h2{font-size:clamp(23px,7.5vw,32px)}
+  .btn-gold,.btn-ghost,.btn-wa{font-size:12px;padding:13px 20px}
+}
+/* prevent any horizontal overflow site-wide */
+html,body{max-width:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+img,svg,video{max-width:100%}
+/* larger tap targets for touch */
+@media(hover:none){
+  .nav-links a,.foot-link,.faq-q,.carousel-dot{min-height:auto}
+  .carousel-dot{width:11px;height:11px}
+  .btn-gold,.btn-ghost,.btn-wa,.feat-cta,.cc-cta{min-height:46px}
+}
 
-  .why-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 300;
-    color: rgba(184,151,58,0.2);
-    line-height: 1;
-    flex-shrink: 0;
-    width: 48px;
-  }
 
-  .why-text h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 400;
-    color: var(--text-dark); margin-bottom: 6px;
-  }
-  .why-text p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+.loomix-footer{font-size:11px;color:var(--muted);margin-top:5px;display:block;text-align:center}
+.loomix-link{color:var(--g1);text-decoration:none;font-weight:500;transition:color .2s}
+.loomix-link:hover{color:var(--g2);text-decoration:underline}
 
-  /* ─── PURITY SECTION ─── */
-  #purity {
-    background: var(--text-dark);
-    color: #fff;
-  }
-  #purity .section-title { color: #fff; }
-  #purity .section-sub { color: rgba(255,255,255,0.55); }
+/* ── Windows/PC text sharpness fix ── */
+h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm){
+  .hero h1,.sld-h1{font-weight:500}
+}
 
-  .purity-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    max-width: 1100px;
-    margin-top: 60px;
-  }
-
-  .purity-card {
-    background: var(--text-dark);
-    padding: 40px 32px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .purity-icon {
-    width: 48px; height: 48px;
-    background: rgba(184,151,58,0.12);
-    border: 1px solid rgba(184,151,58,0.25);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
-  }
-  .purity-icon svg { width: 22px; height: 22px; fill: var(--gold); }
-
-  .purity-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 400;
-    color: #fff; margin-bottom: 10px;
-  }
-  .purity-card p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.7;
-  }
-
-  /* ─── CONTACT ─── */
-  #contact { background: var(--gold-faint); text-align: center; }
-
-  .contact-inner {
-    max-width: 560px; margin: 0 auto;
-  }
-
-  .whatsapp-btn {
-    display: inline-flex; align-items: center; gap: 14px;
-    background: #25D366;
-    color: #fff;
-    padding: 18px 40px;
-    text-decoration: none;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
-    font-weight: 400;
-    transition: background 0.3s, transform 0.2s;
-    margin-top: 40px;
-    margin-bottom: 12px;
-  }
-  .whatsapp-btn:hover { background: #1eba57; transform: translateY(-2px); }
-  .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
-
-  .contact-note {
-    font-size: 12px; color: var(--text-light);
-    letter-spacing: 0.08em;
-  }
-
-  .contact-details {
-    display: flex; justify-content: center; gap: 48px;
-    margin-top: 48px; flex-wrap: wrap;
-  }
-  .contact-item { text-align: center; }
-  .contact-item label {
-    display: block; font-size: 10px; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--text-light);
-    margin-bottom: 6px;
-  }
-  .contact-item span {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; color: var(--text-dark);
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--text-dark);
-    padding: 40px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 500; letter-spacing: 0.12em;
-    color: #fff; text-decoration: none;
-  }
-  .footer-logo span { color: var(--gold); }
-  .footer-copy {
-    font-size: 12px; color: rgba(255,255,255,0.35);
-    letter-spacing: 0.06em;
-  }
-  .footer-license {
-    font-size: 11px; color: var(--gold);
-    letter-spacing: 0.10em; text-transform: uppercase;
-  }
-
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-badge { animation: fadeUp 0.7s ease both; }
-  .hero h1 { animation: fadeUp 0.7s 0.1s ease both; }
-  .hero p { animation: fadeUp 0.7s 0.2s ease both; }
-  .hero-buttons { animation: fadeUp 0.7s 0.3s ease both; }
-  .hero-stats { animation: fadeUp 0.7s 0.4s ease both; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    section { padding: 72px 24px; }
-    .hero { padding: 100px 24px 60px; }
-    .hero h1 { font-size: 44px; }
-    .hero-stats { gap: 28px; }
-    .why-grid { grid-template-columns: 1fr; }
-    .why-visual { display: none; }
-    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
-    .trust-bar { padding: 20px 24px; gap: 24px; }
-  }
-
-  /* ─── PRODUCT CATEGORY FILTER JS HELPER ─── */
-  .product-card[data-cat] { transition: opacity 0.3s, transform 0.4s; }
-  .product-card.hidden { display: none; }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://assuregold.sg/#org",
+      "name": "Assure Gold",
+      "alternateName": "Assure Gold Singapore",
+      "url": "https://assuregold.sg/",
+      "logo": "https://assuregold.sg/assets/images/logo.png",
+      "image": "https://assuregold.sg/assets/images/logo.png",
+      "description": "Gold buyback and preloved gold jewellery in Singapore. In-person weighing and XRF testing at 119A Canberra Crescent by appointment.",
+      "telephone": "+65 9343 0242",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "119A Canberra Crescent",
+        "addressLocality": "Singapore",
+        "addressCountry": "SG",
+        "postalCode": "751119"
+      }
+    },
+    {
+      "@type": "JewelryStore",
+      "@id": "https://assuregold.sg/#store",
+      "name": "Assure Gold",
+      "image": "https://assuregold.sg/assets/images/logo.png",
+      "url": "https://assuregold.sg/",
+      "telephone": "+65 9343 0242",
+      "priceRange": "$$",
+      "currenciesAccepted": "S$",
+      "paymentAccepted": "Cash, Bank Transfer, PayNow",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Singapore"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "119A Canberra Crescent",
+        "addressLocality": "Singapore",
+        "addressCountry": "SG",
+        "postalCode": "751119"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "07:00",
+          "closes": "00:00"
+        }
+      ],
+      "hasCredential": "PSM Registration PS20260000962 - Ministry of Law Singapore"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://assuregold.sg/#website",
+      "url": "https://assuregold.sg/",
+      "name": "Assure Gold",
+      "publisher": {
+        "@id": "https://assuregold.sg/#org"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know preloved gold is genuine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every piece is XRF-tested — we share the purity reading and explain the assessment. We share the reading on WhatsApp before you commit. We are PSM-licensed under Singapore's Ministry of Law (Reg. PS20260000962). Verify at mlaw.gov.sg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the price lower than new gold?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Assure Gold is not GST-registered and does not charge GST. We do not add a separate making charge. Our selling rate includes our margin and depends on gold purity and market rates. The final price is confirmed before you pay. Preloved jewellery is not automatically GST-exempt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is preloved gold the same quality as new?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chemically, yes. Gold doesn't degrade. A 916 chain from 1995 has exactly the same 91.6% purity as one made today. We XRF-verify every piece. Condition details are always disclosed in full with photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I inspect in person before paying?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Contact us to arrange an appointment at 119A Canberra Crescent, Singapore. Inspect the piece and watch the XRF test before deciding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I verify your licence is real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Go to mlaw.gov.sg and search \"Assure Gold\" or Reg. No. PS20260000962 to verify our PSM registration directly with Singapore's Ministry of Law."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
+<h1 class="sr-only">Sell Gold in Singapore with Assure Gold</h1>
 
 <!-- NAV -->
-<nav>
-  <a href="#" style="display:flex;align-items:center;text-decoration:none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzcgNDU3IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkFzc3VyZSBHb2xkIEEgZGlhbW9uZCBsb2dvIiB3aWR0aD0iNTc3IiBoZWlnaHQ9IjQ1NyI+CiAgPHBhdGggZD0iTSA1NTEgMjcgTCA1NDggMjUgTCA1MzUgMjUgTCA1MTYgMjkgTCA0OTkgMzUgTCA0NzQgNDggTCA0NDQgNzAgTCA0MTYgOTcgTCA0MDEgMTE0IEwgMzcyIDE1MiBMIDMzMiAyMTAgTCAzMjkgMjEwIEwgMzI2IDIwOCBMIDMwMCAxOTkgTCAyNjggMTkxIEwgMjQ5IDE4OSBMIDI0OCAxODggTCAyMzkgMTg4IEwgMjM4IDE4NyBMIDE5NSAxODcgTCAxOTQgMTg4IEwgMTgzIDE4OCBMIDE4MiAxODkgTCAxNjMgMTkxIEwgMTQyIDE5NiBMIDExOCAyMDUgTCA5MSAyMjAgTCA3MyAyMzQgTCA2MSAyNDYgTCA1MyAyNTYgTCA0NCAyNzAgTCAzNyAyODQgTCAzMCAzMDMgTCAyNiAzMjIgTCAyNSAzNDUgTCAzMCAzNzAgTCAzOSAzODkgTCA0NSAzOTcgTCA1OCA0MTAgTCA2OCA0MTcgTCA4MiA0MjQgTCAxMDQgNDMwIEwgMTExIDQzMCBMIDExMiA0MzEgTCAxNDIgNDMwIEwgMTYzIDQyNSBMIDE4NyA0MTYgTCAyMDkgNDA0IEwgMjI5IDM5MCBMIDI0MSAzODAgTCAyNjYgMzU1IEwgMjgzIDMzNSBMIDMwMCAzMTIgTCAzMjMgMjc4IEwgMzQ5IDIzNSBMIDM1MSAyMzMgTCAzNTMgMjMzIEwgMzY4IDI0MiBMIDM4MSAyNTIgTCAzOTUgMjY3IEwgNDAzIDI4MSBMIDQwMSAyOTMgTCAzOTggMzAwIEwgMzk0IDMxNiBMIDM5MiAzMzEgTCAzOTAgMzM3IEwgMzg5IDM1MSBMIDM4OCAzNTIgTCAzODggMzgxIEwgMzkxIDM5NiBMIDM5NiA0MDggTCA0MDQgNDE3IEwgNDEwIDQyMSBMIDQyMyA0MjUgTCA0NDcgNDI0IEwgNDU2IDQyMSBMIDQ2OSA0MTQgTCA0NzQgNDA4IEwgNDczIDQwNiBMIDQ2NCA0MDkgTCA0NTEgNDA4IEwgNDQzIDQwMSBMIDQ0MCAzOTUgTCA0MzggMzg2IEwgNDM4IDM3NiBMIDQzNyAzNzUgTCA0MzcgMzU3IEwgNDM4IDM1NiBMIDQzOCAzNDUgTCA0MzkgMzQ0IEwgNDM5IDMzNyBMIDQ0MCAzMzYgTCA0NDMgMzEzIEwgNDUyIDI3NSBMIDQ1NCAyNzEgTCA0NjQgMjMzIEwgNDgwIDE4NiBMIDQ4MSAxODAgTCA0ODMgMTc3IEwgNTA0IDExNSBMIDUxNiA4NiBMIDUyOSA2MCBMIDU0MiA0MiBMIDU1MCAzNSBaIE0gMzI2IDIyMSBMIDI3NSAzMDAgTCAyNTEgMzMyIEwgMjM1IDM1MSBMIDIwOSAzNzcgTCAxODEgMzk4IEwgMTYwIDQwOSBMIDE0OSA0MTMgTCAxMzAgNDE3IEwgMTEzIDQxNyBMIDEwMyA0MTUgTCA4NiA0MDggTCA3MyAzOTcgTCA2NiAzODcgTCA2MSAzNzUgTCA1NyAzNTcgTCA1OCAzMjUgTCA2NiAyOTcgTCA3MyAyODIgTCA4OCAyNjAgTCAxMDkgMjM5IEwgMTI2IDIyNyBMIDE0NSAyMTcgTCAxNzAgMjA4IEwgMTc5IDIwNyBMIDE4OCAyMDQgTCAxOTQgMjA0IEwgMjAyIDIwMiBMIDIxNCAyMDIgTCAyMTUgMjAxIEwgMjQyIDIwMSBMIDI0MyAyMDIgTCAyNTUgMjAyIEwgMjU2IDIwMyBMIDI3NiAyMDUgTCAzMDQgMjEyIEwgMzA3IDIxNCBMIDMxOSAyMTcgWiBNIDUxOCA0MiBMIDUxOSA0NCBMIDUwNiA2MCBMIDQ4NyA5MCBMIDQ1NyAxNDYgTCA0NTcgMTQ4IEwgNDQ5IDE2MyBMIDQ0OSAxNjUgTCA0NDIgMTc4IEwgNDQwIDE4NSBMIDQzNCAxOTcgTCA0MjkgMjEyIEwgNDIxIDIzMCBMIDQyMSAyMzMgTCA0MTQgMjUwIEwgNDExIDI2MiBMIDQwOSAyNjQgTCAzODcgMjQyIEwgMzY3IDIyOCBMIDM1OSAyMjQgTCAzNTcgMjIxIEwgMzc1IDE5MiBMIDM3NyAxODcgTCA0MDQgMTQ1IEwgNDI0IDExNyBMIDQzOCAxMDAgTCA0NjAgNzcgTCA0NzMgNjYgTCA0OTQgNTIgTCA1MDYgNDYgWiBNIDIzMiAyNjQgTCAxOTcgMjY0IEwgMTk2IDI2NSBMIDE5OCAyNjggTCAyMTQgMzEzIFogTSAyNTggMjY0IEwgMjM2IDI2NCBMIDIzNSAyNjUgTCAyMjcgMjg4IEwgMjE3IDMxMSBMIDI0MyAyODMgWiBNIDE3MCAyNjQgTCAxNzQgMjcwIEwgMjExIDMxMiBMIDE5MyAyNjYgTCAxOTEgMjY0IFogTSAxOTcgMjYxIEwgMjMyIDI2MSBMIDIxNCAyMzcgTCAyMDkgMjQyIFogTSAyMTAgMjM3IEwgMTg4IDIzNyBMIDE5NSAyNTQgTCAxOTQgMjU3IEwgMTkyIDI1NSBMIDE5MSAyNDkgTCAxODYgMjM4IEwgMTgyIDI0MiBMIDE4MSAyNDUgTCAxOTMgMjYwIEwgMTk3IDI1NiBaIE0gMjE4IDIzNyBMIDIzNCAyNjAgTCAyMzcgMjU4IEwgMjQ3IDI0NiBMIDI0NyAyNDMgTCAyNDMgMjM4IEwgMjM4IDI1MSBMIDIzMyAyNTggTCAyMzIgMjU0IEwgMjM4IDI0NCBMIDI0MCAyMzcgWiBNIDI1OSAyNjEgTCAyNDkgMjQ3IEwgMjM3IDI2MSBaIE0gMTY5IDI2MSBMIDE5MSAyNjEgTCAxNzkgMjQ3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K" alt="Assure Gold" style="height:52px;width:auto;"><span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;letter-spacing:0.12em;color:var(--text-dark);margin-left:12px;">ASSURE GOLD</span></a>
-  <ul class="nav-links">
-    <li><a href="#savings">Why Preloved</a></li>
-    <li><a href="#products">Collection</a></li>
-    <li><a href="#buyback">Buyback</a></li>
-    <li><a href="#purity">Purity Testing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#verify" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid var(--gold);border-radius:4px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;color:var(--gold);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='#fff';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    Verify
+<header id="nav">
+  <a href="index.html" class="nav-brand">
+    <img src="assets/images/logo.png" alt="Assure Gold Singapore - preloved gold dealer logo" class="nav-logo-img"/>
+    <span class="nav-name">ASSURE GOLD</span>
   </a>
-  <a class="nav-cta" href="https://wa.me/6596724975?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire%20about%20your%20gold%20collection." target="_blank">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.847L.057 23.804l6.109-1.524A11.948 11.948 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.37l-.358-.213-3.726.976.999-3.638-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
-    WhatsApp Us
-  </a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-ornament"></div>
-  <div class="hero-content">
-    
-    <div class="hero-badge">Preloved Gold Jewellery &nbsp;·&nbsp; Authorised Dealer · Singapore</div>
-    <h1>Pure Gold.<br><em>No GST.</em><br>No Making Charge.</h1>
-    <p>The smarter way to buy gold. Our preloved jewellery collection — chains, bracelets, rings & more — lets you own certified pure gold without paying GST or making charges. You get more gold for your money, every time.</p>
-    <div class="hero-buttons">
-      <a href="#savings" class="btn-primary">See How You Save</a>
-      <a href="https://wa.me/6596724975?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire." target="_blank" class="btn-outline">PM Us on WhatsApp</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">0%</div>
-        <div class="stat-label">GST Charged</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">0%</div>
-        <div class="stat-label">Making Charge</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">XRF</div>
-        <div class="stat-label">Purity Verified</div>
-      </div>
-    </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="collection.html">Collection</a>
+    <a href="buyback.html">Buyback</a>
+    <a href="#trust">Trust</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire." target="_blank" class="nav-wa">
+      <span class="wdot"></span><span class="nav-wa-txt">WhatsApp Us</span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-</section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-    Precious Stones & Metals License Holder
-  </div>
-  <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    No GST · No Making Charge
-  </div>
-  <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-    Live XRF Purity Testing
-  </div>
-  <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-    Preloved · Certified · Authorised
-  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="collection.html">Collection</a>
+  <a href="buyback.html">Buyback</a>
+  <a href="#trust">Trust &amp; Licence</a>
+  <a href="https://wa.me/6593430242" target="_blank">&#128172; WhatsApp Us</a>
 </div>
 
-<!-- SAVINGS EXPLAINER -->
-<section id="savings" style="background: var(--cream); padding: 100px 48px;">
-  <div style="max-width: 1100px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 64px;">
-      <span class="section-label">The Smart Buyer's Advantage</span>
-      <h2 class="section-title">Why Preloved Gold<br>is the <em style="font-style:italic; color: var(--gold);">Wiser</em> Choice</h2>
-      <p class="section-sub" style="margin: 0 auto;">When you buy new gold jewellery from a retailer, you pay far more than the gold is worth. With Assure Gold, what you pay is what you get — pure gold value, nothing else.</p>
-    </div>
+<!-- HERO CAROUSEL -->
+<section id="hero">
+<div class="hero-carousel" id="heroCarousel">
 
-    <!-- Comparison table -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 860px; margin: 0 auto 72px;">
-      <!-- Header row -->
-      <div style="background: var(--text-dark); padding: 20px 32px; display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Buying New Gold</span>
+  <div class="hero-slide hs1 active" data-slide="0">
+    <video class="sld-video" autoplay muted loop playsinline poster="assets/images/rope-chain-red.jpg">
+      <source src="assets/videos/hero-slide1.mp4" type="video/mp4">
+    </video>
+    <div class="sld-text">
+      <span class="sld-badge">GOLD BUYBACK &#183; SINGAPORE</span>
+      <span class="sld-ey">By appointment in Canberra</span>
+      <div class="sld-h1" role="heading" aria-level="1">Sell Your Gold<br/><em>With Confidence</em><br/>In Singapore</div>
+      <p class="sld-sub">Bring your old gold for in-person weighing and XRF testing. Understand your buyback quote before deciding. Visits to 119A Canberra Crescent are by appointment.</p>
+      <div class="sld-ctas">
+        <a href="buyback.html" class="btn-gold">Sell Gold &#8594;</a>
+        <a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20arrange%20a%20gold%20buyback%20appointment." target="_blank" class="btn-ghost-light">&#128172; WhatsApp Us</a>
       </div>
-      <div style="background: var(--gold); padding: 20px 32px; display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); font-weight: 500;">✦ Assure Gold — Preloved</span>
-      </div>
-      <!-- Row 1 -->
-      <div style="background: #F5F0E8; padding: 24px 32px; border-bottom: 1px solid var(--border-soft);">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">GST</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #C0392B;">+9%</div>
-      </div>
-      <div style="background: var(--gold-faint); padding: 24px 32px; border-bottom: 1px solid var(--border-soft);">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">GST</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #2E7D32;">$0 — None</div>
-      </div>
-      <!-- Row 2 -->
-      <div style="background: #F5F0E8; padding: 24px 32px; border-bottom: 1px solid var(--border-soft);">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">Making Charge</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #C0392B;">+10–20%</div>
-      </div>
-      <div style="background: var(--gold-faint); padding: 24px 32px; border-bottom: 1px solid var(--border-soft);">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">Making Charge</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #2E7D32;">$0 — None</div>
-      </div>
-      <!-- Row 3 -->
-      <div style="background: #F5F0E8; padding: 24px 32px;">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">What you're actually paying for</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text-dark);">Gold + GST + Labour + Retail Margin</div>
-      </div>
-      <div style="background: var(--gold-faint); padding: 24px 32px;">
-        <div style="font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">What you're actually paying for</div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); font-weight: 500;">Gold. Just gold.</div>
-      </div>
-    </div>
-
-    <!-- Callout quote -->
-    <div style="text-align: center; max-width: 680px; margin: 0 auto; padding: 48px; background: var(--gold-faint); border: 1px solid var(--border);">
-      <div style="font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 34px); font-weight: 300; line-height: 1.4; color: var(--text-dark); margin-bottom: 20px;">
-        "Gold is gold — whether it's new or preloved. The purity doesn't change. <em style="color: var(--gold);">The price you pay does.</em>"
-      </div>
-      <div style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-light);">The Assure Gold Philosophy</div>
     </div>
   </div>
+
+  <div class="hero-slide hs2" data-slide="1">
+    <div class="sld-text">
+      <span class="sld-badge">NEW IN</span>
+      <span class="sld-ey">Buyback Campaign</span>
+      <div class="sld-h1" role="heading" aria-level="1">Buyback is<br/><em>Now Live</em></div>
+      <p class="sld-sub">Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.</p>
+      <div class="sld-ctas">
+        <a href="buyback.html" class="btn-gold">Learn About Buyback →</a>
+        <a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20a%20gold%20buyback%20quote." target="_blank" class="btn-ghost-light">&#128172; Request a Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-arrows">
+    <button class="carousel-arrow" id="carouselPrev">&#10094;</button>
+    <button class="carousel-arrow" id="carouselNext">&#10095;</button>
+  </div>
+  <div class="carousel-dots" id="carouselDots">
+    <button class="carousel-dot active" data-slide="0"></button>
+    <button class="carousel-dot" data-slide="1"></button>
+  </div>
+  <div class="carousel-progress" id="carouselProgress"></div>
+</div>
+
+<!-- Stats row -->
+<div class="hero-stats">
+  <div class="hs"><span class="hs-n">0%</span><span class="hs-l">Making Charge</span></div>
+  <div class="hs"><span class="hs-n">XRF</span><span class="hs-l">Live Purity Testing</span></div>
+  <div class="hs"><span class="hs-n">PSM</span><span class="hs-l">Ministry of Law Licensed</span></div>
+  <div class="hs"><span class="hs-n">Chat</span><span class="hs-l">WhatsApp Enquiries</span></div>
+</div>
 </section>
-<section id="products">
-  <div class="products-header">
-    <span class="section-label">Preloved Collection</span>
-    <h2 class="section-title">Certified Preloved Gold</h2>
-    <p class="section-sub">Every piece is preloved — XRF purity-verified, sold at gold value with zero GST and zero making charges. PM us for pricing.</p>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="mq-track">
+<span>&#9671; Preloved gold &#8212; same purity, smarter price</span>
+<span>&#9671; XRF tested live in front of you</span>
+<span>&#9671; No GST charged &#183; 0% making charge</span>
+<span>&#9671; PSM Licensed Reg. PS20260000962</span>
+<span>&#9671; Same-day buyback payment</span>
+<span>&#9671; WhatsApp &#183; personal replies</span>
+<span>&#9671; 916 &amp; 999 certified gold chains</span>
+<span>&#9671; Preloved gold &#8212; same purity, smarter price</span>
+<span>&#9671; XRF tested live in front of you</span>
+<span>&#9671; No GST charged &#183; 0% making charge</span>
+<span>&#9671; PSM Licensed Reg. PS20260000962</span>
+<span>&#9671; Same-day buyback payment</span>
+<span>&#9671; WhatsApp &#183; personal replies</span>
+<span>&#9671; 916 &amp; 999 certified gold chains</span>
+</div></div>
+
+<!-- WHY -->
+<section class="section section-grey" id="why">
+<div class="sh">
+  <span class="eyebrow">THE SMART CHOICE</span>
+  <h2>Why preloved gold<br/>is <em class="ga">the wiser buy</em></h2>
+  <p>Compare the final price, gold weight, purity and condition before buying. Resale values depend on market rates and the buyer&#8217;s offer.</p>
+</div>
+<div class="why-cols">
+  <div class="why-col">
+    <span class="wc-icon">&#128181;</span>
+    <div class="wc-n">No GST</div>
+    <p class="wc-p">Assure Gold is not GST-registered, so we do not charge GST. This is our business status, not a tax exemption for preloved jewellery.</p>
+    <span class="wc-tag">No GST charged</span>
   </div>
-
-  <div class="category-tabs">
-    <button class="tab-btn active" onclick="filterProducts('all', this)">All</button>
-    <button class="tab-btn" onclick="filterProducts('chains', this)">Chains</button>
-    <button class="tab-btn" onclick="filterProducts('bracelets', this)">Bracelets</button>
-    <button class="tab-btn" onclick="filterProducts('rings', this)">Rings</button>
-    <button class="tab-btn" onclick="filterProducts('earrings', this)">Earrings</button>
+  <div class="why-col">
+    <span class="wc-icon">&#128296;</span>
+    <div class="wc-n">No Making Charge</div>
+    <p class="wc-p">The making charge was already paid by the first owner when the piece was crafted. You pay for the gold &#8212; never again for the labour of making it.</p>
+    <span class="wc-tag">0% Making Charge</span>
   </div>
+  <div class="why-col">
+    <span class="wc-icon">&#127970;</span>
+    <div class="wc-n">Clear Pricing</div>
+    <p class="wc-p">Our selling price includes our margin. Ask for the current per-gram rate and final total before deciding.</p>
+    <span class="wc-tag">Margin Included</span>
+  </div>
+</div>
+</section>
 
-  <div class="products-grid">
-
-    <!-- CHAINS -->
-    <div class="product-card" data-cat="chains">
-      <div class="product-img" style="background: #F5EDD5;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M20 50 Q30 38 40 50 Q50 62 60 50 Q70 38 80 50" stroke="#B8973A" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M20 58 Q30 46 40 58 Q50 70 60 58 Q70 46 80 58" stroke="#B8973A" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
-        </svg>
-        <span class="purity-badge">916 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Curb Link Chain</div>
-        <div class="product-desc">22K gold, classic curb pattern, available in multiple lengths & weights</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Curb%20Link%20Chain." target="_blank">PM Us on WhatsApp</a>
+<!-- PRELOVED GOLD FEATURE SECTION -->
+<section id="goldbar-section">
+  <div id="gb3d">
+    <div class="gbchain-frame">
+      <img src="assets/images/products/chain-05.jpeg" alt="Preloved gold rope chain Singapore - Assure Gold 916 chain 05" class="gbchain-img"/>
+      <div class="gbchain-glow"></div>
     </div>
-
-    <div class="product-card" data-cat="chains">
-      <div class="product-img" style="background: #EDE5CC;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M25 50 L35 42 L45 50 L55 42 L65 50 L75 42" stroke="#B8973A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M25 56 L35 48 L45 56 L55 48 L65 56 L75 48" stroke="#B8973A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
-        </svg>
-        <span class="purity-badge">999 Gold</span>
+    <div style="text-align:center;margin-top:14px;font-family:var(--cinzel);font-size:10px;letter-spacing:.3em;color:var(--g2)">916 &#183; 22K &#183; PRELOVED GOLD</div>
+  </div>
+  <div class="gb3d-copy">
+    <span class="eyebrow">PRELOVED GOLD</span>
+    <h2>Same gold.<br/><em>Smarter price.</em></h2>
+    <p>Compare pieces of the same stated purity and check their condition. We XRF-test our pieces, charge no GST because we are not GST-registered, and include our margin in the quoted selling price.</p>
+    <div class="gb3d-facts">
+      <div class="gbf">
+        <span class="gbf-n" style="color:var(--g1)"  >916</span>
+        <span class="gbf-l">Purity</span>
       </div>
-      <div class="product-info">
-        <div class="product-name">Box Chain Necklace</div>
-        <div class="product-desc">24K pure gold, sleek square-link box chain, smooth polished finish</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
+      <div class="gbf">
+        <span class="gbf-n" style="color:var(--g1)">S$0</span>
+        <span class="gbf-l">GST charged</span>
       </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Box%20Chain%20Necklace." target="_blank">PM Us on WhatsApp</a>
+      <div class="gbf">
+        <span class="gbf-n" style="color:var(--g1)">XRF</span>
+        <span class="gbf-l">Purity tested</span>
+      </div>
     </div>
-
-    <div class="product-card" data-cat="chains">
-      <div class="product-img" style="background: #F0E8D0;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M20 50 C20 50 30 35 40 50 C50 65 60 35 70 50 C80 65 80 50 80 50" stroke="#B8973A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        </svg>
-        <span class="purity-badge">750 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Figaro Chain</div>
-        <div class="product-desc">18K gold, alternating round & oval links — a timeless everyday chain</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Figaro%20Chain." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
-    <!-- BRACELETS -->
-    <div class="product-card" data-cat="bracelets">
-      <div class="product-img" style="background: #EDE5CC;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="28" stroke="#B8973A" stroke-width="3" fill="none"/>
-          <circle cx="50" cy="50" r="20" stroke="#B8973A" stroke-width="0.8" fill="none"/>
-        </svg>
-        <span class="purity-badge">999 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Solid Gold Bangle</div>
-        <div class="product-desc">24K pure gold bangle, solid construction, available in multiple sizes</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Solid%20Gold%20Bangle." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
-    <div class="product-card" data-cat="bracelets">
-      <div class="product-img" style="background: #F5EDD5;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M22 50 Q50 22 78 50 Q50 78 22 50Z" stroke="#B8973A" stroke-width="2" fill="rgba(184,151,58,0.08)"/>
-          <circle cx="22" cy="50" r="4" fill="#B8973A" opacity="0.6"/>
-          <circle cx="78" cy="50" r="4" fill="#B8973A" opacity="0.6"/>
-          <circle cx="50" cy="26" r="3" fill="#B8973A" opacity="0.4"/>
-          <circle cx="50" cy="74" r="3" fill="#B8973A" opacity="0.4"/>
-        </svg>
-        <span class="purity-badge">916 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Link Bracelet</div>
-        <div class="product-desc">22K gold oval-link bracelet with lobster clasp, elegant daily wear</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Link%20Bracelet." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
-    <!-- RINGS -->
-    <div class="product-card" data-cat="rings">
-      <div class="product-img" style="background: #F5EDD5;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="26" stroke="#B8973A" stroke-width="7" fill="none"/>
-        </svg>
-        <span class="purity-badge">916 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Classic Band Ring</div>
-        <div class="product-desc">22K gold smooth comfort-fit band, timeless and versatile, all sizes</div>
-        <div class="product-price">PM for Price <span>SGD · Weight based</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20a%20Gold%20Band%20Ring." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
-    <div class="product-card" data-cat="rings">
-      <div class="product-img" style="background: #EDE5CC;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="22" stroke="#B8973A" stroke-width="6" fill="none"/>
-          <path d="M40 28 L50 18 L60 28" stroke="#B8973A" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="50" cy="18" r="5" fill="#B8973A" opacity="0.5"/>
-        </svg>
-        <span class="purity-badge">750 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Solitaire Ring</div>
-        <div class="product-desc">18K gold with four-claw setting — classic elegance, custom sizing</div>
-        <div class="product-price">PM for Price <span>SGD · Stone optional</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20the%20Solitaire%20Ring." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
-    <!-- EARRINGS -->
-    <div class="product-card" data-cat="earrings">
-      <div class="product-img" style="background: #F0E8D0;">
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="36" cy="38" r="10" stroke="#B8973A" stroke-width="2" fill="rgba(184,151,58,0.1)"/>
-          <path d="M36 48 L28 68" stroke="#B8973A" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="64" cy="38" r="10" stroke="#B8973A" stroke-width="2" fill="rgba(184,151,58,0.1)"/>
-          <path d="M64 48 L72 68" stroke="#B8973A" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span class="purity-badge">916 Gold</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Hoop Earrings</div>
-        <div class="product-desc">22K gold lightweight hoops, polished finish — perfect for daily wear</div>
-        <div class="product-price">PM for Price <span>SGD · Per pair</span></div>
-      </div>
-      <a class="product-cta" href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I'm%20interested%20in%20Hoop%20Earrings." target="_blank">PM Us on WhatsApp</a>
-    </div>
-
+    <a href="collection.html" class="btn-gold">Browse the Collection &#8594;</a>
   </div>
 </section>
 
-<!-- BUYBACK & TRADE-IN -->
-<section id="buyback" style="background: var(--text-dark); padding: 80px 48px;">
-  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-    <div>
-      <span class="section-label" style="color: var(--gold-light);">We Also Buy</span>
-      <h2 class="section-title" style="color: #fff;">Gold Buyback &amp;<br>Trade-Ins Welcome</h2>
-      <p style="font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 40px; max-width: 420px;">Have old gold jewellery? We buy it back at fair, transparent rates — purity-tested on the spot with our XRF analyser so you always know exactly what your gold is worth. Trade-ins towards new pieces are also welcome.</p>
-      <a href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire%20about%20selling%20or%20trading%20in%20my%20gold." target="_blank" class="btn-primary" style="display: inline-block;">PM Us for Buyback Price</a>
+<!-- TRUST / LICENCE -->
+<section class="section" id="trust">
+<div class="lic-strip">
+  <div class="lic-top">
+    <div class="lic-copy">
+      <span class="eyebrow" style="text-align:left;margin-bottom:10px">GOVERNMENT LICENCE</span>
+      <h3>Regulated by Singapore&#8217;s<br/><em class="ga">Ministry of Law</em></h3>
+      <p>Every Assure Gold transaction is conducted under the Precious Stones and Precious Metals Act 2019 (PSPM Act). We are a Regulated Dealer &#8212; mandatory ID verification, official receipts, and government-auditable records on every transaction.</p>
+      <div class="lic-badge">Reg. No. PS20260000962 &#183; Valid to 11 March 2027</div>
+      <div class="verify-links">
+        <span class="verify-link">&#127963;&#65039; Verify via <a href="https://www.mlaw.gov.sg" target="_blank">mlaw.gov.sg</a> &#8212; search &#8220;Assure Gold&#8221; or Reg. No. PS20260000962</span>
+        <span class="verify-link">&#127981; Also searchable on <a href="https://www.bizfile.gov.sg" target="_blank">bizfile.gov.sg</a> &#8212; ACRA Singapore Business Registry</span>
+      </div>
     </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.06);">
-      <div style="background: var(--text-dark); padding: 32px 28px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); margin-bottom: 8px;">XRF</div>
-        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Spot-tested on the day</div>
-      </div>
-      <div style="background: var(--text-dark); padding: 32px 28px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); margin-bottom: 8px;">Fair</div>
-        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Market-rate pricing</div>
-      </div>
-      <div style="background: var(--text-dark); padding: 32px 28px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); margin-bottom: 8px;">Fast</div>
-        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Same-day transaction</div>
-      </div>
-      <div style="background: var(--text-dark); padding: 32px 28px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); margin-bottom: 8px;">Trade</div>
-        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Upgrade towards new pieces</div>
-      </div>
+    <div class="lic-img-wrap">
+      <img src="assets/images/license.jpeg" alt="Assure Gold &#8212; Regulated Dealers Certificate, Reg. PS20260000962, Ministry of Law Singapore"/>
     </div>
   </div>
+</div>
 </section>
 
-<!-- WHY US -->
-<section id="why">
-  <div class="why-grid">
-    <div class="why-visual">
-      <div class="why-inner-border"></div>
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="70" stroke="#B8973A" stroke-width="1.5"/>
-        <circle cx="100" cy="100" r="50" stroke="#B8973A" stroke-width="0.8"/>
-        <path d="M100 30 L120 80 L175 80 L130 112 L148 165 L100 135 L52 165 L70 112 L25 80 L80 80 Z" stroke="#B8973A" stroke-width="1.5" fill="rgba(184,151,58,0.08)"/>
-      </svg>
-    </div>
-    <div>
-      <span class="section-label">Why Assure Gold</span>
-      <h2 class="section-title">Our Promise to You</h2>
-      <div class="why-features">
-        <div class="why-feature">
-          <div class="why-number">01</div>
-          <div class="why-text">
-            <h3>Zero GST. Zero Making Charge.</h3>
-            <p>Preloved jewellery is not subject to GST or making charges — so every dollar you spend goes directly into pure gold value. That's a saving of up to 29% versus buying new.</p>
-          </div>
-        </div>
-        <div class="why-feature">
-          <div class="why-number">02</div>
-          <div class="why-text">
-            <h3>Gold is Gold</h3>
-            <p>The purity of gold does not change with age. A preloved 22K chain is exactly as pure as a brand-new one — and our XRF analyser proves it on the spot, right before your eyes.</p>
-          </div>
-        </div>
-        <div class="why-feature">
-          <div class="why-number">03</div>
-          <div class="why-text">
-            <h3>Live Purity Testing Before You Buy</h3>
-            <p>Watch us test your chosen piece in real time. Results in under 30 seconds — no hidden steps, no waiting. You see exactly what you are getting before any money changes hands.</p>
-          </div>
-        </div>
-        <div class="why-feature">
-          <div class="why-number">04</div>
-          <div class="why-text">
-            <h3>Licensed & Authorised Dealer</h3>
-            <p>We hold a full Precious Stones & Metals licence and operate as an authorised dealer — giving you complete confidence and legal protection in every transaction.</p>
-          </div>
-        </div>
-      </div>
+<!-- COMPARE -->
+<section class="section section-grey">
+<div class="sh">
+  <span class="eyebrow">UNDERSTANDING YOUR PRICE</span>
+  <h2>Clear pricing.<br/><em class="ga">Before you commit.</em></h2>
+  <p>Compare like-for-like pieces by weight, purity, condition and final price.</p>
+</div>
+<div class="cmp">
+  <div class="cbox bad">
+    <div class="cbox-h"><h3>When comparing jewellery</h3><span class="cbox-badge">Check the total</span></div>
+    <div class="cbox-b">
+      <div class="cbox-row"><span class="cbox-lbl">Gold weight &amp; purity</span><span>Compare like for like</span></div>
+      <div class="cbox-row"><span class="cbox-lbl">Condition &amp; workmanship</span><span>Inspect each piece</span></div>
+      <div class="cbox-row"><span class="cbox-lbl">GST &amp; other charges</span><span>Ask the seller</span></div>
     </div>
   </div>
+  <div class="vs-badge">VS</div>
+  <div class="cbox good">
+    <div class="cbox-h"><h3>Assure Gold</h3><span class="cbox-badge">Quote before payment</span></div>
+    <div class="cbox-b">
+      <div class="cbox-row"><span class="cbox-lbl">Selling price</span><span>Weight × quoted selling rate</span></div>
+      <div class="cbox-row"><span class="cbox-lbl">GST</span><span class="pos">Not charged; not GST-registered</span></div>
+      <div class="cbox-row"><span class="cbox-lbl">Separate making charge</span><span class="pos">S$ 0</span></div>
+      <div class="cbox-row"><span class="cbox-lbl">Our margin</span><span>Included in selling rate</span></div>
+    </div>
+  </div>
+</div>
+<p style="text-align:center;margin-top:24px">Website prices are indicative. Confirm the final quote and any delivery fee before payment.</p>
 </section>
 
-<!-- PURITY TESTING -->
-<section id="purity">
-  <span class="section-label" style="color: var(--gold-light);">Science of Trust</span>
-  <h2 class="section-title">Precision Purity Testing</h2>
-  <p class="section-sub">We use advanced XRF (X-ray fluorescence) analyser technology — the same equipment used by government assay offices — to deliver definitive, non-destructive purity results in seconds.</p>
-
-  <div class="purity-cards">
-    <div class="purity-card">
-      <div class="purity-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
-      </div>
-      <h3>XRF Analysis</h3>
-      <p>High-end X-ray fluorescence analysis gives elemental composition to 4 decimal places — accurate to 0.01% purity with no surface damage.</p>
+<!-- PRODUCTS -->
+<section class="section" id="products">
+<div class="sh">
+  <span class="eyebrow">FEATURED PRELOVED PIECES</span>
+  <h2>Real pieces.<br/><em class="ga">Real prices.</em></h2>
+  <p>A selection from today&#8217;s collection. Every piece XRF-tested. Request your quote on WhatsApp.</p>
+</div>
+<div class="feat-grid">
+  <a href="https://wa.me/6593430242?text=Hi%20Assure%20Gold%2C%20I%20am%20interested%20in%20the%20916%20Rope%20Chain%2024%20inches%2022.3g." target="_blank" class="feat-card">
+    <div class="feat-img"><img src="assets/images/products/chain-01.jpeg" alt="Rope Chain &#8212; Long 24&quot;" loading="lazy"/><span class="feat-k">916 &#183; 22K</span><span class="feat-xrf">&#10003; XRF</span></div>
+    <div class="feat-body">
+      <h3>Rope Chain &#8212; Long 24&quot;</h3>
+      <div class="feat-spec">24 inches &#183; 22.3g &#183; Excellent condition</div>
+      <div class="feat-pricebox" data-agp-karat="916 &#183; 22K" data-agp-weight="22.3" data-agp-retail="5200"><div class="feat-price"><span class="agp-amt">S$ &mdash;</span> <span class="feat-nett">nett</span></div><div class="feat-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div>
+      
+      <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
-    <div class="purity-card">
-      <div class="purity-icon">
-        <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-      </div>
-      <h3>Live Before Purchase</h3>
-      <p>You watch the test happen in front of you — results on screen within 30 seconds. No hidden steps, no delays. You see exactly what you are buying.</p>
+  </a>
+  <a href="https://wa.me/6593430242?text=Hi%20Assure%20Gold%2C%20I%20am%20interested%20in%20the%20916%20Rope%20Chain%20premium%2022%20inches%2020.8g." target="_blank" class="feat-card">
+    <div class="feat-img"><img src="assets/images/products/chain-14.jpeg" alt="Rope Chain &#8212; Premium 22&quot;" loading="lazy"/><span class="feat-k">916 &#183; 22K</span><span class="feat-xrf">&#10003; XRF</span></div>
+    <div class="feat-body">
+      <h3>Rope Chain &#8212; Premium 22&quot;</h3>
+      <div class="feat-spec">22 inches &#183; 20.8g &#183; Excellent condition</div>
+      <div class="feat-pricebox" data-agp-karat="916 &#183; 22K" data-agp-weight="20.8" data-agp-retail="4980"><div class="feat-price"><span class="agp-amt">S$ &mdash;</span> <span class="feat-nett">nett</span></div><div class="feat-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div>
+      
+      <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
-    <div class="purity-card">
-      <div class="purity-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-      </div>
-      <h3>Certified Results</h3>
-      <p>Every piece receives a documented purity certification — a record of its gold content and assay results that you keep with your purchase.</p>
+  </a>
+  <a href="https://wa.me/6593430242?text=Hi%20Assure%20Gold%2C%20I%20am%20interested%20in%20the%20Dragon%20Abacus%20Pendant%20Set%2018.4g." target="_blank" class="feat-card">
+    <div class="feat-img"><img src="assets/images/products/chain-16.jpeg" alt="Rope + Dragon Abacus Pendant" loading="lazy"/><span class="feat-k">916 &#183; 22K</span><span class="feat-xrf">&#10003; XRF</span></div>
+    <div class="feat-body">
+      <h3>Rope + Dragon Abacus Pendant</h3>
+      <div class="feat-spec">20 inches &#183; 18.4g total &#183; Very good</div>
+      <div class="feat-pricebox" data-agp-karat="916 &#183; 22K" data-agp-weight="18.4" data-agp-retail="4500"><div class="feat-price"><span class="agp-amt">S$ &mdash;</span> <span class="feat-nett">nett</span></div><div class="feat-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div>
+      
+      <span class="feat-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg> Enquire on WhatsApp</span>
     </div>
-    <div class="purity-card">
-      <div class="purity-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      </div>
-      <h3>Non-Destructive</h3>
-      <p>XRF testing leaves your ornament completely intact and unharmed. The X-ray beam reads the surface — there is no drilling, scratching, or acid use.</p>
-    </div>
-  </div>
+  </a>
+</div>
+<div style="text-align:center"><a href="collection.html" class="btn-gold">View Full Collection &#8594;</a></div>
 </section>
 
-<!-- CONTACT -->
-<section id="verify" style="background:var(--cream);padding:80px 24px;">
-  <div style="max-width:760px;margin:0 auto;text-align:center;">
-    <span class="section-label">Authenticity Check</span>
-    <h2 class="section-title" style="margin-bottom:16px;">Verify Your Purchase</h2>
-    <p class="section-sub" style="margin:0 auto 40px;">Every piece sold by Assure Gold comes with a receipt and purity record. Send us your receipt number or item details on WhatsApp and we'll confirm the gold purity, weight, and transaction — anytime, at no charge.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:40px;">
-      <div style="background:#fff;border:1px solid rgba(184,151,58,0.2);border-radius:8px;padding:28px 20px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:10px;">📋</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--text-dark);margin-bottom:6px;">Receipt Number</div>
-        <div style="font-size:13px;color:var(--text-light);line-height:1.6;">Share your receipt ID and we'll verify the transaction record instantly.</div>
-      </div>
-      <div style="background:#fff;border:1px solid rgba(184,151,58,0.2);border-radius:8px;padding:28px 20px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:10px;">⚗️</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--text-dark);margin-bottom:6px;">XRF Purity Report</div>
-        <div style="font-size:13px;color:var(--text-light);line-height:1.6;">We retain XRF test results for every piece sold. Request your copy anytime.</div>
-      </div>
-      <div style="background:#fff;border:1px solid rgba(184,151,58,0.2);border-radius:8px;padding:28px 20px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:10px;">🛡️</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--text-dark);margin-bottom:6px;">Licensed Dealer</div>
-        <div style="font-size:13px;color:var(--text-light);line-height:1.6;">We operate under Singapore's Precious Stones & Metals Dealer licence — fully traceable.</div>
-      </div>
-    </div>
-    <a href="https://wa.me/6596724975?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20to%20verify%20my%20purchase." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.847L.057 23.804l6.109-1.524A11.948 11.948 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.37l-.358-.213-3.726.976.999-3.638-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
-      Verify on WhatsApp
-    </a>
-  </div>
+<!-- REVIEWS -->
+<section class="section">
+<div class="sh">
+  <span class="eyebrow">VERIFIED BUYER REVIEWS</span>
+  <h2>Real customers.<br/><em class="ga">Real conversations.</em></h2>
+</div>
+<div class="rev-grid">
+  <article class="rcard">
+    <div class="rcard-h"><div class="rcard-ava">N</div><div><div class="rcard-name">Noor Fazilah B. &#10003;</div><div class="rcard-status">Verified preloved buyer</div></div></div>
+    <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="rcard-bubble"><p>&#8220;Nervous buying preloved gold online. They sent the XRF reading <em>before I even asked.</em> Got a 916 rope chain 20% below mall price. Completely legit.&#8221;</p></div>
+    <div class="rcard-prod">&#9671; Preloved 916 Rope Chain &#183; 18.2g</div>
+  </article>
+  <article class="rcard">
+    <div class="rcard-h"><div class="rcard-ava">W</div><div><div class="rcard-name">Wei Keong L. &#10003;</div><div class="rcard-status">Verified preloved buyer</div></div></div>
+    <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="rcard-bubble"><p>&#8220;Photos, weight, purity &#8212; all on WhatsApp before I committed. Compared 3 retailers. <em>Saved S$ 800</em> buying preloved. Zero pressure.&#8221;</p></div>
+    <div class="rcard-prod">&#9671; Preloved 916 Rope + Pendant Set</div>
+  </article>
+  <article class="rcard">
+    <div class="rcard-h"><div class="rcard-ava">R</div><div><div class="rcard-name">Rajeshwari D. &#10003;</div><div class="rcard-status">Verified preloved seller</div></div></div>
+    <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="rcard-bubble"><p>&#8220;Sold my old chain. XRF tested live, quoted at daily rate, <em>paid same-day.</em> Exactly what the rate said. Zero lowballing.&#8221;</p></div>
+    <div class="rcard-prod">&#9671; Preloved 916 Rope Chain Buyback</div>
+  </article>
+</div>
 </section>
 
-<section id="contact">
-  <div class="contact-inner">
-    <span class="section-label">Get in Touch</span>
-    <h2 class="section-title">Buy, Sell or Trade In?</h2>
-    <p class="section-sub" style="margin: 0 auto;">PM us on WhatsApp for pricing, availability, gold buyback rates, or to arrange a visit with live purity testing.</p>
+<!-- FAQ -->
+<section class="section section-grey" id="faq">
+<div class="sh"><span class="eyebrow">QUICK ANSWERS</span><h2>Common questions.<br/><em class="ga">Straight answers.</em></h2></div>
+<div class="fql">
+  <div class="fq-item"><button class="fq-btn"><span>How do I know preloved gold is genuine?</span><span class="fq-ico">+</span></button><div class="fq-ans">Every piece is XRF-tested &#8212; we share the purity reading and explain the assessment. We share the reading on WhatsApp before you commit. We are PSM-licensed under Singapore&#8217;s Ministry of Law (Reg. PS20260000962). Verify at mlaw.gov.sg.</div></div>
+  <div class="fq-item"><button class="fq-btn"><span>Why is the price lower than new gold?</span><span class="fq-ico">+</span></button><div class="fq-ans">Assure Gold is not GST-registered and does not charge GST. We do not add a separate making charge. Our selling rate includes our margin and depends on gold purity and market rates. The final price is confirmed before you pay. Preloved jewellery is not automatically GST-exempt.</div></div>
+  <div class="fq-item"><button class="fq-btn"><span>Is preloved gold the same quality as new?</span><span class="fq-ico">+</span></button><div class="fq-ans">Chemically, yes. Gold doesn&#8217;t degrade. A 916 chain from 1995 has exactly the same 91.6% purity as one made today. We XRF-verify every piece. Condition details are always disclosed in full with photos.</div></div>
+  <div class="fq-item"><button class="fq-btn"><span>Can I inspect in person before paying?</span><span class="fq-ico">+</span></button><div class="fq-ans">Yes &#8212; contact us to arrange a viewing at 119A Canberra Cres, Singapore. Inspect, watch the live XRF test, pay only when satisfied. Or arrange secure hand-delivery within Singapore.</div></div>
+  <div class="fq-item"><button class="fq-btn"><span>How do I verify your licence is real?</span><span class="fq-ico">+</span></button><div class="fq-ans">Go to mlaw.gov.sg and search &#8220;Assure Gold&#8221; or Reg. No. PS20260000962 to verify our PSM registration directly with Singapore&#8217;s Ministry of Law.</div></div>
+</div>
+</section>
 
-    <a class="whatsapp-btn" href="https://wa.me/6596724975?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.847L.057 23.804l6.109-1.524A11.948 11.948 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.37l-.358-.213-3.726.976.999-3.638-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
-      Chat on WhatsApp
-    </a>
-    <p class="contact-note">Typically responds within 30 minutes · Mon–Sat, 10am–7pm</p>
-
-    <div class="contact-details">
-      <div class="contact-item">
-        <label>WhatsApp / Call</label>
-        <span>+65 9672 4975</span>
-      </div>
-      <div class="contact-item">
-        <label>Address</label>
-        <span>119A Canberra Cres, Singapore</span>
-      </div>
-      <div class="contact-item">
-        <label>PM Us For</label>
-        <span>Pricing & Buyback</span>
-      </div>
-    </div>
-  </div>
+<!-- CTA -->
+<section id="cta-section" id="contact">
+<span class="eyebrow">START THE CONVERSATION</span>
+<h2>Find your preloved piece.<br/><em>Priced in pure gold.</em></h2>
+<p>Personal WhatsApp service &#183; Replies during business hours &#183; Daily, 7am&#8211;midnight SGT</p>
+<a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire%20about%20preloved%20gold." target="_blank" class="btn-wa">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>
+  Chat with Us on WhatsApp
+</a>
+<div class="cta-dets">
+  <div class="cdet"><span>WhatsApp</span><b>+65 9343 0242</b></div>
+  <div class="cdet"><span>Visit by appointment</span><b>119A Canberra Cres, S&#8217;pore</b></div>
+  <div class="cdet"><span>Hours</span><b>Daily &#183; 7am&#8211;midnight SGT</b></div>
+</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" style="display:flex;align-items:center;text-decoration:none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzcgNDU3IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkFzc3VyZSBHb2xkIEEgZGlhbW9uZCBsb2dvIiB3aWR0aD0iNTc3IiBoZWlnaHQ9IjQ1NyI+CiAgPHBhdGggZD0iTSA1NTEgMjcgTCA1NDggMjUgTCA1MzUgMjUgTCA1MTYgMjkgTCA0OTkgMzUgTCA0NzQgNDggTCA0NDQgNzAgTCA0MTYgOTcgTCA0MDEgMTE0IEwgMzcyIDE1MiBMIDMzMiAyMTAgTCAzMjkgMjEwIEwgMzI2IDIwOCBMIDMwMCAxOTkgTCAyNjggMTkxIEwgMjQ5IDE4OSBMIDI0OCAxODggTCAyMzkgMTg4IEwgMjM4IDE4NyBMIDE5NSAxODcgTCAxOTQgMTg4IEwgMTgzIDE4OCBMIDE4MiAxODkgTCAxNjMgMTkxIEwgMTQyIDE5NiBMIDExOCAyMDUgTCA5MSAyMjAgTCA3MyAyMzQgTCA2MSAyNDYgTCA1MyAyNTYgTCA0NCAyNzAgTCAzNyAyODQgTCAzMCAzMDMgTCAyNiAzMjIgTCAyNSAzNDUgTCAzMCAzNzAgTCAzOSAzODkgTCA0NSAzOTcgTCA1OCA0MTAgTCA2OCA0MTcgTCA4MiA0MjQgTCAxMDQgNDMwIEwgMTExIDQzMCBMIDExMiA0MzEgTCAxNDIgNDMwIEwgMTYzIDQyNSBMIDE4NyA0MTYgTCAyMDkgNDA0IEwgMjI5IDM5MCBMIDI0MSAzODAgTCAyNjYgMzU1IEwgMjgzIDMzNSBMIDMwMCAzMTIgTCAzMjMgMjc4IEwgMzQ5IDIzNSBMIDM1MSAyMzMgTCAzNTMgMjMzIEwgMzY4IDI0MiBMIDM4MSAyNTIgTCAzOTUgMjY3IEwgNDAzIDI4MSBMIDQwMSAyOTMgTCAzOTggMzAwIEwgMzk0IDMxNiBMIDM5MiAzMzEgTCAzOTAgMzM3IEwgMzg5IDM1MSBMIDM4OCAzNTIgTCAzODggMzgxIEwgMzkxIDM5NiBMIDM5NiA0MDggTCA0MDQgNDE3IEwgNDEwIDQyMSBMIDQyMyA0MjUgTCA0NDcgNDI0IEwgNDU2IDQyMSBMIDQ2OSA0MTQgTCA0NzQgNDA4IEwgNDczIDQwNiBMIDQ2NCA0MDkgTCA0NTEgNDA4IEwgNDQzIDQwMSBMIDQ0MCAzOTUgTCA0MzggMzg2IEwgNDM4IDM3NiBMIDQzNyAzNzUgTCA0MzcgMzU3IEwgNDM4IDM1NiBMIDQzOCAzNDUgTCA0MzkgMzQ0IEwgNDM5IDMzNyBMIDQ0MCAzMzYgTCA0NDMgMzEzIEwgNDUyIDI3NSBMIDQ1NCAyNzEgTCA0NjQgMjMzIEwgNDgwIDE4NiBMIDQ4MSAxODAgTCA0ODMgMTc3IEwgNTA0IDExNSBMIDUxNiA4NiBMIDUyOSA2MCBMIDU0MiA0MiBMIDU1MCAzNSBaIE0gMzI2IDIyMSBMIDI3NSAzMDAgTCAyNTEgMzMyIEwgMjM1IDM1MSBMIDIwOSAzNzcgTCAxODEgMzk4IEwgMTYwIDQwOSBMIDE0OSA0MTMgTCAxMzAgNDE3IEwgMTEzIDQxNyBMIDEwMyA0MTUgTCA4NiA0MDggTCA3MyAzOTcgTCA2NiAzODcgTCA2MSAzNzUgTCA1NyAzNTcgTCA1OCAzMjUgTCA2NiAyOTcgTCA3MyAyODIgTCA4OCAyNjAgTCAxMDkgMjM5IEwgMTI2IDIyNyBMIDE0NSAyMTcgTCAxNzAgMjA4IEwgMTc5IDIwNyBMIDE4OCAyMDQgTCAxOTQgMjA0IEwgMjAyIDIwMiBMIDIxNCAyMDIgTCAyMTUgMjAxIEwgMjQyIDIwMSBMIDI0MyAyMDIgTCAyNTUgMjAyIEwgMjU2IDIwMyBMIDI3NiAyMDUgTCAzMDQgMjEyIEwgMzA3IDIxNCBMIDMxOSAyMTcgWiBNIDUxOCA0MiBMIDUxOSA0NCBMIDUwNiA2MCBMIDQ4NyA5MCBMIDQ1NyAxNDYgTCA0NTcgMTQ4IEwgNDQ5IDE2MyBMIDQ0OSAxNjUgTCA0NDIgMTc4IEwgNDQwIDE4NSBMIDQzNCAxOTcgTCA0MjkgMjEyIEwgNDIxIDIzMCBMIDQyMSAyMzMgTCA0MTQgMjUwIEwgNDExIDI2MiBMIDQwOSAyNjQgTCAzODcgMjQyIEwgMzY3IDIyOCBMIDM1OSAyMjQgTCAzNTcgMjIxIEwgMzc1IDE5MiBMIDM3NyAxODcgTCA0MDQgMTQ1IEwgNDI0IDExNyBMIDQzOCAxMDAgTCA0NjAgNzcgTCA0NzMgNjYgTCA0OTQgNTIgTCA1MDYgNDYgWiBNIDIzMiAyNjQgTCAxOTcgMjY0IEwgMTk2IDI2NSBMIDE5OCAyNjggTCAyMTQgMzEzIFogTSAyNTggMjY0IEwgMjM2IDI2NCBMIDIzNSAyNjUgTCAyMjcgMjg4IEwgMjE3IDMxMSBMIDI0MyAyODMgWiBNIDE3MCAyNjQgTCAxNzQgMjcwIEwgMjExIDMxMiBMIDE5MyAyNjYgTCAxOTEgMjY0IFogTSAxOTcgMjYxIEwgMjMyIDI2MSBMIDIxNCAyMzcgTCAyMDkgMjQyIFogTSAyMTAgMjM3IEwgMTg4IDIzNyBMIDE5NSAyNTQgTCAxOTQgMjU3IEwgMTkyIDI1NSBMIDE5MSAyNDkgTCAxODYgMjM4IEwgMTgyIDI0MiBMIDE4MSAyNDUgTCAxOTMgMjYwIEwgMTk3IDI1NiBaIE0gMjE4IDIzNyBMIDIzNCAyNjAgTCAyMzcgMjU4IEwgMjQ3IDI0NiBMIDI0NyAyNDMgTCAyNDMgMjM4IEwgMjM4IDI1MSBMIDIzMyAyNTggTCAyMzIgMjU0IEwgMjM4IDI0NCBMIDI0MCAyMzcgWiBNIDI1OSAyNjEgTCAyNDkgMjQ3IEwgMjM3IDI2MSBaIE0gMTY5IDI2MSBMIDE5MSAyNjEgTCAxNzkgMjQ3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K" alt="Assure Gold" style="height:40px;width:auto;filter:invert(1);"><span style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;letter-spacing:0.12em;color:#fff;margin-left:10px;">ASSURE GOLD</span></a>
-  <span class="footer-license">Precious Stones & Metals License · Authorised Dealer</span>
-  <span class="footer-copy">© 2025 Assure Gold. All rights reserved.</span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <img src="assets/images/logo.png" alt="Assure Gold" class="foot-logo-img"/>
+      <div><strong>ASSURE GOLD</strong><span>Singapore&#8217;s Certified Preloved Gold Dealer</span></div>
+    </div>
+    <nav class="foot-nav">
+      <a href="index.html">Home</a>
+      <a href="collection.html">Collection</a>
+        <a href="buyback.html">Buyback</a>
+      <a href="#trust">Trust &amp; Licence</a>
+      <a href="https://wa.me/6593430242" target="_blank">WhatsApp</a>
+    </nav>
+    <nav class="foot-nav" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="delivery.html">Delivery &amp; Meetup</a>
+    </nav>
+  </div>
+  <div class="foot-bot">
+    <span>PSM Licensed &#183; Reg. No. PS20260000962 &#183; Ministry of Law &#183; Republic of Singapore</span>
+    <span>&#169; 2026 Assure Gold. All rights reserved.</span>
+    <span class="loomix-footer">Website crafted with <span style="color:var(--muted)">&#9829;</span> by <a href="https://www.instagram.com/loomixstudios/" target="_blank" rel="noopener" class="loomix-link">Loomix Studios</a></span>
+  </div>
 </footer>
 
+<!-- FAB -->
+<a class="fab" href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire." target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>
+</a>
+
+<!-- MISHI CHATBOT -->
+<button id="mishi-btn" aria-label="Chat with Mishi">&#128142;<span class="mishi-pip">&#10006;</span></button>
+<div id="mishi-chat" role="dialog">
+  <div class="mishi-hd">
+    <div class="mishi-av">&#128142;</div>
+    <div><div class="mishi-nm">Mishi &#183; Assure Gold</div><div class="mishi-st">Online &#183; Preloved Gold Expert</div></div>
+    <button class="mishi-x" id="mishi-close">&#215;</button>
+  </div>
+  <div class="mishi-msgs" id="mishi-msgs"></div>
+  <div class="mishi-chips">
+    <button class="mchip" onclick="mishiSend('What gold do you have?')">Browse gold</button>
+    <button class="mchip" onclick="mishiSend('How does buying work?')">How to buy</button>
+    <button class="mchip" onclick="mishiSend('What is XRF testing?')">XRF test</button>
+    <button class="mchip" onclick="mishiSend('How are prices calculated?')">Pricing</button>
+    <button class="mchip" onclick="mishiSend('I want to sell my gold')">Sell gold</button>
+    <button class="mchip" onclick="mishiSend('Is Assure Gold legit?')">Trust</button>
+  </div>
+  <div class="mishi-in-row">
+    <textarea class="mishi-in" id="mishi-input" placeholder="Ask about our preloved gold..." rows="1"></textarea>
+    <button class="mishi-send" id="mishi-send" aria-label="Send">&#10148;</button>
+  </div>
+</div>
+
 <script>
-  function filterProducts(cat, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.product-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
+// =====================================================
+// INLINE BOOT: Nav scroll, hamburger, FAQ, particles
+// =====================================================
+(function(){
+  // ── LENIS SMOOTH SCROLL (60fps) ──
+  // Lenis gives butter-smooth 60fps momentum scrolling
+  // It drives GSAP ScrollTrigger so animations stay in sync
+  var lenis;
+  try {
+    lenis = new Lenis({
+      duration: 0.7,           // reduced from 1.25 — feels responsive on desktop
+      smoothWheel: window.matchMedia('(hover: none) and (pointer: coarse)').matches,
+      easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false
+    });
+
+    // Feed Lenis scroll position into GSAP ScrollTrigger
+    lenis.on('scroll', function(e){
+      if(typeof ScrollTrigger !== 'undefined'){
+        ScrollTrigger.update();
+      }
+    });
+
+    // GSAP ticker drives Lenis at 60fps (requestAnimationFrame)
+    function lenisRaf(time){
+      lenis.raf(time);
+      requestAnimationFrame(lenisRaf);
+    }
+    requestAnimationFrame(lenisRaf);
+
+    // Anchor links — smooth scroll through Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href');
+        var target = document.querySelector(id);
+        if(target){ e.preventDefault(); lenis.scrollTo(target, {offset: -72, duration: 1.4}); }
+      });
+    });
+
+    window.__lenis = lenis; // expose for debugging
+    console.log('[AG] Lenis smooth scroll active (60fps)');
+  } catch(err) {
+    console.warn('[AG] Lenis not available, falling back to native scroll:', err);
+  }
+
+  // Nav scroll
+  window.addEventListener('scroll',function(){
+    document.getElementById('nav').classList.toggle('scrolled',window.scrollY>18);
+  },{passive:true});
+  // Hamburger
+  var hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+  hb.addEventListener('click',function(){hb.classList.toggle('open');mm.classList.toggle('open');});
+  // FAQ
+  document.querySelectorAll('.fq-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var it=b.closest('.fq-item'),op=it.classList.contains('open');
+      document.querySelectorAll('.fq-item.open').forEach(function(i){i.classList.remove('open');});
+      if(!op)it.classList.add('open');
+    });
+  });
+})();
+
+// =====================================================
+// CAROUSEL — slide 1 (video) 10s, others 4s, NO pause on hover, instant swap (no entrance animation)
+// =====================================================
+(function(){
+  var slides=document.querySelectorAll('.hero-slide');
+  var dots=document.querySelectorAll('.carousel-dot');
+  var prog=document.getElementById('carouselProgress');
+  var DURATIONS=[10000,4000,4000,4000,4000]; // slide 1 = 10s (video), rest = 4s
+  var cur=0,tot=slides.length,timer=null;
+
+  function durFor(i){return DURATIONS[i]!==undefined?DURATIONS[i]:4000;}
+
+  function startProg(){
+    if(!prog)return;
+    var d=durFor(cur);
+    prog.style.transition='none';prog.style.width='0%';
+    void prog.offsetWidth;
+    prog.style.transition='width '+d+'ms linear';prog.style.width='100%';
+  }
+
+  function goTo(idx){
+    if(idx===cur)return;
+    slides[cur].classList.remove('active');
+    if(dots[cur])dots[cur].classList.remove('active');
+    cur=(idx+tot)%tot;
+    slides[cur].classList.add('active');
+    if(dots[cur])dots[cur].classList.add('active');
+    startProg();
+  }
+  function next(){goTo(cur+1);}
+  function prev(){goTo(cur-1);}
+
+  function startTimer(){
+    clearTimeout(timer);
+    timer=setTimeout(function(){next();startTimer();},durFor(cur));
+  }
+
+  // Init
+  startProg();
+  startTimer();
+  // NO hover pause — timer keeps running always
+
+  document.getElementById('carouselNext').addEventListener('click',function(){next();startTimer();});
+  document.getElementById('carouselPrev').addEventListener('click',function(){prev();startTimer();});
+  dots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(d.dataset.slide,10));startTimer();});});
+
+  // Touch swipe
+  var tx=0;
+  document.getElementById('heroCarousel').addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  document.getElementById('heroCarousel').addEventListener('touchend',function(e){
+    var diff=tx-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>50){diff>0?next():prev();startTimer();}
+  },{passive:true});
+})();
+
+// =====================================================
+// GSAP SCROLL ANIMATIONS — aggressive & visible
+// =====================================================
+window.addEventListener('load',function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'){
+    console.warn('[AG] GSAP not loaded — CDN may be blocked in preview'); return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Sync Lenis with GSAP ScrollTrigger
+  if(typeof window.__lenis!=='undefined'){
+    ScrollTrigger.scrollerProxy(document.body,{
+      scrollTop:function(v){
+        if(arguments.length){window.__lenis.scrollTo(v,{immediate:true});}
+        return window.__lenis.scroll;
+      },
+      getBoundingClientRect:function(){
+        return{top:0,left:0,width:window.innerWidth,height:window.innerHeight};
+      },
+      pinType:'transform'
+    });
+    window.__lenis.on('scroll',ScrollTrigger.update);
+  }
+
+  // 1. WHY COLS — slide up from below, staggered
+  var wc=gsap.utils.toArray('.why-col');
+  if(wc.length){
+    gsap.set(wc,{y:70,opacity:0});
+    ScrollTrigger.create({
+      trigger:'.why-cols',start:'top 88%',
+      onEnter:function(){gsap.to(wc,{y:0,opacity:1,duration:.85,ease:'power3.out',stagger:.15});}
+    });
+  }
+
+  // 2. SECTION HEADERS
+  document.querySelectorAll('.sh').forEach(function(sh){
+    var kids=Array.from(sh.children);
+    gsap.set(kids,{y:35,opacity:0});
+    ScrollTrigger.create({
+      trigger:sh,start:'top 88%',
+      onEnter:function(){gsap.to(kids,{y:0,opacity:1,duration:.7,ease:'power2.out',stagger:.12});}
+    });
+  });
+
+  // 3. PRELOVED GOLD FEATURE SECTION — entrance
+  var gb=document.getElementById('gb3d');
+  var isDesktop = window.innerWidth > 860 && !('ontouchstart' in window);
+  if(gb){
+    if(isDesktop){
+      // desktop: dramatic 3D entrance + mouse parallax
+      gsap.set(gb,{y:60,rotationY:-35,opacity:0});
+      ScrollTrigger.create({
+        trigger:'#goldbar-section',start:'top 85%',
+        onEnter:function(){gsap.to(gb,{y:0,rotationY:0,opacity:1,duration:1.2,ease:'back.out(1.3)'});}
+      });
+      gsap.to(gb,{y:-18,duration:3.2,ease:'sine.inOut',repeat:-1,yoyo:true});
+      document.addEventListener('mousemove',function(e){
+        var cx=window.innerWidth/2,cy=window.innerHeight/2;
+        var dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
+        gsap.to(gb,{rotationY:dx*28,rotationX:-dy*14,duration:.7,ease:'power2.out',transformPerspective:800,overwrite:'auto'});
+      },{passive:true});
+    } else {
+      // mobile: simple clean fade-up, NO 3D rotation (keeps it upright)
+      gsap.set(gb,{y:40,opacity:0});
+      ScrollTrigger.create({
+        trigger:'#goldbar-section',start:'top 88%',
+        onEnter:function(){gsap.to(gb,{y:0,opacity:1,duration:.9,ease:'power3.out'});}
+      });
+    }
+  }
+
+  // 3b. CAROUSEL 3D CHAIN — mouse tilt interaction
+  var chainFloat=document.querySelector('.chain3d-float');
+  if(chainFloat){
+    var chainStage=document.querySelector('.chain3d-stage');
+    chainStage.addEventListener('mousemove',function(e){
+      var r=chainStage.getBoundingClientRect();
+      var dx=((e.clientX-r.left)/r.width-.5)*2;
+      var dy=((e.clientY-r.top)/r.height-.5)*2;
+      chainFloat.style.animationPlayState='paused';
+      gsap.to(chainFloat,{rotationY:dx*28,rotationX:-dy*18,rotationZ:dx*4,duration:.5,ease:'power2.out',transformPerspective:1200,overwrite:'auto'});
+    },{passive:true});
+    chainStage.addEventListener('mouseleave',function(){
+      gsap.to(chainFloat,{rotationY:0,rotationX:0,rotationZ:0,duration:.9,ease:'power2.out',clearProps:'transform',
+        onComplete:function(){chainFloat.style.animationPlayState='running';}});
+    });
+  }
+  var gbCopy=document.querySelector('.gb3d-copy');
+  if(gbCopy){
+    gsap.set(gbCopy,{x:50,opacity:0});
+    ScrollTrigger.create({
+      trigger:'#goldbar-section',start:'top 85%',
+      onEnter:function(){gsap.to(gbCopy,{x:0,opacity:1,duration:1,ease:'power3.out',delay:.2});}
+    });
+  }
+
+  // 4. LICENCE IMAGE — rotate + scale entrance
+  var licImg=document.querySelector('.lic-img-wrap');
+  if(licImg){
+    gsap.set(licImg,{scale:.82,opacity:0,rotation:-4});
+    ScrollTrigger.create({
+      trigger:licImg,start:'top 88%',
+      onEnter:function(){gsap.to(licImg,{scale:1,opacity:1,rotation:0,duration:1.1,ease:'back.out(1.5)'});}
+    });
+    gsap.to(licImg,{y:-22,duration:3.5,ease:'sine.inOut',repeat:-1,yoyo:true,delay:1.5});
+  }
+
+  // 5. LICENCE COPY — slide from left
+  var licCopy=document.querySelector('.lic-copy');
+  if(licCopy){
+    gsap.set(licCopy,{x:-40,opacity:0});
+    ScrollTrigger.create({
+      trigger:licCopy,start:'top 88%',
+      onEnter:function(){gsap.to(licCopy,{x:0,opacity:1,duration:.85,ease:'power3.out'});}
+    });
+  }
+
+  // 6. COMPARE BOXES — split fly-in
+  var cboxBad=document.querySelector('.cbox.bad'),cboxGood=document.querySelector('.cbox.good'),vsBadge=document.querySelector('.vs-badge');
+  if(cboxBad){
+    gsap.set(cboxBad,{x:-60,opacity:0});gsap.set(cboxGood,{x:60,opacity:0});
+    if(vsBadge)gsap.set(vsBadge,{scale:0,opacity:0});
+    ScrollTrigger.create({
+      trigger:'.cmp',start:'top 86%',
+      onEnter:function(){
+        gsap.to(cboxBad,{x:0,opacity:1,duration:.8,ease:'power3.out'});
+        gsap.to(cboxGood,{x:0,opacity:1,duration:.8,ease:'power3.out',delay:.1});
+        if(vsBadge)gsap.to(vsBadge,{scale:1,opacity:1,duration:.55,ease:'back.out(2.5)',delay:.35});
       }
     });
   }
 
-  // Smooth reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
+  // 7. PRODUCT CARDS — rise with stagger
+  var fc=gsap.utils.toArray('.feat-card');
+  if(fc.length){
+    gsap.set(fc,{y:70,opacity:0});
+    ScrollTrigger.create({
+      trigger:'.feat-grid',start:'top 88%',
+      onEnter:function(){gsap.to(fc,{y:0,opacity:1,duration:.8,ease:'power3.out',stagger:.13});}
     });
-  }, { threshold: 0.1 });
+  }
 
-  document.querySelectorAll('.product-card, .why-feature, .purity-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
+  // 8. TRUST PILLS — pop-scale stagger
+  var tp=gsap.utils.toArray('.tp');
+  if(tp.length){
+    gsap.set(tp,{scale:.65,opacity:0});
+    ScrollTrigger.create({
+      trigger:'.trust-pills',start:'top 90%',
+      onEnter:function(){gsap.to(tp,{scale:1,opacity:1,duration:.5,ease:'back.out(2)',stagger:.05});}
+    });
+  }
+
+  // 9. REVIEW CARDS
+  var rc=gsap.utils.toArray('.rcard');
+  if(rc.length){
+    gsap.set(rc,{y:55,opacity:0,rotationX:8});
+    ScrollTrigger.create({
+      trigger:'.rev-grid',start:'top 88%',
+      onEnter:function(){gsap.to(rc,{y:0,opacity:1,rotationX:0,duration:.8,ease:'power2.out',stagger:.14});}
+    });
+  }
+
+  // 10. FAQ ITEMS
+  var fi=gsap.utils.toArray('.fq-item');
+  if(fi.length){
+    gsap.set(fi,{x:-30,opacity:0});
+    ScrollTrigger.create({
+      trigger:'.fql',start:'top 88%',
+      onEnter:function(){gsap.to(fi,{x:0,opacity:1,duration:.55,ease:'power2.out',stagger:.08});}
+    });
+  }
+
+  // 11. CTA SECTION
+  var ctaKids=document.querySelectorAll('#cta-section > *');
+  if(ctaKids.length){
+    gsap.set(ctaKids,{y:55,opacity:0});
+    ScrollTrigger.create({
+      trigger:'#cta-section',start:'top 88%',
+      onEnter:function(){gsap.to(ctaKids,{y:0,opacity:1,duration:.85,ease:'power3.out',stagger:.12});}
+    });
+  }
+
+  // 12. ANIMATED COUNTERS (removed — numbers display statically)
+
+  // 13. Footer
+  var footKids=document.querySelectorAll('footer > *');
+  if(footKids.length){
+    gsap.set(footKids,{y:24,opacity:0});
+    ScrollTrigger.create({
+      trigger:'footer',start:'top 94%',
+      onEnter:function(){gsap.to(footKids,{y:0,opacity:1,duration:.6,ease:'power2.out',stagger:.1});}
+    });
+  }
+
+  console.log('[AG] GSAP ScrollTrigger animations active');
+});
+
+// =====================================================
+// MISHI CHATBOT
+// =====================================================
+(function(){
+  var btn=document.getElementById('mishi-btn'),
+      chat=document.getElementById('mishi-chat'),
+      msgs=document.getElementById('mishi-msgs'),
+      inp=document.getElementById('mishi-input'),
+      snd=document.getElementById('mishi-send'),
+      cls=document.getElementById('mishi-close');
+  if(!btn)return;
+  var open=false,greeted=false,isMobile=window.innerWidth<=480;
+  function sgtH(){var d=new Date();return new Date(d.getTime()+d.getTimezoneOffset()*60000+28800000).getHours();}
+  function greet(){var h=sgtH();if(h>=5&&h<12)return'Good morning!';if(h>=12&&h<17)return'Good afternoon!';if(h>=17&&h<21)return'Good evening!';return'Hello!';}
+  var KB={
+    browse:'We have certified preloved 916 gold pieces:\n\nRope Chains (916/22K) - multiple lengths 16 to 24 inches, ranging 10g to 24g\nChain + Pendant Sets - rope chains with dragon abacus, barrel and cylinder gold pendants\n\nAll XRF-verified. No GST charged. 0% making charge.\n\nShall I connect you to WhatsApp to see photos and live pricing?',
+    howbuy:'Buying preloved gold from us is simple:\n\n1. WhatsApp us - tell us what you are looking for\n2. We reply during business hours with photos, exact weight, XRF purity and live S$ price\n3. Arrange a visit to 119A Canberra Cres to inspect and watch live XRF test\n4. Pay only when 100% satisfied\n\nWant to chat with our team on WhatsApp?',
+    xrf:'XRF stands for X-Ray Fluorescence. We use it to assess gold purity and explain the reading alongside the weight before giving a quote. Contact us to arrange an in-person assessment.',
+    price:'Our pricing formula is open:\n\nYour Price = Weight (g) x Quoted Selling Rate (S$/g)\n\nWhy cheaper than retail?\n- No GST charged: Assure Gold is not GST-registered\n- 0% making charge (already paid when first made)\n- Our margin is included in the selling rate\n\nMarket spot rates are a reference, not our final selling rate. Confirm the final quote before paying.',
+    sell:'We buy all preloved gold!\n\n1. WhatsApp photos of your pieces\n2. Visit 119A Canberra Cres, Singapore\n3. Live XRF test - you watch the screen\n4. Quote = Weight x Purity x Live S$ Rate\n5. Accept and get paid same-day (PayNow, transfer or cash)',
+    trust:'Why Singapore buyers trust us:\n\n- PSM Licensed - Reg. PS20260000962, Ministry of Law Singapore\n- Live XRF testing - you see the purity reading before paying\n- Official receipts - every transaction legally documented\n- Real humans on WhatsApp - personal replies\n\nOur government licence certificate is displayed on this page.',
+    fallback:['Great question - our team would give the most accurate answer. Want me to connect you to WhatsApp?','I would rather connect you to our team than risk giving wrong information. WhatsApp?']
+  };
+  function addMsg(role,text){
+    var d=document.createElement('div');d.className='mishi-msg '+role;
+    var fmt=text.replace(/\n/g,'<br>');
+    d.innerHTML=role==='bot'?('<div class="msg-av">&#128142;</div><div class="msg-bbl">'+fmt+'</div>'):('<div class="msg-bbl">'+fmt+'</div>');
+    msgs.appendChild(d);
+    if(role==='bot'&&/whatsapp|our team|connect you/i.test(text)){
+      var a=document.createElement('a');a.className='mishi-wa-cta';
+      a.href='https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20Mishi%20sent%20me.';
+      a.target='_blank';a.innerHTML='&#128172; Open WhatsApp directly &#8594;';
+      msgs.appendChild(a);
+    }
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+  function showDots(){var d=document.createElement('div');d.className='mishi-msg bot';d.id='mishi-typing';d.innerHTML='<div class="msg-av">&#128142;</div><div class="msg-bbl"><div class="mishi-dots"><div class="mdot"></div><div class="mdot"></div><div class="mdot"></div></div></div>';msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+  function hideDots(){var t=document.getElementById('mishi-typing');if(t)t.remove();}
+  function match(t){
+    t=t.toLowerCase();
+    if(/chain|necklace|pendant|collect|browse|have|show|pieces|stock/.test(t))return'browse';
+    if(/how.*buy|process|step|purchase|order/.test(t))return'howbuy';
+    if(/xrf|test|purity|certif|verify|assay/.test(t))return'xrf';
+    if(/price|cost|how much|rate|sgd|gst|making|charge|cheaper|save/.test(t))return'price';
+    if(/sell|buyback|buy back|trade|cash|want to sell/.test(t))return'sell';
+    if(/legit|safe|real|genuine|scam|trust|licen|psm|ministry|acra|reg/.test(t))return'trust';
+    if(/hi|hello|hey|morning|afternoon|evening|night/.test(t))return'greet';
+    return null;
+  }
+  function respond(userText){
+    addMsg('user',userText);showDots();
+    setTimeout(function(){
+      hideDots();
+      var topic=match(userText),resp;
+      if(!topic)resp=KB.fallback[Math.floor(Math.random()*KB.fallback.length)];
+      else if(topic==='greet')resp=greet()+' I am Mishi, Assure Gold preloved gold expert! Ask me about our certified 916 gold chains, XRF testing, pricing, or how buying preloved gold works.';
+      else resp=KB[topic];
+      addMsg('bot',resp);
+    },650+Math.random()*400);
+  }
+  window.mishiSend=function(t){respond(t);};
+  function openChat(){open=true;chat.classList.add('open');btn.style.transform='scale(.88)';if(!greeted){greeted=true;setTimeout(function(){addMsg('bot',greet()+' I am Mishi, Assure Gold preloved gold expert! Ask me about our gold pieces, pricing, XRF testing, or how buying and selling works.');},280);}setTimeout(function(){inp.focus();},380);}
+  function closeChat(){open=false;chat.classList.remove('open');btn.style.transform='';}
+  btn.addEventListener('click',function(){open?closeChat():openChat();});
+  cls.addEventListener('click',closeChat);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open)closeChat();});
+  function doSend(){var v=inp.value.trim();if(!v)return;inp.value='';inp.style.height='auto';respond(v);}
+  snd.addEventListener('click',doSend);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doSend();}});
+  inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,70)+'px';});
+  if(!isMobile){setTimeout(function(){if(!open&&!greeted){var n=document.createElement('div');n.className='mishi-nudge';n.innerHTML=greet()+' Need help with preloved gold? &#128155;';document.body.appendChild(n);setTimeout(function(){var x=document.querySelector('.mishi-nudge');if(x)x.remove();},5500);}},4000);}
+  if(isMobile){setTimeout(function(){if(!open&&!greeted){var pip=document.querySelector('.mishi-pip');if(pip){pip.style.background='#9e2a3e';pip.style.transform='scale(1.3)';pip.textContent='1';}}},6000);}
+})();
+
+/* ═══════════════════════════════════════════════
+   ENHANCED INTERACTIVITY ENGINE
+═══════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  /* ── 1. Scroll progress bar ── */
+  (function(){
+    var bar=document.createElement('div');
+    bar.id='scroll-progress';
+    document.body.appendChild(bar);
+    function upd(){
+      var h=document.documentElement;
+      var scrolled=h.scrollTop/(h.scrollHeight-h.clientHeight);
+      bar.style.width=(scrolled*100)+'%';
+    }
+    window.addEventListener('scroll',upd,{passive:true});
+    window.addEventListener('resize',upd,{passive:true});
+    upd();
+  })();
+
+  /* ── 2. Magnetic buttons (desktop only) ── */
+  if(!isTouch && !reduceMotion){
+    document.querySelectorAll('.btn-gold,.btn-wa,.btn-ghost,.btn-ghost-light').forEach(function(btn){
+      btn.addEventListener('mousemove',function(e){
+        var r=btn.getBoundingClientRect();
+        var x=(e.clientX-r.left-r.width/2)*0.25;
+        var y=(e.clientY-r.top-r.height/2)*0.35;
+        btn.style.transform='translate('+x+'px,'+y+'px)';
+      });
+      btn.addEventListener('mouseleave',function(){
+        btn.style.transform='';
+      });
+    });
+  }
+
+  /* ── 3. 3D tilt on cards (desktop only) ── */
+  if(!isTouch && !reduceMotion){
+    document.querySelectorAll('.feat-card,.why-col,.rcard').forEach(function(card){
+      card.classList.add('tilt3d');
+      card.addEventListener('mousemove',function(e){
+        var r=card.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width;
+        var py=(e.clientY-r.top)/r.height;
+        var rx=(py-.5)*-8;
+        var ry=(px-.5)*8;
+        card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-6px)';
+        // move the glow blob to cursor
+        card.style.setProperty('--gx',(px*100)+'%');
+        var after=card;
+      });
+      card.addEventListener('mousemove',function(e){
+        var r=card.getBoundingClientRect();
+        card.style.setProperty('--blobX',(e.clientX-r.left)+'px');
+        card.style.setProperty('--blobY',(e.clientY-r.top)+'px');
+      });
+      card.addEventListener('mouseleave',function(){
+        card.style.transform='';
+      });
+    });
+  }
+
+  /* ── 4. Card glow blob follows cursor ── */
+  var glowStyle=document.createElement('style');
+  glowStyle.textContent='.feat-card::after,.why-col::after,.rcard::after{left:var(--blobX,50%);top:var(--blobY,50%)}';
+  document.head.appendChild(glowStyle);
+
+  /* ── 5. Cursor spotlight on dark sections ── */
+  if(!isTouch){
+    document.querySelectorAll('#hero,#cta-section,.marquee').forEach(function(sec){
+      sec.classList.add('spotlight-sec');
+      sec.addEventListener('mousemove',function(e){
+        var r=sec.getBoundingClientRect();
+        sec.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+        sec.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+      });
+    });
+  }
+
+  /* ── 6. Shimmer-in headings on scroll ── */
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var headObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('shimmer-text');
+          headObs.unobserve(en.target);
+        }
+      });
+    },{threshold:.5});
+    document.querySelectorAll('.sh h2').forEach(function(h){headObs.observe(h);});
+  }
+
+  /* ── 7. Generic reveal-up for elements without GSAP triggers ── */
+  if('IntersectionObserver' in window){
+    var revObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('reveal-in');
+          revObs.unobserve(en.target);
+        }
+      });
+    },{threshold:.15});
+    document.querySelectorAll('.cmp-quote,.lic-strip,.verify-links').forEach(function(el){
+      el.classList.add('reveal-up');
+      revObs.observe(el);
+    });
+  }
+
+  /* ── 8. Image zoom-parallax on scroll ── */
+  if(!reduceMotion){
+    var zoomImgs=[];
+    document.querySelectorAll('.feat-img img,.lic-img-wrap img,.gbchain-img,.chain-photo').forEach(function(img){
+      var wrap=img.closest('.feat-img,.lic-img-wrap,.gbchain-frame,.chain-photo-wrap')||img.parentElement;
+      if(wrap){wrap.classList.add('zoom-parallax');zoomImgs.push(img);}
+    });
+    function zoomUpd(){
+      var vh=window.innerHeight;
+      zoomImgs.forEach(function(img){
+        var r=img.getBoundingClientRect();
+        if(r.bottom<0||r.top>vh)return;
+        var prog=1-(r.top+r.height/2)/vh; // -1..1
+        var scale=1+Math.abs(prog)*0.06;
+        img.style.transform='scale('+scale.toFixed(3)+')';
+      });
+    }
+    /* throttle zoom parallax to 30fps max to reduce CPU load on desktop */
+  var _zoomTick=false;
+  window.addEventListener('scroll',function(){if(!_zoomTick){_zoomTick=true;requestAnimationFrame(function(){zoomUpd();_zoomTick=false;})}},{passive:true});
+    zoomUpd();
+  }
+
+  /* ── 9. Parallax depth on hero particles already exists; add tilt to badges ── */
+
+  /* ── 10. Smooth anchor offset + active nav highlight ── */
+  var navLinks=document.querySelectorAll('#nav .nav-links a, #navLinks a');
+  var sections=['why','trust','products','faq','contact'].map(function(id){
+    return document.getElementById(id);
+  }).filter(Boolean);
+  function highlightNav(){
+    var pos=window.scrollY+120;
+    var current='';
+    sections.forEach(function(s){
+      if(s.offsetTop<=pos)current=s.id;
+    });
+    navLinks.forEach(function(a){
+      var href=(a.getAttribute('href')||'');
+      a.style.color = href.indexOf('#'+current)>=0 && current ? 'var(--g1)' : '';
+    });
+  }
+  window.addEventListener('scroll',highlightNav,{passive:true});
+
+  /* ── 11. Ripple on button click ── */
+  if(!reduceMotion){
+    document.querySelectorAll('.btn-gold,.btn-wa,.btn-ghost,.feat-cta,.cc-cta').forEach(function(b){
+      b.addEventListener('click',function(e){
+        var r=b.getBoundingClientRect();
+        var rip=document.createElement('span');
+        rip.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.5);'+
+          'pointer-events:none;transform:scale(0);animation:rippleFx .6s ease-out;'+
+          'width:'+r.width+'px;height:'+r.width+'px;'+
+          'left:'+(e.clientX-r.left-r.width/2)+'px;top:'+(e.clientY-r.top-r.width/2)+'px';
+        var pos=getComputedStyle(b).position;
+        if(pos==='static')b.style.position='relative';
+        b.style.overflow='hidden';
+        b.appendChild(rip);
+        setTimeout(function(){rip.remove();},600);
+      });
+    });
+    var rs=document.createElement('style');
+    rs.textContent='@keyframes rippleFx{to{transform:scale(2.5);opacity:0}}';
+    document.head.appendChild(rs);
+  }
+
+  /* ── 12. Stat tiles pop when scrolled into view ── */
+  if('IntersectionObserver' in window && !reduceMotion){
+    var statObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.style.animation='statPop .6s cubic-bezier(.34,1.56,.64,1)';
+          statObs.unobserve(en.target);
+        }
+      });
+    },{threshold:.4});
+    document.querySelectorAll('.hs,.tp,.gbf').forEach(function(el){statObs.observe(el);});
+    var ss=document.createElement('style');
+    ss.textContent='@keyframes statPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}';
+    document.head.appendChild(ss);
+  }
+
+
+  /* ── 13. MOBILE-SPECIFIC ANIMATIONS (touch devices) ── */
+  if(isTouch && !reduceMotion){
+    /* Tap-press feedback on all interactive cards & buttons */
+    document.querySelectorAll('.feat-card,.why-col,.rcard,.btn-gold,.btn-ghost,.btn-wa,.feat-cta,.cc-cta,.tp,.faq-q').forEach(function(el){
+      el.addEventListener('touchstart',function(){
+        el.style.transition='transform .12s ease';
+        el.style.transform='scale(.97)';
+      },{passive:true});
+      el.addEventListener('touchend',function(){
+        el.style.transform='';
+      },{passive:true});
+      el.addEventListener('touchcancel',function(){
+        el.style.transform='';
+      },{passive:true});
+    });
+
+    /* Scroll-reveal: cards float & fade in as you scroll (mobile) */
+    if('IntersectionObserver' in window){
+      var mObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){
+            en.target.style.transition='opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)';
+            en.target.style.opacity='1';
+            en.target.style.transform='none';
+            mObs.unobserve(en.target);
+          }
+        });
+      },{threshold:.12});
+      document.querySelectorAll('.feat-card,.why-col,.rcard,.tp,.cbox,.gbf,.lic-strip,.cmp-quote').forEach(function(el,i){
+        el.style.opacity='0';
+        el.style.transform='translateY(34px)';
+        el.style.transitionDelay=((i%3)*0.08)+'s';
+        mObs.observe(el);
+      });
+    }
+
+    /* Device-tilt: 3D chain reacts to phone gyroscope */
+    var chainFloatEl=document.querySelector('.chain3d-float');
+    if(chainFloatEl && window.DeviceOrientationEvent){
+      window.addEventListener('deviceorientation',function(e){
+        if(e.gamma==null||e.beta==null)return;
+        var ry=Math.max(-25,Math.min(25,e.gamma*0.6));
+        var rx=Math.max(-18,Math.min(18,(e.beta-45)*0.35));
+        chainFloatEl.style.animationPlayState='paused';
+        chainFloatEl.style.transform='rotateY('+ry+'deg) rotateX('+rx+'deg)';
+        chainFloatEl.style.transition='transform .25s ease-out';
+      },{passive:true});
+    }
+
+    /* Subtle parallax on hero particles for mobile scroll */
+    var heroParts=document.querySelector('.hero-particles');
+    if(heroParts){
+      window.addEventListener('scroll',function(){
+        var y=window.scrollY;
+        if(y<900) heroParts.style.transform='translateY('+(y*0.18)+'px)';
+      },{passive:true});
+    }
+  }
+
+  /* ── 14. Touch swipe hint pulse on carousel (first 6s) ── */
+  if(isTouch){
+    var dotsWrap=document.querySelector('.carousel-dots');
+    if(dotsWrap){
+      dotsWrap.style.animation='dotsHint 1.6s ease-in-out 3';
+      var dh=document.createElement('style');
+      dh.textContent='@keyframes dotsHint{0%,100%{transform:translateX(-50%)}50%{transform:translateX(-50%) scale(1.12)}}';
+      document.head.appendChild(dh);
+    }
+  }
+
+  console.log('[AG] Enhanced interactivity engine loaded');
+})();
+
 </script>
-
+<script>
+/* AG-PRICE-ENGINE:START — managed by ag-admin.html, do not edit by hand */
+var AGP_RATE_999 = 185.0;
+var AGP_LIVE = false;
+var AGP_MARGIN = { '999':7, '916':8.5, '850':15, '750':15, '585':15, '375':15 };
+var AGP_MARKUP = 28;
+var AGP_PURITY = { '999':0.999, '916':0.916, '850':0.850, '750':0.750, '585':0.585, '375':0.375 };
+function agpKaratKey(k){ var m=/^(\d+)/.exec(String(k||"").trim()); return m?m[1]:"916"; }
+function agpMarginFor(k){ return (AGP_MARGIN[k]!==undefined)?AGP_MARGIN[k]:15; }
+function agpSellRate(karatStr){ var k=agpKaratKey(karatStr); var purity=AGP_PURITY[k]||0.916; return AGP_RATE_999*purity - agpMarginFor(k) + AGP_MARKUP; }
+function agpFmt(n){ return n.toLocaleString("en-SG",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function agpPopulate(){
+  document.querySelectorAll("[data-agp-karat]").forEach(function(el){
+    var karat = el.getAttribute("data-agp-karat");
+    var weight = parseFloat(el.getAttribute("data-agp-weight"))||0;
+    var retail = parseFloat(el.getAttribute("data-agp-retail"))||0;
+    var rate = agpSellRate(karat);
+    var total = Math.round(rate*weight);
+    var a = el.querySelector(".agp-amt"); if(a) a.textContent = "S$ " + total.toLocaleString();
+    var r = el.querySelector(".agp-rate"); if(r) r.textContent = "S$ " + agpFmt(rate) + "/g";
+    var container = el.closest(".feat-body") || el.closest(".cc-body") || el.parentElement;
+    var s = container ? container.querySelector(".agp-save") : null;
+    if(s && retail) s.textContent = Math.max(0, retail-total).toLocaleString();
+  });
+}
+async function agpFetchRate(){
+  var ok=false;
+  try{
+    var gRes = await fetch("https://api.gold-api.com/price/XAU");
+    if(!gRes.ok) throw new Error("gold fetch failed");
+    var gData = await gRes.json();
+    if(!gData.price || gData.price<500) throw new Error("bad gold price");
+    var usdPerOz = gData.price;
+    var fxRate = 1.338;
+    try{
+      var fxRes = await fetch("https://open.er-api.com/v6/latest/USD");
+      if(fxRes.ok){
+        var fxData = await fxRes.json();
+        var sgd = fxData.rates && fxData.rates.SGD;
+        if(sgd && sgd>1.2 && sgd<1.6) fxRate=sgd;
+      }
+    }catch(e2){}
+    AGP_RATE_999 = (usdPerOz*fxRate)/31.1035;
+    ok=true;
+  }catch(e){}
+  AGP_LIVE=ok;
+  agpPopulate();
+}
+document.addEventListener("DOMContentLoaded", function(){
+  agpPopulate();
+  agpFetchRate();
+  setInterval(agpFetchRate, 60*1000);
+});
+/* AG-PRICE-ENGINE:END */
+</script>
+<script>
+/* Count contact clicks without sending phone numbers or message contents. */
+document.addEventListener('click', function(event) {
+  var link = event.target.closest && event.target.closest('a[href]');
+  if (!link || typeof gtag !== 'function') return;
+  var href = link.getAttribute('href') || '';
+  var method = /^https:\/\/wa\.me\//i.test(href) ? 'whatsapp' : (/^tel:/i.test(href) ? 'phone' : '');
+  if (method) gtag('event', 'contact_click', {contact_method: method, page_path: location.pathname});
+});
+</script>
 </body>
 </html>
