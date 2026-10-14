@@ -1012,13 +1012,13 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 <div class="pr-wrap">
   <div class="pr-head">
     <span class="eyebrow">TRADE-IN</span>
-    <h2 class="pr-h2">Trade in your old gold. Get new ones for just S$10 more.</h2>
-    <p class="pr-sub">Exchange your old gold for a new piece and pay only S$10 more per gram.</p>
+    <h2 class="pr-h2">Trade in your old gold. Get new ones for just S$<span data-trade>10</span> more per gram.</h2>
+    <p class="pr-sub">Exchange your old gold for a new piece and pay only S$<span data-trade>10</span> more per gram.</p>
   </div>
   <ol class="pr-steps">
     <li><h3>Bring your old gold</h3><p>We weigh and XRF-test your gold in person, by appointment.</p></li>
     <li><h3>Choose your new piece</h3><p>Pick from the preloved or brand new collection, or a custom chain.</p></li>
-    <li><h3>Pay just S$10 more</h3><p>Pay only S$10 more per gram to upgrade to your new gold.</p></li>
+    <li><h3>Pay just S$<span data-trade>10</span> more per gram</h3><p>Upgrade to your new gold for only S$<span data-trade>10</span> more per gram.</p></li>
   </ol>
   <div class="pr-cta"><a class="pr-btn solid" target="_blank" rel="noopener" id="prTradeWa">Ask about trade-in</a></div>
 </div>
@@ -1027,10 +1027,11 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 <script>
 /* Pricing, collection toggle and live gold rate for the sections above. Static layout, no animation. */
 (function(){
-  /* S$ per gram added on top of the live 916 gold rate */
+  /* AG-COLLECTION:START — managed by ag-admin.html, do not edit by hand */
   var CFG={preloved:20,brandnew:25,tradein:10,purity:0.916,wa:'6593430242',page:6};
   var PRELOVED=[{"id":1,"name":"Rope Chain — Long 24\"","spec":"24 inches · 22.3g · Excellent condition","w":22.3,"img":"assets/images/products/chain-01.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g."},{"id":2,"name":"Rope Chain — Classic 20\"","spec":"20 inches · 17.6g · Very good condition","w":17.6,"img":"assets/images/products/chain-03.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g."},{"id":3,"name":"Rope Chain — Statement 22\"","spec":"22 inches · 20.1g · Good condition","w":20.1,"img":"assets/images/products/chain-04.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g."},{"id":4,"name":"Rope Chain — Heavy Long 24\"","spec":"24 inches · 23.7g · Good condition","w":23.7,"img":"assets/images/products/chain-02.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy."},{"id":5,"name":"Rope Chain — Dainty 16\"","spec":"16 inches · 10.2g · Excellent condition","w":10.2,"img":"assets/images/products/chain-06.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g."},{"id":6,"name":"Rope Chain — Mid-Length 18\"","spec":"18 inches · 14.8g · Good condition","w":14.8,"img":"assets/images/products/chain-05.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g."},{"id":7,"name":"Rope Chain — Angled 22\"","spec":"22 inches · 19.6g · Good condition","w":19.6,"img":"assets/images/products/chain-08.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g."},{"id":8,"name":"Rope Chain — Detail View 20\"","spec":"20 inches · 16.4g · Excellent condition","w":16.4,"img":"assets/images/products/chain-07.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g."},{"id":9,"name":"Rope Chain — Width Verified 20\"","spec":"20 inches · 17.1g · Very good condition","w":17.1,"img":"assets/images/products/chain-09.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g."},{"id":10,"name":"Rope Chain — Short Fine 16\"","spec":"16 inches · 9.8g · Very good condition","w":9.8,"img":"assets/images/products/chain-11.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g."},{"id":11,"name":"Rope Chain — Thick Gauge 18\"","spec":"18 inches · 15.2g · Good condition","w":15.2,"img":"assets/images/products/chain-10.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g."},{"id":12,"name":"Rope Chain — Medium 20\"","spec":"20 inches · 16.8g · Very good condition","w":16.8,"img":"assets/images/products/chain-13.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g."},{"id":13,"name":"Rope Chain — Premium 22\"","spec":"22 inches · 20.8g · Excellent condition","w":20.8,"img":"assets/images/products/chain-14.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g."},{"id":14,"name":"Rope Chain + Barrel Pendant","spec":"18 inches · 12.8g total · Good condition","w":12.8,"img":"assets/images/products/chain-12.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g."},{"id":15,"name":"Rope + Dragon Abacus Pendant","spec":"20 inches · 18.4g total · Very good","w":18.4,"img":"assets/images/products/chain-16.jpeg","wa":"Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g."},{"id":16,"name":"Rope + Cylinder Pendant","spec":"18 inches · 16.9g total · Very good","w":16.9,"img":"assets/images/products/chain-15.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g."},{"id":17,"name":"Rope + Ornate Pendant","spec":"20 inches · 22.1g total · Good","w":22.1,"img":"assets/images/products/chain-18.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g."},{"id":18,"name":"Rope + Classic Round Pendant","spec":"18 inches · 17.4g total · Very good","w":17.4,"img":"assets/images/products/chain-19.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g."},{"id":19,"name":"Rope + Designer Pendant","spec":"20 inches · 20.3g total · Good","w":20.3,"img":"assets/images/products/chain-17.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g."}];
-  var BRANDNEW=[]; /* add brand new pieces here: {id,name,spec,w,img,wa} */
+  var BRANDNEW=[{"id":"bn-1","name":"Brand New 916 Rope Chain","spec":"916 · 22K · Priced by weight","w":0,"img":"assets/images/products/brandnew-rope-01.webp","wa":"Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."}];
+  /* AG-COLLECTION:END */
   var rate916=null, mode='preloved', shown=CFG.page;
   function $(id){return document.getElementById(id);}
   function money(n,d){return n.toLocaleString('en-SG',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
@@ -1042,6 +1043,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     var p=perGram('preloved'), b=perGram('brandnew');
     var up=p===null?'S$ \u2014':'S$ '+money(p,2), ub=b===null?'S$ \u2014':'S$ '+money(b,2);
     setText('prPreloved',up); setText('prBrandNew',ub); setText('prCustom',ub); setText('prCustomH',ub);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-trade]'),function(e){e.textContent=CFG.tradein;});
   }
   function renderGrid(){
     var list=mode==='preloved'?PRELOVED:BRANDNEW, rate=perGram(mode);
@@ -1052,8 +1054,10 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     if(!list.length){ grid.innerHTML=''; grid.hidden=true; empty.hidden=false; more.hidden=true; return; }
     empty.hidden=true; grid.hidden=false;
     grid.innerHTML=list.slice(0,shown).map(function(it){
-      var total=rate===null?'Enquire for price':'S$ '+money(Math.round(it.w*rate));
-      var rtxt=rate===null?'':'S$ '+money(rate,2)+' / gram';
+      var total, rtxt;
+      if(rate===null){ total='Enquire for price'; rtxt=''; }
+      else if(it.w>0){ total='S$ '+money(Math.round(it.w*rate)); rtxt='S$ '+money(rate,2)+' / gram'; }
+      else { total='S$ '+money(rate,2)+' / gram'; rtxt='Final price by weight'; }
       var msg=it.wa||('Hi Assure Gold, I am interested in the '+it.name+'.');
       return '<article class="pr-item"><div class="pr-item-img"><img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" loading="lazy"/><span class="pr-item-k">916 &#183; 22K</span></div>'
         +'<div class="pr-item-b"><h3 class="pr-item-n">'+esc(it.name)+'</h3><div class="pr-item-s">'+esc(it.spec)+'</div>'

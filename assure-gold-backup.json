@@ -82,5 +82,176 @@
   "youpay": 5000,
   "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
  },
- "heroVideoActive": true
+ "heroVideoActive": true,
+ "pricing": {
+  "preloved": 20,
+  "brandnew": 25,
+  "tradein": 10
+ },
+ "collection": {
+  "preloved": [
+   {
+    "id": 1,
+    "name": "Rope Chain — Long 24\"",
+    "spec": "24 inches · 22.3g · Excellent condition",
+    "w": 22.3,
+    "img": "assets/images/products/chain-01.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g."
+   },
+   {
+    "id": 2,
+    "name": "Rope Chain — Classic 20\"",
+    "spec": "20 inches · 17.6g · Very good condition",
+    "w": 17.6,
+    "img": "assets/images/products/chain-03.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g."
+   },
+   {
+    "id": 3,
+    "name": "Rope Chain — Statement 22\"",
+    "spec": "22 inches · 20.1g · Good condition",
+    "w": 20.1,
+    "img": "assets/images/products/chain-04.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g."
+   },
+   {
+    "id": 4,
+    "name": "Rope Chain — Heavy Long 24\"",
+    "spec": "24 inches · 23.7g · Good condition",
+    "w": 23.7,
+    "img": "assets/images/products/chain-02.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy."
+   },
+   {
+    "id": 5,
+    "name": "Rope Chain — Dainty 16\"",
+    "spec": "16 inches · 10.2g · Excellent condition",
+    "w": 10.2,
+    "img": "assets/images/products/chain-06.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g."
+   },
+   {
+    "id": 6,
+    "name": "Rope Chain — Mid-Length 18\"",
+    "spec": "18 inches · 14.8g · Good condition",
+    "w": 14.8,
+    "img": "assets/images/products/chain-05.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g."
+   },
+   {
+    "id": 7,
+    "name": "Rope Chain — Angled 22\"",
+    "spec": "22 inches · 19.6g · Good condition",
+    "w": 19.6,
+    "img": "assets/images/products/chain-08.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g."
+   },
+   {
+    "id": 8,
+    "name": "Rope Chain — Detail View 20\"",
+    "spec": "20 inches · 16.4g · Excellent condition",
+    "w": 16.4,
+    "img": "assets/images/products/chain-07.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g."
+   },
+   {
+    "id": 9,
+    "name": "Rope Chain — Width Verified 20\"",
+    "spec": "20 inches · 17.1g · Very good condition",
+    "w": 17.1,
+    "img": "assets/images/products/chain-09.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g."
+   },
+   {
+    "id": 10,
+    "name": "Rope Chain — Short Fine 16\"",
+    "spec": "16 inches · 9.8g · Very good condition",
+    "w": 9.8,
+    "img": "assets/images/products/chain-11.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g."
+   },
+   {
+    "id": 11,
+    "name": "Rope Chain — Thick Gauge 18\"",
+    "spec": "18 inches · 15.2g · Good condition",
+    "w": 15.2,
+    "img": "assets/images/products/chain-10.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g."
+   },
+   {
+    "id": 12,
+    "name": "Rope Chain — Medium 20\"",
+    "spec": "20 inches · 16.8g · Very good condition",
+    "w": 16.8,
+    "img": "assets/images/products/chain-13.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g."
+   },
+   {
+    "id": 13,
+    "name": "Rope Chain — Premium 22\"",
+    "spec": "22 inches · 20.8g · Excellent condition",
+    "w": 20.8,
+    "img": "assets/images/products/chain-14.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g."
+   },
+   {
+    "id": 14,
+    "name": "Rope Chain + Barrel Pendant",
+    "spec": "18 inches · 12.8g total · Good condition",
+    "w": 12.8,
+    "img": "assets/images/products/chain-12.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g."
+   },
+   {
+    "id": 15,
+    "name": "Rope + Dragon Abacus Pendant",
+    "spec": "20 inches · 18.4g total · Very good",
+    "w": 18.4,
+    "img": "assets/images/products/chain-16.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g."
+   },
+   {
+    "id": 16,
+    "name": "Rope + Cylinder Pendant",
+    "spec": "18 inches · 16.9g total · Very good",
+    "w": 16.9,
+    "img": "assets/images/products/chain-15.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g."
+   },
+   {
+    "id": 17,
+    "name": "Rope + Ornate Pendant",
+    "spec": "20 inches · 22.1g total · Good",
+    "w": 22.1,
+    "img": "assets/images/products/chain-18.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g."
+   },
+   {
+    "id": 18,
+    "name": "Rope + Classic Round Pendant",
+    "spec": "18 inches · 17.4g total · Very good",
+    "w": 17.4,
+    "img": "assets/images/products/chain-19.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g."
+   },
+   {
+    "id": 19,
+    "name": "Rope + Designer Pendant",
+    "spec": "20 inches · 20.3g total · Good",
+    "w": 20.3,
+    "img": "assets/images/products/chain-17.jpeg",
+    "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g."
+   }
+  ],
+  "brandnew": [
+   {
+    "id": "bn-1",
+    "name": "Brand New 916 Rope Chain",
+    "spec": "916 · 22K · Priced by weight",
+    "w": 0,
+    "img": "assets/images/products/brandnew-rope-01.webp",
+    "wa": "Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."
+   }
+  ]
+ }
 }

@@ -21,6 +21,10 @@ updates by itself.
 
   Use the menu on the left. You can edit:
 
+    Prices & Collection - the amounts added to the live 916
+                         gold rate (preloved, brand new, trade-in)
+                         and the preloved / brand new pieces:
+                         add, edit, remove, change photos
     Photos & Images    - replace the logo, licence, carousel
                          photos (you see a preview of the
                          current photo)

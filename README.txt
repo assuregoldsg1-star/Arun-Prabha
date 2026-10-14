@@ -7,7 +7,8 @@ WEBSITE PAGES (your live site)
 
 ADMIN TOOL (edit the website yourself)
   ag-admin.html     Double-click to open in your browser.
-                    Edit buyback prices, photos, carousel,
+                    Edit selling prices, the collection, buyback
+                    prices, photos, carousel,
                     text and business info - no coding needed.
 
 ASSETS

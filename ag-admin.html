@@ -281,6 +281,7 @@ img{display:block;max-width:100%}
     <nav class="sb-nav">
       <div class="sb-sec">Manage</div>
       <div class="sb-item active" id="nav-dashboard" onclick="showView('dashboard')"><span class="i">&#127968;</span><span>Dashboard</span></div>
+      <div class="sb-item" id="nav-collection" onclick="showView('collection')"><span class="i">&#128141;</span><span>Prices &amp; Collection</span><span class="c" id="cnt-col">0</span></div>
       <div class="sb-item" id="nav-images" onclick="showView('images')"><span class="i">&#128247;</span><span>Photos &amp; Images</span></div>
       <div class="sb-item" id="nav-carousel" onclick="showView('carousel')"><span class="i">&#127909;</span><span>Hero Carousel</span></div>
       <div class="sb-item" id="nav-text" onclick="showView('text')"><span class="i">&#9999;&#65039;</span><span>Website Text</span></div>
@@ -319,7 +320,7 @@ img{display:block;max-width:100%}
       <div class="view active" id="view-dashboard">
         <div class="notice green">
           <span class="ni">&#9989;</span>
-          <div><strong>Welcome to your Website Manager</strong><p>Edit buyback prices, photos, text and business info here. Everything saves automatically. When ready, go to <b>Publish Website</b> to push changes live.</p></div>
+          <div><strong>Welcome to your Website Manager</strong><p>Edit selling prices, the collection, buyback prices, photos, text and business info here. Everything saves automatically. When ready, go to <b>Publish Website</b> to push changes live.</p></div>
         </div>
         <div class="sgrid">
           <div class="stile"><div class="n" id="d-img">0</div><div class="l">Editable Images</div></div>
@@ -329,6 +330,7 @@ img{display:block;max-width:100%}
           <div class="card-h"><div><h3>&#9889; Quick Actions</h3></div></div>
           <div class="card-b">
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px">
+              <button class="btn btn-g" onclick="showView('collection')">&#128141; Prices &amp; Collection</button>
               <button class="btn btn-g" onclick="showView('buyback')">&#128181; Edit Buyback Prices</button>
               <button class="btn btn-g" onclick="showView('images')">&#128247; Change a Photo</button>
               <button class="btn btn-g" onclick="showView('text')">&#9999;&#65039; Edit Website Text</button>
@@ -336,6 +338,31 @@ img{display:block;max-width:100%}
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- PRICES & COLLECTION -->
+      <div class="view" id="view-collection">
+        <div class="card" style="border:2px solid var(--g1);margin-bottom:16px">
+          <div class="card-h"><div><h3>&#128176; Selling Prices (916 gold)</h3><p>Each amount is added to the live 916 gold rate, per gram.</p></div></div>
+          <div class="card-b">
+            <div class="fr2">
+              <div class="field"><label>Preloved &mdash; added per gram (S$)</label><input type="number" id="pc-preloved" step="0.5" min="0"/></div>
+              <div class="field"><label>Brand new &mdash; added per gram (S$)</label><input type="number" id="pc-brandnew" step="0.5" min="0"/></div>
+            </div>
+            <div class="field"><label>Trade-in &mdash; extra per gram (S$)</label><div class="hint">Shown in the Trade-in section: "new gold for just S$X more per gram"</div><input type="number" id="pc-tradein" step="0.5" min="0" style="max-width:240px"/></div>
+            <div class="notice" style="margin-bottom:14px"><span class="ni">&#128161;</span><div><strong>Where these apply</strong><p id="pc-formula" style="line-height:1.7"></p></div></div>
+            <button class="btn btn-p" onclick="savePricing()">&#10003; Save Prices</button>
+            <div id="pc-save-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Publish the website to make this live.</div>
+          </div>
+        </div>
+        <div class="notice"><span class="ni">&#128141;</span><div><strong>Manage the collection shown on the homepage</strong><p>New pieces appear first. Give a weight to show a total price, or leave it blank to show the price per gram.</p></div></div>
+        <div class="frow">
+          <button class="fp active" id="ctab-preloved" onclick="colTab('preloved')">Preloved</button>
+          <button class="fp" id="ctab-brandnew" onclick="colTab('brandnew')">Brand new</button>
+          <div style="flex:1"></div>
+          <button class="btn btn-p btn-sm" onclick="openPiece(-1)">&#10133; Add Piece</button>
+        </div>
+        <div class="pgrid" id="collist"></div>
       </div>
 
       <!-- IMAGES -->
@@ -510,6 +537,13 @@ img{display:block;max-width:100%}
         <div class="card">
           <div class="card-h"><h3>&#128218; How To Use This Tool</h3></div>
           <div class="card-b">
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128141; Change Selling Prices or the Collection</h4>
+            <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
+              <li>Click <b>Prices &amp; Collection</b> in the menu</li>
+              <li>Change the amounts added to the live 916 rate, then click <b>Save Prices</b></li>
+              <li>Use <b>Add Piece</b>, or click a piece to edit or delete it</li>
+              <li>Go to <b>Publish</b> and follow the steps below</li>
+            </ol>
             <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128181; Change Buyback Prices</h4>
             <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
               <li>Click <b>Buyback Prices</b> in the menu</li>
@@ -553,6 +587,32 @@ img{display:block;max-width:100%}
       </div>
   </div>
 
+</div>
+
+<div class="ov" id="m-piece">
+  <div class="modal">
+    <div class="modal-h"><h3 id="mpc-title">Edit Piece</h3><button class="modal-x" onclick="closeM('m-piece')">&#215;</button></div>
+    <div class="modal-b">
+      <div class="field"><label>Name</label><input type="text" id="mpc-name"/></div>
+      <div class="field"><label>Details</label><div class="hint">Length, weight, condition &mdash; shown under the name</div><input type="text" id="mpc-spec"/></div>
+      <div class="field"><label>Weight (g)</label><div class="hint">Leave blank to show the price per gram instead of a total</div><input type="number" id="mpc-weight" step="0.1" min="0" oninput="pieceInfo()"/></div>
+      <div class="field" id="mpc-info" style="background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub)"></div>
+      <div class="field"><label>Photo</label>
+        <div class="hint">Photos are resized automatically for the website</div>
+        <div style="display:flex;gap:11px;align-items:center">
+          <img id="mpc-imgprev" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--paper)"/>
+          <div id="mpc-imgname" style="flex:1;font-size:12px;color:var(--muted);word-break:break-all"></div>
+          <button class="btn btn-g btn-sm" onclick="document.getElementById('mpc-imgfile').click()">Choose photo</button>
+          <input type="file" id="mpc-imgfile" accept="image/*" style="display:none" onchange="pieceImgPick(this)"/>
+        </div>
+      </div>
+      <div class="field"><label>WhatsApp Message</label><div class="hint">Auto-fills when a customer taps Enquire (optional)</div><input type="text" id="mpc-wa"/></div>
+    </div>
+    <div class="modal-f">
+      <button class="btn btn-d btn-sm" id="mpc-del" onclick="delPiece()" style="display:none">&#128465; Delete</button>
+      <div class="r"><button class="btn btn-g" onclick="closeM('m-piece')">Cancel</button><button class="btn btn-p" onclick="savePiece()">&#10003; Save Piece</button></div>
+    </div>
+  </div>
 </div>
 
 <div class="ov" id="m-slide">
@@ -614,6 +674,8 @@ var SLOT_CHROME = [
     imgPath:'assets/images/license.jpeg', imgEditable:false, imgNote:'This slide uses the licence certificate photo. To change it, edit it under Photos & Images.'}
 ];
 var DEFAULT_STATS = [{"num": "0%", "label": "Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "Chat", "label": "WhatsApp Enquiries"}];
+var DEFAULT_PRICING = {"preloved": 20, "brandnew": 25, "tradein": 10};
+var DEFAULT_COLLECTION = {"preloved": [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "w": 22.3, "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g."}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "w": 17.6, "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g."}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "w": 20.1, "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g."}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "w": 23.7, "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy."}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "w": 10.2, "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g."}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "w": 14.8, "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g."}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "w": 19.6, "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g."}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "w": 16.4, "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g."}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "w": 17.1, "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g."}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "w": 9.8, "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g."}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "w": 15.2, "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g."}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "w": 16.8, "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g."}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "w": 20.8, "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g."}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "w": 12.8, "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g."}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "w": 18.4, "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g."}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "w": 16.9, "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g."}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "w": 22.1, "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g."}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "w": 17.4, "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g."}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "w": 20.3, "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g."}], "brandnew": [{"id": "bn-1", "name": "Brand New 916 Rope Chain", "spec": "916 · 22K · Priced by weight", "w": 0, "img": "assets/images/products/brandnew-rope-01.webp", "wa": "Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."}]};
 var DEFAULT_HEADINGS = [
   {"id":"why","label":"Why Preloved Gold","l1":"Why preloved gold","l2":"the wiser buy","em":"ga","pre":"is "},
   {"id":"faq","label":"FAQ Section","l1":"Common questions.","l2":"Straight answers.","em":"ga","pre":""},
@@ -625,6 +687,8 @@ var DATA = {
   slides:DEFAULT_SLIDES,
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
+  pricing:JSON.parse(JSON.stringify(DEFAULT_PRICING)),
+  collection:JSON.parse(JSON.stringify(DEFAULT_COLLECTION)),
   images:{},   /* path -> dataURL of replaced images */
   buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' },
   heroVideoActive:true  /* whether slide 1 shows the uploaded video (true) or just the photo (false) */
@@ -638,10 +702,13 @@ function normalizeData(){
   (DATA.slides||[]).forEach(function(sl){ if(sl && /collection|#products/i.test(sl.href||'')) sl.href='buyback.html'; });
   delete DATA.products;
   if(DATA.buyback) delete DATA.buyback.sellMarkup;
+  DATA.pricing=Object.assign({},DEFAULT_PRICING,DATA.pricing||{});
+  if(!DATA.collection) DATA.collection={};
+  ['preloved','brandnew'].forEach(function(k){ if(!Array.isArray(DATA.collection[k])) DATA.collection[k]=JSON.parse(JSON.stringify(DEFAULT_COLLECTION[k])); });
 }
 function persist(){ try{
   /* images can be big — store separately, tolerate quota errors */
-  var core = {business:DATA.business,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback,heroVideoActive:DATA.heroVideoActive};
+  var core = {business:DATA.business,pricing:DATA.pricing,collection:DATA.collection,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback,heroVideoActive:DATA.heroVideoActive};
   localStorage.setItem('ag_core', JSON.stringify(core));
   try{ localStorage.setItem('ag_images', JSON.stringify(DATA.images)); }
   catch(e){ toast('Images too large to auto-save. Use Save Backup.','error'); }
@@ -649,7 +716,7 @@ function persist(){ try{
 
 function load(){ try{
   var c=localStorage.getItem('ag_core');
-  if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business;
+  if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business; DATA.pricing=p.pricing||DATA.pricing; DATA.collection=p.collection||DATA.collection;
     DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; DATA.buyback=p.buyback||DATA.buyback;
     DATA.heroVideoActive=(p.heroVideoActive!==undefined)?p.heroVideoActive:DATA.heroVideoActive; }
   var im=localStorage.getItem('ag_images');
@@ -665,6 +732,7 @@ function markEdit(){ EDITS++; var el=document.getElementById('d-edits'); if(el)e
 /* ============ UI ============ */
 var TITLES={
   dashboard:['Dashboard','Manage your Assure Gold website'],
+  collection:['Prices & Collection','Set selling prices and manage the collection'],
   images:['Photos & Images','Replace any photo on the website'],
   carousel:['Hero Carousel','Edit the 5 rotating homepage slides'],
   text:['Website Text','Edit headings and the stats bar'],
@@ -681,6 +749,7 @@ function showView(v){
   document.getElementById('tb-title').textContent=TITLES[v][0];
   document.getElementById('tb-sub').textContent=TITLES[v][1];
   if(v==='dashboard')renderDash();
+  if(v==='collection')renderCollection();
   if(v==='images')renderImages();
   if(v==='carousel')renderSlides();
   if(v==='text')renderText();
@@ -714,6 +783,124 @@ function imgSrc(path){ return DATA.images[path] || path; }
 function renderDash(){
   document.getElementById('d-img').textContent=allImages().length;
   document.getElementById('d-edits').textContent=EDITS;
+}
+
+/* ============ PRICES & COLLECTION ============ */
+var COL_KIND='preloved', PIECE_I=-1, _pieceImgData=null;
+function colList(){ return DATA.collection[COL_KIND]; }
+function fmtAmt(n){ n=Number(n); return (n%1===0)?String(n):n.toFixed(2); }
+function renderCollection(){
+  var P=DATA.pricing;
+  [['pc-preloved','preloved'],['pc-brandnew','brandnew'],['pc-tradein','tradein']].forEach(function(x){
+    var el=document.getElementById(x[0]); if(el && document.activeElement!==el) el.value=P[x[1]];
+  });
+  document.getElementById('pc-formula').innerHTML=
+    '<b>Preloved</b> price per gram = live 916 rate + S$'+fmtAmt(P.preloved)+'<br/>'+
+    '<b>Brand new</b> price per gram = live 916 rate + S$'+fmtAmt(P.brandnew)+' (also the custom chain rate)<br/>'+
+    '<b>Trade-in</b> = S$'+fmtAmt(P.tradein)+' more per gram';
+  ['preloved','brandnew'].forEach(function(k){ document.getElementById('ctab-'+k).classList.toggle('active',k===COL_KIND); });
+  var list=colList();
+  document.getElementById('collist').innerHTML = list.length
+    ? list.map(pieceCard).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:26px;color:var(--muted)">No pieces yet. Click Add Piece.</div>';
+  document.getElementById('cnt-col').textContent=DATA.collection.preloved.length+DATA.collection.brandnew.length;
+}
+function savePricing(){
+  var vals={};
+  var ok=[['pc-preloved','preloved'],['pc-brandnew','brandnew'],['pc-tradein','tradein']].every(function(x){
+    var v=parseFloat(document.getElementById(x[0]).value);
+    if(!isFinite(v)||v<0) return false; vals[x[1]]=v; return true;
+  });
+  if(!ok){ toast('Enter a valid amount in every field','error'); return; }
+  DATA.pricing=vals; persist(); markEdit(); renderCollection();
+  var m=document.getElementById('pc-save-msg'); m.style.display='block'; setTimeout(function(){m.style.display='none';},4000);
+}
+function colTab(k){ COL_KIND=k; renderCollection(); }
+function pieceCard(p,i){
+  var w=Number(p.w)||0;
+  return [
+    '<div class="pcard">',
+      '<div class="pc-top">',
+        '<img class="pc-img" src="'+esc(imgSrc(p.img))+'" onclick="openPiece('+i+')"/>',
+        '<div class="pc-info"><div class="pc-name">'+esc(p.name)+'</div><div class="pc-spec">'+esc(p.spec||'')+'</div></div>',
+      '</div>',
+      '<div class="pc-row">',
+        '<div><div class="pc-price">'+(w>0?(w+' g'):'Per gram')+'</div><div style="font-size:10.5px;color:var(--muted)">'+(w>0?'Total = weight x rate':'Rate per gram shown')+'</div></div>',
+        '<div><span class="tag tag-gold">916 &#183; 22K</span></div>',
+      '</div>',
+      '<div class="pc-actions">',
+        '<button class="btn btn-g" onclick="openPiece('+i+')">&#9998; Edit</button>',
+        '<button class="btn btn-g" onclick="PIECE_I='+i+';delPiece()">&#128465; Remove</button>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+function pieceInfo(){
+  var el=document.getElementById('mpc-info'); if(!el) return;
+  var w=parseFloat(document.getElementById('mpc-weight').value)||0;
+  var add=DATA.pricing[COL_KIND];
+  el.innerHTML = w>0
+    ? 'Shown as a total: <b>'+w+' g &times; (live 916 rate + S$'+fmtAmt(add)+')</b>'
+    : 'No weight: shown as <b>live 916 rate + S$'+fmtAmt(add)+' per gram</b>, final price by weight.';
+}
+function openPiece(i){
+  PIECE_I=i; _pieceImgData=null;
+  var p=i>=0?colList()[i]:{name:'',spec:'916 · 22K',w:0,img:'',wa:''};
+  document.getElementById('mpc-title').textContent=i>=0?('Edit: '+p.name):('Add '+(COL_KIND==='preloved'?'Preloved':'Brand New')+' Piece');
+  document.getElementById('mpc-name').value=p.name||'';
+  document.getElementById('mpc-spec').value=p.spec||'';
+  document.getElementById('mpc-weight').value=p.w>0?p.w:'';
+  document.getElementById('mpc-wa').value=p.wa||'';
+  document.getElementById('mpc-imgprev').src=p.img?imgSrc(p.img):'';
+  document.getElementById('mpc-imgname').textContent=p.img?p.img.split('/').pop():'No photo yet';
+  document.getElementById('mpc-imgfile').value='';
+  document.getElementById('mpc-del').style.display=i>=0?'':'none';
+  pieceInfo(); openM('m-piece');
+}
+/* shrink big photos to max 1200px JPEG so the website stays fast */
+function pieceImgPick(inp){
+  var f=inp.files[0]; if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var im=new Image();
+    im.onload=function(){
+      var max=1200, sc=Math.min(1,max/Math.max(im.width,im.height));
+      var c=document.createElement('canvas'); c.width=Math.round(im.width*sc); c.height=Math.round(im.height*sc);
+      var cx=c.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,c.width,c.height); cx.drawImage(im,0,0,c.width,c.height);
+      _pieceImgData=c.toDataURL('image/jpeg',0.86);
+      document.getElementById('mpc-imgprev').src=_pieceImgData;
+      document.getElementById('mpc-imgname').textContent=f.name+' (ready)';
+    };
+    im.onerror=function(){ toast('Could not read that image','error'); };
+    im.src=e.target.result;
+  };
+  r.readAsDataURL(f);
+}
+function savePiece(){
+  var name=document.getElementById('mpc-name').value.trim();
+  if(!name){ toast('Enter a name','error'); return; }
+  var list=colList(), old=PIECE_I>=0?list[PIECE_I]:null;
+  if(!old && !_pieceImgData){ toast('Choose a photo for the new piece','error'); return; }
+  var w=parseFloat(document.getElementById('mpc-weight').value); if(!isFinite(w)||w<0) w=0;
+  var p={
+    id:old?old.id:(COL_KIND==='preloved'?'pl-':'bn-')+Date.now().toString(36),
+    name:name, spec:document.getElementById('mpc-spec').value.trim(), w:w,
+    img:old?old.img:'', wa:document.getElementById('mpc-wa').value.trim()
+  };
+  if(_pieceImgData){
+    p.img='assets/images/products/'+(COL_KIND==='preloved'?'preloved':'brandnew')+'-'+Date.now().toString(36)+'.jpg';
+    DATA.images[p.img]=_pieceImgData;
+  }
+  if(old) list[PIECE_I]=p; else list.unshift(p);
+  persist(); markEdit(); renderCollection(); closeM('m-piece');
+  toast('Piece saved - publish to make it live','success');
+}
+function delPiece(){
+  var list=colList(); if(PIECE_I<0||!list[PIECE_I]) return;
+  if(!confirm('Remove "'+list[PIECE_I].name+'" from the collection?')) return;
+  list.splice(PIECE_I,1);
+  persist(); markEdit(); renderCollection(); closeM('m-piece');
+  toast('Piece removed - publish to make it live','info');
 }
 
 /* ============ IMAGES ============ */
@@ -1005,6 +1192,28 @@ function blockRange(html,startTag){
   return null;
 }
 
+/* rewrite the price settings + collection data block inside index.html */
+function buildCollectionBlock(){
+  var P=DATA.pricing, C=DATA.collection, b=DATA.business;
+  function num(v,d){ v=Number(v); return (isFinite(v)&&v>=0)?v:d; }
+  function arr(a){
+    return JSON.stringify((a||[]).map(function(p){
+      return {id:p.id,name:p.name,spec:p.spec||'',w:num(p.w,0),img:p.img,wa:p.wa||''};
+    })).replace(/</g,'\\u003c');
+  }
+  return '/* AG-COLLECTION:START — managed by ag-admin.html, do not edit by hand */'+NL
+    +'  var CFG={preloved:'+num(P.preloved,20)+',brandnew:'+num(P.brandnew,25)+',tradein:'+num(P.tradein,10)+',purity:0.916,wa:\''+String(b.wa).replace(/\D/g,'')+'\',page:6};'+NL
+    +'  var PRELOVED='+arr(C.preloved)+';'+NL
+    +'  var BRANDNEW='+arr(C.brandnew)+';'+NL
+    +'  /* AG-COLLECTION:END */';
+}
+function patchCollectionBlock(html){
+  var START='/* AG-COLLECTION:START', END='/* AG-COLLECTION:END */';
+  var a=html.indexOf(START), e=html.indexOf(END);
+  if(a<0||e<0||e<a) return html;
+  return html.slice(0,a)+buildCollectionBlock()+html.slice(e+END.length);
+}
+
 function patchIndex(html){
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
@@ -1022,6 +1231,9 @@ function patchIndex(html){
 
   /* ---- section headings ---- */
   html=patchHeadings(html);
+
+  /* ---- selling prices + collection ---- */
+  html=patchCollectionBlock(html);
 
   /* ---- replaced images: swap src to new filenames is not needed; we keep same path ---- */
 
@@ -1280,6 +1492,8 @@ async function loadFromRepo(){
     if(!r.ok) return;
     var d = await r.json();
     if(d.business){ DATA.business = d.business; }
+    if(d.pricing){ DATA.pricing = d.pricing; }
+    if(d.collection){ DATA.collection = d.collection; }
     if(d.slides){ DATA.slides = d.slides; }
     if(d.stats){ DATA.stats = d.stats; }
     if(d.headings){ DATA.headings = d.headings; }
@@ -1325,7 +1539,7 @@ async function publishLive(){
       files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
     }
 
-    var backup={ business:DATA.business, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback, heroVideoActive:DATA.heroVideoActive };
+    var backup={ business:DATA.business, pricing:DATA.pricing, collection:DATA.collection, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback, heroVideoActive:DATA.heroVideoActive };
     files.push({ path:'assure-gold-backup.json', content:JSON.stringify(backup,null,1), encoding:'utf-8' });
 
     var imgPaths=Object.keys(DATA.images||{});
