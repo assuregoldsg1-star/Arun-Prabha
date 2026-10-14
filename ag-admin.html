@@ -281,8 +281,6 @@ img{display:block;max-width:100%}
     <nav class="sb-nav">
       <div class="sb-sec">Manage</div>
       <div class="sb-item active" id="nav-dashboard" onclick="showView('dashboard')"><span class="i">&#127968;</span><span>Dashboard</span></div>
-      <div class="sb-item" id="nav-products" onclick="showView('products')"><span class="i">&#128141;</span><span>Products &amp; Prices</span><span class="c" id="cnt-prod">19</span></div>
-      <div class="sb-item" id="nav-featured" onclick="showView('featured')"><span class="i">&#11088;</span><span>Featured on Home</span><span class="c" id="cnt-feat">3</span></div>
       <div class="sb-item" id="nav-images" onclick="showView('images')"><span class="i">&#128247;</span><span>Photos &amp; Images</span></div>
       <div class="sb-item" id="nav-carousel" onclick="showView('carousel')"><span class="i">&#127909;</span><span>Hero Carousel</span></div>
       <div class="sb-item" id="nav-text" onclick="showView('text')"><span class="i">&#9999;&#65039;</span><span>Website Text</span></div>
@@ -321,11 +319,9 @@ img{display:block;max-width:100%}
       <div class="view active" id="view-dashboard">
         <div class="notice green">
           <span class="ni">&#9989;</span>
-          <div><strong>Welcome to your Website Manager</strong><p>Edit prices, products, photos, text and business info here. Everything saves automatically. When ready, go to <b>Publish Website</b> to push changes live.</p></div>
+          <div><strong>Welcome to your Website Manager</strong><p>Edit buyback prices, photos, text and business info here. Everything saves automatically. When ready, go to <b>Publish Website</b> to push changes live.</p></div>
         </div>
         <div class="sgrid">
-          <div class="stile"><div class="n" id="d-prod">0</div><div class="l">Total Products</div></div>
-          <div class="stile"><div class="n" id="d-feat">0</div><div class="l">Featured on Home</div></div>
           <div class="stile"><div class="n" id="d-img">0</div><div class="l">Editable Images</div></div>
           <div class="stile"><div class="n" id="d-edits">0</div><div class="l">Unsaved Edits</div></div>
         </div>
@@ -333,55 +329,12 @@ img{display:block;max-width:100%}
           <div class="card-h"><div><h3>&#9889; Quick Actions</h3></div></div>
           <div class="card-b">
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px">
-              <button class="btn btn-g" onclick="showView('products')">&#128141; Edit a Price</button>
+              <button class="btn btn-g" onclick="showView('buyback')">&#128181; Edit Buyback Prices</button>
               <button class="btn btn-g" onclick="showView('images')">&#128247; Change a Photo</button>
               <button class="btn btn-g" onclick="showView('text')">&#9999;&#65039; Edit Website Text</button>
               <button class="btn btn-g" onclick="showView('deploy')">&#128640; Publish Website</button>
             </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div><h3>&#11088; Featured on Homepage</h3></div><button class="btn btn-g btn-sm" onclick="showView('featured')">Manage &#8594;</button></div>
-          <div class="card-b" id="d-featured"></div>
-        </div>
-      </div>
-
-      <!-- PRODUCTS -->
-      <div class="view" id="view-products">
-        <div class="card" style="border:2px solid var(--g1);margin-bottom:16px">
-          <div class="card-h"><div><h3>&#128176; Selling Price Formula</h3><p>One control drives every product price automatically.</p></div></div>
-          <div class="card-b">
-            <div class="notice" style="margin-bottom:14px"><span class="ni">&#128161;</span><div><strong>How it works</strong><p>Selling price (S$/g) = current buyback price (S$/g) + your markup below. Each product's total = its weight &times; that rate, updating live on the website. Shown to customers as a <b>nett price</b> &mdash; no further deductions.</p></div></div>
-            <div class="field"><label>Markup over buyback (S$ per gram)</label><input type="number" id="sp-markup" step="0.01" min="0" placeholder="e.g. 30.00"/></div>
-            <button class="btn btn-p" onclick="saveSellMarkup()">&#10003; Save Markup</button>
-            <div id="sp-save-msg" style="font-size:12.5px;color:var(--green);margin-top:8px;display:none">&#10003; Saved! Prices update immediately &mdash; live on the website too.</div>
-            <h4 style="font-family:var(--serif);font-size:15px;color:var(--g2);margin:18px 0 9px;border-bottom:1px solid var(--ls);padding-bottom:7px">Live selling rate by karat</h4>
-            <table style="width:100%;border-collapse:collapse" id="sp-preview"></table>
-          </div>
-        </div>
-        <div class="notice"><span class="ni">&#128181;</span><div><strong>Edit any product &mdash; changes apply to ALL pages automatically</strong><p>Change a price here and it updates on the Collection page and the Home page together. No more mismatches.</p></div></div>
-        <input type="search" class="search" id="psearch" placeholder="Search products by name..." oninput="renderProducts()"/>
-        <div class="frow">
-          <button class="fp active" data-c="all" onclick="filt('all')">All</button>
-          <button class="fp" data-c="chains" onclick="filt('chains')">Chains</button>
-          <button class="fp" data-c="pendants" onclick="filt('pendants')">Pendants</button>
-          <button class="fp" data-c="featured" onclick="filt('featured')">&#11088; Featured</button>
-          <div style="flex:1"></div>
-          <button class="btn btn-p btn-sm" onclick="openProd(-1)">&#10133; Add Product</button>
-        </div>
-        <div class="pgrid" id="plist"></div>
-      </div>
-
-      <!-- FEATURED -->
-      <div class="view" id="view-featured">
-        <div class="notice"><span class="ni">&#11088;</span><div><strong>Pick the 3 products shown on the homepage</strong><p>Click the star on any product to feature it. The first 3 starred products appear in the homepage "Featured" section.</p></div></div>
-        <div class="card">
-          <div class="card-h"><div><h3>&#11088; Currently Featured</h3></div></div>
-          <div class="card-b"><div class="pgrid" id="featlist"></div></div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div><h3>All Products</h3><p>Click the star to feature / unfeature</p></div></div>
-          <div class="card-b"><div class="pgrid" id="featall"></div></div>
         </div>
       </div>
 
@@ -393,7 +346,7 @@ img{display:block;max-width:100%}
           <div class="card-b"><div class="imgrid" id="imbrand"></div></div>
         </div>
         <div class="card">
-          <div class="card-h"><div><h3>&#128141; Product Photos</h3><p>All 19 product images</p></div></div>
+          <div class="card-h"><div><h3>&#127909; Carousel Photos</h3><p>Photos used by carousel slides 3 to 5</p></div></div>
           <div class="card-b"><div class="imgrid" id="improd"></div></div>
         </div>
       </div>
@@ -513,10 +466,10 @@ img{display:block;max-width:100%}
         <div class="card" style="margin-top:10px">
           <div class="card-h"><div><h3>&#128229; Step 1 &mdash; Build Your Updated Website</h3></div></div>
           <div class="card-b">
-            <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:13px">Select your 3 current website files below. This tool will apply all your changes and give you a ZIP to download.</p>
+            <p style="font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:13px">Select your 2 current website files below. This tool will apply all your changes and give you a ZIP to download.</p>
             <div class="field">
               <label>Select your website files</label>
-              <div class="hint">Pick index.html, collection.html and buyback.html together (hold Ctrl or Cmd to select all 3). Any photos you changed are included automatically.</div>
+              <div class="hint">Pick index.html and buyback.html together (hold Ctrl or Cmd to select both). Any photos you changed are included automatically.</div>
               <input type="file" id="zip-files" accept=".html" multiple style="padding:9px;border:1.5px dashed rgba(185,134,11,.4);border-radius:8px;width:100%;background:#fff;cursor:pointer;margin-bottom:7px"/>
               <div id="zip-fstatus" style="font-size:11.5px;color:var(--muted)"></div>
             </div>
@@ -557,11 +510,11 @@ img{display:block;max-width:100%}
         <div class="card">
           <div class="card-h"><h3>&#128218; How To Use This Tool</h3></div>
           <div class="card-b">
-            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128181; Change a Price</h4>
+            <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128181; Change Buyback Prices</h4>
             <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
-              <li>Click <b>Products &amp; Prices</b> in the menu</li>
-              <li>Find the product, click <b>Edit</b></li>
-              <li>Change the price, click <b>Save Product</b></li>
+              <li>Click <b>Buyback Prices</b> in the menu</li>
+              <li>Change the margin or hero prices</li>
+              <li>Click <b>Save</b></li>
               <li>Go to <b>Publish</b> and follow the steps below</li>
             </ol>
             <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128247; Change a Photo</h4>
@@ -580,7 +533,7 @@ img{display:block;max-width:100%}
             <h4 style="font-family:var(--serif);font-size:16px;color:var(--g2);margin-bottom:9px;border-bottom:1px solid var(--ls);padding-bottom:7px">&#128640; Publishing Your Changes</h4>
             <ol style="padding-left:19px;line-height:1.95;font-size:12.5px;color:var(--sub);margin-bottom:20px">
               <li>Click <b>Publish</b> in the menu</li>
-              <li>Select your 3 website files (index.html, collection.html, buyback.html)</li>
+              <li>Select your 2 website files (index.html, buyback.html)</li>
               <li>Click <b>Build &amp; Download ZIP</b> &mdash; a ZIP downloads with all your changes</li>
               <li>Unzip it, then upload the files to your GitHub repository</li>
               <li>Your live website updates automatically in about 30 seconds</li>
@@ -602,43 +555,6 @@ img{display:block;max-width:100%}
 
 </div>
 
-<div class="ov" id="m-prod">
-  <div class="modal">
-    <div class="modal-h"><h3 id="mp-title">Edit Product</h3><button class="modal-x" onclick="closeM('m-prod')">&#215;</button></div>
-    <div class="modal-b">
-      <div class="fr2">
-        <div class="field"><label>Product Name</label><input type="text" id="mp-name"/></div>
-        <div class="field"><label>Karat</label><select id="mp-karat"><option>916 &#183; 22K</option><option>999 &#183; 24K</option><option>750 &#183; 18K</option></select></div>
-      </div>
-      <div class="field"><label>Specification</label><div class="hint">Length, weight, condition</div><input type="text" id="mp-spec"/></div>
-      <div class="field"><label>Description</label><textarea id="mp-desc" rows="2"></textarea></div>
-      <div class="fr2">
-        <div class="field"><label>Weight (g)</label><input type="number" id="mp-weight" step="0.1" min="0"/></div>
-        <div class="field"><label>Retail Price (new, S$)</label><input type="number" id="mp-retail"/></div>
-      </div>
-      <div class="field" id="mp-priceinfo" style="background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub)">Enter a weight to see the computed selling price.</div>
-      <div class="fr2">
-        <div class="field"><label>Category</label><select id="mp-cat"><option value="chains">Chain</option><option value="pendants">Chain + Pendant Set</option></select></div>
-        <div class="field"><label>Featured on Home</label><select id="mp-feat"><option value="false">No</option><option value="true">Yes</option></select></div>
-      </div>
-      <div class="field"><label>Product Photo</label>
-        <div class="hint">The image file used for this product</div>
-        <div style="display:flex;gap:11px;align-items:center">
-          <img id="mp-imgprev" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--paper)"/>
-          <input type="text" id="mp-img" style="flex:1" readonly/>
-          <button class="btn btn-g btn-sm" onclick="document.getElementById('mp-imgfile').click()">Change</button>
-          <input type="file" id="mp-imgfile" accept="image/*" style="display:none" onchange="prodImgPick(this)"/>
-        </div>
-      </div>
-      <div class="field"><label>WhatsApp Message</label><div class="hint">Auto-fills when customer taps Enquire</div><input type="text" id="mp-wa"/></div>
-    </div>
-    <div class="modal-f">
-      <button class="btn btn-d btn-sm" id="mp-del" onclick="delProd()" style="display:none">&#128465; Delete</button>
-      <div class="r"><button class="btn btn-g" onclick="closeM('m-prod')">Cancel</button><button class="btn btn-p" onclick="saveProd()">&#10003; Save Product</button></div>
-    </div>
-  </div>
-</div>
-
 <div class="ov" id="m-slide">
   <div class="modal">
     <div class="modal-h"><h3 id="ms-title">Edit Slide</h3><button class="modal-x" onclick="closeM('m-slide')">&#215;</button></div>
@@ -650,7 +566,7 @@ img{display:block;max-width:100%}
       <div class="field"><label>Description</label><textarea id="ms-sub" rows="2"></textarea></div>
       <div class="fr2">
         <div class="field"><label>Button Text</label><input type="text" id="ms-btn"/></div>
-        <div class="field"><label>Button Links To</label><select id="ms-href"><option value="collection.html">Collection Page</option><option value="buyback.html">Buyback Page</option><option value="index.html#products">Products Section</option></select></div>
+        <div class="field"><label>Button Links To</label><select id="ms-href"><option value="buyback.html">Buyback Page</option></select></div>
       </div>
       <div class="field" id="ms-bg-wrap">
         <label>Background Photo</label>
@@ -682,8 +598,7 @@ img{display:block;max-width:100%}
 <script>
 
 /* ============ DATA ============ */
-var DEFAULT_PRODUCTS = [{"id": 1, "name": "Rope Chain — Long 24\"", "spec": "24 inches · 22.3g · Excellent condition", "desc": "Heavy 916 rope chain. Beautiful light catch on every link. Clasp in perfect order. XRF confirmed.", "retail": 5200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-01.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g.", "featured": true, "weight_g": 22.3}, {"id": 2, "name": "Rope Chain — Classic 20\"", "spec": "20 inches · 17.6g · Very good condition", "desc": "Classic 916 rope at 20 inches &#8212; the most popular everyday length. XRF confirmed purity.", "retail": 4200, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-03.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g.", "featured": false, "weight_g": 17.6}, {"id": 3, "name": "Rope Chain — Statement 22\"", "spec": "22 inches · 20.1g · Good condition", "desc": "Heavier-gauge 916 rope at 22 inches. Minor patina fully disclosed. XRF certified.", "retail": 4700, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-04.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g.", "featured": false, "weight_g": 20.1}, {"id": 4, "name": "Rope Chain — Heavy Long 24\"", "spec": "24 inches · 23.7g · Good condition", "desc": "Thick-gauge 916 rope at 24 inches. Strong gold weight. XRF-verified. Surface marks disclosed.", "retail": 5600, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-02.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy.", "featured": false, "weight_g": 23.7}, {"id": 5, "name": "Rope Chain — Dainty 16\"", "spec": "16 inches · 10.2g · Excellent condition", "desc": "Fine-gauge 916 rope at 16 inches. Elegant for daily wear. XRF-confirmed. Excellent throughout.", "retail": 2500, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-06.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g.", "featured": false, "weight_g": 10.2}, {"id": 6, "name": "Rope Chain — Mid-Length 18\"", "spec": "18 inches · 14.8g · Good condition", "desc": "916 rope at 18 inches. Original jeweller tag intact. XRF verified.", "retail": 3550, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-05.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g.", "featured": false, "weight_g": 14.8}, {"id": 7, "name": "Rope Chain — Angled 22\"", "spec": "22 inches · 19.6g · Good condition", "desc": "Medium-gauge 916 rope. Angled photo shows link texture clearly. XRF confirmed. Clean clasp.", "retail": 4650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-08.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g.", "featured": false, "weight_g": 19.6}, {"id": 8, "name": "Rope Chain — Detail View 20\"", "spec": "20 inches · 16.4g · Excellent condition", "desc": "High-detail close-up shows each rope link quality. XRF confirmed 916. No surface marks.", "retail": 3950, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-07.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g.", "featured": false, "weight_g": 16.4}, {"id": 9, "name": "Rope Chain — Width Verified 20\"", "spec": "20 inches · 17.1g · Very good condition", "desc": "Photographed with ruler showing 3mm chain width. XRF-verified 916. No surprises.", "retail": 4100, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-09.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g.", "featured": false, "weight_g": 17.1}, {"id": 10, "name": "Rope Chain — Short Fine 16\"", "spec": "16 inches · 9.8g · Very good condition", "desc": "Short 916 rope. Clean link pattern. XRF confirmed. Excellent for layering.", "retail": 2400, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-11.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g.", "featured": false, "weight_g": 9.8}, {"id": 11, "name": "Rope Chain — Thick Gauge 18\"", "spec": "18 inches · 15.2g · Good condition", "desc": "Thick-gauge 916 rope at 18 inches. Bold presence. Minor clasp wear disclosed. XRF confirmed.", "retail": 3650, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-10.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g.", "featured": false, "weight_g": 15.2}, {"id": 12, "name": "Rope Chain — Medium 20\"", "spec": "20 inches · 16.8g · Very good condition", "desc": "Medium-gauge 916 rope chain. Versatile everyday length. XRF-verified purity.", "retail": 4050, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-13.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g.", "featured": false, "weight_g": 16.8}, {"id": 13, "name": "Rope Chain — Premium 22\"", "spec": "22 inches · 20.8g · Excellent condition", "desc": "Premium 916 rope at 22 inches in excellent condition. Clean clasp. XRF confirmed. No marks.", "retail": 4980, "karat": "916 · 22K", "cat": "chains", "img": "assets/images/products/chain-14.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g.", "featured": true, "weight_g": 20.8}, {"id": 14, "name": "Rope Chain + Barrel Pendant", "spec": "18 inches · 12.8g total · Good condition", "desc": "916 rope with barrel-style gold pendant. Chain and pendant XRF-tested separately. Both 916.", "retail": 3100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-12.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g.", "featured": false, "weight_g": 12.8}, {"id": 15, "name": "Rope + Dragon Abacus Pendant", "spec": "20 inches · 18.4g total · Very good", "desc": "Traditional dragon-abacus 916 pendant on rope. Auspicious design. Both XRF-verified.", "retail": 4500, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-16.jpeg", "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g.", "featured": true, "weight_g": 18.4}, {"id": 16, "name": "Rope + Cylinder Pendant", "spec": "18 inches · 16.9g total · Very good", "desc": "916 rope with textured cylinder pendant &#8212; minimalist and modern. Both XRF-verified.", "retail": 4100, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-15.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g.", "featured": false, "weight_g": 16.9}, {"id": 17, "name": "Rope + Ornate Pendant", "spec": "20 inches · 22.1g total · Good", "desc": "Heavy 916 rope with substantial ornate pendant. Striking piece. Both XRF-verified.", "retail": 5350, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-18.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g.", "featured": false, "weight_g": 22.1}, {"id": 18, "name": "Rope + Classic Round Pendant", "spec": "18 inches · 17.4g total · Very good", "desc": "916 rope with classic round-profile pendant. Clean design. Both XRF-tested and certified.", "retail": 4200, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-19.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g.", "featured": false, "weight_g": 17.4}, {"id": 19, "name": "Rope + Designer Pendant", "spec": "20 inches · 20.3g total · Good", "desc": "Statement 916 rope with layered designer pendant. XRF-verified. Substantial gold weight.", "retail": 4900, "karat": "916 · 22K", "cat": "pendants", "img": "assets/images/products/chain-17.jpeg", "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g.", "featured": false, "weight_g": 20.3}];
-var DEFAULT_SLIDES = [{"eyebrow":"By appointment in Canberra","line1":"Sell Your Gold","line2":"With Confidence","line3":"In Singapore","sub":"Bring your old gold for in-person weighing and XRF testing. Understand your buyback quote before deciding. Visits to 119A Canberra Crescent are by appointment.","btn":"Sell Gold →","href":"buyback.html"},{"eyebrow":"Just Arrived","line1":"New Arrivals","line2":"Collection","line3":"","sub":"Fresh pieces added weekly — chains, pendants, sets. Request your quote on WhatsApp.","btn":"View New Pieces →","href":"collection.html"},{"eyebrow":"Buyback Campaign","line1":"Buyback is","line2":"Now Live","line3":"","sub":"Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.","btn":"Learn About Buyback →","href":"buyback.html"},{"eyebrow":"Assay-Grade Technology","line1":"XRF Verified","line2":"Collection","line3":"","sub":"In-person XRF purity testing. You watch the screen live. No hidden steps.","btn":"Shop Verified Gold →","href":"collection.html"},{"eyebrow":"PSM Licensed · Ministry of Law","line1":"Certified","line2":"Preloved Luxury","line3":"Gold","sub":"Same purity. Smarter price. No GST charged. 0% making charge. Government-licensed.","btn":"Browse Collection →","href":"collection.html"}];
+var DEFAULT_SLIDES = [{"eyebrow": "By appointment in Canberra", "line1": "Sell Your Gold", "line2": "With Confidence", "line3": "In Singapore", "sub": "Bring your old gold for in-person weighing and XRF testing. Understand your buyback quote before deciding. Visits to 119A Canberra Crescent are by appointment.", "btn": "Sell Gold →", "href": "buyback.html"}, {"eyebrow": "Buyback Campaign", "line1": "Buyback is", "line2": "Now Live", "line3": "", "sub": "Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.", "btn": "Learn About Buyback →", "href": "buyback.html"}];
 /* Fixed per-position chrome (background class, badge, secondary CTA) for the 5 carousel slots.
    Slide text content (DATA.slides) is user-editable; this visual "shell" stays tied to position. */
 var SLOT_CHROME = [
@@ -692,37 +607,41 @@ var SLOT_CHROME = [
   {cls:'hs2', badge:'NEW IN', ghostText:'&#128172; Request a Quote', ghostWa:'Hello Assure Gold, I would like a gold buyback quote.',
     imgPath:'assets/images/new-arrivals.jpg', imgEditable:true},
   {cls:'hs3', badge:'LIVE RATE', ghostText:'&#128172; Sell Your Gold', ghostWa:'Hello Assure Gold, I want to sell my gold.',
-    imgPath:'assets/images/products/chain-14.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit that product\'s photo under Photos & Images - Product Photos.'},
+    imgPath:'assets/images/products/chain-14.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit it under Photos & Images - Carousel Photos.'},
   {cls:'hs4', badge:'XRF CERT', ghostText:'&#128172; Ask About XRF', ghostWa:'Hello Assure Gold, tell me about XRF testing.',
-    imgPath:'assets/images/products/chain-09.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit that product\'s photo under Photos & Images - Product Photos.'},
+    imgPath:'assets/images/products/chain-09.jpeg', imgEditable:false, imgNote:'This slide uses a product photo. To change it, edit it under Photos & Images - Carousel Photos.'},
   {cls:'hs5', badge:'PSM REG.', ghostText:'View Our Licence', ghostHref:'#trust',
     imgPath:'assets/images/license.jpeg', imgEditable:false, imgNote:'This slide uses the licence certificate photo. To change it, edit it under Photos & Images.'}
 ];
 var DEFAULT_STATS = [{"num": "0%", "label": "Making Charge"}, {"num": "XRF", "label": "Live Purity Testing"}, {"num": "PSM", "label": "Ministry of Law Licensed"}, {"num": "Chat", "label": "WhatsApp Enquiries"}];
 var DEFAULT_HEADINGS = [
   {"id":"why","label":"Why Preloved Gold","l1":"Why preloved gold","l2":"the wiser buy","em":"ga","pre":"is "},
-  {"id":"goldbar","label":"Same Gold Section","l1":"Same gold.","l2":"Smarter price.","em":"","pre":""},
-  {"id":"compare","label":"Price Comparison","l1":"Same gold.","l2":"Very different price.","em":"ga","pre":""},
-  {"id":"products","label":"Featured Products","l1":"Real pieces.","l2":"Real prices.","em":"ga","pre":""},
-  {"id":"reviews","label":"Reviews Section","l1":"Real customers.","l2":"Real conversations.","em":"ga","pre":""},
   {"id":"faq","label":"FAQ Section","l1":"Common questions.","l2":"Straight answers.","em":"ga","pre":""},
   {"id":"cta","label":"Contact Section","l1":"Find your preloved piece.","l2":"Priced in pure gold.","em":"","pre":""}
 ];
 
 var DATA = {
   business:{wa:'6593430242',addr:'119A Canberra Cres, Singapore',hours:'Daily 7am-midnight SGT',psm:'PS20260000962',psmValid:'11 March 2027'},
-  products:DEFAULT_PRODUCTS,
   slides:DEFAULT_SLIDES,
   stats:DEFAULT_STATS,
   headings:DEFAULT_HEADINGS,
   images:{},   /* path -> dataURL of replaced images */
-  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, sellMarkup:30, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' },
+  buyback:{ margins:{m999:7,m916:8.5,m850:15,m750:15,m585:15}, retail:6200, youpay:5000, footnote:'For Gold Jewellery with less than 14K Purity, please contact us for the current price' },
   heroVideoActive:true  /* whether slide 1 shows the uploaded video (true) or just the photo (false) */
 };
 
+/* Drop data for sections that no longer exist (products, collection, removed headings) so older saves and backups stay compatible */
+function normalizeData(){
+  var order=DEFAULT_HEADINGS.map(function(h){return h.id;});
+  var byId={}; (DATA.headings||[]).forEach(function(h){ if(h&&order.indexOf(h.id)>=0) byId[h.id]=h; });
+  DATA.headings=DEFAULT_HEADINGS.map(function(d){ return byId[d.id]||d; });
+  (DATA.slides||[]).forEach(function(sl){ if(sl && /collection|#products/i.test(sl.href||'')) sl.href='buyback.html'; });
+  delete DATA.products;
+  if(DATA.buyback) delete DATA.buyback.sellMarkup;
+}
 function persist(){ try{
   /* images can be big — store separately, tolerate quota errors */
-  var core = {business:DATA.business,products:DATA.products,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback,heroVideoActive:DATA.heroVideoActive};
+  var core = {business:DATA.business,slides:DATA.slides,stats:DATA.stats,headings:DATA.headings,buyback:DATA.buyback,heroVideoActive:DATA.heroVideoActive};
   localStorage.setItem('ag_core', JSON.stringify(core));
   try{ localStorage.setItem('ag_images', JSON.stringify(DATA.images)); }
   catch(e){ toast('Images too large to auto-save. Use Save Backup.','error'); }
@@ -730,80 +649,22 @@ function persist(){ try{
 
 function load(){ try{
   var c=localStorage.getItem('ag_core');
-  if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business; DATA.products=p.products||DATA.products;
+  if(c){ var p=JSON.parse(c); DATA.business=p.business||DATA.business;
     DATA.slides=p.slides||DATA.slides; DATA.stats=p.stats||DATA.stats; DATA.headings=p.headings||DATA.headings; DATA.buyback=p.buyback||DATA.buyback;
     DATA.heroVideoActive=(p.heroVideoActive!==undefined)?p.heroVideoActive:DATA.heroVideoActive; }
   var im=localStorage.getItem('ag_images');
   if(im){ DATA.images=JSON.parse(im)||{}; }
-}catch(e){} }
+}catch(e){}
+  normalizeData();
+}
 load();
-agFetchRate();
 
 var EDITS=0;
 function markEdit(){ EDITS++; var el=document.getElementById('d-edits'); if(el)el.textContent=EDITS; }
 
-/* ============ LIVE PRICE ENGINE ============
-   Same formula as buyback.html: fetch live gold spot (USD/oz) + FX, convert
-   to S$/g at 999 purity, then per-karat buyback rate = spot999*purity - margin.
-   Selling rate = buyback rate + your markup (Products & Prices > Selling Price Formula). */
-var AG_RATE_999 = 185.0; /* fallback until live fetch completes */
-var AG_PURITY = { '999':0.999, '916':0.916, '850':0.850, '750':0.750, '585':0.585, '375':0.375 };
-function agKaratKey(karatStr){ var m=/^(\d+)/.exec(String(karatStr||'').trim()); return m?m[1]:'916'; }
-function agMarginFor(key){
-  var m=(DATA.buyback&&DATA.buyback.margins)||{};
-  var v=m['m'+key];
-  return (v!==undefined&&v!=='') ? Number(v) : 15;
-}
-function agSellMarkup(){
-  var v=DATA.buyback&&DATA.buyback.sellMarkup;
-  return (v!==undefined&&v!=='') ? Number(v) : 30;
-}
-function agBuybackRate(karatStr){
-  var key=agKaratKey(karatStr);
-  var purity=AG_PURITY[key]||0.916;
-  return AG_RATE_999*purity - agMarginFor(key);
-}
-function agSellRate(karatStr){ return agBuybackRate(karatStr) + agSellMarkup(); }
-function agProductPrice(p){
-  var w=Number(p.weight_g)||0;
-  return Math.round(agSellRate(p.karat) * w);
-}
-async function agFetchRate(){
-  try{
-    var gRes = await fetch('https://api.gold-api.com/price/XAU');
-    if(!gRes.ok) throw new Error('gold fetch failed');
-    var gData = await gRes.json();
-    if(!gData.price || gData.price<500) throw new Error('bad gold price');
-    var usdPerOz = gData.price;
-    var fxRate = 1.338;
-    try{
-      var fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
-      if(fxRes.ok){
-        var fxData = await fxRes.json();
-        var sgd = fxData.rates && fxData.rates.SGD;
-        if(sgd && sgd>1.2 && sgd<1.6) fxRate=sgd;
-      }
-    }catch(e2){ /* keep fallback FX */ }
-    AG_RATE_999 = (usdPerOz*fxRate)/31.1035;
-  }catch(e){ /* keep last known rate */ }
-  agRefreshPriceViews();
-}
-function agRefreshPriceViews(){
-  var v=document.querySelector('.view.active');
-  var id=v?v.id:'';
-  if(id==='view-products') renderProducts();
-  if(id==='view-featured') renderFeatured();
-  if(id==='view-dashboard') renderDash();
-  updateProdPricePreview();
-  renderSellMarkupPreview();
-}
-setInterval(agFetchRate, 20*1000);
-
 /* ============ UI ============ */
 var TITLES={
   dashboard:['Dashboard','Manage your Assure Gold website'],
-  products:['Products & Prices','Edit products - changes apply to all pages'],
-  featured:['Featured on Home','Choose the 3 products shown on the homepage'],
   images:['Photos & Images','Replace any photo on the website'],
   carousel:['Hero Carousel','Edit the 5 rotating homepage slides'],
   text:['Website Text','Edit headings and the stats bar'],
@@ -820,8 +681,6 @@ function showView(v){
   document.getElementById('tb-title').textContent=TITLES[v][0];
   document.getElementById('tb-sub').textContent=TITLES[v][1];
   if(v==='dashboard')renderDash();
-  if(v==='products'){renderProducts();renderSellMarkupPreview();}
-  if(v==='featured')renderFeatured();
   if(v==='images')renderImages();
   if(v==='carousel')renderSlides();
   if(v==='text')renderText();
@@ -853,165 +712,8 @@ function imgSrc(path){ return DATA.images[path] || path; }
 
 /* ============ DASHBOARD ============ */
 function renderDash(){
-  document.getElementById('d-prod').textContent=DATA.products.length;
-  document.getElementById('d-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
   document.getElementById('d-img').textContent=allImages().length;
   document.getElementById('d-edits').textContent=EDITS;
-  document.getElementById('cnt-prod').textContent=DATA.products.length;
-  document.getElementById('cnt-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
-  var feat=DATA.products.filter(function(p){return p.featured;}).slice(0,3);
-  document.getElementById('d-featured').innerHTML = feat.length
-    ? '<div class="pgrid">'+feat.map(pcard).join('')+'</div>'
-    : '<div style="padding:18px;text-align:center;color:var(--muted)">No featured products yet.</div>';
-}
-
-/* ============ PRODUCTS ============ */
-var FILT='all', EDIT_I=-1;
-function filt(c){ FILT=c; document.querySelectorAll('.fp').forEach(function(b){b.classList.toggle('active',b.dataset.c===c);}); renderProducts(); }
-function renderProducts(){
-  var q=(document.getElementById('psearch').value||'').toLowerCase().trim();
-  var list=DATA.products.filter(function(p){
-    if(FILT==='featured'&&!p.featured)return false;
-    if(FILT!=='all'&&FILT!=='featured'&&p.cat!==FILT)return false;
-    if(q&&(p.name+' '+p.spec).toLowerCase().indexOf(q)<0)return false;
-    return true;
-  });
-  document.getElementById('plist').innerHTML = list.length
-    ? list.map(function(p){return pcard(p,DATA.products.indexOf(p));}).join('')
-    : '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No products match.</div>';
-  document.getElementById('cnt-prod').textContent=DATA.products.length;
-  document.getElementById('cnt-feat').textContent=DATA.products.filter(function(p){return p.featured;}).length;
-}
-function pcard(p,i){
-  if(i===undefined)i=DATA.products.indexOf(p);
-  var price=agProductPrice(p);
-  var rate=agSellRate(p.karat);
-  return [
-    '<div class="pcard '+(p.featured?'feat':'')+'">',
-      '<div class="pc-top">',
-        '<img class="pc-img" src="'+esc(imgSrc(p.img))+'" onclick="openProd('+i+')"/>',
-        '<div class="pc-info"><div class="pc-name">'+esc(p.name)+'</div>',
-        '<div class="pc-spec">'+esc(p.spec)+'</div></div>',
-      '</div>',
-      '<div class="pc-row">',
-        '<div><div class="pc-price">S$ '+price.toLocaleString()+'</div><div style="font-size:10.5px;color:var(--muted)">S$ '+rate.toFixed(2)+'/g nett</div></div>',
-        '<div><span class="tag tag-gold">'+esc(p.karat)+'</span><span class="tag '+(p.cat==='pendants'?'tag-blue':'tag-green')+'">'+(p.cat==='pendants'?'Pendant':'Chain')+'</span></div>',
-      '</div>',
-      '<div class="pc-actions">',
-        '<button class="btn btn-g" onclick="openProd('+i+')">&#9998; Edit</button>',
-        '<button class="btn '+(p.featured?'btn-s':'btn-g')+'" onclick="togFeat('+i+')">'+(p.featured?'&#11088; Featured':'&#9734; Feature')+'</button>',
-      '</div>',
-    '</div>'
-  ].join('');
-}
-function togFeat(i){
-  if(!DATA.products[i].featured && DATA.products.filter(function(p){return p.featured;}).length>=3){
-    toast('Maximum 3 featured. Unfeature one first.','error'); return;
-  }
-  DATA.products[i].featured=!DATA.products[i].featured;
-  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
-  toast(DATA.products[i].featured?'Added to featured':'Removed from featured','success');
-}
-var _prodImgData=null;
-function openProd(i){
-  EDIT_I=i; _prodImgData=null;
-  var p=i>=0?DATA.products[i]:{name:'',spec:'',desc:'',weight_g:'',retail:'',karat:'916 \u00b7 22K',cat:'chains',img:'assets/images/products/chain-20.jpeg',wa:'',featured:false};
-  document.getElementById('mp-title').textContent=i>=0?('Edit: '+p.name):'Add New Product';
-  document.getElementById('mp-name').value=p.name||'';
-  document.getElementById('mp-spec').value=p.spec||'';
-  document.getElementById('mp-desc').value=p.desc||'';
-  document.getElementById('mp-weight').value=p.weight_g||'';
-  document.getElementById('mp-retail').value=p.retail||'';
-  document.getElementById('mp-karat').value=p.karat||'916 \u00b7 22K';
-  document.getElementById('mp-cat').value=p.cat||'chains';
-  document.getElementById('mp-feat').value=p.featured?'true':'false';
-  document.getElementById('mp-img').value=p.img||'';
-  document.getElementById('mp-imgprev').src=imgSrc(p.img);
-  document.getElementById('mp-wa').value=p.wa||'';
-  document.getElementById('mp-del').style.display=i>=0?'':'none';
-  updateProdPricePreview();
-  openM('m-prod');
-}
-function prodImgPick(inp){
-  var f=inp.files[0]; if(!f)return;
-  var r=new FileReader();
-  r.onload=function(e){ _prodImgData=e.target.result; document.getElementById('mp-imgprev').src=e.target.result; toast('Photo ready - click Save Product','info'); };
-  r.readAsDataURL(f);
-}
-function saveProd(){
-  var name=document.getElementById('mp-name').value.trim();
-  if(!name){toast('Enter a product name','error');return;}
-  var p={
-    name:name,
-    spec:document.getElementById('mp-spec').value.trim(),
-    desc:document.getElementById('mp-desc').value.trim(),
-    weight_g:parseFloat(document.getElementById('mp-weight').value)||0,
-    retail:parseInt(document.getElementById('mp-retail').value)||0,
-    karat:document.getElementById('mp-karat').value,
-    cat:document.getElementById('mp-cat').value,
-    img:document.getElementById('mp-img').value,
-    wa:document.getElementById('mp-wa').value.trim(),
-    featured:document.getElementById('mp-feat').value==='true'
-  };
-  if(p.featured){
-    var fc=DATA.products.filter(function(q,idx){return q.featured&&idx!==EDIT_I;}).length;
-    if(fc>=3){p.featured=false;toast('Already 3 featured - unfeature one first','error');}
-  }
-  /* if a new photo was picked, store it under the product's image path */
-  if(_prodImgData){ DATA.images[p.img]=_prodImgData; }
-  if(EDIT_I>=0)DATA.products[EDIT_I]=p; else DATA.products.push(p);
-  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
-  closeM('m-prod'); toast('Product saved','success');
-}
-function delProd(){
-  if(EDIT_I<0)return;
-  if(!confirm('Delete "'+DATA.products[EDIT_I].name+'"?'))return;
-  DATA.products.splice(EDIT_I,1);
-  persist(); markEdit(); renderProducts(); renderFeatured(); renderDash();
-  closeM('m-prod'); toast('Product deleted','info');
-}
-function updateProdPricePreview(){
-  var wEl=document.getElementById('mp-weight'), kEl=document.getElementById('mp-karat'), el=document.getElementById('mp-priceinfo');
-  if(!wEl||!kEl||!el) return;
-  var w=parseFloat(wEl.value)||0;
-  var rate=agSellRate(kEl.value);
-  el.innerHTML = w>0
-    ? ('<b>Auto price: S$ '+Math.round(rate*w).toLocaleString()+'</b> &nbsp;(S$ '+rate.toFixed(2)+'/g nett &times; '+w+'g)')
-    : 'Enter a weight to see the computed selling price.';
-}
-document.getElementById('mp-weight').addEventListener('input', updateProdPricePreview);
-document.getElementById('mp-karat').addEventListener('change', updateProdPricePreview);
-
-/* ============ SELLING PRICE FORMULA (single markup control) ============ */
-function saveSellMarkup(){
-  if(!DATA.buyback) DATA.buyback = {};
-  DATA.buyback.sellMarkup = parseFloat(document.getElementById('sp-markup').value)||0;
-  persist(); markEdit();
-  renderProducts(); renderFeatured(); renderDash(); renderSellMarkupPreview();
-  var msg = document.getElementById('sp-save-msg');
-  if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
-}
-function renderSellMarkupPreview(){
-  var el = document.getElementById('sp-markup');
-  if(el && document.activeElement!==el) el.value = (DATA.buyback&&DATA.buyback.sellMarkup!==undefined) ? DATA.buyback.sellMarkup : 30;
-  var tbl = document.getElementById('sp-preview');
-  if(!tbl) return;
-  var rows = ['999','916','850','750','585'].map(function(k){
-    var buy=agBuybackRate(k), sell=agSellRate(k);
-    return '<tr><td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px">'+k+'</td>'
-      +'<td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px;text-align:right">S$ '+buy.toFixed(2)+'/g</td>'
-      +'<td style="padding:7px 4px;border-bottom:1px solid var(--line);font-size:12.5px;text-align:right;font-weight:700;color:var(--g1)">S$ '+sell.toFixed(2)+'/g</td></tr>';
-  }).join('');
-  tbl.innerHTML = '<thead><tr><th style="text-align:left;padding:7px 4px;font-size:11px;color:var(--muted)">Karat</th><th style="text-align:right;padding:7px 4px;font-size:11px;color:var(--muted)">Buyback</th><th style="text-align:right;padding:7px 4px;font-size:11px;color:var(--muted)">Selling (nett)</th></tr></thead><tbody>'+rows+'</tbody>';
-}
-
-/* ============ FEATURED ============ */
-function renderFeatured(){
-  var feat=DATA.products.filter(function(p){return p.featured;});
-  document.getElementById('featlist').innerHTML = feat.length
-    ? feat.map(function(p){return pcard(p);}).join('')
-    : '<div style="grid-column:1/-1;text-align:center;padding:22px;color:var(--muted)">No featured products. Click a star below.</div>';
-  document.getElementById('featall').innerHTML=DATA.products.map(function(p){return pcard(p);}).join('');
 }
 
 /* ============ IMAGES ============ */
@@ -1026,11 +728,12 @@ function allImages(){
 function renderImages(){
   /* brand */
   document.getElementById('imbrand').innerHTML=allImages().map(imtile).join('');
-  /* products */
-  var prods=DATA.products.map(function(p){return {path:p.img,role:p.name};});
-  /* dedupe by path */
+  /* carousel photos used by slides 3-5 (slides 1-2 are replaced from the Hero Carousel editor) */
   var seen={}, uniq=[];
-  prods.forEach(function(x){ if(!seen[x.path]){seen[x.path]=1;uniq.push(x);} });
+  SLOT_CHROME.forEach(function(c){
+    if(c.imgEditable||c.imgPath==='assets/images/license.jpeg'||seen[c.imgPath])return;
+    seen[c.imgPath]=1; uniq.push({path:c.imgPath,role:'Carousel slide photo'});
+  });
   document.getElementById('improd').innerHTML=uniq.map(imtile).join('');
 }
 function imtile(im){
@@ -1142,7 +845,7 @@ function renderSlides(){
 }
 function addSlide(){
   if(DATA.slides.length>=5){ toast('Maximum 5 slides allowed','error'); return; }
-  DATA.slides.push({eyebrow:'New Slide',line1:'Your headline here',line2:'',line3:'',sub:'Add a short description for this slide.',btn:'Learn More →',href:'collection.html'});
+  DATA.slides.push({eyebrow:'New Slide',line1:'Your headline here',line2:'',line3:'',sub:'Add a short description for this slide.',btn:'Learn More →',href:'buyback.html'});
   persist(); markEdit(); renderSlides();
   openSlide(DATA.slides.length-1);
   toast('Slide added - edit the details, then Save','success');
@@ -1163,7 +866,7 @@ function openSlide(i){
   document.getElementById('ms-l3').value=s.line3||'';
   document.getElementById('ms-sub').value=s.sub||'';
   document.getElementById('ms-btn').value=s.btn||'';
-  document.getElementById('ms-href').value=s.href||'collection.html';
+  document.getElementById('ms-href').value=s.href||'buyback.html';
 
   var bgWrap=document.getElementById('ms-bg-wrap'), noteWrap=document.getElementById('ms-bg-note-wrap'), mediaWrap=document.getElementById('ms-media-wrap');
   bgWrap.style.display='none'; noteWrap.style.display='none'; mediaWrap.style.display='none';
@@ -1267,8 +970,9 @@ function loadBackup(){
     var r=new FileReader();
     r.onload=function(ev){
       try{ var d=JSON.parse(ev.target.result);
-        if(!d.business||!d.products)throw new Error('bad file');
+        if(!d.business)throw new Error('bad file');
         DATA=d; if(!DATA.images)DATA.images={};
+        normalizeData();
         persist(); renderDash();
         toast('Backup restored','success');
       }catch(err){ toast('Could not read that file','error'); }
@@ -1301,89 +1005,6 @@ function blockRange(html,startTag){
   return null;
 }
 
-/* ---- live price engine injected into index.html / collection.html ----
-   Self-contained: fetches live gold rate + FX itself (same source as
-   buyback.html), so product prices stay in sync with the buyback price
-   without needing a republish. Margins + markup are baked in as constants
-   and refreshed every publish. */
-function buildPriceEngineScript(){
-  var bb = DATA.buyback || {};
-  var margins = bb.margins || {};
-  function mv(k,def){ return (margins['m'+k]!==undefined && margins['m'+k]!=='') ? margins['m'+k] : def; }
-  var marginObj = "{ '999':"+mv('999',7)+", '916':"+mv('916',8.5)+", '850':"+mv('850',15)+", '750':"+mv('750',15)+", '585':"+mv('585',15)+", '375':15 }";
-  var markup = (bb.sellMarkup!==undefined && bb.sellMarkup!=='') ? bb.sellMarkup : 30;
-  return '<script>\n'
-    +'/* AG-PRICE-ENGINE:START — managed by ag-admin.html, do not edit by hand */\n'
-    +'var AGP_RATE_999 = 185.0;\n'
-    +'var AGP_LIVE = false;\n'
-    +'var AGP_MARGIN = '+marginObj+';\n'
-    +'var AGP_MARKUP = '+markup+';\n'
-    +"var AGP_PURITY = { '999':0.999, '916':0.916, '850':0.850, '750':0.750, '585':0.585, '375':0.375 };\n"
-    +'function agpKaratKey(k){ var m=/^(\\d+)/.exec(String(k||"").trim()); return m?m[1]:"916"; }\n'
-    +'function agpMarginFor(k){ return (AGP_MARGIN[k]!==undefined)?AGP_MARGIN[k]:15; }\n'
-    +'function agpSellRate(karatStr){ var k=agpKaratKey(karatStr); var purity=AGP_PURITY[k]||0.916; return AGP_RATE_999*purity - agpMarginFor(k) + AGP_MARKUP; }\n'
-    +'function agpFmt(n){ return n.toLocaleString("en-SG",{minimumFractionDigits:2,maximumFractionDigits:2}); }\n'
-    +'function agpPopulate(){\n'
-    +'  document.querySelectorAll("[data-agp-karat]").forEach(function(el){\n'
-    +'    var karat = el.getAttribute("data-agp-karat");\n'
-    +'    var weight = parseFloat(el.getAttribute("data-agp-weight"))||0;\n'
-    +'    var retail = parseFloat(el.getAttribute("data-agp-retail"))||0;\n'
-    +'    var rate = agpSellRate(karat);\n'
-    +'    var total = Math.round(rate*weight);\n'
-    +'    var a = el.querySelector(".agp-amt"); if(a) a.textContent = "S$ " + total.toLocaleString();\n'
-    +'    var r = el.querySelector(".agp-rate"); if(r) r.textContent = "S$ " + agpFmt(rate) + "/g";\n'
-    +'    var container = el.closest(".feat-body") || el.closest(".cc-body") || el.parentElement;\n'
-    +'    var s = container ? container.querySelector(".agp-save") : null;\n'
-    +'    if(s && retail) s.textContent = Math.max(0, retail-total).toLocaleString();\n'
-    +'  });\n'
-    +'}\n'
-    +'async function agpFetchRate(){\n'
-    +'  var ok=false;\n'
-    +'  try{\n'
-    +'    var gRes = await fetch("https://api.gold-api.com/price/XAU");\n'
-    +'    if(!gRes.ok) throw new Error("gold fetch failed");\n'
-    +'    var gData = await gRes.json();\n'
-    +'    if(!gData.price || gData.price<500) throw new Error("bad gold price");\n'
-    +'    var usdPerOz = gData.price;\n'
-    +'    var fxRate = 1.338;\n'
-    +'    try{\n'
-    +'      var fxRes = await fetch("https://open.er-api.com/v6/latest/USD");\n'
-    +'      if(fxRes.ok){\n'
-    +'        var fxData = await fxRes.json();\n'
-    +'        var sgd = fxData.rates && fxData.rates.SGD;\n'
-    +'        if(sgd && sgd>1.2 && sgd<1.6) fxRate=sgd;\n'
-    +'      }\n'
-    +'    }catch(e2){}\n'
-    +'    AGP_RATE_999 = (usdPerOz*fxRate)/31.1035;\n'
-    +'    ok=true;\n'
-    +'  }catch(e){}\n'
-    +'  AGP_LIVE=ok;\n'
-    +'  agpPopulate();\n'
-    +'}\n'
-    +'document.addEventListener("DOMContentLoaded", function(){\n'
-    +'  agpPopulate();\n'
-    +'  agpFetchRate();\n'
-    +'  setInterval(agpFetchRate, 60*1000);\n'
-    +'});\n'
-    +'/* AG-PRICE-ENGINE:END */\n'
-    +'<\/script>';
-}
-function injectPriceEngine(html){
-  var script = buildPriceEngineScript();
-  var si = html.indexOf('/* AG-PRICE-ENGINE:START');
-  if(si>=0){
-    var tagStart = html.lastIndexOf('<script', si);
-    var ei = html.indexOf('/* AG-PRICE-ENGINE:END */', si);
-    var tagEnd = ei>=0 ? html.indexOf('<\/script>', ei) + '<\/script>'.length : -1;
-    if(tagStart>=0 && tagEnd>0){
-      return html.slice(0,tagStart) + script + html.slice(tagEnd);
-    }
-  }
-  var bi = html.lastIndexOf('</body>');
-  if(bi<0) return html;
-  return html.slice(0,bi) + script + '\n' + html.slice(bi);
-}
-
 function patchIndex(html){
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
@@ -1392,28 +1013,6 @@ function patchIndex(html){
   html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
   html=html.replace(/PS20260000962/g,b.psm);
   html=html.replace(/11 March 2027/g,b.psmValid);
-
-  /* ---- featured products grid ---- */
-  var feat=DATA.products.filter(function(p){return p.featured;}).slice(0,3);
-  if(feat.length){
-    var r=blockRange(html,'<div class="feat-grid">');
-    if(r){
-      var WA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>';
-      var cards=feat.map(function(p){
-        var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
-        return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="feat-card">'+NL
-          +'    <div class="feat-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="feat-k">'+escHtml(p.karat)+'</span><span class="feat-xrf">&#10003; XRF</span></div>'+NL
-          +'    <div class="feat-body">'+NL
-          +'      <h3>'+escHtml(p.name)+'</h3>'+NL
-          +'      <div class="feat-spec">'+escHtml(p.spec)+'</div>'+NL
-          +'      <div class="feat-pricebox" data-agp-karat="'+escHtml(p.karat)+'" data-agp-weight="'+(p.weight_g||0)+'" data-agp-retail="'+(p.retail||0)+'"><div class="feat-price"><span class="agp-amt">S$ &mdash;</span> <span class="feat-nett">nett</span></div><div class="feat-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div>'+NL
-          +'      <span class="feat-cta">'+WA+' Enquire on WhatsApp</span>'+NL
-          +'    </div>'+NL
-          +'  </a>';
-      }).join(NL+'  ');
-      html=html.slice(0,r.start)+'<div class="feat-grid">'+NL+'  '+cards+NL+'</div>'+html.slice(r.end);
-    }
-  }
 
   /* ---- carousel slides (full rebuild: supports 1-5 slides) ---- */
   html=patchCarousel(html);
@@ -1425,9 +1024,6 @@ function patchIndex(html){
   html=patchHeadings(html);
 
   /* ---- replaced images: swap src to new filenames is not needed; we keep same path ---- */
-
-  /* ---- live price engine (auto selling price = buyback + markup) ---- */
-  html=injectPriceEngine(html);
 
   return html;
 }
@@ -1461,7 +1057,7 @@ function patchCarousel(html){
       +'      <div class="sld-h1" role="heading" aria-level="1">'+h1+'</div>'+NL
       +'      <p class="sld-sub">'+escHtml(s.sub)+'</p>'+NL
       +'      <div class="sld-ctas">'+NL
-      +'        <a href="'+escHtml(s.href||'collection.html')+'" class="btn-gold">'+escHtml(s.btn||'Learn More →')+'</a>'+NL
+      +'        <a href="'+escHtml(s.href||'buyback.html')+'" class="btn-gold">'+escHtml(s.btn||'Learn More →')+'</a>'+NL
       +'        '+ghost+NL
       +'      </div>'+NL
       +'    </div>'+NL
@@ -1506,40 +1102,6 @@ function patchHeadings(html){
     var emClass=h.em?(' class="'+h.em+'"'):'';
     return '<h2>'+escHtml(h.l1)+'<br/>'+(h.pre?escHtml(h.pre):'')+'<em'+emClass+'>'+escHtml(h.l2)+'</em></h2>';
   });
-}
-
-function patchCollection(html){
-  var b=DATA.business;
-  html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
-  html=html.replace(/\+65 9343 0242/g,fmtWA(b.wa));
-  html=html.replace(/\+65\s*\d{4}\s*\d{4}/g,fmtWA(b.wa));
-  html=html.replace(/119A Canberra Cres, Singapore/g,b.addr);
-  html=html.replace(/PS20260000962/g,b.psm);
-  html=html.replace(/11 March 2027/g,b.psmValid);
-
-  var gs=html.indexOf('<div class="col-grid"');
-  if(gs<0)return html;
-  var bodyStart=html.indexOf('>',gs)+1;
-  var search=html.slice(bodyStart),depth=1,i=0,bodyEnd=-1;
-  while(i<search.length){
-    var no=search.indexOf('<div',i),nc=search.indexOf('</div>',i);
-    if(nc<0)break;
-    if(no>=0&&no<nc){depth++;i=no+4;}
-    else{depth--; if(depth===0){bodyEnd=bodyStart+nc;break;} i=nc+6;}
-  }
-  if(bodyEnd<0)return html;
-
-  var WA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>';
-  var cards=DATA.products.map(function(p){
-    var wam=encodeURIComponent(p.wa||('Hi Assure Gold, I am interested in the '+p.name+'.'));
-    return '<a href="https://wa.me/'+b.wa+'?text='+wam+'" target="_blank" class="cc" data-cat="'+p.cat+'">'+NL
-      +'  <div class="cc-img"><img src="'+escHtml(p.img)+'" alt="'+escHtml(p.name)+'" loading="lazy"/><span class="cc-k">'+escHtml(p.karat)+'</span><span class="cc-xrf">&#10003; XRF</span></div>'+NL
-      +'  <div class="cc-body"><h3>'+escHtml(p.name)+'</h3><div class="cc-spec">'+escHtml(p.spec)+'</div><p class="cc-desc">'+escHtml(p.desc||'')+'</p><div class="cc-pricebox" data-agp-karat="'+escHtml(p.karat)+'" data-agp-weight="'+(p.weight_g||0)+'" data-agp-retail="'+(p.retail||0)+'"><div class="cc-price"><span class="agp-amt">S$ &mdash;</span> <span class="cc-nett">nett</span></div><div class="cc-rate"><span class="agp-rate">S$ &mdash;/g</span></div></div><span class="cc-cta">'+WA+' Enquire on WhatsApp</span></div>'+NL
-      +'</a>';
-  }).join(NL);
-  html = html.slice(0,bodyStart)+NL+cards+NL+html.slice(bodyEnd);
-  html = injectPriceEngine(html);
-  return html;
 }
 
 /* ============ BUYBACK EDITOR ============ */
@@ -1623,23 +1185,23 @@ document.addEventListener('DOMContentLoaded',function(){
   var fi=document.getElementById('zip-files');
   if(fi)fi.addEventListener('change',function(){
     var names=Array.from(fi.files).map(function(f){return f.name;});
-    var need=['index.html','collection.html','buyback.html'];
+    var need=['index.html','buyback.html'];
     var have=need.filter(function(n){return names.indexOf(n)>=0;});
     var st=document.getElementById('zip-fstatus');
-    st.innerHTML = have.length===3
-      ? '<span style="color:var(--green);font-weight:600">&#10003; All 3 files selected</span>'
-      : '<span style="color:var(--red)">Selected '+have.length+'/3 - need: '+need.join(', ')+'</span>';
+    st.innerHTML = have.length===need.length
+      ? '<span style="color:var(--green);font-weight:600">&#10003; Both files selected</span>'
+      : '<span style="color:var(--red)">Selected '+have.length+'/'+need.length+' - need: '+need.join(', ')+'</span>';
   });
 });
 async function buildZip(){
   var fi=document.getElementById('zip-files');
-  if(!fi.files.length){ zipStatus('&#9888; Select your 3 HTML files first.','err'); return; }
+  if(!fi.files.length){ zipStatus('&#9888; Select your 2 HTML files first.','err'); return; }
   var fmap={}; Array.from(fi.files).forEach(function(f){fmap[f.name]=f;});
-  var need=['index.html','collection.html','buyback.html'];
+  var need=['index.html','buyback.html'];
   for(var i=0;i<need.length;i++){ if(!fmap[need[i]]){ zipStatus('&#9888; Missing '+need[i],'err'); return; } }
   zipStatus('&#8987; Building ZIP...','work');
   try{
-    var patchers={'index.html':patchIndex,'collection.html':patchCollection,'buyback.html':patchBuyback};
+    var patchers={'index.html':patchIndex,'buyback.html':patchBuyback};
     var zip=new JSZip();
     for(var f in patchers){
       var txt=await fmap[f].text();
@@ -1675,7 +1237,7 @@ window.addEventListener('DOMContentLoaded',function(){ renderDash(); });
    CLOUD LAYER - passcode unlock + load from repo + one-tap publish
    ============================================================ */
 var AG_RAW   = "https://raw.githubusercontent.com/assuregoldsg1-star/Arun-Prabha/main/";
-var AG_PAGES = ["index.html","collection.html","buyback.html"];
+var AG_PAGES = ["index.html","buyback.html"];
 var AG_CODE  = null;  /* validated passcode, kept only in memory/session */
 
 function lgEl(id){ return document.getElementById(id); }
@@ -1717,13 +1279,13 @@ async function loadFromRepo(){
     var r = await fetch(AG_RAW + 'assure-gold-backup.json?t=' + Date.now(), {cache:'no-store'});
     if(!r.ok) return;
     var d = await r.json();
-    if(d.products && d.products.length){ DATA.products = d.products; }
     if(d.business){ DATA.business = d.business; }
     if(d.slides){ DATA.slides = d.slides; }
     if(d.stats){ DATA.stats = d.stats; }
     if(d.headings){ DATA.headings = d.headings; }
     if(d.buyback){ DATA.buyback = d.buyback; }
     if(d.heroVideoActive!==undefined){ DATA.heroVideoActive = d.heroVideoActive; }
+    normalizeData();
     try{ persistLocalOnly(); }catch(e){}
   }catch(e){ /* offline or first run - keep local/defaults */ }
 }
@@ -1744,7 +1306,7 @@ async function publishLive(){
   btn.disabled=true;
   try{
     pStatus('&#8987; Reading your current website...','work');
-    var patchers={'index.html':patchIndex,'collection.html':patchCollection,'buyback.html':patchBuyback};
+    var patchers={'index.html':patchIndex,'buyback.html':patchBuyback};
     var files=[];
 
     // Get the FRESH current pages straight from GitHub (no cache) to avoid conflicts
@@ -1763,7 +1325,7 @@ async function publishLive(){
       files.push({ path:name, content:patchers[name](html), encoding:'utf-8' });
     }
 
-    var backup={ business:DATA.business, products:DATA.products, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback, heroVideoActive:DATA.heroVideoActive };
+    var backup={ business:DATA.business, slides:DATA.slides, stats:DATA.stats, headings:DATA.headings, buyback:DATA.buyback, heroVideoActive:DATA.heroVideoActive };
     files.push({ path:'assure-gold-backup.json', content:JSON.stringify(backup,null,1), encoding:'utf-8' });
 
     var imgPaths=Object.keys(DATA.images||{});

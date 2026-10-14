@@ -21,15 +21,13 @@ updates by itself.
 
   Use the menu on the left. You can edit:
 
-    Products & Prices  - any price, add or remove products,
-                         names, weights, descriptions
-    Featured on Home   - the 3 products shown on the homepage
-    Photos & Images    - replace any product photo, carousel
-                         image, or the logo (you see a preview
-                         of the current photo)
+    Photos & Images    - replace the logo, licence, carousel
+                         photos (you see a preview of the
+                         current photo)
     Hero Carousel      - the big rotating banners on top
     Website Text       - section headings and the stats bar
     Business Info      - WhatsApp number, address, hours
+    Buyback Prices     - your buyback margins and hero prices
 
   Make as many changes as you like. They are saved in the
   tool as you go.
@@ -40,12 +38,11 @@ updates by itself.
 
   1. Click  "Publish"  in the left menu.
 
-  2. Click the file box and select your 3 website files:
+  2. Click the file box and select your 2 website files:
         index.html
-        collection.html
         buyback.html
      (They are in this same folder. Hold the Ctrl key to
-      click and select all 3 together.)
+      click and select both together.)
 
   3. Click  "Build & Download ZIP".
 

@@ -167,10 +167,7 @@ body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(170deg,#f
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1 1.1-1.7 2.5-1.7s2.5.7 2.5 1.7-1.1 1.6-2.5 1.8-2.5.8-2.5 1.8 1.1 1.7 2.5 1.7 2.5-.7 2.5-1.7"/></svg></span>
       <span>Buyback</span>
     </a>
-    <a class="mini" id="lnkCollection">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
-      <span>Collection</span>
-    </a>
+    
     <a class="mini" id="lnkBuybackPg">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
       <span>Reports</span>
@@ -199,10 +196,9 @@ $('lnkPortal').href     = ORIGIN + "/portal.html";
 $('lnkAdmin').href      = ORIGIN + "/ag-admin.html";
 $('lnkHome').href       = ORIGIN + "/index.html";
 $('lnkBuyback').href    = ORIGIN + "/buyback.html";
-$('lnkCollection').href = ORIGIN + "/collection.html";
 $('lnkBuybackPg').href  = ORIGIN + "/portal.html";
 $('lnkKyc').target='_blank'; $('lnkPortal').target='_blank'; $('lnkAdmin').target='_blank';
-$('lnkHome').target='_blank'; $('lnkBuyback').target='_blank'; $('lnkCollection').target='_blank';
+$('lnkHome').target='_blank'; $('lnkBuyback').target='_blank';
 
 function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),1800); }
 async function copy(text,label){ try{ await navigator.clipboard.writeText(text); toast(label+' copied'); }catch(e){

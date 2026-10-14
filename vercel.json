@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/collection.html", "destination": "/", "permanent": true },
+    { "source": "/collection", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/",

@@ -3,12 +3,11 @@ ASSURE GOLD WEBSITE
 
 WEBSITE PAGES (your live site)
   index.html        Home page
-  collection.html   Collection page
   buyback.html      Buyback page
 
 ADMIN TOOL (edit the website yourself)
   ag-admin.html     Double-click to open in your browser.
-                    Edit prices, products, photos, carousel,
+                    Edit buyback prices, photos, carousel,
                     text and business info - no coding needed.
 
 ASSETS
@@ -22,7 +21,7 @@ GUIDES
 QUICK START
   1. Double-click ag-admin.html
   2. Make your changes
-  3. Go to Publish -> select the 3 HTML files ->
+  3. Go to Publish -> select the 2 HTML files ->
      Build & Download ZIP
   4. Unzip it, upload the files to GitHub
   5. Website updates automatically
