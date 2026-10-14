@@ -8,12 +8,12 @@
  },
  "slides": [
   {
-   "eyebrow": "By appointment in Canberra",
-   "line1": "Sell Your Gold",
-   "line2": "With Confidence",
+   "eyebrow": "CUSTOM MAKE YOUR ROPE CHAINS",
+   "line1": "Brand New",
+   "line2": "Rope Chains",
    "line3": "In Singapore",
-   "sub": "Bring your old gold for in-person weighing and XRF testing. Understand your buyback quote before deciding. Visits to 119A Canberra Crescent are by appointment.",
-   "btn": "Sell Gold →",
+   "sub": "Brand new rope chains without GST or Making Charge",
+   "btn": "Trade in",
    "href": "buyback.html"
   },
   {
@@ -73,7 +73,7 @@
  "buyback": {
   "margins": {
    "m999": 7,
-   "m916": 8.5,
+   "m916": 4,
    "m850": 15,
    "m750": 15,
    "m585": 15
