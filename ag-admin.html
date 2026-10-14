@@ -1253,15 +1253,17 @@ function patchCarousel(html){
     if(s.line2)h1+='<br/><em>'+escHtml(s.line2)+'</em>';
     if(s.line3)h1+='<br/>'+escHtml(s.line3);
     var videoHtml = (chrome.hasVideo && DATA.heroVideoActive)
-      ? '    <video class="sld-video" autoplay muted loop playsinline poster="'+escHtml(chrome.imgPath)+'">'+NL
+      ? '    <video class="sld-video" autoplay muted loop playsinline>'+NL
         +'      <source src="'+escHtml(HERO_VIDEO_PATH)+'" type="video/mp4">'+NL
         +'    </video>'+NL
       : '';
+    /* photo is only used as the slide background when the video has been removed */
+    var bgStyle = (chrome.hasVideo && !DATA.heroVideoActive) ? ' style="background-image:url(\''+escHtml(chrome.imgPath)+'\')"' : '';
     var ghost = chrome.ghostHref
       ? '<a href="'+chrome.ghostHref+'" class="btn-ghost-light">'+chrome.ghostText+'</a>'
       : '<a href="https://wa.me/'+b.wa+'?text='+encodeURIComponent(chrome.ghostWa)+'" target="_blank" class="btn-ghost-light">'+chrome.ghostText+'</a>';
     slidesHtml.push(
-      '  <div class="hero-slide '+chrome.cls+(i===0?' active':'')+'" data-slide="'+i+'">'+NL
+      '  <div class="hero-slide '+chrome.cls+(i===0?' active':'')+'" data-slide="'+i+'"'+bgStyle+'>'+NL
       +videoHtml
       +'    <div class="sld-text">'+NL
       +'      <span class="sld-badge">'+chrome.badge+'</span>'+NL
