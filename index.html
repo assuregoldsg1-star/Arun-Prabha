@@ -800,7 +800,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <a href="#contact">Contact</a>
   </nav>
   <div class="nav-right">
-    <a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire." target="_blank" class="nav-wa">
+    <a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20enquire." target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp Us">
       <span class="wdot"></span><span class="nav-wa-txt">WhatsApp Us</span>
     </a>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -848,12 +848,12 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
   </div>
 
   <div class="carousel-arrows">
-    <button class="carousel-arrow" id="carouselPrev">&#10094;</button>
-    <button class="carousel-arrow" id="carouselNext">&#10095;</button>
+    <button class="carousel-arrow" id="carouselPrev" aria-label="Previous slide">&#10094;</button>
+    <button class="carousel-arrow" id="carouselNext" aria-label="Next slide">&#10095;</button>
   </div>
   <div class="carousel-dots" id="carouselDots">
-    <button class="carousel-dot active" data-slide="0"></button>
-    <button class="carousel-dot" data-slide="1"></button>
+    <button class="carousel-dot active" data-slide="0" aria-label="Go to slide 1"></button>
+    <button class="carousel-dot" data-slide="1" aria-label="Go to slide 2"></button>
   </div>
   <div class="carousel-progress" id="carouselProgress"></div>
 </div>
@@ -1167,11 +1167,11 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 
 <!-- MISHI CHATBOT -->
 <button id="mishi-btn" aria-label="Chat with Mishi">&#128142;<span class="mishi-pip">&#10006;</span></button>
-<div id="mishi-chat" role="dialog">
+<div id="mishi-chat" role="dialog" aria-label="Chat with Assure Gold">
   <div class="mishi-hd">
     <div class="mishi-av">&#128142;</div>
     <div><div class="mishi-nm">Mishi &#183; Assure Gold</div><div class="mishi-st">Online &#183; Preloved Gold Expert</div></div>
-    <button class="mishi-x" id="mishi-close">&#215;</button>
+    <button class="mishi-x" id="mishi-close" aria-label="Close chat">&#215;</button>
   </div>
   <div class="mishi-msgs" id="mishi-msgs"></div>
   <div class="mishi-chips">

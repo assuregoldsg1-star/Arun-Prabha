@@ -1277,12 +1277,12 @@ function patchCarousel(html){
       +'    </div>'+NL
       +'  </div>'
     );
-    dotsHtml.push('<button class="carousel-dot'+(i===0?' active':'')+'" data-slide="'+i+'"></button>');
+    dotsHtml.push('<button class="carousel-dot'+(i===0?' active':'')+'" data-slide="'+i+'" aria-label="Go to slide '+(i+1)+'"></button>');
   }
   var body = NL+NL+slidesHtml.join(NL+NL)+NL+NL
     +'  <div class="carousel-arrows">'+NL
-    +'    <button class="carousel-arrow" id="carouselPrev">&#10094;</button>'+NL
-    +'    <button class="carousel-arrow" id="carouselNext">&#10095;</button>'+NL
+    +'    <button class="carousel-arrow" id="carouselPrev" aria-label="Previous slide">&#10094;</button>'+NL
+    +'    <button class="carousel-arrow" id="carouselNext" aria-label="Next slide">&#10095;</button>'+NL
     +'  </div>'+NL
     +'  <div class="carousel-dots" id="carouselDots">'+NL
     +'    '+dotsHtml.join(NL+'    ')+NL
