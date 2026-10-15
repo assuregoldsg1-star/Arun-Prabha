@@ -34,10 +34,10 @@
 <meta name="theme-color" content="#14171b"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 /* =====================================================
    ASSURE GOLD — Full Premium CSS
@@ -160,7 +160,7 @@ a{text-decoration:none;color:inherit}
 .carousel-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px}
 .carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:1.5px solid rgba(255,255,255,.55);cursor:pointer;transition:all .4s;padding:0}
 .carousel-dot.active{background:var(--g1);border-color:var(--g1);transform:scale(1.35)}
-.carousel-progress{position:absolute;bottom:0;left:0;z-index:10;height:3px;background:linear-gradient(90deg,var(--gold-lt),var(--g1));width:0%}
+.carousel-progress{position:absolute;bottom:0;left:0;z-index:10;height:3px;background:linear-gradient(90deg,var(--gold-lt),var(--g1));width:100%;transform:scaleX(0);transform-origin:left;will-change:transform}
 
 /* Stats row under carousel */
 .hero-stats{display:flex;justify-content:center;background:var(--ink);border-top:2px solid rgba(174,138,62,.3)}
@@ -585,7 +585,7 @@ img,svg,video{max-width:100%}
 /* larger tap targets for touch */
 @media(hover:none){
   .nav-links a,.foot-link,.faq-q,.carousel-dot{min-height:auto}
-  .carousel-dot{width:11px;height:11px}
+  .carousel-dot{width:24px;height:24px}
   .btn-gold,.btn-ghost,.btn-wa,.feat-cta,.cc-cta{min-height:46px}
 }
 
@@ -663,6 +663,16 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 .pr-cta{text-align:center}
 @media(max-width:900px){.pr-grid{grid-template-columns:repeat(2,1fr)}.pr-split{grid-template-columns:1fr;gap:28px}.pr-split .pr-h2,.pr-split .pr-sub{text-align:center}.pr-steps{grid-template-columns:1fr}}
 @media(max-width:560px){.pr-cards,.pr-grid{grid-template-columns:1fr}.pr-seg button{padding:10px 18px}.pr-card{padding:26px 20px}.pr-head{margin-bottom:28px}}
+.carousel-dot{width:24px;height:24px;background:none!important;border:0!important;transform:none!important;position:relative;padding:0}
+.carousel-dot::before{content:'';position:absolute;top:50%;left:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:rgba(255,255,255,.35);border:1.5px solid rgba(255,255,255,.55);box-sizing:border-box;transition:transform .3s}
+.carousel-dot.active::before{background:var(--g1);border-color:var(--g1);transform:scale(1.35)}
+.carousel-dots{gap:0}
+/* a11y contrast */
+:root{--muted:#625e55;--gtxt:#7a5f22}
+#cta-section,#bb-cta,.hero,.hero-slide,#mishi-chat{--muted:#847f74}
+.loomix-link,.mchip,.bpt-title em,.bpt-nett,#bptUpdatedWrap{color:var(--gtxt)}
+.btn-wa,#calcWaBtn{background:#0f7a3f}.btn-wa:hover{background:#0c6334}
+html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 <script type="application/ld+json">
 {
@@ -792,7 +802,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <img src="assets/images/logo.png" alt="Assure Gold Singapore - preloved gold dealer logo" class="nav-logo-img"/>
     <span class="nav-name">ASSURE GOLD</span>
   </a>
-  <nav class="nav-links" id="navLinks">
+  <nav class="nav-links" id="navLinks" aria-label="Main">
     <a href="index.html">Home</a>
     <a href="buyback.html">Buyback</a>
     <a href="#trust">Trust</a>
@@ -806,6 +816,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
+<main id="main">
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="buyback.html">Buyback</a>
@@ -1100,7 +1111,7 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
       </div>
     </div>
     <div class="lic-img-wrap">
-      <img src="assets/images/license.jpeg" alt="Assure Gold &#8212; Regulated Dealers Certificate, Reg. PS20260000962, Ministry of Law Singapore"/>
+      <img loading="lazy" decoding="async" src="assets/images/license.jpeg" alt="Assure Gold &#8212; Regulated Dealers Certificate, Reg. PS20260000962, Ministry of Law Singapore"/>
     </div>
   </div>
 </div>
@@ -1135,19 +1146,20 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
       <img src="assets/images/logo.png" alt="Assure Gold" class="foot-logo-img"/>
       <div><strong>ASSURE GOLD</strong><span>Singapore&#8217;s Certified Preloved Gold Dealer</span></div>
     </div>
-    <nav class="foot-nav">
+    <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
         <a href="buyback.html">Buyback</a>
       <a href="#trust">Trust &amp; Licence</a>
       <a href="https://wa.me/6593430242" target="_blank">WhatsApp</a>
     </nav>
-    <nav class="foot-nav" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
+    <nav class="foot-nav" aria-label="Legal" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms &amp; Conditions</a>
       <a href="delivery.html">Delivery &amp; Meetup</a>
@@ -1193,52 +1205,6 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 // INLINE BOOT: Nav scroll, hamburger, FAQ, particles
 // =====================================================
 (function(){
-  // ── LENIS SMOOTH SCROLL (60fps) ──
-  // Lenis gives butter-smooth 60fps momentum scrolling
-  // It drives GSAP ScrollTrigger so animations stay in sync
-  var lenis;
-  try {
-    lenis = new Lenis({
-      duration: 0.7,           // reduced from 1.25 — feels responsive on desktop
-      smoothWheel: window.matchMedia('(hover: none) and (pointer: coarse)').matches,
-      easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false
-    });
-
-    // Feed Lenis scroll position into GSAP ScrollTrigger
-    lenis.on('scroll', function(e){
-      if(typeof ScrollTrigger !== 'undefined'){
-        ScrollTrigger.update();
-      }
-    });
-
-    // GSAP ticker drives Lenis at 60fps (requestAnimationFrame)
-    function lenisRaf(time){
-      lenis.raf(time);
-      requestAnimationFrame(lenisRaf);
-    }
-    requestAnimationFrame(lenisRaf);
-
-    // Anchor links — smooth scroll through Lenis
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click', function(e){
-        var id = a.getAttribute('href');
-        var target = document.querySelector(id);
-        if(target){ e.preventDefault(); lenis.scrollTo(target, {offset: -72, duration: 1.4}); }
-      });
-    });
-
-    window.__lenis = lenis; // expose for debugging
-    console.log('[AG] Lenis smooth scroll active (60fps)');
-  } catch(err) {
-    console.warn('[AG] Lenis not available, falling back to native scroll:', err);
-  }
-
   // Nav scroll
   window.addEventListener('scroll',function(){
     document.getElementById('nav').classList.toggle('scrolled',window.scrollY>18);
@@ -1271,9 +1237,10 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
   function startProg(){
     if(!prog)return;
     var d=durFor(cur);
-    prog.style.transition='none';prog.style.width='0%';
-    void prog.offsetWidth;
-    prog.style.transition='width '+d+'ms linear';prog.style.width='100%';
+    prog.style.transition='none';prog.style.transform='scaleX(0)';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      prog.style.transition='transform '+d+'ms linear';prog.style.transform='scaleX(1)';
+    });});
   }
 
   function goTo(idx){
@@ -1311,131 +1278,6 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
   },{passive:true});
 })();
 
-// =====================================================
-// GSAP SCROLL ANIMATIONS — aggressive & visible
-// =====================================================
-window.addEventListener('load',function(){
-  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'){
-    console.warn('[AG] GSAP not loaded — CDN may be blocked in preview'); return;
-  }
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Sync Lenis with GSAP ScrollTrigger
-  if(typeof window.__lenis!=='undefined'){
-    ScrollTrigger.scrollerProxy(document.body,{
-      scrollTop:function(v){
-        if(arguments.length){window.__lenis.scrollTo(v,{immediate:true});}
-        return window.__lenis.scroll;
-      },
-      getBoundingClientRect:function(){
-        return{top:0,left:0,width:window.innerWidth,height:window.innerHeight};
-      },
-      pinType:'transform'
-    });
-    window.__lenis.on('scroll',ScrollTrigger.update);
-  }
-
-  // 1. WHY COLS — slide up from below, staggered
-  var wc=gsap.utils.toArray('.why-col');
-  if(wc.length){
-    gsap.set(wc,{y:70,opacity:0});
-    ScrollTrigger.create({
-      trigger:'.why-cols',start:'top 88%',
-      onEnter:function(){gsap.to(wc,{y:0,opacity:1,duration:.85,ease:'power3.out',stagger:.15});}
-    });
-  }
-
-  // 2. SECTION HEADERS
-  document.querySelectorAll('.sh').forEach(function(sh){
-    var kids=Array.from(sh.children);
-    gsap.set(kids,{y:35,opacity:0});
-    ScrollTrigger.create({
-      trigger:sh,start:'top 88%',
-      onEnter:function(){gsap.to(kids,{y:0,opacity:1,duration:.7,ease:'power2.out',stagger:.12});}
-    });
-  });
-
-  // 3b. CAROUSEL 3D CHAIN — mouse tilt interaction
-  var chainFloat=document.querySelector('.chain3d-float');
-  if(chainFloat){
-    var chainStage=document.querySelector('.chain3d-stage');
-    chainStage.addEventListener('mousemove',function(e){
-      var r=chainStage.getBoundingClientRect();
-      var dx=((e.clientX-r.left)/r.width-.5)*2;
-      var dy=((e.clientY-r.top)/r.height-.5)*2;
-      chainFloat.style.animationPlayState='paused';
-      gsap.to(chainFloat,{rotationY:dx*28,rotationX:-dy*18,rotationZ:dx*4,duration:.5,ease:'power2.out',transformPerspective:1200,overwrite:'auto'});
-    },{passive:true});
-    chainStage.addEventListener('mouseleave',function(){
-      gsap.to(chainFloat,{rotationY:0,rotationX:0,rotationZ:0,duration:.9,ease:'power2.out',clearProps:'transform',
-        onComplete:function(){chainFloat.style.animationPlayState='running';}});
-    });
-  }
-  // 4. LICENCE IMAGE — rotate + scale entrance
-  var licImg=document.querySelector('.lic-img-wrap');
-  if(licImg){
-    gsap.set(licImg,{scale:.82,opacity:0,rotation:-4});
-    ScrollTrigger.create({
-      trigger:licImg,start:'top 88%',
-      onEnter:function(){gsap.to(licImg,{scale:1,opacity:1,rotation:0,duration:1.1,ease:'back.out(1.5)'});}
-    });
-    gsap.to(licImg,{y:-22,duration:3.5,ease:'sine.inOut',repeat:-1,yoyo:true,delay:1.5});
-  }
-
-  // 5. LICENCE COPY — slide from left
-  var licCopy=document.querySelector('.lic-copy');
-  if(licCopy){
-    gsap.set(licCopy,{x:-40,opacity:0});
-    ScrollTrigger.create({
-      trigger:licCopy,start:'top 88%',
-      onEnter:function(){gsap.to(licCopy,{x:0,opacity:1,duration:.85,ease:'power3.out'});}
-    });
-  }
-
-  // 8. TRUST PILLS — pop-scale stagger
-  var tp=gsap.utils.toArray('.tp');
-  if(tp.length){
-    gsap.set(tp,{scale:.65,opacity:0});
-    ScrollTrigger.create({
-      trigger:'.trust-pills',start:'top 90%',
-      onEnter:function(){gsap.to(tp,{scale:1,opacity:1,duration:.5,ease:'back.out(2)',stagger:.05});}
-    });
-  }
-
-  // 10. FAQ ITEMS
-  var fi=gsap.utils.toArray('.fq-item');
-  if(fi.length){
-    gsap.set(fi,{x:-30,opacity:0});
-    ScrollTrigger.create({
-      trigger:'.fql',start:'top 88%',
-      onEnter:function(){gsap.to(fi,{x:0,opacity:1,duration:.55,ease:'power2.out',stagger:.08});}
-    });
-  }
-
-  // 11. CTA SECTION
-  var ctaKids=document.querySelectorAll('#cta-section > *');
-  if(ctaKids.length){
-    gsap.set(ctaKids,{y:55,opacity:0});
-    ScrollTrigger.create({
-      trigger:'#cta-section',start:'top 88%',
-      onEnter:function(){gsap.to(ctaKids,{y:0,opacity:1,duration:.85,ease:'power3.out',stagger:.12});}
-    });
-  }
-
-  // 12. ANIMATED COUNTERS (removed — numbers display statically)
-
-  // 13. Footer
-  var footKids=document.querySelectorAll('footer > *');
-  if(footKids.length){
-    gsap.set(footKids,{y:24,opacity:0});
-    ScrollTrigger.create({
-      trigger:'footer',start:'top 94%',
-      onEnter:function(){gsap.to(footKids,{y:0,opacity:1,duration:.6,ease:'power2.out',stagger:.1});}
-    });
-  }
-
-  console.log('[AG] GSAP ScrollTrigger animations active');
-});
 
 // =====================================================
 // MISHI CHATBOT

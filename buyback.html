@@ -32,7 +32,10 @@
 <link rel="apple-touch-icon" href="assets/images/logo.png"/>
 <meta name="theme-color" content="#14171b"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 
 :root{
@@ -188,7 +191,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:48px var
 .pillar{text-align:center;padding:28px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--white);transition:box-shadow .4s,transform .4s}
 .pillar:hover{box-shadow:0 10px 32px rgba(174,138,62,.1);transform:translateY(-4px)}
 .pillar-i{font-size:28px;display:block;margin-bottom:12px}
-.pillar h4{font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;font-weight:500}
+.pillar h3{font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;font-weight:500}
 .pillar p{font-size:12.5px;color:var(--sub);line-height:1.65}
 @media(max-width:720px){.pillars{grid-template-columns:repeat(2,1fr)}}
 
@@ -314,6 +317,12 @@ select.bbc-input{appearance:none;-webkit-appearance:none;background-image:url("d
 .bbc-fine{text-align:center;font-size:12.5px;line-height:1.6;color:var(--muted);margin:18px auto 0;max-width:640px}
 @media(max-width:860px){.bb-hero-img{order:0}.bb-hero{padding-bottom:36px}}
 @media(max-width:760px){.bbc-card{grid-template-columns:1fr;gap:22px;padding:22px 18px}.bbc-section{padding:44px var(--pad) 48px}.bb-hero-copy .bb-sub{font-size:17px}}
+/* a11y contrast */
+:root{--muted:#625e55;--gtxt:#7a5f22}
+#cta-section,#bb-cta,.hero,.hero-slide,#mishi-chat{--muted:#847f74}
+.loomix-link,.mchip,.bpt-title em,.bpt-nett,#bptUpdatedWrap{color:var(--gtxt)}
+.btn-wa,#calcWaBtn{background:#0f7a3f}.btn-wa:hover{background:#0c6334}
+html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 <script type="application/ld+json">
 {
@@ -332,7 +341,7 @@ select.bbc-input{appearance:none;-webkit-appearance:none;background-image:url("d
     <img src="assets/images/logo.png" alt="Assure Gold Singapore - preloved gold dealer logo" class="nav-logo-img"/>
     <span class="nav-name">ASSURE GOLD</span>
   </a>
-  <nav class="nav-links" id="navLinks">
+  <nav class="nav-links" id="navLinks" aria-label="Main">
     <a href="index.html">Home</a>
     <a href="buyback.html" class="on">Buyback</a>
     <a href="index.html#trust">Trust</a>
@@ -347,6 +356,7 @@ select.bbc-input{appearance:none;-webkit-appearance:none;background-image:url("d
     </button>
   </div>
 </header>
+<main id="main">
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="buyback.html" class="on">Buyback</a>
@@ -452,10 +462,10 @@ select.bbc-input{appearance:none;-webkit-appearance:none;background-image:url("d
 <div class="accept-item">Gold from any other dealer or source</div>
 </div>
 </section>
-<section class="section section-grey"><div class="sh reveal"><span class="eyebrow">WHY SELLERS CHOOSE US</span><h2>Fair. Fast.<br/><em class="ga">Every time.</em></h2></div><div class="pillars reveal"><div class="pillar"><span class="pillar-i">&#127963;&#65039;</span><h4>PSM Licensed</h4><p>Every buyback transaction is legally documented under Ministry of Law regulations. Mandatory ID. Official receipt. Every time.</p></div>
-<div class="pillar"><span class="pillar-i">&#128300;</span><h4>You Watch the XRF Test</h4><p>The XRF analyser is on the counter. You watch the test. The purity reading on screen is exactly what we calculate from.</p></div>
-<div class="pillar"><span class="pillar-i">&#128184;</span><h4>Same-Day Payment</h4><p>Accept the quote and walk out paid. PayNow, bank transfer or cash. Fully receipted. No delays. No follow-ups needed.</p></div>
-<div class="pillar"><span class="pillar-i">&#128260;</span><h4>Trade-In Option</h4><p>Don&#8217;t want cash? Apply your buyback value as credit toward any preloved piece we have in stock. Upgrade without extra funds.</p></div>
+<section class="section section-grey"><div class="sh reveal"><span class="eyebrow">WHY SELLERS CHOOSE US</span><h2>Fair. Fast.<br/><em class="ga">Every time.</em></h2></div><div class="pillars reveal"><div class="pillar"><span class="pillar-i">&#127963;&#65039;</span><h3>PSM Licensed</h3><p>Every buyback transaction is legally documented under Ministry of Law regulations. Mandatory ID. Official receipt. Every time.</p></div>
+<div class="pillar"><span class="pillar-i">&#128300;</span><h3>You Watch the XRF Test</h3><p>The XRF analyser is on the counter. You watch the test. The purity reading on screen is exactly what we calculate from.</p></div>
+<div class="pillar"><span class="pillar-i">&#128184;</span><h3>Same-Day Payment</h3><p>Accept the quote and walk out paid. PayNow, bank transfer or cash. Fully receipted. No delays. No follow-ups needed.</p></div>
+<div class="pillar"><span class="pillar-i">&#128260;</span><h3>Trade-In Option</h3><p>Don&#8217;t want cash? Apply your buyback value as credit toward any preloved piece we have in stock. Upgrade without extra funds.</p></div>
 </div>
 </section>
 <section class="section"><div class="sh reveal"><span class="eyebrow">BUYBACK QUESTIONS</span><h2>Before you visit.<br/><em class="ga">Get the answers.</em></h2></div><div class="fql"><div class="fq-item reveal"><button class="fq-btn"><span>Do I need an appointment to sell gold?</span><span class="fq-ico">+</span></button><div class="fq-ans">Yes. WhatsApp us before visiting 119A Canberra Crescent, Singapore 751119. We meet customers by appointment to weigh and XRF-test their gold. Business hours are daily, 7am to midnight SGT.</div></div>
@@ -472,19 +482,20 @@ select.bbc-input{appearance:none;-webkit-appearance:none;background-image:url("d
 <section id="bb-cta"><div class="reveal"><span class="eyebrow">READY TO SELL?</span><h2>WhatsApp a photo.<br/><em>Get your quote today.</em></h2><p>XRF-tested live. Paid same-day. Zero theatre. Replies during business hours: daily, 7am&#8211;midnight SGT.</p><a href="https://wa.me/6593430242?text=Hi%20Assure%20Gold%2C%20I%20would%20like%20a%20buyback%20quote%20for%20my%20gold." target="_blank" class="btn-wa"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>Get My Buyback Quote
 </a><div class="cta-dets"><div class="cdet"><span>WhatsApp</span><b>+65 9343 0242</b></div><div class="cdet"><span>Visit by appointment</span><b>119A Canberra Cres, S&#8217;pore</b></div><div class="cdet"><span>Hours</span><b>Daily &#183; 7am&#8211;midnight SGT</b></div></div></div>
 </section>
+</main>
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
       <img src="assets/images/logo.png" alt="Assure Gold" class="foot-logo-img"/>
       <div><strong>ASSURE GOLD</strong><span>Singapore&#8217;s Certified Preloved Gold Dealer</span></div>
     </div>
-    <nav class="foot-nav">
+    <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
         <a href="buyback.html">Buyback</a>
       <a href="index.html#trust">Trust &amp; Licence</a>
       <a href="https://wa.me/6593430242" target="_blank">WhatsApp</a>
     </nav>
-    <nav class="foot-nav" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
+    <nav class="foot-nav" aria-label="Legal" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms &amp; Conditions</a>
       <a href="delivery.html">Delivery &amp; Meetup</a>
