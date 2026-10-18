@@ -4,6 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex, nofollow" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/assets/images/icon-180.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="AG Portal" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#FAF8F3" />
 <title>Owner Portal · Assure Gold</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -273,6 +280,7 @@ tbody tr.pending td{background:#fffdf5}
       <h1>Assure Gold<span>Verification Portal</span></h1>
     </div>
     <div class="grow"></div>
+    <button class="tbtn hide" id="pushBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Notifications</span></button>
     <button class="tbtn" id="pdfBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel Report</button>
     <button class="tbtn primary" id="newCodeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New customer code</button>
     <button class="tbtn" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
@@ -460,6 +468,7 @@ async function loadAll(){
   state.customers=c.data||[]; state.txns=t.data||[]; state.codes=k.data||[];
   try{ await loadInvoices(); }catch(e){ state.invoicesError=String(e); }
   render();
+  if(window.handlePendingLog) handlePendingLog();
 }
 
 /* ---------- RENDER ---------- */
@@ -1058,6 +1067,56 @@ function renderInvoices(){
   $('panel').querySelectorAll('[data-dl]').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); const i=state.invoices.find(x=>x.id===b.dataset.dl); if(i) invDownload(i.data,false); }));
 }
 
+
+/* ============================================================
+   PUSH NOTIFICATIONS — new customer submitted details
+   ============================================================ */
+const VAPID_PUBLIC_KEY = "BPDelMaQvISPPfrsEVzQgAX_yIMb3Eq_eL5vq_okMA3q_OPoJv4OI1gPyCYTvlX0GSNqLmUvbGC_uyZ-qN4rmBo";
+function b64ToU8(b){ const p='='.repeat((4-b.length%4)%4); const r=atob((b+p).replace(/-/g,'+').replace(/_/g,'/')); return Uint8Array.from([...r].map(c=>c.charCodeAt(0))); }
+const pushOK = ('serviceWorker' in navigator) && ('PushManager' in window) && ('Notification' in window);
+let pendingLog = new URLSearchParams(location.search).get('log');
+function logIdFromUrl(u){ try{ return new URL(u,location.origin).searchParams.get('log'); }catch(e){ return null; } }
+function handlePendingLog(){
+  if(!pendingLog) return;
+  const c=state.customers.find(x=>x.id===pendingLog); pendingLog=null;
+  try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  if(c){ document.querySelectorAll('.modal-center,.scrim').forEach(x=>x.remove()); openTxModal(c); }
+}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.addEventListener('message',async e=>{
+    if(e.data&&e.data.type==='open-log'){ pendingLog=logIdFromUrl(e.data.url);
+      if(!state.customers.find(x=>x.id===pendingLog)){ try{ await loadAll(); }catch(_){} } else handlePendingLog(); }
+  });
+}
+async function pushState_(){
+  const b=$('pushBtn'); if(!b||!pushOK) return;
+  const reg=await navigator.serviceWorker.getRegistration('/');
+  const sub=reg&&await reg.pushManager.getSubscription();
+  const on = sub && Notification.permission==='granted';
+  b.classList.toggle('hide', !!on && !!sub);          // hide once enabled
+  b.querySelector('span').textContent='Enable notifications';
+}
+async function enablePush(){
+  const b=$('pushBtn'); const t=b.querySelector('span');
+  try{
+    t.textContent='Enabling…';
+    const reg=await navigator.serviceWorker.register('/sw.js'); await navigator.serviceWorker.ready;
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted'){ t.textContent='Blocked in Settings'; return; }
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub) sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToU8(VAPID_PUBLIC_KEY)});
+    const j=sub.toJSON();
+    const r=await sb.from('push_subscriptions').upsert({endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth});
+    if(r.error){ t.textContent='Setup needed'; alert('Notifications are not set up in the database yet. Run push-setup.sql in Supabase first.'); return; }
+    t.textContent='Notifications on'; setTimeout(()=>b.classList.add('hide'),1500);
+  }catch(e){ t.textContent='Could not enable'; console.warn(e); }
+}
+(function(){
+  const b=$('pushBtn'); if(!b) return;
+  if(!pushOK){ return; }           // e.g. iPhone Safari tab (not installed) – button stays hidden
+  b.classList.remove('hide'); b.addEventListener('click',enablePush);
+  navigator.serviceWorker.register('/sw.js').then(pushState_).catch(()=>{});
+})();
 </script>
 </body>
 </html>
