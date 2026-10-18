@@ -865,7 +865,7 @@ function invFromTxn(t, c){
   const w = Number(t.weight_g)||0, amt = Number(t.amount_sgd)||0;
   const item = { desc: ((t.purity?(/^\d+$/.test(t.purity)?t.purity+' ':''):'')+(t.item||'Gold item')).trim(),
     detail: t.notes||'', qty: w>0?w:1, unit: w>0?'Gram':'Pc', rate: w>0?Math.round(amt/w*100)/100:amt, amount: amt };
-  return { no: nextInvNo(), title: sell?'TAX INVOICE':'PURCHASE RECEIPT', date: t.txn_date||today, terms:'Due on Receipt', dueDate: t.txn_date||today,
+  return { no: nextInvNo(), title: sell?'INVOICE':'PURCHASE RECEIPT', date: t.txn_date||today, terms:'Due on Receipt', dueDate: t.txn_date||today,
     seller: INV_SELLER_DEFAULT.slice(),
     billTo: { name: niceName(c.full_name), contact: c.contact||'', showId: true, idType:(c.id_type||'NRIC').toUpperCase(), idText: maskId(c.id_number) },
     payment: t.payment_method||'', items:[item], notes:'Thanks for your business.',
@@ -887,7 +887,7 @@ function invHtml(inv){
     <div class="ip-b"><b>${esc(b.name)}</b>${b.contact?`<div>${esc(b.contact)}</div>`:''}${b.showId&&b.idText?`<div>${esc(b.idType)}: ${esc(b.idText)}</div>`:''}</div>
     <table class="ip-i"><thead><tr><th class="c">#</th><th>Item &amp; Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead><tbody>${rows}</tbody></table>
     <div class="ip-f"><div class="ip-n"><span>Notes</span><div>${esc(inv.notes).replace(/\n/g,'<br>')}</div></div>
-      <div class="ip-tt"><div><span>Sub Total</span><span>${n2(t.sub)}</span></div><div class="b"><span>Total</span><span>SGD ${n2(t.total)}</span></div>${t.paid?`<div><span>Payment Made</span><span>(-) ${n2(t.paid)}</span></div>`:''}<div class="b big"><span>${t.balance<=0.005?'Balance Due':'Balance Due'}</span><span>SGD ${n2(t.balance)}</span></div></div></div></div>`;
+      <div class="ip-tt"><div><span>Sub Total</span><span>${n2(t.sub)}</span></div>${t.paid?`<div class="b"><span>Total</span><span>SGD ${n2(t.total)}</span></div><div><span>Payment Made</span><span>(-) ${n2(t.paid)}</span></div><div class="b big"><span>Balance Due</span><span>SGD ${n2(t.balance)}</span></div>`:`<div class="b big"><span>Total</span><span>SGD ${n2(t.total)}</span></div>`}</div></div></div>`;
 }
 
 /* ---------- real PDF (jsPDF) ---------- */
@@ -943,7 +943,7 @@ async function buildInvoicePdf(inv){
   // totals + notes
   const bx=120; let ty=iy+5; d.setFontSize(8.5);
   const trow=(k,v,bold)=>{ d.setFont('helvetica',bold?'bold':'normal'); d.text(k,bx+30,ty,{align:'right'}); d.text(v,R-3,ty,{align:'right'}); ty+=6; };
-  const boxTop=iy; trow('Sub Total',n2(t.sub)); trow('Total','SGD '+n2(t.total),true); if(t.paid) trow('Payment Made','(-) '+n2(t.paid)); d.setFontSize(9.5); trow('Balance Due','SGD '+n2(t.balance),true);
+  const boxTop=iy; trow('Sub Total',n2(t.sub)); if(t.paid){ trow('Total','SGD '+n2(t.total),true); trow('Payment Made','(-) '+n2(t.paid)); d.setFontSize(9.5); trow('Balance Due','SGD '+n2(t.balance),true); } else { d.setFontSize(9.5); trow('Total','SGD '+n2(t.total),true); }
   d.line(bx-5,boxTop,bx-5,ty-2); d.line(bx-5,ty-2,R,ty-2);
   d.setFont('helvetica','normal'); d.setFontSize(8); d.setTextColor(90); d.text('Notes',L+3,iy+5); d.setTextColor(0);
   d.text(d.splitTextToSize(inv.notes||'',100),L+3,iy+10);
@@ -961,7 +961,7 @@ async function invDownload(inv, share){
 /* ---------- editor window ---------- */
 function openInvoiceEditor(inv, existingId){
   const w=document.createElement('div'); w.className='inv-win';
-  let cur=JSON.parse(JSON.stringify(inv)); let savedId=existingId||null;
+  let cur=JSON.parse(JSON.stringify(inv)); if(cur.title==='TAX INVOICE') cur.title='INVOICE'; let savedId=existingId||null;
   const itemRow=(it,i)=>`<div class="ii" data-i="${i}">
     <div class="field"><label>Item</label><input data-f="desc" value="${esc(it.desc)}"/></div>
     <div class="field"><label>Description / detail</label><textarea data-f="detail" rows="2">${esc(it.detail)}</textarea></div>
