@@ -819,7 +819,8 @@ function openCodeModal(){
 /* ============================================================
    INVOICES — generate, store (Supabase `invoices` table), list
    ============================================================ */
-const INV_SELLER_DEFAULT = ['Assure Gold','Blk 119A 2-03 Canberra cres','UEN: 53518755J','Sembawang 751119','Singapore','96724975','assuregoldsg1@gmail.com'];
+const INV_SELLER_OLD = ['Assure Gold','Blk 119A 2-03 Canberra cres','UEN: 53518755J','Sembawang 751119','Singapore','96724975','assuregoldsg1@gmail.com'];
+const INV_SELLER_DEFAULT = ['Assure Gold','Blk 119A Canberra cres','UEN: 53518755J','Sembawang 751119','Singapore','93430242','assuregoldsg1@gmail.com'];
 const INV_START_AFTER = 77;               // last number used in the old system (INV-000077)
 const INV_SQL = `create table if not exists public.invoices (
   id uuid primary key default gen_random_uuid(),
@@ -961,7 +962,7 @@ async function invDownload(inv, share){
 /* ---------- editor window ---------- */
 function openInvoiceEditor(inv, existingId){
   const w=document.createElement('div'); w.className='inv-win';
-  let cur=JSON.parse(JSON.stringify(inv)); if(cur.title==='TAX INVOICE') cur.title='INVOICE'; let savedId=existingId||null;
+  let cur=JSON.parse(JSON.stringify(inv)); if(cur.title==='TAX INVOICE') cur.title='INVOICE'; if(JSON.stringify(cur.seller)===JSON.stringify(INV_SELLER_OLD)) cur.seller=INV_SELLER_DEFAULT.slice(); let savedId=existingId||null;
   const itemRow=(it,i)=>`<div class="ii" data-i="${i}">
     <div class="field"><label>Item</label><input data-f="desc" value="${esc(it.desc)}"/></div>
     <div class="field"><label>Description / detail</label><textarea data-f="detail" rows="2">${esc(it.detail)}</textarea></div>
