@@ -1,12 +1,47 @@
 {
   "redirects": [
-    { "source": "/collection.html", "destination": "/", "permanent": true },
-    { "source": "/collection", "destination": "/", "permanent": true }
+    {
+      "source": "/collection.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/collection",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "assuregold.sg"
+        }
+      ],
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.assuregold.sg"
+        }
+      ],
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "controlpanel.assuregold.sg" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "controlpanel.assuregold.sg"
+        }
+      ],
       "destination": "/hub.html"
     }
   ]
