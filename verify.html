@@ -562,6 +562,7 @@ function submitForm(){
       setBtn('submitBtn', false, 'Submit verification');
       return;
     }
+    try{ if(window.gtag) gtag('event','verification_submitted',{transaction_type:(typeof txnType!=='undefined'?txnType:undefined),page_path:location.pathname}); }catch(e){}
     var ref = String(res.data).slice(0,8).toUpperCase();
     gid('refCode').textContent = 'REF: ' + ref;
     gid('form').classList.add('hide');
