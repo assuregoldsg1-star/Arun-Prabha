@@ -31,6 +31,16 @@
       ],
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/delivery.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/delivery",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
