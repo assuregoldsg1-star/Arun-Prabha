@@ -618,6 +618,13 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 .pr-price{font-family:var(--serif);font-size:clamp(38px,5vw,52px);line-height:1;color:var(--ink)}
 .pr-price small{font-family:var(--sans);font-size:14px;color:var(--muted);margin-left:4px}
 .pr-nett{font-size:13px;line-height:1.6;color:var(--sub);margin:18px 0 0}
+.pr-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;align-items:start}
+.pr-duo .pr-head{margin-bottom:26px}
+.pr-duo .pr-cards{gap:14px;max-width:none}
+.pr-duo .pr-card{padding:26px 16px}
+.pr-duo .pr-price{font-size:clamp(30px,3.3vw,42px)}
+.pr-duo .pr-price small{display:block;margin:6px 0 0;font-size:13px}
+.pr-pane-cta{text-align:center;margin-top:22px}
 .pr-meta{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:22px;font-size:12.5px;color:var(--muted)}
 .pr-dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
 .pr-dot.live{background:var(--green)}
@@ -662,7 +669,8 @@ h1,h2,h3,h4{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased
 .pr-steps p{font-size:13.5px;line-height:1.65;color:var(--sub);margin:0}
 .pr-cta{text-align:center}
 @media(max-width:900px){.pr-grid{grid-template-columns:repeat(2,1fr)}.pr-split{grid-template-columns:1fr;gap:28px}.pr-split .pr-h2,.pr-split .pr-sub{text-align:center}.pr-steps{grid-template-columns:1fr}}
-@media(max-width:560px){.pr-cards,.pr-grid{grid-template-columns:1fr}.pr-seg button{padding:10px 18px}.pr-card{padding:26px 20px}.pr-head{margin-bottom:28px}}
+@media(max-width:900px){.pr-duo{grid-template-columns:1fr;gap:44px}.pr-duo .pr-price{font-size:clamp(32px,8vw,44px)}}
+@media(max-width:560px){.pr-grid{grid-template-columns:1fr}.pr-duo .pr-card{padding:22px 12px}.pr-duo .pr-nett{font-size:12px}.pr-seg button{padding:10px 18px}.pr-card{padding:26px 20px}.pr-head{margin-bottom:28px}}
 .carousel-dot{width:24px;height:24px;background:none!important;border:0!important;transform:none!important;position:relative;padding:0}
 .carousel-dot::before{content:'';position:absolute;top:50%;left:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:rgba(255,255,255,.35);border:1.5px solid rgba(255,255,255,.55);box-sizing:border-box;transition:transform .3s}
 .carousel-dot.active::before{background:var(--g1);border-color:var(--g1);transform:scale(1.35)}
@@ -915,27 +923,54 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
 <!-- TODAY'S PRICE -->
 <section class="section" id="prices">
 <div class="pr-wrap">
-  <div class="pr-head">
-    <span class="eyebrow">TODAY&#8217;S GOLD PRICE &#183; 916</span>
-    <h2 class="pr-h2">Today&#8217;s selling price.</h2>
-    <p class="pr-sub">916 (22K) gold, priced per gram from the live gold rate.</p>
-  </div>
-  <div class="pr-cards">
-    <div class="pr-card">
-      <span class="pr-card-tag">Preloved</span>
-      <span class="pr-card-k">916 &#183; 22K &#183; XRF-tested</span>
-      <div class="pr-price"><span id="prPreloved">S$ &mdash;</span><small>/ gram</small></div>
-      <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+  <div class="pr-duo">
+    <div class="pr-pane">
+      <div class="pr-head">
+        <span class="eyebrow">TODAY&#8217;S GOLD PRICE &#183; 916</span>
+        <h2 class="pr-h2">Today&#8217;s selling price.</h2>
+        <p class="pr-sub">916 (22K) gold, priced per gram from the live gold rate.</p>
+      </div>
+      <div class="pr-cards">
+        <div class="pr-card">
+          <span class="pr-card-tag">Preloved</span>
+          <span class="pr-card-k">916 &#183; 22K &#183; XRF-tested</span>
+          <div class="pr-price"><span id="prPreloved">S$ &mdash;</span><small>/ gram</small></div>
+          <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+        </div>
+        <div class="pr-card hl">
+          <span class="pr-card-tag">Brand new</span>
+          <span class="pr-card-k">916 &#183; 22K</span>
+          <div class="pr-price"><span id="prBrandNew">S$ &mdash;</span><small>/ gram</small></div>
+          <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+        </div>
+      </div>
+      <div class="pr-pane-cta"><a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20buy%20gold." target="_blank" rel="noopener" class="btn-wa"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>Buy on WhatsApp</a></div>
     </div>
-    <div class="pr-card hl">
-      <span class="pr-card-tag">Brand new</span>
-      <span class="pr-card-k">916 &#183; 22K</span>
-      <div class="pr-price"><span id="prBrandNew">S$ &mdash;</span><small>/ gram</small></div>
-      <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+    <div class="pr-pane">
+      <div class="pr-head">
+        <span class="eyebrow">TODAY&#8217;S GOLD PRICE &#183; BUYBACK</span>
+        <h2 class="pr-h2">Today&#8217;s buyback price.</h2>
+        <p class="pr-sub">What we pay per gram for your gold, from the live gold rate.</p>
+      </div>
+      <div class="pr-cards">
+        <div class="pr-card">
+          <span class="pr-card-tag">22K &#183; 916</span>
+          <span class="pr-card-k">XRF-tested</span>
+          <div class="pr-price"><span id="prBB916">S$ &mdash;</span><small>/ gram</small></div>
+          <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+        </div>
+        <div class="pr-card hl">
+          <span class="pr-card-tag">24K &#183; 999</span>
+          <span class="pr-card-k">XRF-tested</span>
+          <div class="pr-price"><span id="prBB999">S$ &mdash;</span><small>/ gram</small></div>
+          <p class="pr-nett">Total nett price per gram.<br/>No additional or hidden charges.</p>
+        </div>
+      </div>
+      <div class="pr-pane-cta"><a href="https://wa.me/6593430242?text=Hello%20Assure%20Gold%2C%20I%20would%20like%20to%20sell%20my%20gold." target="_blank" rel="noopener" class="btn-wa"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zM8.53 7.33c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.43-.14 0-.3-.01-.46-.01z"/></svg>Sell on WhatsApp</a></div>
     </div>
   </div>
   <div class="pr-meta"><span class="pr-dot" id="prDot"></span><span id="prStatus">Loading live gold rate&hellip;</span></div>
-  <p class="pr-note">Prices are indicative. The final price is confirmed face to face before payment.</p>
+  <p class="pr-note">Prices are indicative. The final price is confirmed face to face before payment. Buyback prices depend on the XRF-tested purity of your gold.</p>
 </div>
 </section>
 
@@ -1012,6 +1047,7 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
   var PRELOVED=[{"id":1,"name":"Rope Chain — Long 24\"","spec":"24 inches · 22.3g · Excellent condition","w":22.3,"img":"assets/images/products/chain-01.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g."},{"id":2,"name":"Rope Chain — Classic 20\"","spec":"20 inches · 17.6g · Very good condition","w":17.6,"img":"assets/images/products/chain-03.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g."},{"id":3,"name":"Rope Chain — Statement 22\"","spec":"22 inches · 20.1g · Good condition","w":20.1,"img":"assets/images/products/chain-04.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g."},{"id":4,"name":"Rope Chain — Heavy Long 24\"","spec":"24 inches · 23.7g · Good condition","w":23.7,"img":"assets/images/products/chain-02.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy."},{"id":5,"name":"Rope Chain — Dainty 16\"","spec":"16 inches · 10.2g · Excellent condition","w":10.2,"img":"assets/images/products/chain-06.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g."},{"id":6,"name":"Rope Chain — Mid-Length 18\"","spec":"18 inches · 14.8g · Good condition","w":14.8,"img":"assets/images/products/chain-05.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g."},{"id":7,"name":"Rope Chain — Angled 22\"","spec":"22 inches · 19.6g · Good condition","w":19.6,"img":"assets/images/products/chain-08.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g."},{"id":8,"name":"Rope Chain — Detail View 20\"","spec":"20 inches · 16.4g · Excellent condition","w":16.4,"img":"assets/images/products/chain-07.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g."},{"id":9,"name":"Rope Chain — Width Verified 20\"","spec":"20 inches · 17.1g · Very good condition","w":17.1,"img":"assets/images/products/chain-09.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g."},{"id":10,"name":"Rope Chain — Short Fine 16\"","spec":"16 inches · 9.8g · Very good condition","w":9.8,"img":"assets/images/products/chain-11.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g."},{"id":11,"name":"Rope Chain — Thick Gauge 18\"","spec":"18 inches · 15.2g · Good condition","w":15.2,"img":"assets/images/products/chain-10.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g."},{"id":12,"name":"Rope Chain — Medium 20\"","spec":"20 inches · 16.8g · Very good condition","w":16.8,"img":"assets/images/products/chain-13.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g."},{"id":13,"name":"Rope Chain — Premium 22\"","spec":"22 inches · 20.8g · Excellent condition","w":20.8,"img":"assets/images/products/chain-14.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g."},{"id":14,"name":"Rope Chain + Barrel Pendant","spec":"18 inches · 12.8g total · Good condition","w":12.8,"img":"assets/images/products/chain-12.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g."},{"id":15,"name":"Rope + Dragon Abacus Pendant","spec":"20 inches · 18.4g total · Very good","w":18.4,"img":"assets/images/products/chain-16.jpeg","wa":"Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g."},{"id":16,"name":"Rope + Cylinder Pendant","spec":"18 inches · 16.9g total · Very good","w":16.9,"img":"assets/images/products/chain-15.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g."},{"id":17,"name":"Rope + Ornate Pendant","spec":"20 inches · 22.1g total · Good","w":22.1,"img":"assets/images/products/chain-18.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g."},{"id":18,"name":"Rope + Classic Round Pendant","spec":"18 inches · 17.4g total · Very good","w":17.4,"img":"assets/images/products/chain-19.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g."},{"id":19,"name":"Rope + Designer Pendant","spec":"20 inches · 20.3g total · Good","w":20.3,"img":"assets/images/products/chain-17.jpeg","wa":"Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g."}];
   var BRANDNEW=[{"id":"bn-1","name":"Brand New 916 Rope Chain","spec":"916 · 22K · Priced by weight","w":0,"img":"assets/images/products/brandnew-rope-01.webp","wa":"Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."}];
   /* AG-COLLECTION:END */
+  var BB_MARGIN = { '999':3, '916':0 };
   var rate916=null, mode='preloved', shown=CFG.page;
   function $(id){return document.getElementById(id);}
   function money(n,d){return n.toLocaleString('en-SG',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
@@ -1022,6 +1058,9 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
   function renderPrices(){
     var p=perGram('preloved'), b=perGram('brandnew');
     var up=p===null?'S$ \u2014':'S$ '+money(p,2), ub=b===null?'S$ \u2014':'S$ '+money(b,2);
+    var r999=rate916===null?null:rate916/CFG.purity;
+    function bb(p,k){ return r999===null?'S$ \u2014':'S$ '+money(r999*p-(BB_MARGIN[k]||0),2); }
+    setText('prBB916',bb(0.916,'916')); setText('prBB999',bb(0.999,'999'));
     setText('prPreloved',up); setText('prBrandNew',ub); setText('prCustom',ub); setText('prCustomH',ub);
     Array.prototype.forEach.call(document.querySelectorAll('[data-trade]'),function(e){e.textContent=CFG.tradein;});
   }

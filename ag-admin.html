@@ -1214,7 +1214,13 @@ function patchCollectionBlock(html){
   return html.slice(0,a)+buildCollectionBlock()+html.slice(e+END.length);
 }
 
+function bbMarginStr(){
+  var bb = DATA.buyback || {}; var margins = bb.margins || {};
+  function mv(k,def){ return (margins['m'+k]!==undefined && margins['m'+k]!=='') ? margins['m'+k] : def; }
+  return "{ '999':"+mv('999',7)+", '916':"+mv('916',8.5)+", '850':"+mv('850',15)+", '750':"+mv('750',15)+", '585':"+mv('585',15)+", '375':15 }";
+}
 function patchIndex(html){
+  html = html.replace(/var BB_MARGIN = \{[^}]*\};/, 'var BB_MARGIN = '+bbMarginStr()+';');
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
   html=html.replace(/\+65 9343 0242/g,fmtWA(b.wa));
