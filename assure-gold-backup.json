@@ -1,257 +1,176 @@
 {
- "business": {
-  "wa": "6593430242",
-  "addr": "119A Canberra Cres, Singapore",
-  "hours": "Daily 7am-midnight SGT",
-  "psm": "PS20260000962",
-  "psmValid": "11 March 2027"
- },
- "pricing": {
-  "preloved": 20,
-  "brandnew": 25,
-  "tradein": 10
- },
- "collection": {
-  "preloved": [
-   {
-    "id": 1,
-    "name": "Rope Chain — Long 24\"",
-    "spec": "24 inches · 22.3g · Excellent condition",
-    "w": 22.3,
-    "img": "assets/images/products/chain-01.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 22.3g."
-   },
-   {
-    "id": 2,
-    "name": "Rope Chain — Classic 20\"",
-    "spec": "20 inches · 17.6g · Very good condition",
-    "w": 17.6,
-    "img": "assets/images/products/chain-03.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 20 inches 17.6g."
-   },
-   {
-    "id": 3,
-    "name": "Rope Chain — Statement 22\"",
-    "spec": "22 inches · 20.1g · Good condition",
-    "w": 20.1,
-    "img": "assets/images/products/chain-04.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 22 inches 20.1g."
-   },
-   {
-    "id": 4,
-    "name": "Rope Chain — Heavy Long 24\"",
-    "spec": "24 inches · 23.7g · Good condition",
-    "w": 23.7,
-    "img": "assets/images/products/chain-02.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 24 inches 23.7g heavy."
-   },
-   {
-    "id": 5,
-    "name": "Rope Chain — Dainty 16\"",
-    "spec": "16 inches · 10.2g · Excellent condition",
-    "w": 10.2,
-    "img": "assets/images/products/chain-06.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 16 inches 10.2g."
-   },
-   {
-    "id": 6,
-    "name": "Rope Chain — Mid-Length 18\"",
-    "spec": "18 inches · 14.8g · Good condition",
-    "w": 14.8,
-    "img": "assets/images/products/chain-05.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain 18 inches 14.8g."
-   },
-   {
-    "id": 7,
-    "name": "Rope Chain — Angled 22\"",
-    "spec": "22 inches · 19.6g · Good condition",
-    "w": 19.6,
-    "img": "assets/images/products/chain-08.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain angled 22 inches 19.6g."
-   },
-   {
-    "id": 8,
-    "name": "Rope Chain — Detail View 20\"",
-    "spec": "20 inches · 16.4g · Excellent condition",
-    "w": 16.4,
-    "img": "assets/images/products/chain-07.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain closeup 20 inches 16.4g."
-   },
-   {
-    "id": 9,
-    "name": "Rope Chain — Width Verified 20\"",
-    "spec": "20 inches · 17.1g · Very good condition",
-    "w": 17.1,
-    "img": "assets/images/products/chain-09.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ruler 20 inches 17.1g."
-   },
-   {
-    "id": 10,
-    "name": "Rope Chain — Short Fine 16\"",
-    "spec": "16 inches · 9.8g · Very good condition",
-    "w": 9.8,
-    "img": "assets/images/products/chain-11.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain short 16 inches 9.8g."
-   },
-   {
-    "id": 11,
-    "name": "Rope Chain — Thick Gauge 18\"",
-    "spec": "18 inches · 15.2g · Good condition",
-    "w": 15.2,
-    "img": "assets/images/products/chain-10.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain thick 18 inches 15.2g."
-   },
-   {
-    "id": 12,
-    "name": "Rope Chain — Medium 20\"",
-    "spec": "20 inches · 16.8g · Very good condition",
-    "w": 16.8,
-    "img": "assets/images/products/chain-13.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain medium 20 inches 16.8g."
-   },
-   {
-    "id": 13,
-    "name": "Rope Chain — Premium 22\"",
-    "spec": "22 inches · 20.8g · Excellent condition",
-    "w": 20.8,
-    "img": "assets/images/products/chain-14.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain premium 22 inches 20.8g."
-   },
-   {
-    "id": 14,
-    "name": "Rope Chain + Barrel Pendant",
-    "spec": "18 inches · 12.8g total · Good condition",
-    "w": 12.8,
-    "img": "assets/images/products/chain-12.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain Barrel Pendant Set 12.8g."
-   },
-   {
-    "id": 15,
-    "name": "Rope + Dragon Abacus Pendant",
-    "spec": "20 inches · 18.4g total · Very good",
-    "w": 18.4,
-    "img": "assets/images/products/chain-16.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the Dragon Abacus Pendant Set 18.4g."
-   },
-   {
-    "id": 16,
-    "name": "Rope + Cylinder Pendant",
-    "spec": "18 inches · 16.9g total · Very good",
-    "w": 16.9,
-    "img": "assets/images/products/chain-15.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Cylinder Pendant Set 16.9g."
-   },
-   {
-    "id": 17,
-    "name": "Rope + Ornate Pendant",
-    "spec": "20 inches · 22.1g total · Good",
-    "w": 22.1,
-    "img": "assets/images/products/chain-18.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain ornate pendant 22.1g."
-   },
-   {
-    "id": 18,
-    "name": "Rope + Classic Round Pendant",
-    "spec": "18 inches · 17.4g total · Very good",
-    "w": 17.4,
-    "img": "assets/images/products/chain-19.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain classic pendant 17.4g."
-   },
-   {
-    "id": 19,
-    "name": "Rope + Designer Pendant",
-    "spec": "20 inches · 20.3g total · Good",
-    "w": 20.3,
-    "img": "assets/images/products/chain-17.jpeg",
-    "wa": "Hi Assure Gold, I am interested in the 916 Rope designer pendant 20.3g."
-   }
+  "business": {
+    "wa": "6593430242",
+    "addr": "119A Canberra Cres, Singapore",
+    "hours": "Daily 7am-midnight SGT",
+    "psm": "PS20260000962",
+    "psmValid": "11 March 2027"
+  },
+  "pricing": {
+    "preloved": 20,
+    "brandnew": 25,
+    "tradein": 10
+  },
+  "collection": {
+    "preloved": [
+      {
+        "id": 1,
+        "name": "Rope Chain 20 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 20.0,
+        "img": "assets/images/products/rope-20g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 20 grams."
+      },
+      {
+        "id": 2,
+        "name": "Rope Chain 40 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 40.0,
+        "img": "assets/images/products/rope-40g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 40 grams."
+      },
+      {
+        "id": 3,
+        "name": "Rope Chain 50 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 50.0,
+        "img": "assets/images/products/rope-50g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 50 grams."
+      },
+      {
+        "id": 4,
+        "name": "Rope Chain 100 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 100.0,
+        "img": "assets/images/products/rope-100g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 100 grams."
+      },
+      {
+        "id": 5,
+        "name": "Rope Chain 150 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 150.0,
+        "img": "assets/images/products/rope-150g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 150 grams."
+      },
+      {
+        "id": 6,
+        "name": "Rope Chain 200 grams",
+        "spec": "60 cm · 916 · 22K · XRF-tested",
+        "w": 200.0,
+        "img": "assets/images/products/rope-200g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 200 grams."
+      },
+      {
+        "id": 7,
+        "name": "Rope Chain 250 grams",
+        "spec": "60 cm · 916 · 22K · Made to order (photo shows our 200g chain)",
+        "w": 250.0,
+        "img": "assets/images/products/rope-200g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 250 grams."
+      },
+      {
+        "id": 8,
+        "name": "Rope Chain 300 grams",
+        "spec": "60 cm · 916 · 22K · Made to order (photo shows our 200g chain)",
+        "w": 300.0,
+        "img": "assets/images/products/rope-200g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 300 grams."
+      },
+      {
+        "id": 9,
+        "name": "Rope Chain 400 grams",
+        "spec": "60 cm · 916 · 22K · Made to order (photo shows our 200g chain)",
+        "w": 400.0,
+        "img": "assets/images/products/rope-200g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 400 grams."
+      },
+      {
+        "id": 10,
+        "name": "Rope Chain 500 grams",
+        "spec": "60 cm · 916 · 22K · Made to order (photo shows our 200g chain)",
+        "w": 500.0,
+        "img": "assets/images/products/rope-200g.jpg",
+        "wa": "Hi Assure Gold, I am interested in the 916 Rope Chain, 60 cm, 500 grams."
+      }
+    ],
+    "brandnew": []
+  },
+  "slides": [
+    {
+      "eyebrow": "CUSTOM MAKE YOUR ROPE CHAINS",
+      "line1": "Brand New",
+      "line2": "Rope Chains",
+      "line3": "In Singapore",
+      "sub": "Brand new rope chains without GST or Making Charge",
+      "btn": "Trade in",
+      "href": "buyback.html"
+    },
+    {
+      "eyebrow": "Buyback Campaign",
+      "line1": "Buyback is",
+      "line2": "Now Live",
+      "line3": "",
+      "sub": "Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.",
+      "btn": "Learn About Buyback →",
+      "href": "buyback.html"
+    }
   ],
-  "brandnew": [
-   {
-    "id": "bn-1",
-    "name": "Brand New 916 Rope Chain",
-    "spec": "916 · 22K · Priced by weight",
-    "w": 0,
-    "img": "assets/images/products/brandnew-rope-01.webp",
-    "wa": "Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."
-   }
-  ]
- },
- "slides": [
-  {
-   "eyebrow": "CUSTOM MAKE YOUR ROPE CHAINS",
-   "line1": "Brand New",
-   "line2": "Rope Chains",
-   "line3": "In Singapore",
-   "sub": "Brand new rope chains without GST or Making Charge",
-   "btn": "Trade in",
-   "href": "buyback.html"
+  "stats": [
+    {
+      "num": "0%",
+      "label": "Making Charge"
+    },
+    {
+      "num": "XRF",
+      "label": "Live Purity Testing"
+    },
+    {
+      "num": "PSM",
+      "label": "Ministry of Law Licensed"
+    },
+    {
+      "num": "Chat",
+      "label": "WhatsApp Enquiries"
+    }
+  ],
+  "headings": [
+    {
+      "id": "why",
+      "label": "Why Preloved Gold",
+      "l1": "Why preloved gold",
+      "l2": "the wiser buy",
+      "em": "ga",
+      "pre": "is "
+    },
+    {
+      "id": "faq",
+      "label": "FAQ Section",
+      "l1": "Common questions.",
+      "l2": "Straight answers.",
+      "em": "ga",
+      "pre": ""
+    },
+    {
+      "id": "cta",
+      "label": "Contact Section",
+      "l1": "Find your preloved piece.",
+      "l2": "Priced in pure gold.",
+      "em": "",
+      "pre": ""
+    }
+  ],
+  "buyback": {
+    "margins": {
+      "m999": 3,
+      "m916": 0,
+      "m850": 15,
+      "m750": 15,
+      "m585": 15
+    },
+    "retail": 6200,
+    "youpay": 5000,
+    "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
   },
-  {
-   "eyebrow": "Buyback Campaign",
-   "line1": "Buyback is",
-   "line2": "Now Live",
-   "line3": "",
-   "sub": "Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.",
-   "btn": "Learn About Buyback →",
-   "href": "buyback.html"
-  }
- ],
- "stats": [
-  {
-   "num": "0%",
-   "label": "Making Charge"
-  },
-  {
-   "num": "XRF",
-   "label": "Live Purity Testing"
-  },
-  {
-   "num": "PSM",
-   "label": "Ministry of Law Licensed"
-  },
-  {
-   "num": "Chat",
-   "label": "WhatsApp Enquiries"
-  }
- ],
- "headings": [
-  {
-   "id": "why",
-   "label": "Why Preloved Gold",
-   "l1": "Why preloved gold",
-   "l2": "the wiser buy",
-   "em": "ga",
-   "pre": "is "
-  },
-  {
-   "id": "faq",
-   "label": "FAQ Section",
-   "l1": "Common questions.",
-   "l2": "Straight answers.",
-   "em": "ga",
-   "pre": ""
-  },
-  {
-   "id": "cta",
-   "label": "Contact Section",
-   "l1": "Find your preloved piece.",
-   "l2": "Priced in pure gold.",
-   "em": "",
-   "pre": ""
-  }
- ],
- "buyback": {
-  "margins": {
-   "m999": 3,
-   "m916": 0,
-   "m850": 15,
-   "m750": 15,
-   "m585": 15
-  },
-  "retail": 6200,
-  "youpay": 5000,
-  "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
- },
- "heroVideoActive": true
+  "heroVideoActive": true
 }
