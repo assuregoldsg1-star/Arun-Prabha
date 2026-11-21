@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/:path(.*)", "has": [{ "type": "host", "value": "www.assuregold.sg" }], "destination": "https://assuregold.sg/:path", "permanent": true },
     {
       "source": "/collection.html",
       "destination": "/",
