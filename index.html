@@ -1065,8 +1065,7 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
       return '<article class="pr-item"><div class="pr-item-img"><img src="'+esc(it.img)+'" alt="'+esc(it.name)+', 60 cm, 916 gold" loading="lazy"/><span class="pr-item-k">916 &#183; 22K</span></div>'
         +'<div class="pr-item-b"><h3 class="pr-item-n">'+esc(it.name)+'</h3><div class="pr-item-s">'+esc(it.spec)+'</div>'
         +'<div class="pr-item-p">'+total+'</div><div class="pr-item-r">'+rtxt+'</div>'
-        +'<a class="pr-btn" target="_blank" rel="noopener" href="'+wa(msg)+'">Enquire on WhatsApp</a>'
-        +'<a class="pr-btn solid" style="margin-top:8px" target="_blank" rel="noopener" href="'+wa(nmsg)+'">Get a brand new piece for S$'+extra+' more per gram</a></div></article>';
+        +'<a class="pr-btn solid" target="_blank" rel="noopener" href="'+wa(msg)+'">Enquire now</a></div></article>';
     }).join('');
     html+='<article class="pr-item" style="align-self:start"><div class="pr-item-b" style="padding-top:22px;padding-bottom:22px"><h3 class="pr-item-n">Want a different weight or length?</h3><div class="pr-item-s">Brand new 916, made to your preferred length, style and weight.</div><a class="pr-btn solid" target="_blank" rel="noopener" href="'+wa('Hi Assure Gold, I would like a quote to custom make a gold chain.')+'">Customise your chain</a></div></article>';
     grid.innerHTML=html;
