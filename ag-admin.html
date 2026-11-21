@@ -1367,6 +1367,40 @@ function saveBuybackFootnote(){
   if(msg){ msg.style.display='block'; setTimeout(function(){ msg.style.display='none'; }, 3000); }
 }
 
+/* ---- preloved page: same collection as the homepage ---- */
+function pjCardsHtml(rate){
+  var C=DATA.collection.preloved||[], P=DATA.pricing, wan=String(DATA.business.wa).replace(/\D/g,'');
+  var pg=rate+(Number(P.preloved)||0);
+  function money(n,d){return n.toLocaleString('en-SG',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+  return C.map(function(it){
+    var w=Number(it.w)||0;
+    var msg=it.wa||('Hi Assure Gold, I am interested in the '+it.name+'.');
+    var tot=w>0?'S$'+money(Math.round(w*pg)):'S$'+money(pg,2)+' / gram';
+    return '<article class="pj"><img src="'+esc(it.img)+'" alt="'+esc(it.name)+', 916 gold" loading="lazy" width="400" height="400"/><div class="pj-b"><h3>'+esc(it.name)+'</h3><p class="pj-s">'+esc(it.spec||'')+'</p><p class="pj-p">'+tot+'</p><p class="pj-r">S$'+money(pg,2)+' per gram nett</p><a class="pj-wa" target="_blank" rel="noopener" href="https://wa.me/'+wan+'?text='+encodeURIComponent(msg)+'">Enquire now</a></div></article>';
+  }).join('\n');
+}
+function patchPreloved(html){
+  html = patchCollectionBlock(html);
+  var a=html.indexOf('<!-- AG-PJ:START'), e=html.indexOf('<!-- AG-PJ:END -->');
+  if(a>=0 && e>a){
+    var head=html.slice(a, html.indexOf('-->',a)+3);
+    var snap=parseFloat((head.match(/snapshot=([0-9.]+)/)||[0,134.54])[1]);
+    html = html.slice(0,a)+head+'\n'+pjCardsHtml(snap)+'\n'+html.slice(e);
+  }
+  /* keep the structured-data item list in step with the collection */
+  html = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, function(m,j){
+    try{
+      var o=JSON.parse(j), g=o['@graph']; if(!g) return m;
+      g.forEach(function(n){ if(n['@type']==='ItemList'){
+        n.itemListElement=(DATA.collection.preloved||[]).map(function(it,i){return {'@type':'ListItem',position:i+1,name:it.name+' (916 gold)'};});
+      }});
+      return '<script type="application/ld+json">'+JSON.stringify(o).replace(/</g,'\\u003c')+'<'+'/script>';
+    }catch(err){ return m; }
+  });
+  return html;
+}
+
 function patchBuyback(html){
   var b=DATA.business;
   html=html.replace(/wa\.me\/\d{8,15}/g,'wa.me/'+b.wa);
@@ -1457,7 +1491,7 @@ window.addEventListener('DOMContentLoaded',function(){ renderDash(); });
    CLOUD LAYER - passcode unlock + load from repo + one-tap publish
    ============================================================ */
 var AG_RAW   = "https://raw.githubusercontent.com/assuregoldsg1-star/Arun-Prabha/main/";
-var AG_PAGES = ["index.html","buyback.html"];
+var AG_PAGES = ["index.html","buyback.html","preloved-gold-jewellery-singapore.html"];
 var AG_CODE  = null;  /* validated passcode, kept only in memory/session */
 
 function lgEl(id){ return document.getElementById(id); }
@@ -1528,7 +1562,7 @@ async function publishLive(){
   btn.disabled=true;
   try{
     pStatus('&#8987; Reading your current website...','work');
-    var patchers={'index.html':patchIndex,'buyback.html':patchBuyback};
+    var patchers={'index.html':patchIndex,'buyback.html':patchBuyback,'preloved-gold-jewellery-singapore.html':patchPreloved};
     var files=[];
 
     // Get the FRESH current pages straight from GitHub (no cache) to avoid conflicts
