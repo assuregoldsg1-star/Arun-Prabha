@@ -6,83 +6,6 @@
   "psm": "PS20260000962",
   "psmValid": "11 March 2027"
  },
- "slides": [
-  {
-   "eyebrow": "CUSTOM MAKE YOUR ROPE CHAINS",
-   "line1": "Brand New",
-   "line2": "Rope Chains",
-   "line3": "In Singapore",
-   "sub": "Brand new rope chains without GST or Making Charge",
-   "btn": "Trade in",
-   "href": "buyback.html"
-  },
-  {
-   "eyebrow": "Buyback Campaign",
-   "line1": "Buyback is",
-   "line2": "Now Live",
-   "line3": "",
-   "sub": "Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.",
-   "btn": "Learn About Buyback →",
-   "href": "buyback.html"
-  }
- ],
- "stats": [
-  {
-   "num": "0%",
-   "label": "Making Charge"
-  },
-  {
-   "num": "XRF",
-   "label": "Live Purity Testing"
-  },
-  {
-   "num": "PSM",
-   "label": "Ministry of Law Licensed"
-  },
-  {
-   "num": "Chat",
-   "label": "WhatsApp Enquiries"
-  }
- ],
- "headings": [
-  {
-   "id": "why",
-   "label": "Why Preloved Gold",
-   "l1": "Why preloved gold",
-   "l2": "the wiser buy",
-   "em": "ga",
-   "pre": "is "
-  },
-  {
-   "id": "faq",
-   "label": "FAQ Section",
-   "l1": "Common questions.",
-   "l2": "Straight answers.",
-   "em": "ga",
-   "pre": ""
-  },
-  {
-   "id": "cta",
-   "label": "Contact Section",
-   "l1": "Find your preloved piece.",
-   "l2": "Priced in pure gold.",
-   "em": "",
-   "pre": ""
-  }
- ],
- "buyback": {
-  "margins": {
-   "m999": 7,
-   "m916": 4,
-   "m850": 15,
-   "m750": 15,
-   "m585": 15
-  },
-  "retail": 6200,
-  "youpay": 5000,
-  "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
- },
- "heroVideoActive": true,
  "pricing": {
   "preloved": 20,
   "brandnew": 25,
@@ -253,5 +176,82 @@
     "wa": "Hi Assure Gold, I am interested in the Brand New 916 Rope Chain."
    }
   ]
- }
+ },
+ "slides": [
+  {
+   "eyebrow": "CUSTOM MAKE YOUR ROPE CHAINS",
+   "line1": "Brand New",
+   "line2": "Rope Chains",
+   "line3": "In Singapore",
+   "sub": "Brand new rope chains without GST or Making Charge",
+   "btn": "Trade in",
+   "href": "buyback.html"
+  },
+  {
+   "eyebrow": "Buyback Campaign",
+   "line1": "Buyback is",
+   "line2": "Now Live",
+   "line3": "",
+   "sub": "Sell your preloved gold the easy way. XRF tested. Request your quote on WhatsApp. Same-day payment.",
+   "btn": "Learn About Buyback →",
+   "href": "buyback.html"
+  }
+ ],
+ "stats": [
+  {
+   "num": "0%",
+   "label": "Making Charge"
+  },
+  {
+   "num": "XRF",
+   "label": "Live Purity Testing"
+  },
+  {
+   "num": "PSM",
+   "label": "Ministry of Law Licensed"
+  },
+  {
+   "num": "Chat",
+   "label": "WhatsApp Enquiries"
+  }
+ ],
+ "headings": [
+  {
+   "id": "why",
+   "label": "Why Preloved Gold",
+   "l1": "Why preloved gold",
+   "l2": "the wiser buy",
+   "em": "ga",
+   "pre": "is "
+  },
+  {
+   "id": "faq",
+   "label": "FAQ Section",
+   "l1": "Common questions.",
+   "l2": "Straight answers.",
+   "em": "ga",
+   "pre": ""
+  },
+  {
+   "id": "cta",
+   "label": "Contact Section",
+   "l1": "Find your preloved piece.",
+   "l2": "Priced in pure gold.",
+   "em": "",
+   "pre": ""
+  }
+ ],
+ "buyback": {
+  "margins": {
+   "m999": 3,
+   "m916": 0,
+   "m850": 15,
+   "m750": 15,
+   "m585": 15
+  },
+  "retail": 6200,
+  "youpay": 5000,
+  "footnote": "For Gold Jewellery with less than 14K Purity, please contact us for the current price"
+ },
+ "heroVideoActive": true
 }
