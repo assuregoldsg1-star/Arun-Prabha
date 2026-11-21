@@ -91,7 +91,9 @@ a{text-decoration:none;color:inherit}
 .mobile-menu.open{transform:none}
 .mobile-menu a{font-family:var(--cinzel);font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ls);padding-bottom:18px;transition:color .2s}
 .mobile-menu a:hover{color:var(--g1)}
-@media(max-width:860px){.nav-links{display:none}.nav-wa .nav-wa-txt{display:none}.nav-wa{padding:9px 12px}.hamburger{display:flex}}
+@media(max-width:1120px){.nav-links{gap:14px}.nav-links a{letter-spacing:.1em}}
+.nav-links a{white-space:nowrap}
+@media(max-width:1020px){.nav-links{display:none}.nav-wa .nav-wa-txt{display:none}.nav-wa{padding:9px 12px}.hamburger{display:flex}}
 
 /* ─── BUTTONS ─── */
 .btn-gold{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--red);color:#fff;border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:all .3s;border:0;cursor:pointer;line-height:1;box-shadow:0 4px 18px rgba(158,42,62,.28)}
@@ -829,6 +831,9 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
   <nav class="nav-links" id="navLinks" aria-label="Main">
     <a href="/">Home</a>
     <a href="buyback.html">Buyback</a>
+    <a href="#prices">Prices</a>
+    <a href="#collection">Collection</a>
+    <a href="#tradein">Trade-In</a>
     <a href="#trust">Trust</a>
     <a href="verify.html">Verify</a>
     <a href="#contact">Contact</a>
@@ -844,6 +849,10 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}@media(prefers-reduced-motio
 <div class="mobile-menu" id="mobileMenu">
   <a href="/">Home</a>
   <a href="buyback.html">Buyback</a>
+  <a href="#prices">Today&#8217;s Prices</a>
+  <a href="#collection">Collection</a>
+  <a href="#tradein">Trade-In</a>
+  <a href="#custom">Custom Chains</a>
   <a href="#trust">Trust &amp; Licence</a>
   <a href="verify.html">&#10003; Verify</a>
   <a href="https://wa.me/6593430242" target="_blank">&#128172; WhatsApp Us</a>
